@@ -15512,7 +15512,7 @@ html.boxed .rd-navbar--is-clone {
 	overflow: hidden;
 	text-align: center;
 	text-decoration: none;
-	z-index: 20;
+	z-index: 1001;
 	transition: .45s all ease-in-out;
 	transform: translateY(100px);
 	border-radius: 50%;
@@ -32481,7 +32481,7 @@ section:first-of-type {margin-top: -68px;}
 .brand__logo-dark { height: 25px !important;}
 
 .self-center {align-self: center !important;}
-.video-block {max-height: 70vh; overflow: hidden; align-items: flex-end; background: url('images/video-static.jpg'); background-size: cover;}
+.video-block {max-height: 70vh; overflow: hidden; align-items: flex-end; background: url('../images/video-static.jpg'); background-size: cover;}
 .video-after {background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 20vh); padding-top: 25vh; position: relative; top: -25vh; z-index: 900; margin-bottom: -20vh; margin-bottom: -68px;}
 
 .faded-text {color: #828282;}
