@@ -32453,18 +32453,28 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .h-95 .range {height: 95vh;}
 .h-85 { height: 85vh !important;}
 .h-85 .range {height: 85vh;}
+.h-80 { height: 80vh !important;}
+.h-80 .range {height: 80vh;}
+.h-75 { height: 75vh !important;}
+.h-75 .range {height: 75vh;}
 
 .h-85-plus { min-height: 85vh !important;}
 .h-85-plus .range {min-height: 85vh;}
+.h-80-plus { min-height: 80vh !important;}
+.h-80-plus .range {min-height: 80vh;}
+.h-75-plus { min-height: 75vh !important;}
+.h-75-plus .range {min-height: 75vh;}
 
-.h-100 .offset, .h-95 .offset, .h-85 .offset {margin-top: -50px;}
+.h-100 .offset, .h-95 .offset, .h-85 .offset, .h-80 .offset , .h-75 .offset  {margin-top: -50px;}
 
 @media (max-height: 500px) 
 {
-	.h-100, .h-95, .h-85, .h-100 .range, .h-95 .range, .h-85 .range  { height: auto !important;} 
+	.h-100, .h-95, .h-85, .h-80, .h-75, .h-100 .range, .h-95 .range, .h-85 .range, .h-75 .range  { height: auto !important;} 
 	.h-100, .h-100 .range { min-height: 100vh !important; }
 	.h-95, .h-95 .range { min-height: 95vh !important; }
 	.h-85, .h-85 .range { min-height: 85vh !important;}
+	.h-80, .h-80 .range { min-height: 80vh !important;}
+	.h-75, .h-75 .range { min-height: 75vh !important;}
 }
 
 .center-auto {margin-left: auto; margin-right: auto;}
