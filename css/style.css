@@ -20105,6 +20105,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 
 .fa-linkedin:before {
 	content: "\f0e1";
+	left: 2px;
 }
 
 .fa-rotate-left:before,
