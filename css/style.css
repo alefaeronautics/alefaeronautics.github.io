@@ -8882,7 +8882,7 @@ h4 + .heading-5,
 
 @media (min-width: 768px) {
 	.footer-centered {
-		padding: 75px 0 50px;
+		padding: 75px 0 0px;
 	}
 }
 
