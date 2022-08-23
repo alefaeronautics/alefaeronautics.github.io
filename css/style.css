@@ -13414,7 +13414,25 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 1.2;
+	margin-left: 0;
+	margin-right: 0;
 }
+
+@media (max-width: 1208px) and (min-width:992px)
+ {
+	.rd-navbar .rd-navbar-nav > li > a
+	 {
+		 font-size: 17px;
+		 margin-left: -9px;
+		 margin-right:-9px;
+		 letter-spacing: 0.1em !important;
+	}
+
+	.rd-navbar-nav li.divider {display: none !important;}
+
+	.brand {margin-right: -10px;}
+	.rd-navbar-nav li.menu-button a {font-size: 14px !important;}
+ }
 
 .rd-navbar-fullwidth .rd-navbar-nav .rd-navbar-submenu > .rd-navbar-dropdown,
 .rd-navbar-fullwidth .rd-navbar-nav .rd-navbar-submenu > .rd-navbar-megamenu,
@@ -13474,6 +13492,17 @@ html.lt-ie-10 .range > .cell-lg-12 {
 
 .rd-navbar-nav li.divider {background: #ffffff; width: 1px; height: 15px;}
 
+.rd-navbar-nav li.menu-button a {
+	font-size: 14px;
+	text-transform: uppercase; 
+	line-height: 0.9 !important; 
+	background: black; 
+	font-weight: bold;
+	padding: 10px 15px 10px 15px !important;
+}
+
+.rd-navbar-nav li.menu-button a small {font-size: 88%; 	line-height: 1 !important; }
+
 .rd-navbar-fullwidth .rd-navbar-nav > li.opened > a,
 .rd-navbar-fullwidth .rd-navbar-nav > li.active > a,
 .rd-navbar-fullwidth .rd-navbar-nav > li.focus > a,
@@ -13485,6 +13514,9 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	opacity: 0.6 !important;
 	background: transparent;
 }
+
+.rd-navbar-nav li.menu-button a:hover {background: white !important; color: #293c98 !important; opacity: 1 !important;}
+
 
 .rd-navbar-static .rd-navbar-nav > li.active > a { 
 	opacity: 1;
@@ -14106,7 +14138,7 @@ html.lt-ie-10 .range > .cell-lg-12 {
 
 .rd-navbar-static .rd-navbar-nav > li > a {
 	position: relative;
-	padding: 8px 16px;
+	padding: 8px 8px;
 }
 
 .rd-navbar-static .rd-navbar-nav > li > a span {
