@@ -13497,9 +13497,10 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	font-size: 14px;
 	text-transform: uppercase; 
 	line-height: 0.9 !important; 
-	background: black; 
+	background: #ffffff; 
 	font-weight: bold;
 	padding: 10px 15px 10px 15px !important;
+	color: #293c98;
 }
 
 .rd-navbar-nav li.menu-button a small {font-size: 88%; 	line-height: 1 !important; }
@@ -13516,7 +13517,7 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	background: transparent;
 }
 
-.rd-navbar-nav li.menu-button a:hover {background: white !important; color: #293c98 !important; opacity: 1 !important;}
+.rd-navbar-nav li.menu-button a:hover {transform: scale3d(1.1, 1.1, 1.1); color: #293c98; background: #ffffff; opacity: 1 !important;}
 
 
 .rd-navbar-static .rd-navbar-nav > li.active > a { 
