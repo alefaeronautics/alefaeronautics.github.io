@@ -260,6 +260,17 @@
 				}
 			});
 
+			// Custom validator - phone number
+			regula.custom({
+				name: 'Resume',
+				defaultMessage: 'Unacceptable file type',
+				validator: function() {
+					this.style.color = (this.value=='') ? "rgba(0,0,0,0)" : "#293c98";
+					if ( this.value === '' ) return true;
+					else return /(\.pdf|\.doc)$$/i.test( this.value );
+				}
+			});
+
 			for (var i = 0; i < elements.length; i++) {
 				var o = $(elements[i]), v;
 				o.addClass("form-control-has-validation").after("<span class='form-validation'></span>");

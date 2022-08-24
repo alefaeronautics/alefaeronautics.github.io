@@ -291,11 +291,26 @@ h1,
 	line-height: 1.15;
 }
 
+.one-word { font-size: 20px; margin-top: 0;}
+
+@media (max-width: 768px) {
+	.one-word { margin-top: 50px;}
+}
+
+@media (max-width: 468px) {
+	.one-word { margin-top: 20px;}
+}
+
+@media (min-width: 450px) {
+	.one-word { font-size: 25px;}
+}
+
 @media (min-width: 768px) {
 	h1,
 	.heading-1 {
 		font-size: 46px;
 	}
+	.one-word { font-size: 44px;}
 }
 
 @media (min-width: 992px) {
@@ -304,19 +319,27 @@ h1,
 		font-size: 80px;
 		line-height: 1.33333;
 	}
+
+	.one-word { font-size: 60px;}
+}
+
+@media (min-width:1209px) 
+{
+	.one-word { font-size: 75px;}
 }
 
 h2,
 .heading-2 {
-	font-size: 24px;
-	line-height: 1.3;
+	font-family: Xspace;
+	font-size: 30px;
+	line-height: 0.9;
 	letter-spacing: .04em;
 }
 
 @media (min-width: 768px) {
 	h2,
 	.heading-2 {
-		font-size: 28px;
+		font-size: 40px;
 		line-height: 1.3;
 	}
 }
@@ -324,7 +347,7 @@ h2,
 @media (min-width: 992px) {
 	h2,
 	.heading-2 {
-		font-size: 30px;
+		font-size: 50px;
 		line-height: 1.26667;
 	}
 }
@@ -2586,8 +2609,8 @@ input:-webkit-autofill ~ label {
 }
 
 textarea.form-input {
-	height: 85px;
-	min-height: 44px;
+	height: 46px;
+	min-height: 46px;
 	max-height: 145px;
 	resize: vertical;
 }
@@ -32564,3 +32587,54 @@ section:first-of-type {margin-top: -68px;}
 	font-weight: bold;
 	text-transform: uppercase;
 }
+
+.careers-positions-list a {color: #293c98;}
+
+#careers-positions-container::-webkit-scrollbar {
+    width: 20px;
+}
+
+#careers-positions-container::-webkit-scrollbar-track {
+	border-radius: 8px;
+	border: 1px solid rgba(41,60,152,0.2);
+}
+
+#careers-positions-container::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	background: #293c98;
+
+}
+
+
+.careers-positions__list-col {text-align: left;}
+.careers-position-title {font-size: 22px; font-weight: bold;}
+.careers-position-area-title {font-weight: bold;}
+
+.careers-positions-list {padding: 10px 20px 10px 20px; margin-right: 10px;}
+
+.careers-positions-list a:hover {}
+
+.careers-positions-list:hover {background: rgba(41,60,152,0.05); border-radius: 8px;}
+
+.right-arrow:before 
+{
+	content: "\f061";
+	font-family: 'FontAwesome';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 40px;
+	float: right; margin-top: -80px;
+}
+
+
+input[type="file"]:focus { outline: 0 !important; 
+	
+}
+
+input[type="file"] span {color: red;}
+
+::-webkit-file-upload-button {
+	display: none;
+  }
+
+.file-input {color: rgba(41,60,152,0);}
