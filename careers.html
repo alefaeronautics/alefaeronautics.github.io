@@ -653,12 +653,23 @@
                             <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">
                             <label class="form-label" for="contact-email">E-MAIL*</label>
                     </div>      
-                    <div class="form-wrap wow fadeInLeft mb-1">
+                    <div class="form-wrap wow fadeInLeft">
                       <input class="form-input" id="contact-phone" type="text" name="phone" data-constraints="@PhoneNumber">
                       <label class="form-label" for="contact-phone">PHONE</label>
                     </div>
-                    <div class="form-wrap wow fadeInRight mb-1">
-                            <input class="form-input file-input" id="contact-resume" type="file" name="resume" data-constraints="@Required @Resume" onChange="">
+                    <p class="heading-4 text-center mt-0 mb-0">Do you live near San Mateo or Santa Clara? (this is in-person hands-on job)</p>
+                    <div class="row mt-0 mb-2">
+                    <div class="text-center wow fadeInLeft col-lg-6 col-md-6 col-sm-6">
+                            <input class="form-check-input" id="yes" type="radio" name="location" data-constraints="@Select">
+                            <label class="heading-4 mt-1 mb-2" for="yes">Yes</label>
+                    </div>
+                    <div class="text-center wow fadeInRight col-lg-6 col-md-6 col-sm-6">
+                            <input class="form-check-input" id="no" type="radio" name="location">
+                            <label class="heading-4 mt-1 mb-2" for="no">No</label>
+                    </div>
+                    </div>
+                    <div class="form-wrap wow fadeInLeft mb-1">
+                            <input class="form-input file-input" id="contact-resume" type="file" name="resume" data-constraints="@Required @Resume">
                             <label class="form-label" for="contact-resume">ATTACH RESUME (PDF,DOC)</label>
                     </div>
                     <div class="form-wrap form-button wow fadeInBottom">

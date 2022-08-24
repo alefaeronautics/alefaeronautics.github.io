@@ -3043,6 +3043,33 @@ textarea.form-input {
 	max-height: 230px;
 }
 
+.form-check-input {
+	width: 20px;
+	height: 20px;
+	accent-color: #293c98;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #293c98;
+    background-color: #fff;
+	border-radius: 50%;
+	position: relative;
+	top: 4px;
+}
+
+.form-check-input:hover {outline-color: #293c98;}
+
+.form-check-input:focus {outline: 0 !important;}
+
+.form-check-input:checked {
+    outline-color: #293c98;
+    background-color: #293c98;
+}
+
+
+:root {
+	--form-control-color: #103e96;
+  }
+
 /*
 *
 * Icons
@@ -32627,11 +32654,7 @@ section:first-of-type {margin-top: -68px;}
 }
 
 
-input[type="file"]:focus { outline: 0 !important; 
-	
-}
-
-input[type="file"] span {color: red;}
+input[type="file"]:focus { outline: 0 !important; }
 
 ::-webkit-file-upload-button {
 	display: none;

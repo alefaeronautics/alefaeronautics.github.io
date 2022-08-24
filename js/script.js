@@ -260,16 +260,27 @@
 				}
 			});
 
-			// Custom validator - phone number
+			// Custom validator - file type pdf doc
 			regula.custom({
 				name: 'Resume',
 				defaultMessage: 'Unacceptable file type',
 				validator: function() {
 					this.style.color = (this.value=='') ? "rgba(0,0,0,0)" : "#293c98";
 					if ( this.value === '' ) return true;
-					else return /(\.pdf|\.doc)$$/i.test( this.value );
+					else return /(\.pdf|\.doc|\.PDF|\.DOC|\.Pdf|\.Doc)$$/i.test( this.value );
 				}
 			});
+
+			// Custom validator - selected radio
+			regula.custom({
+				name: 'Select',
+				defaultMessage: 'You need to live in that area or agree to relocate',
+				validator: function() {
+				return this.checked;
+				}
+			});
+
+			
 
 			for (var i = 0; i < elements.length; i++) {
 				var o = $(elements[i]), v;
@@ -296,7 +307,7 @@
 			var regularConstraintsMessages = [
 				{
 					type: regula.Constraint.Required,
-					newMessage: "The text field is required."
+					newMessage: "This field is required."
 				},
 				{
 					type: regula.Constraint.Email,
