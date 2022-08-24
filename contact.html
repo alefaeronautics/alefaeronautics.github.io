@@ -115,12 +115,12 @@
                       <label class="form-label" for="contact-name">NAME*</label>
                     </div>
                     <div class="form-wrap wow fadeInRight mb-1">
-                      <input class="form-input" id="contact-company" type="text" name="company" data-constraints="@Required">
-                      <label class="form-label" for="contact-company">COMPANY*</label>
-                    </div>
+                            <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">
+                            <label class="form-label" for="contact-email">E-MAIL*</label>
+                    </div>      
                     <div class="form-wrap wow fadeInLeft mb-1">
-                      <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">
-                      <label class="form-label" for="contact-email">E-MAIL*</label>
+                      <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
+                      <label class="form-label" for="contact-message">MESSAGE*</label>
                     </div>
                     <div class="form-wrap form-button wow fadeInBottom">
                       <button class="button button-block button-primary" type="submit">submit</button>
