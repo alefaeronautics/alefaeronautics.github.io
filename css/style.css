@@ -32623,7 +32623,8 @@ section:first-of-type {margin-top: -68px;}
 
 #careers-positions-container::-webkit-scrollbar-track {
 	border-radius: 8px;
-	border: 1px solid rgba(41,60,152,0.2);
+	border: 0px solid white;
+	background: rgba(41,60,152,0.05);
 }
 
 #careers-positions-container::-webkit-scrollbar-thumb {
