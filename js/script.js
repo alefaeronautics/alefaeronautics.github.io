@@ -1014,3 +1014,18 @@
 
 	} );
 }());
+
+
+$('.careers-position-title').each(function() {
+	var option = document.createElement("option");
+	option.text = $(this).text();
+	option.value = $(this).text();
+	document.getElementById('contact-position').add(option);
+});
+
+$('.careers-positions-list').on('click',function() { 
+	var x = document.getElementById('contact-position');
+	x.value = x.options[$(this).index()+1].value; 
+	x.scrollIntoView();
+	return false;
+});

@@ -2654,6 +2654,7 @@ textarea.form-input {
 	will-change: transform;
 	transform: translateY(-50%);
 	letter-spacing: 0em;
+	text-transform: uppercase;
 }
 
 .form-label.focus {
@@ -32635,7 +32636,7 @@ section:first-of-type {margin-top: -68px;}
 
 
 .careers-positions__list-col {text-align: left;}
-.careers-position-title {font-size: 22px; font-weight: bold;}
+.careers-position-title {font-size: 22px; font-weight: bold; padding-right: 30px;}
 .careers-position-area-title {font-weight: bold;}
 
 .careers-positions-list {padding: 10px 20px 10px 20px; margin-right: 10px;}
