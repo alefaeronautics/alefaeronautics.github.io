@@ -288,7 +288,8 @@ h1,
 .heading-1 {
 	font-family: Xspace;
 	font-size: 34px;
-	line-height: 1.15;
+	line-height: 0.8em !important;
+	margin-bottom: 25px;
 }
 
 .one-word { font-size: 20px; margin-top: 0;}
@@ -4584,7 +4585,10 @@ html .icon-md {
 * Boxed post
 */
 .post-boxed {
-	max-width: 340px;
+	color: #293c98;
+	height: 45vh;
+	min-height: 350px;
+	max-width: 99%;
 	padding: 30px 25px;
 	margin-left: auto;
 	margin-right: auto;
@@ -4592,12 +4596,21 @@ html .icon-md {
 	background: #ffffff;
 	transition: .33s;
 	will-change: transform;
-	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 8px;
+	border: 1px solid #293c98;
 }
 
+.post-boxed a {color: #293c98;}
+
 .post-boxed:hover {
-	transform: scale3d(1.05, 1.05, 1.05);
-	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.19);
+	background-color: rgba(41,60,152,1);
+	background:  linear-gradient(to right, rgba(41,60,152,1) 0, rgba(41,60,152,0) 100%), url('../images/video-static.jpg');
+	background-size: cover;
+	color: white;
+}
+
+.post-boxed:hover a {;
+	color: white;
 }
 
 .post-boxed * + p {
@@ -4611,6 +4624,15 @@ html .icon-md {
 
 .post-boxed__title {
 	max-width: 90%;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.post-boxed__type {
+	font-family: Xspace;
+	font-size: 20px;
+	border: 1px solid #293c98;
+	border-radius: 8px;
 }
 
 .post-boxed__title a:focus {
@@ -4619,7 +4641,8 @@ html .icon-md {
 
 .post-boxed__meta > li {
 	display: inline-block;
-	font-style: italic;
+	text-transform: uppercase;
+	font-weght: bold;
 }
 
 .post-boxed__meta > li:not(:last-child)::after {
@@ -4654,10 +4677,23 @@ html .icon-md {
 
 * + .post-boxed__main {
 	margin-top: 15px;
+	height: 30vh;
+	min-height: 210px;
 }
 
 * + .post-boxed__aside {
 	margin-top: 25px;
+}
+
+.post-boxed:after {
+
+	content: "read more    →";
+	justify-content: space-between;
+	display: flex;
+	font-family: Xspace;
+	align-self: bottom;
+	width: 100%;
+	
 }
 
 @media (min-width: 480px) {
@@ -7943,14 +7979,13 @@ html .page .group-sm-justify .button {
 
 .bg-image-dark .button-primary, .bg-image-dark .button-primary:focus {
 	color: #ffffff;
-	background-color: #000000;
-	border-color: #000000;
+	background-color: transparent;
+	border: 1px solid #ffffff;
+	border-radius: 8px;
 }
 
 .bg-image-dark .button-primary:hover, .bg-image-dark .button-primary:active {
-	color: #000000;
-	background-color: #ffffff;
-	border-color: #ffffff;
+	opacity: 0.6;
 }
 
 .bg-image-dark .button-primary.button-ujarak:hover {
@@ -13554,7 +13589,7 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	color: #ffffff;
 }
 
-.rd-navbar-nav li.menu-button a small {font-size: 88%; 	line-height: 1 !important; }
+.rd-navbar-nav li.menu-button a small {font-size: 88%; 	line-height: 1 !important; letter-spacing: 0.14em;}
 
 .rd-navbar-fullwidth .rd-navbar-nav > li.opened > a,
 .rd-navbar-fullwidth .rd-navbar-nav > li.active > a,
