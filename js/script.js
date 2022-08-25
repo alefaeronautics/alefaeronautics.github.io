@@ -1025,7 +1025,7 @@ $('.careers-position-title').each(function() {
 
 $('.careers-positions-list').on('click',function() { 
 	var x = document.getElementById('contact-position');
-	x.value = x.options[$(this).index()+1].value; 
+	x.selectedIndex = $(this).index()+1;
 	x.scrollIntoView();
 	return false;
 });
