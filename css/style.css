@@ -8969,7 +8969,7 @@ h4 + .heading-5,
 
 @media (min-width: 768px) {
 	.footer-centered {
-		padding: 75px 0 20px;
+		padding: 75px 0;
 	}
 }
 
@@ -14812,6 +14812,7 @@ html.lt-ie-10 .range > .cell-lg-12 {
 .rd-navbar-fixed .rd-navbar-nav > li > a {
 	font-size: 16px;
 	line-height: 1.5;
+	padding-left: 60px !important;
 }
 
 .rd-navbar-fixed .rd-navbar-nav li {
@@ -15273,6 +15274,12 @@ html .page .rd-navbar-fixed .rd-navbar-fixed--hidden {
 
 html.rd-navbar-fixed-linked .page {
 	padding-top: 56px;
+}
+
+@media (max-width:992px) {
+	.rd-navbar-nav li.divider { display: none;}
+	.rd-navbar-nav li.menu-button a {margin-left: 40px; padding-left: 20px !important; margin-right: 20px; margin-top: 10px;}
+
 }
 
 /**
