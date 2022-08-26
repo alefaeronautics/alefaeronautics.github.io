@@ -1039,7 +1039,7 @@ $("#load-more").on('click',function(){
 		{
 			if (index>=display) 
 			{
-				$(this).attr("data-wow-delay",(0.15*(index-display-step+2))+"s");
+				$(this).attr("data-wow-delay",(0.15*(index-display))+"s");
 				$(this).removeClass('hide');
 			}
 		} 
@@ -1049,3 +1049,7 @@ $("#load-more").on('click',function(){
 	});
 	display += step;
 });
+
+function shareLinks() {	$("#sharer-block a").each(function(){$(this).get(0).href += window.location;});}
+
+window.addEventListener('load', shareLinks);

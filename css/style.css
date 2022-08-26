@@ -331,25 +331,16 @@ h1,
 
 h2,
 .heading-2 {
-	font-family: Xspace;
-	font-size: 30px;
+	font-size: 40px;
 	line-height: 0.9;
 	letter-spacing: .04em;
 }
 
-@media (min-width: 768px) {
-	h2,
-	.heading-2 {
-		font-size: 40px;
-		line-height: 1.3;
-	}
-}
 
 @media (min-width: 992px) {
 	h2,
 	.heading-2 {
 		font-size: 50px;
-		line-height: 1.26667;
 	}
 }
 
@@ -3117,7 +3108,7 @@ a.icon-gray-7:hover {
 }
 
 html .icon-xs {
-	font-size: 13px;
+	font-size: 15px !important;
 }
 
 html .icon-sm {
@@ -3137,6 +3128,9 @@ html .icon-md {
 	margin: 10px -8px 10px -8px;
 }
 
+.icon-xs.icon-style-camera { margin-top: -20px;}
+.icon-xs.icon-style-camera:hover { opacity: 1; color: black !important;}
+
 .icon-style-camera > span {
 	position: absolute;
 	width: 14px;
@@ -3147,6 +3141,8 @@ html .icon-md {
 	pointer-events: none;
 	transition: height .5s, width .5s, color .08s;
 }
+
+
 
 .icon-style-camera > span:nth-child(1) {
 	top: 0;
@@ -7786,6 +7782,9 @@ html .page .group-sm-justify .button {
 	background-color: #ffffff;
 	color: #293c98;
 }
+
+.link-back {font-family: Xspace; color: #293c98; font-size: 14px;}
+.link-back:before {content: "← ";}
 
 .bg-white[class*='section-'] + .bg-white[class*='section-'] {
 	padding-top: 0;
@@ -32625,6 +32624,11 @@ section:first-of-type {margin-top: -68px;}
 .self-center {align-self: center !important;}
 .video-block {max-height: 70vh; overflow: hidden; align-items: flex-end; background: url('../images/video-static.jpg'); background-size: cover;}
 .video-after {background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 20vh); padding-top: 25vh; position: relative; top: -25vh; z-index: 900; margin-bottom: -20vh; margin-bottom: -68px;}
+
+.news-image div {	background: linear-gradient(to top, rgba(255,255,255,1) 0, rgba(255,255,255,0) 30%);}
+.news-block .section-md {
+	padding-top: 50px !important;
+}
 
 .faded-text {color: #828282;}
 
