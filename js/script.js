@@ -1051,8 +1051,7 @@ $("#load-more").on('click',function(){
 });
 
 function smartBack(e) {
-
-	if ((document.referrer.match(/presskit\.html/i)) && (history.length>1)) {
+	if ((document.referrer==e.target) && (history.length>1)) {
 		e.preventDefault();
 		e.stopPropagation();
 		history.back();
