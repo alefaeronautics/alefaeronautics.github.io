@@ -274,7 +274,7 @@
 			// Custom validator - selected radio
 			regula.custom({
 				name: 'Select',
-				defaultMessage: 'You need to live in that area or agree to relocate',
+				defaultMessage: 'You need to live in that area',
 				validator: function() {
 				return this.checked;
 				}
