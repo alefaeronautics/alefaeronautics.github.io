@@ -1063,4 +1063,3 @@ function smartBack(e) {
 function shareLinks() {	$("#sharer-block a").each(function(){$(this).get(0).href += window.location;});}
 
 window.addEventListener('load', shareLinks);
-document.getElementById("link-back").addEventListener('click',smartBack);
