@@ -1029,3 +1029,23 @@ $('.careers-positions-list').on('click',function() {
 	x.scrollIntoView();
 	return false;
 });
+
+var display = parseInt($(".post-item").length-$(".hide").length); 
+var step = parseInt($("#news-items").attr('data-step'));
+
+$("#load-more").on('click',function(){
+	$(".post-item").each(function(index) {
+		if (index<display+step)
+		{
+			if (index>=display) 
+			{
+				$(this).attr("data-wow-delay",(0.15*(index-display-step+2))+"s");
+				$(this).removeClass('hide');
+			}
+		} 
+
+		window.scroll(0,window.scrollY+1); //scrolling is necessary to trigger animation start
+		if ((display+step)>=$(".post-item").length) $("#load-more").addClass('hide');
+	});
+	display += step;
+});
