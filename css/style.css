@@ -32629,6 +32629,7 @@ section:first-of-type {margin-top: -68px;}
 .news-block .section-md {
 	padding-top: 50px !important;
 }
+.news-block p {font-size: 15px; color: black;}
 
 .faded-text {color: #828282;}
 
