@@ -15729,6 +15729,7 @@ html.tablet .ui-to-top {
 }
 
 .cssload-cube {
+	visibility: hidden;
 	background-color: #ffffff;
 	width: 13px;
 	height: 13px;
@@ -32721,3 +32722,5 @@ input[type="file"]:focus { outline: 0 !important; }
 .file-input {color: rgba(41,60,152,0);}
 
 .hide {display: none;}
+
+#no-javascript {position: relative; top: -50px;}
