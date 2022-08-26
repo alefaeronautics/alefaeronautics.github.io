@@ -6,7 +6,7 @@ function createMenu(where)
         { url: 'investors.html', title: 'Investors',class:''},
         { url: 'contact.html', title: 'Contact',class:''},
         { url: 'presskit.html', title: 'Press&nbsp;Kit',class:''},
-        { url: 'purchase.html', title: 'Purchase<br><small>Flying&nbsp;Car</small>',class:'menu-button'}, 
+        { url: 'purchase.html', title: 'Purchase<br><small>Flying&nbsp;Car</small>',class:Array('menu-button')}, 
         );
 
     var item = window.location.href;
@@ -19,7 +19,7 @@ function createMenu(where)
         for (var i=0; i<menu.length; i++) 
         {
             elem = document.createElement('li');
-            if (menu[i]['class']) elem.classList.add(menu[i]['class']);
+            if (menu[i]['class']) for (j=0; j<menu[i]['class'].length; j++) elem.classList.add(menu[i]['class'][j]);
             elem.innerHTML = "<a href='"+menu[i]['url']+"'>"+menu[i]['title']+"</a>";
             if (menu[i]['url']==item) elem.classList.add('active');
             target[n].appendChild(elem);

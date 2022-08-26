@@ -1663,7 +1663,7 @@ a.box-triangle__aside:hover .box-triangle__image {
 * Filled Buttons
 */
 
-.button-glow:hover {box-shadow: 0px 0px 6px rgba(117, 154, 255, 0.7), inset 0px 0px 3px rgba(117, 154, 255, 0.7), 0px 0px 15px rgba(180,180,255,0.6), inset 0px 0px 8px rgba(180,180,255,0.6);}
+.button-glow:hover {box-shadow: 0px 0px 15px rgba(180,180,255,0.6), inset 0px 0px 8px rgba(180,180,255,0.6);}
 
 .button-default, .button-default:focus {
 	color: #ffffff;
@@ -13592,7 +13592,7 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	color: #ffffff;
 }
 
-.rd-navbar-nav li.menu-button a small {font-size: 88%; 	line-height: 1 !important; letter-spacing: 0.14em;}
+.rd-navbar-nav li.menu-button a small {font-size: 88%; 	line-height: 1 !important;}
 
 .rd-navbar-fullwidth .rd-navbar-nav > li.opened > a,
 .rd-navbar-fullwidth .rd-navbar-nav > li.active > a,
@@ -13606,7 +13606,7 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	background: transparent;
 }
 
-/* .rd-navbar-nav li.menu-button a:hover {transform: scale3d(1, 1, 1); font-weight: bold; color: #293c98; background: #ffffff; opacity: 1 !important;} */
+ .rd-navbar-nav li.menu-button a:hover { } 
 
 
 .rd-navbar-static .rd-navbar-nav > li.active > a { 
@@ -15115,6 +15115,11 @@ html .page .rd-navbar-fixed .rd-navbar-fixed--hidden {
 .rd-navbar-fixed .rd-navbar-nav li:hover > a, .rd-navbar-fixed .rd-navbar-nav li.focus > a, .rd-navbar-fixed .rd-navbar-nav li.active > a, .rd-navbar-fixed .rd-navbar-nav li.opened > a {
 	color: #ffffff;
 	background: linear-gradient(to right, rgba(34,50,128,0.9) 30%, rgba(34,50,128,0) 95%);
+}
+
+.rd-navbar-fixed .rd-navbar-nav li.menu-button:hover > a, .rd-navbar-fixed .rd-navbar-nav li.menu-button.active > a {
+	color: #ffffff;
+	background: rgba(255,255,255,0.1);
 }
 
 .rd-navbar-fixed .rd-navbar-nav li:hover > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.focus > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.active > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.opened > .rd-navbar-submenu-toggle {
