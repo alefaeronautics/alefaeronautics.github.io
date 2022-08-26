@@ -1062,4 +1062,13 @@ function smartBack(e) {
 
 function shareLinks() {	$("#sharer-block a").each(function(){$(this).get(0).href += window.location;});}
 
+/*
 window.addEventListener('load', shareLinks);
+$("#link-back").on('click',function(e){
+	if ((document.referrer.match(/presskit\.html/i)) && (history.length>1)) {
+		e.preventDefault();
+		e.stopPropagation();
+		history.back();
+	  }
+});
+*/
