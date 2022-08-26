@@ -472,7 +472,7 @@
 			setTimeout( function () {
 				plugins.pageLoader.addClass( "loaded" );
 				$window.trigger( "resize" );
-			}, 100 );
+			}, 50 );
 		}
 
 		/**
