@@ -32727,8 +32727,8 @@ input[type="file"]:focus { outline: 0 !important; }
 #no-javascript {position: relative; width: 230px; left: -80px;}
 
 .icon-block a {color:rgba(41,60,152,1); font-size: 14px;}
-.icon-block a:hover {color:#000000;}
-.icon-block a:hover img {opacity: 0.8; transform: scale3d(1.06, 1.06, 1.06); image-rendering: -webkit-optimize-contrast}
+.icon-block a:hover {color:#000000;opacity: 0.6;}
+.icon-block a:hover img {}
 .icon-block div { border-radius: 8px; border: 1px solid rgba(41,60,152,1); padding: 25px; display: inline-block; margin-bottom: -10px;}
 .icon-block div img {height: 90px; max-width: 90px;}
 
