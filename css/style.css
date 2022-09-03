@@ -19333,6 +19333,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .fa-spin {
 	-webkit-animation: fa-spin 2s infinite linear;
 	animation: fa-spin 2s infinite linear;
+	background: none !important;
+	width:18px !important; height: 16px !important;
+	font-size: 18px !important;
+	position: relative; top: -2px;
 }
 
 .fa-pulse {
