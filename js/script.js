@@ -818,6 +818,7 @@
 						"counter": i
 					},
 					beforeSubmit: function (arr, $form, options) {
+
 						if (isNoviBuilder)
 							return;
 
@@ -876,6 +877,9 @@
 								output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
 								output.addClass("active");
 							}
+
+							sendMail();
+
 						} else {
 							return false;
 						}
@@ -895,6 +899,7 @@
 						}
 					},
 					success: function (result) {
+
 						if (isNoviBuilder)
 							return;
 
@@ -1062,3 +1067,76 @@ function smartBack(e) {
 function shareLinks() {	$("#sharer-block a").each(function(){$(this).get(0).href += window.location;});}
 
 window.addEventListener('load', shareLinks);
+
+
+function getBase64(file,maildata) {
+	maildata["attachments"] = {
+		"filename" : file.name,
+		"id" : file.name,
+		"content" : ""
+	}
+	var reader = new FileReader();
+	reader.readAsDataURL(file);
+	reader.onload = function () {
+		maildata["attachments"]["content"] = reader.result,
+		cUrl_request(maildata);
+	};
+	reader.onerror = function (error) {
+		return null;
+	};
+ }
+
+function sendMail()
+{
+	var templates = { 'contact' : 'k68zxl275k94j905', 'position' : '0r83ql3p89pgzw1j' };
+	var formtype = $(".rd-mailform").attr('data-form-type'); 
+	var formdata = {};
+
+	$(".form-input").each(function(index) {
+		formdata[String($(this).attr('name'))] = $(this).attr('value');
+	});
+
+	var maildata = {
+		"from": {
+			"email": "robot@alef.aero"
+		},
+		"to": [
+			{
+				"email": "khandro.an@gmail.com"
+			}
+		],
+		"personalization": [{
+			"email": "khandro.an@gmail.com",
+			"data": { formdata }
+		}],
+		"template_id": templates[formtype]
+	}
+
+	if (formtype=='contact') {
+		cUrl_request(maildata);
+	}
+	if (formtype=="position")
+	{
+		getBase64(document.getElementById("contact-resume").files[0],maildata);
+	}
+	
+}
+
+function cUrl_request(maildata) {
+	let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMDM2MDRhNWYyNDcyMWZhMDA5MTk2NzI5ZThlOWQ2MDg1MjRjNGE0NTY0MzExMjFkZGI2OTlmMDU0ODY3NDFmOWJjOGFhMjc2MjIzM2I4NTciLCJpYXQiOjE2NjIyNzkwMTIuOTA0OTA5LCJuYmYiOjE2NjIyNzkwMTIuOTA0OTE0LCJleHAiOjQ4MTc5NTI2MTIuODk1MSwic3ViIjoiMzY4MTIiLCJzY29wZXMiOlsiZW1haWxfZnVsbCIsImRvbWFpbnNfZnVsbCIsImFjdGl2aXR5X2Z1bGwiLCJhbmFseXRpY3NfZnVsbCIsInRva2Vuc19mdWxsIiwid2ViaG9va3NfZnVsbCIsInRlbXBsYXRlc19mdWxsIiwic3VwcHJlc3Npb25zX2Z1bGwiLCJzbXNfZnVsbCIsImVtYWlsX3ZlcmlmaWNhdGlvbl9mdWxsIl19.K9OA__lRPw4rNqWui6ho64FLoeKaJ83DPSCPiF_59OZgGNr5wOR_VunzILl9JZWIjtZLkVkZ3yQSYw5WkyBNfTJkciI5nCHxrsm9I8oWuBcmskj2QZ7p2jyIwdTK3MWpbTyn7ovxjjFNERbelxxPD43I1gvfJIshkjanbgFGlmupDGv4NwuzdBQCGVz5XKg2Rkt8IYtlVqjS5-AH2o2FPiy6JRZIC6qCFVP1lvKSVowWJIfCrnL9KpdjzQ05iVyrLMUVDfHEEsypF_AUix_iUJEST_f58eQD1NZRzojDBZ5_PFUXfZLj3-NMszAvsW9oD2reKvcMpTjDB1qYceD04Z48G4H1kQp2ldEc2cs6ckCsKWqB-uuyW6UC7_R-3TQxeM5rXpKFN8G0qAYtcN7JXnPO1Odm-tV9j1hBaM96YyktS_6zEtiDztJSccbJTSfG390MEa9WlgxyK5pm8Kx_FYx21FIIfT7VSWnlWPjyh09wfXT9ghA4rWGF4XQDQv3exf1Ob50Gn8v3rtXG2b2TYQDGxq4gp5ZDA7Nd4YVdEPlSp731Bt4wqG8BQlNqLERYf0gQBgPhpC3RPeneZDnnUanqkdT37EDJ9X4qFasGT0ZF-7USw5co8iKBtYlxdOt8QNZe8Hern4-2NF_tTioIxBYQchdCB5_ZIkDZB0WW9i8";
+	let post = JSON.stringify(maildata);
+ 
+	const url = "https://api.mailersend.com/v1/email";
+	let xhr = new XMLHttpRequest()
+ 
+	xhr.open('POST', url, true);
+	xhr.setRequestHeader('Authorization', 'Bearer '+token);
+	xhr.send(post);
+ 
+	xhr.onload = function () {
+    	if(xhr.status === 201) {
+        	alert('got it');
+    	}
+}
+
+}

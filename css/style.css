@@ -2582,7 +2582,7 @@ input:-webkit-autofill ~ label {
 	font-weight: 400;
 }
 
-.form-input {
+.form-input, .form-file-input {
 	display: block;
 	width: 100%;
 	min-height: 44px;
@@ -22459,6 +22459,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .mdi-alert-octagon:before {
 	content: "\f128";
 }
+
+.mdi-alert-outline {background: none !important;}
 
 .mdi-alert-outline:before {
 	content: "\f129";
