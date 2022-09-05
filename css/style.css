@@ -2582,7 +2582,7 @@ input:-webkit-autofill ~ label {
 	font-weight: 400;
 }
 
-.form-input, .form-file-input {
+.form-input, .form-file-input  {
 	display: block;
 	width: 100%;
 	min-height: 44px;
@@ -23458,6 +23458,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 	content: "\f221";
 }
 
+.mdi-check
+ {
+	 background: none !important;
+ }
 .mdi-check:before {
 	content: "\f222";
 }

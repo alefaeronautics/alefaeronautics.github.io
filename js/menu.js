@@ -1,3 +1,5 @@
+var curPage = "";
+
 function createMenu(where)
 {
     menu = Array( 
@@ -21,7 +23,10 @@ function createMenu(where)
             elem = document.createElement('li');
             if (menu[i]['class']) for (j=0; j<menu[i]['class'].length; j++) elem.classList.add(menu[i]['class'][j]);
             elem.innerHTML = "<a href='"+menu[i]['url']+"'>"+menu[i]['title']+"</a>";
-            if (menu[i]['url']==item) elem.classList.add('active');
+            if (menu[i]['url']==item) {
+                elem.classList.add('active');
+                curPage = menu[i]['title'];
+                }
             target[n].appendChild(elem);
             if (i<menu.length-2) 
                 {
