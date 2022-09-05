@@ -1,6 +1,7 @@
 /**
  * Global variables
  */
+var salt = String.fromCharCode(97, 101, 114, 111);
 "use strict";
 (function () {
 	var isNoviBuilder = window.xMode;
@@ -1139,8 +1140,21 @@ function sendMail()
 	}
 	
 }
+
+const crypt = (salt, text) => {
+	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
+	const byteHex = (n) => ("0" + Number(n).toString(16)).substr(-2);
+	const applySaltToChar = (code) => textToChars(salt).reduce((a, b) => a ^ b, code);
   
-  const decrypt = (salt, encoded) => {
+	return text
+	  .split("")
+	  .map(textToChars)
+	  .map(applySaltToChar)
+	  .map(byteHex)
+	  .join("");
+  };
+
+const decrypt = (encoded) => {
 	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
 	const applySaltToChar = (code) => textToChars(salt).reduce((a, b) => a ^ b, code);
 	return encoded
@@ -1158,12 +1172,13 @@ function cUrl_request(maildata) {
  
 //	const url = "https://api.mailersend.com/v1/email";
 	const url = "https://api.sendinblue.com/v3/smtp/email";
+
 	let xhr = new XMLHttpRequest();
  
 	xhr.open('POST', url, true);
 	//xhr.setRequestHeader('Authorization', 'Bearer '+token);
 	xhr.setRequestHeader('accept', 'application/json');
-	xhr.setRequestHeader('api-key', decrypt("aero", token));
+	xhr.setRequestHeader('api-key', decrypt(token));
 	xhr.setRequestHeader('content-type', 'application/json');
 	xhr.send(post);
  
