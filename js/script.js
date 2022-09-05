@@ -1086,7 +1086,6 @@ function getBase64(file,maildata) {
 	reader.onload = function () {
 		//maildata["attachments"]["content"] = reader.result,
 		maildata["attachment"][0]["content"] = reader.result.split(',').pop();
-		alert(reader.result);
 		cUrl_request(maildata);
 	};
 	reader.onerror = function (error) {
@@ -1140,12 +1139,21 @@ function sendMail()
 	}
 	
 }
+  
+  const decrypt = (salt, encoded) => {
+	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
+	const applySaltToChar = (code) => textToChars(salt).reduce((a, b) => a ^ b, code);
+	return encoded
+	  .match(/.{1,2}/g)
+	  .map((hex) => parseInt(hex, 16))
+	  .map(applySaltToChar)
+	  .map((charCode) => String.fromCharCode(charCode))
+	  .join("");
+  };
 
 function cUrl_request(maildata) {
-	//let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMDM2MDRhNWYyNDcyMWZhMDA5MTk2NzI5ZThlOWQ2MDg1MjRjNGE0NTY0MzExMjFkZGI2OTlmMDU0ODY3NDFmOWJjOGFhMjc2MjIzM2I4NTciLCJpYXQiOjE2NjIyNzkwMTIuOTA0OTA5LCJuYmYiOjE2NjIyNzkwMTIuOTA0OTE0LCJleHAiOjQ4MTc5NTI2MTIuODk1MSwic3ViIjoiMzY4MTIiLCJzY29wZXMiOlsiZW1haWxfZnVsbCIsImRvbWFpbnNfZnVsbCIsImFjdGl2aXR5X2Z1bGwiLCJhbmFseXRpY3NfZnVsbCIsInRva2Vuc19mdWxsIiwid2ViaG9va3NfZnVsbCIsInRlbXBsYXRlc19mdWxsIiwic3VwcHJlc3Npb25zX2Z1bGwiLCJzbXNfZnVsbCIsImVtYWlsX3ZlcmlmaWNhdGlvbl9mdWxsIl19.K9OA__lRPw4rNqWui6ho64FLoeKaJ83DPSCPiF_59OZgGNr5wOR_VunzILl9JZWIjtZLkVkZ3yQSYw5WkyBNfTJkciI5nCHxrsm9I8oWuBcmskj2QZ7p2jyIwdTK3MWpbTyn7ovxjjFNERbelxxPD43I1gvfJIshkjanbgFGlmupDGv4NwuzdBQCGVz5XKg2Rkt8IYtlVqjS5-AH2o2FPiy6JRZIC6qCFVP1lvKSVowWJIfCrnL9KpdjzQ05iVyrLMUVDfHEEsypF_AUix_iUJEST_f58eQD1NZRzojDBZ5_PFUXfZLj3-NMszAvsW9oD2reKvcMpTjDB1qYceD04Z48G4H1kQp2ldEc2cs6ckCsKWqB-uuyW6UC7_R-3TQxeM5rXpKFN8G0qAYtcN7JXnPO1Odm-tV9j1hBaM96YyktS_6zEtiDztJSccbJTSfG390MEa9WlgxyK5pm8Kx_FYx21FIIfT7VSWnlWPjyh09wfXT9ghA4rWGF4XQDQv3exf1Ob50Gn8v3rtXG2b2TYQDGxq4gp5ZDA7Nd4YVdEPlSp731Bt4wqG8BQlNqLERYf0gQBgPhpC3RPeneZDnnUanqkdT37EDJ9X4qFasGT0ZF-7USw5co8iKBtYlxdOt8QNZe8Hern4-2NF_tTioIxBYQchdCB5_ZIkDZB0WW9i8";
-	let token = "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";
+	let token = "61727c606a707b3429292b2d20787f2e2e2f2f2d2d212d7a2a7b217f2f7f7c7c2c297f7f7b2a2c2a282c7c2a7a28202a20282f2b207a2c282d2e2f292f2d782c2e2e2c2d7b2d7b2c344d284f214e6f7f52745e72415a5d6877";
 	let post = JSON.stringify(maildata);
-	alert(post);
  
 //	const url = "https://api.mailersend.com/v1/email";
 	const url = "https://api.sendinblue.com/v3/smtp/email";
@@ -1154,7 +1162,7 @@ function cUrl_request(maildata) {
 	xhr.open('POST', url, true);
 	//xhr.setRequestHeader('Authorization', 'Bearer '+token);
 	xhr.setRequestHeader('accept', 'application/json');
-	xhr.setRequestHeader('api-key', token);
+	xhr.setRequestHeader('api-key', decrypt("aero", token));
 	xhr.setRequestHeader('content-type', 'application/json');
 	xhr.send(post);
  
