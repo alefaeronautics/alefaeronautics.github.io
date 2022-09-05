@@ -263,11 +263,11 @@
 			// Custom validator - file type pdf doc
 			regula.custom({
 				name: 'Resume',
-				defaultMessage: 'Unacceptable file type',
+				defaultMessage: 'Unacceptable file type (PDF,DOC,DOCX,ODT,RTF,TXT required)',
 				validator: function() {
 					this.style.color = (this.value=='') ? "rgba(0,0,0,0)" : "#293c98";
 					if ( this.value === '' ) return true;
-					else return /(\.pdf|\.doc|\.PDF|\.DOC|\.Pdf|\.Doc|\.txt)$$/i.test( this.value );
+					else return /(\.pdf|\.doc|\.docx|\.txt|\.odt|\.rtf)$$/i.test( this.value );
 				}
 			});
 
