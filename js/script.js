@@ -885,7 +885,7 @@
 						}
 					},
 					error: function (result) {
-						return;
+						return; // is now handled by sendMail function
 						if (isNoviBuilder)
 							return;
 
@@ -900,7 +900,7 @@
 						}
 					},
 					success: function (result) {
-						return;
+						return; // is now handled by sendMail function
 
 						if (isNoviBuilder)
 							return;
@@ -1152,6 +1152,7 @@ function sendMail()
   };
 
 function cUrl_request(maildata) {
+
 	let token = "61727c606a707b3429292b2d20787f2e2e2f2f2d2d212d7a2a7b217f2f7f7c7c2c297f7f7b2a2c2a282c7c2a7a28202a20282f2b207a2c282d2e2f292f2d782c2e2e2c2d7b2d7b2c344d284f214e6f7f52745e72415a5d6877";
 	let post = JSON.stringify(maildata);
  
@@ -1167,38 +1168,33 @@ function cUrl_request(maildata) {
 	xhr.send(post);
  
 	xhr.onload = function () {
-    	if(xhr.status === 201) {
 
-			var form = $(".rd-mailform"),
-			output = $("#" + form.attr("data-form-output"));
+		var form = $(".rd-mailform"),
+		output = $("#" + form.attr("data-form-output"));
+
+    	if(xhr.status === 201) {
+			var cls = "success", msg = "Mail sent!", icon = "mdi-check";
+		}
+		else {
+			var cls = "error", msg = "Something went wrong: "+String(xhr.status), icon = "mdi-alert-outline";
+		}
 
 		form
-			.addClass('success')
-			.removeClass('form-in-process');
+		.addClass(cls)
+		.removeClass('form-in-process');
 
-		output.text("Mail sent!");
+		output.text(msg);
 
-			if (output.hasClass("snackbars")) {
-				output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + 'Mail sent!' + '</span></p>');
-			} else {
-				output.addClass("active success");
+		if (output.hasClass("snackbars")) {
+			output.html('<p><span class="icon text-middle mdi '+icon+' icon-xxs"></span><span>' + msg + '</span></p>');
+			} 
+		else {
+				output.addClass("active "+cls);
 			}
 
+		setTimeout(function () {
+			output.removeClass("active");
+		}, 3500);
+
     	}
-}
-
-}
-
-function sendMailSMTP() {
-	Email.send({
-		Host : "smtp.mailersend.net",
-		Username : "MS_8JDt26@alef.aero",
-		Password : "p9laYUlvjdw1WlMm",
-		To : 'khandro.an@gmail.com',
-		From : "robot@alef.aero",
-		Subject : "test mail",
-		Body : "test body"
-	}).then(
-	  message => alert(message)
-	);
 }
