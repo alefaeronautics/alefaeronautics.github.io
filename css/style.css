@@ -32620,6 +32620,11 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 
 .h-100 { height: 100vh !important; }
 .h-100 .range {height: 100vh;}
+
+.h-100-plus { min-height: 100vh !important; height: auto;}
+.h-100-plus .section-md {padding-top: 0 !important;padding-bottom: 0 !important;}
+.h-100-plus .range {min-height: 100vh; height: auto;}
+
 .h-95 { height: 95vh !important; }
 .h-95 .range {height: 95vh;}
 .h-85 { height: 85vh !important;}
@@ -32805,7 +32810,7 @@ input[type="file"]:focus { outline: 0 !important; }
 
 @media (max-width:768px) { .icon-block div img {height: 70px; max-width: 70px;} }
 
-.text-image {margin: 30px 0; background: #293c98;border-radius: 9px; }
+.text-image {margin: 30px 0; background: #293c98; border-radius: 9px; }
 .text-image p {margin-top: -12px; line-height: 12px; background: white; color: #ccc; font-size: 70%; text-align: left; letter-spacing: 0.2em; text-indent: 4px; position: relative; top: 13px;}
 .text-image img {border-radius: 8px; opacity: 0.5; filter: sepia(100%) hue-rotate(190deg); width: 100%;}
 .text-image img:hover {filter: none; opacity: 1;}
@@ -32815,3 +32820,79 @@ input[type="file"]:focus { outline: 0 !important; }
 
 .story {position: relative; left: 50px;}
 .story h2 {font-size: 80px; position: relative; top: -4px;}
+
+.purchase-car {
+	background: linear-gradient(to right, transparent 60%, black 80%),url('../images/alef-car-blur.jpg');
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: 0 0, -20vw 0;
+	background-repeat: no-repeat;
+}
+
+@media (max-width:992px) { 
+	.purchase-car {
+		background: linear-gradient(to bottom, transparent 300px, black 400px),url('../images/alef-car-blur.jpg'), black;
+		background-attachment: auto;
+		background-size: 100% auto;
+		background-position: 0 0, 0 0;
+		background-repeat: no-repeat;
+	}	
+ }
+
+ @media (max-width:680px) { 
+	.purchase-car {
+		background: linear-gradient(to bottom, transparent 300px, black 400px),url('../images/alef-car-blur.jpg'), black;
+		background-size: 150% auto;
+		background-position: center top;
+		background-repeat: no-repeat, no-repeat;
+	}	
+
+ }
+
+.order-form {padding: 50px; text-align: center; margin-top: 125px;}
+.order-form h3 {font-weight: bold;display: flex; justify-content: space-between;}
+
+.order-form a {color: #495cb8; font-weight: bold; text-decoration: underline;}
+.order-form a:hover {color: #597cd8; font-weight: bold; text-decoration: underline;}
+
+
+@media (max-width: 992px) { 
+	.order-form { padding-top: 300px; max-width: 60% !important; margin-left: auto; margin-right: auto; min-width: 400px !important;} 
+	.order-form h3 {font-weight: bold; justify-content: center;} .order-form h3 span:last-child {padding-left: 10px;}
+}
+
+
+
+.order-form .button-primary {
+	color: #ffffff;
+	background-color: transparent;
+	border: 1px solid #ffffff;
+	border-radius: 8px;
+	max-width: 100%;
+	white-space: nowrap;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.order-form .button-primary:hover, .order-form .button-primary:focus {
+	background: linear-gradient(135deg, transparent 20%, rgba(255,255,255,0.13) 20%, rgba(255,255,255,0.13) 80%, transparent 80%) !important;
+}
+
+.order-form .form-input {background-color: rgba(255,255,255,1); color: black;}
+.order-form .form-label {color: black;}
+
+
+
+.order-form h1 small {font-size: 80%; color: white; position: relative; left: -10px;}
+
+@media (min-width: 992px) { 
+	.order-form h1 small {font-size: 33%;} 
+	.order-form {text-align: left; padding-right: 100px; padding-left: 0;}
+}
+
+@media (min-width: 1200px) { 
+	.order-form h1 small {font-size: 48%;} 
+}
+
+@media (min-width: 1600px) {.order-form {text-align: justify;}}
+
