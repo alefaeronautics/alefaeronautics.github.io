@@ -13123,6 +13123,7 @@ html.lt-ie-10 .range > .cell-lg-12 {
 /*
 * @subsection General Styles
 */
+
 .rd-navbar-wrap, .rd-navbar-fixed .rd-navbar-nav-wrap, .rd-navbar-fixed .rd-navbar-submenu {
 	transition: 0.32s all cubic-bezier(1, 0.54, 0.15, 0.86);
 }
@@ -14310,38 +14311,8 @@ html.lt-ie-10 .range > .cell-lg-12 {
 .rd-navbar-static .rd-navbar-nav > li .rd-navbar-megamenu {
 	margin-top: 37px;
 }
-/*
-@media (max-width: 1199px) {
-	.rd-navbar-static .rd-navbar-main {
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
-		justify-content: center;
-		-webkit-flex-wrap: wrap;
-		-ms-flex-wrap: wrap;
-		flex-wrap: wrap;
-		text-align: center;
-	}
-	.rd-navbar-static .rd-navbar-main > * {
-		width: 100%;
-	}
-	.rd-navbar-static .rd-navbar-main > * + * {
-		padding-top: 20px;
-	}
-	.rd-navbar-static .rd-navbar-nav-wrap {
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
-		justify-content: center;
-	}
-	.rd-navbar-static.rd-navbar--is-stuck .rd-navbar-panel, .rd-navbar-static.rd-navbar--is-clone .rd-navbar-panel {
-		display: none;
-	}
-	.rd-navbar-static.rd-navbar--is-stuck .rd-navbar-main > * + *, .rd-navbar-static.rd-navbar--is-clone .rd-navbar-main > * + * {
-		padding-top: 0;
-	}
-}
-*/
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
 	.rd-navbar-static .rd-navbar-aside {
 		padding-top: 42px;
 		padding-bottom: 42px;
@@ -14361,11 +14332,10 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	right: 0;
 	z-index: 1000;
 	background: #293c98;
-	box-shadow: 0 2px 10px 1px rgba(21, 21, 21, 0.1);
 }
 
 .rd-navbar-static.rd-navbar--is-stuck .rd-navbar-main, .rd-navbar-static.rd-navbar--is-clone .rd-navbar-main {
-	padding: 5px 0;
+	padding: 5px 0 !important;
 }
 
 .rd-navbar-static.rd-navbar--is-stuck .rd-navbar-nav > li .rd-navbar-dropdown,
@@ -32852,8 +32822,8 @@ input[type="file"]:focus { outline: 0 !important; }
 .order-form {padding: 50px; text-align: center; margin-top: 125px;}
 .order-form h3 {font-weight: bold;display: flex; justify-content: space-between;}
 
-.order-form a {color: #495cb8; font-weight: bold; text-decoration: underline;}
-.order-form a:hover {color: #597cd8; font-weight: bold; text-decoration: underline;}
+.order-form a {color: #495cb8; font-weight: bold;}
+.order-form a:hover {color: #597cd8; font-weight: bold;}
 
 
 @media (max-width: 992px) { 
@@ -32875,7 +32845,7 @@ input[type="file"]:focus { outline: 0 !important; }
 }
 
 .order-form .button-primary:hover, .order-form .button-primary:focus {
-	background: linear-gradient(135deg, transparent 20%, rgba(255,255,255,0.13) 20%, rgba(255,255,255,0.13) 80%, transparent 80%) !important;
+	background: linear-gradient(155deg, transparent 35%, rgba(41,60,151,0.4) 35%, rgba(41,60,151,0.4) 65%, transparent 65%) !important;
 }
 
 .order-form .form-input {background-color: rgba(255,255,255,1); color: black;}
