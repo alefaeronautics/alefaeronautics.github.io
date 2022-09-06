@@ -1097,7 +1097,7 @@ function getBase64(file,maildata) {
 function sendMail()
 {
 	//var templates = { 'contact' : 'k68zxl275k94j905', 'position' : '0r83ql3p89pgzw1j' };
-	var templates = { 'contact' : 1, 'position' : 2 };
+	var templates = { 'contact' : 1, 'position' : 2, 'order' : 3 };
 	var formtype = $(".rd-mailform").attr('data-form-type'); 
 	var formdata = {};
 
@@ -1137,6 +1137,12 @@ function sendMail()
 	if (formtype=="position")
 	{
 		getBase64(document.getElementById("contact-resume").files[0],maildata);
+	}
+	if (formtype=="order")
+	{
+		alert('Here JS must send you to PayPal');
+		return false;
+		cUrl_request(maildata);
 	}
 	
 }
