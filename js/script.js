@@ -1103,13 +1103,13 @@ function sendMail()
 
 	if (formtype == "order") { 
 		formdata['date'] = fullDate(new Date());
-		var url = "?";
-		url += "date=" + encodeURIComponent(fullDate(new Date()));
+		//var url = "?";
+		//url += "date=" + encodeURIComponent(fullDate(new Date()));
 	}
 
 	$(".form-input").each(function(index) {
 		formdata[String($(this).attr('name'))] = $(this).attr('value');
-		if (formtype == "order") url += "&" + String($(this).attr('name')) + "=" + encodeURIComponent($(this).attr('value'));
+		//if (formtype == "order") url += "&" + String($(this).attr('name')) + "=" + encodeURIComponent($(this).attr('value'));
 	});
 
 	formdata['page'] = curPage;
@@ -1147,10 +1147,10 @@ function sendMail()
 	}
 	if (formtype=="order")
 	{
-		alert('Here JS must send you to PayPal');
+		alert('Here JS must send you to PayPal and detect if payment was completed.');
 		//must detect if paid or not
 		formdata['paid'] = "no";
-		url += "&paid=no";
+		//url += "&paid=no";
 		updateSheets(url,formdata);
 	}
 	
@@ -1216,7 +1216,6 @@ function updateSheets(dataurl,formdata) {
 	iframe.style = "visibility: hidden; position: absolute; top: 0; left: 0; width: 1px; height: 1px;";
 	iframe.src = g_url + dataurl; 
 	document.body.appendChild(iframe);
-
 	// iframe displays 403 but spreadsheet is nevertheless updated
 	*/
 
@@ -1224,19 +1223,21 @@ function updateSheets(dataurl,formdata) {
 		url: g_url,
 		method: "GET",
 		type: "GET",
-		dataType: "jsonp",
+		dataType: "json",
 		data: formdata
 	  }).success(
-		  function () { formClear(true,true,"Order Sent!"); }
+		  function () { formClear(true,true,"Order Sent!"); thankYou();}
 	  ).error (
-		function (xhr) { console.log(xhr); formClear(true,false,xhr.responseText); }
+		function (xhr) { console.log(xhr); formClear(xhr.responseText,false,""); }
 	  );
 
 }
 
 function switchMode(amount) {
+
 	$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
 	$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
+	document.getElementById( (amount>150) ? "priority" : "general" ).checked = true;
 	document.getElementById("contact-advance").value = amount;
 }
 
@@ -1268,4 +1269,10 @@ function formClear(status,required,success_message) {
 			output.removeClass("active");
 		}, 3500);
 
+}
+
+function thankYou()
+{
+	document.getElementById("order-block").style = "display: none";
+	document.getElementById("thank-you").style = "display: block";
 }

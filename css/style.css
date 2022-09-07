@@ -32820,10 +32820,13 @@ input[type="file"]:focus { outline: 0 !important; }
  }
 
 .order-form {padding: 50px; text-align: center; margin-top: 125px;}
-.order-form h3 {display: flex; justify-content: space-between; text-transform: uppercase;}
+.order-form h3 {display: flex; justify-content: space-between; text-transform: uppercase; cursor: pointer;}
+.order-form h3:hover {font-weight: bold;}
 
 .order-form a {color: #495cb8; font-weight: bold;}
 .order-form a:hover {color: #597cd8; font-weight: bold;}
+.order-form a h3{color: white !important;}
+.order-form a:hover h3 {font-weight: bold !important;}
 
 
 @media (max-width: 992px) { 
@@ -32851,7 +32854,9 @@ input[type="file"]:focus { outline: 0 !important; }
 .order-form .form-input {background-color: rgba(255,255,255,1); color: black;}
 .order-form .form-label {color: black;}
 
-.order-form .check-input { float: left; clear: left; position: relative; top: 6px; left: -3px; margin-right: 5px;}
+.order-form .check-input { float: left; clear: left; position: relative; top: -3px; left: -25px; margin-right: -20px;}
+.order-form .form-check-input { background: transparent; border: 0; padding: 0;}
+.order-form .form-check-input:checked { background: url("../images/checkmark.png"); background-size: 20px 20px; }
 
 
 
