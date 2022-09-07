@@ -1229,7 +1229,7 @@ function updateSheets(dataurl,formdata) {
 	  }).success(
 		  function () { formClear(true,true,"Order Sent!"); }
 	  ).error (
-		function (data) { console.log('data'); formClear(true,false,JSON.stringify($(data))); }
+		function (xhr) { console.log(xhr); formClear(true,false,xhr.responseText); }
 	  );
 
 }
