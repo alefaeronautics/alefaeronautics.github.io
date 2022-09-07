@@ -1101,8 +1101,15 @@ function sendMail()
 	var formtype = $(".rd-mailform").attr('data-form-type'); 
 	var formdata = {};
 
+	if (formtype == "order") { 
+		formdata['date'] = fullDate(new Date());
+		var url = "?";
+		url += "date=" + encodeURIComponent(fullDate(new Date()));
+	}
+
 	$(".form-input").each(function(index) {
 		formdata[String($(this).attr('name'))] = $(this).attr('value');
+		if (formtype == "order") url += "&" + String($(this).attr('name')) + "=" + encodeURIComponent($(this).attr('value'));
 	});
 
 	formdata['page'] = curPage;
@@ -1141,8 +1148,8 @@ function sendMail()
 	if (formtype=="order")
 	{
 		alert('Here JS must send you to PayPal');
+		updateSheets(url+"&paid=yes",formdata);
 		return false;
-		cUrl_request(maildata);
 	}
 	
 }
@@ -1188,16 +1195,66 @@ function cUrl_request(maildata) {
 	xhr.setRequestHeader('content-type', 'application/json');
 	xhr.send(post);
  
-	xhr.onload = function () {
+	xhr.onload = function () { formClear(xhr.status,201,"Mail sent!");}
+}
 
-		var form = $(".rd-mailform"),
+function fullDate(now) {
+	return now.getFullYear() + "/" + String(now.getMonth()+1).padStart(2,"0") + "/" + String(now.getDate()).padStart(2,"0") + " " + now.getHours() + ":" + now.getMinutes();
+}
+
+function updateSheets(dataurl,formdata) {
+	delete formdata['url'];
+	delete formdata['page'];
+	//var sheetID = "1tWeyn-zaFROaVBYoPcPJLq6qBoxtMxAZdeNGxkrNaTc";
+	var g_url = "https://script.google.com/macros/s/AKfycbzpQ27ALVEQP9kZ-a3aI74nDe-Ai70sSKr-3fIcqt5hnOHROY8pAx7mcnge70P_CnoTww/exec";
+
+	var iframe = document.createElement('iframe');
+	iframe.onload = function() { formClear(true,true,"Order sent!"); };
+	iframe.style = "visibility: hidden; position: absolute; top: 0; left: 0; width: 1px; height: 1px;";
+	iframe.src = g_url + dataurl; 
+	document.body.appendChild(iframe);
+
+	// other types of request do not work because of CORS, frame displays 403 but spreadsheet is nevertheless updated
+
+	/*
+	let xhr = new XMLHttpRequest(); 
+	xhr.open('GET', g_url);
+	//xhr.setRequestHeader('accept', 'application/json');
+	//xhr.setRequestHeader('content-type', 'application/json');
+	xhr.send(JSON.stringify(formdata));
+ 
+	xhr.onload = function () { 
+		formClear(xhr.status,201,"Order sent!");
+	}*/
+	
+	/*var xhr = $.ajax({
+		url: g_url,
+		method: "GET",
+		dataType: "json",
+		data: formdata
+	  }).success(
+		  function (data,status) { alert(data + " " + status); formClear(status,true,"Sheets added!"); }
+	  ).error (
+		function () { alert('fail'), formClear(true,false,JSON.stringify($(this))); }
+	  ); */
+
+}
+
+function switchMode(amount) {
+	$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
+	$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
+	document.getElementById("contact-advance").value = amount;
+}
+
+function formClear(status,required,success_message) {
+	var form = $(".rd-mailform"),
 		output = $("#" + form.attr("data-form-output"));
 
-    	if(xhr.status === 201) {
-			var cls = "success", msg = "Mail sent!", icon = "mdi-check";
+    	if(status==required) {
+			var cls = "success", msg = success_message, icon = "mdi-check";
 		}
 		else {
-			var cls = "error", msg = "Something went wrong: "+String(xhr.status), icon = "mdi-alert-outline";
+			var cls = "error", msg = "Something went wrong: "+String(status), icon = "mdi-alert-outline";
 		}
 
 		form
@@ -1217,5 +1274,4 @@ function cUrl_request(maildata) {
 			output.removeClass("active");
 		}, 3500);
 
-    	}
 }

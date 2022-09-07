@@ -71,16 +71,26 @@
                     <div class="range range-50 range-lg-bottom">
                         <div class="cell-xs-12 cell-md-8"></div>
                       <div class="cell-xs-12 cell-md-4 self-center order-form">
+
                           <h1><small>Purchase Flying Car</small></h1>
                           <p>You will be able to complete your configuration as production nears.</p>
-                          <h3 class="mt-3 mb-1"><span>DUE TODAY</span><span>$100</span></h3>
+                          <div class="wow fadeInLeftSmall check-input">
+                                <input class="form-check-input" id="general" type="radio" name="advance" checked onClick="switchMode(150);">
+                                <!-- label class="heading-4 mt-1 mb-2" for="general"></label-->
+                          </div>
+                          <h3 class="mt-1 mb-0" style="font-weight: bold;"><span>Preorder</span><span>$150</span></h3>
+                          <div class="wow fadeInLeftSmall check-input">
+                                <input class="form-check-input" id="priority" type="radio" name="advance" onClick="switchMode(1500);">
+                                <!-- label class="heading-4 mt-1 mb-2" for="priority"></label-->
+                          </div>
+                          <h3 class="mt-1 mb-0"><span>Priority</span><span>$1500</span></h3>
                           <p>Fully refundable.</p>
                           <div class="form-wrap form-button wow fadeInBottom mt-4" id="order-button">
                                 <button class="button button-block button-primary" type="submit" onClick="document.getElementById('order-button').style.display = 'none'; document.getElementById('order-form').style.display = 'block'; window.scroll(0,window.scrollY+1);">order with paypal</button>
                           </div>
 
 
-                          <form class="rd-mailform" data-form-output="form-output-global" data-form-type="order" id="order-form" style="display: none;">
+                          <form class="rd-mailform" data-form-output="form-output-global" data-form-type="order" style="display: none;" id="order-form">
                                 <div class="form-wrap wow fadeInLeftSmall mb-1" data-wow-delay="0.15s">
                                   <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
                                   <label class="form-label" for="contact-name">Name*</label>
@@ -90,9 +100,10 @@
                                         <label class="form-label" for="contact-email">E-mail*</label>
                                 </div>      
                                 <div class="form-wrap wow fadeInLeftSmall mb-1" data-wow-delay="0.45s">
-                                  <textarea class="form-input" id="contact-phone" name="message" data-constraints="@Required @PhoneNumber"></textarea>
+                                  <textarea class="form-input" id="contact-phone" name="phone" data-constraints="@Required @PhoneNumber"></textarea>
                                   <label class="form-label" for="contact-phone">Phone*</label>
                                 </div>
+                                <input type="hidden" id="contact-advance" name="advance" class="form-input" value="150">
                                 <div class="wow fadeInLeftSmall" data-wow-delay="0.6s">
                                 <p class="mb-3">By entering my account details above, I&nbsp;agree to be contacted about Alef products, including through automated calls or texts. This is not a condition of&nbsp;purchase.</p>
                                 <p>By placing this order, I agree to the <a href="about:blank" target="_pre-order">Alef Pre-Order Agreement</a> and the <a href="about:blank" target="_privacy">Customer Privacy Agreement.</a></p>

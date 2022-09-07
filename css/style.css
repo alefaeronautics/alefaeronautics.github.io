@@ -32792,7 +32792,7 @@ input[type="file"]:focus { outline: 0 !important; }
 .story h2 {font-size: 80px; position: relative; top: -4px;}
 
 .purchase-car {
-	background: linear-gradient(to right, transparent 60%, black 80%),url('../images/alef-car-cgi.jpg');
+	background: linear-gradient(to right, transparent 60%, black 80%),url('../images/alef-car-cgi.jpg'), black;
 	background-attachment: fixed;
 	background-size: cover;
 	background-position: 0 0, -20vw 0;
@@ -32820,7 +32820,7 @@ input[type="file"]:focus { outline: 0 !important; }
  }
 
 .order-form {padding: 50px; text-align: center; margin-top: 125px;}
-.order-form h3 {font-weight: bold;display: flex; justify-content: space-between;}
+.order-form h3 {display: flex; justify-content: space-between; text-transform: uppercase;}
 
 .order-form a {color: #495cb8; font-weight: bold;}
 .order-form a:hover {color: #597cd8; font-weight: bold;}
@@ -32828,7 +32828,7 @@ input[type="file"]:focus { outline: 0 !important; }
 
 @media (max-width: 992px) { 
 	.order-form { padding-top: 300px; max-width: 60% !important; margin-left: auto; margin-right: auto; min-width: 400px !important;} 
-	.order-form h3 {font-weight: bold; justify-content: center;} .order-form h3 span:last-child {padding-left: 10px;}
+	.order-form h3 {justify-content: center;} .order-form h3 span:last-child {padding-left: 10px;}
 }
 
 
@@ -32850,6 +32850,8 @@ input[type="file"]:focus { outline: 0 !important; }
 
 .order-form .form-input {background-color: rgba(255,255,255,1); color: black;}
 .order-form .form-label {color: black;}
+
+.order-form .check-input { float: left; clear: left; position: relative; top: 6px; left: -3px; margin-right: 5px;}
 
 
 
