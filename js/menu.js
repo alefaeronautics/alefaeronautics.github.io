@@ -17,10 +17,9 @@ function createMenu(where)
     target = document.getElementsByClassName(where);
     for (var n=0; n<target.length; n++)
     {
-        
         for (var i=0; i<menu.length; i++) 
         {
-            //if ((item==menu[menu.length-1]['url'])&&(i==menu.length-1)) break;
+            if ((item==menu[menu.length-1]['url'])&&(i==menu.length-1)) break;
             elem = document.createElement('li');
             if (menu[i]['class']) for (j=0; j<menu[i]['class'].length; j++) elem.classList.add(menu[i]['class'][j]);
             elem.innerHTML = "<a href='"+menu[i]['url']+"'>"+menu[i]['title']+"</a>";
@@ -28,7 +27,7 @@ function createMenu(where)
                 elem.classList.add('active');
                 curPage = menu[i]['title'];
                 }
-            if (item)target[n].appendChild(elem);
+            target[n].appendChild(elem);
             if (i<menu.length-2) 
                 {
                     elem = document.createElement('li');
