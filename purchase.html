@@ -66,7 +66,7 @@
         </div>
 
             <!-- First blue image block -->
-            <section class="section h-100-plus">
+            <section class="section h-100-plus" id="first-block">
                 <div class="section-md text-center">
                     <div class="range range-50 range-lg-bottom">
                         <div class="cell-xs-12 cell-md-8"></div>
@@ -125,7 +125,7 @@
     </div>
 
       <!-- Page Footer-->
-    <div class="page" style="min-height:auto !important; display: none;">
+    <div class="page" style="min-height:auto !important;">
       <footer class="footer-centered section bg-blue-darker" id="footer">
         <!-- is now loaded from includes/footer.html -->
       </footer>
@@ -135,6 +135,18 @@
     <!-- Javascript-->
     <script src="js/script.js"></script>
     <script src="js/menu.js"></script>
+    <script>
+        // unfix the background when scrolled beyond the first block
+            function bgBehavior() {
+                if (document.getElementById("first-block").scrollHeight>=window.innerHeight)
+                    pos = document.documentElement.scrollHeight - window.scrollY - document.getElementById("first-block").scrollHeight;
+                else
+                    pos = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
+                document.getElementsByClassName("purchase-car")[0].style = "background-position-y:"+ String( (pos<0) ? pos : "0" ) + "px;";
+            }
+            window.addEventListener( 'scroll', bgBehavior );
+    </script>
+    
     <!-- coded by Himic-->
   </body>
 </html>
