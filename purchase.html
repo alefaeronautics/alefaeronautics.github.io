@@ -140,9 +140,15 @@
             function bgBehavior() {
                 if (document.getElementById("first-block").scrollHeight>=window.innerHeight)
                     pos = document.documentElement.scrollHeight - window.scrollY - document.getElementById("first-block").scrollHeight;
+                {
+                    pos =  - window.innerHeight - window.scrollY + document.getElementById("first-block").scrollHeight - 50;
+                    if (pos>0) pos = 0;
+                }
+                    
                 else
-                    pos = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
-                document.getElementsByClassName("purchase-car")[0].style = "background-position-y:"+ String( (pos<0) ? pos : "0" ) + "px;";
+                    pos = -window.scrollY;
+
+                document.getElementsByClassName("purchase-car")[0].style = "background-position-y:"+ String( pos ) + "px;";
             }
             window.addEventListener( 'scroll', bgBehavior );
     </script>
