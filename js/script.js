@@ -1227,7 +1227,7 @@ function updateSheets(dataurl,formdata) {
 		formClear(xhr.status,201,"Order sent!");
 	}*/
 	
-	/*var xhr = $.ajax({
+	var xhr = $.ajax({
 		url: g_url,
 		method: "GET",
 		dataType: "json",
@@ -1236,7 +1236,7 @@ function updateSheets(dataurl,formdata) {
 		  function (data,status) { alert(data + " " + status); formClear(true,true,"Order Sent!"); }
 	  ).error (
 		function () { formClear(true,false,JSON.stringify($(this))); }
-	  ); */
+	  );
 
 }
 
