@@ -138,8 +138,7 @@
     <script>
         // unfix the background when scrolled beyond the first block
             function bgBehavior() {
-                if (document.getElementById("first-block").scrollHeight>=window.innerHeight)
-                    pos = document.documentElement.scrollHeight - window.scrollY - document.getElementById("first-block").scrollHeight;
+                if (document.getElementById("first-block").scrollHeight>window.innerHeight)
                 {
                     pos =  - window.innerHeight - window.scrollY + document.getElementById("first-block").scrollHeight - 50;
                     if (pos>0) pos = 0;

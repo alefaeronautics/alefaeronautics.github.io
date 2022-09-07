@@ -32872,7 +32872,7 @@ input[type="file"]:focus { outline: 0 !important; }
 
  }
 
-.order-form {padding: 50px; text-align: center; margin-top: 125px;}
+.order-form {padding: 60px; text-align: center; margin-top: 125px;}
 .order-form h3 {display: flex; justify-content: space-between; text-transform: uppercase; cursor: pointer;}
 .order-form h3:hover {font-weight: bold;}
 
