@@ -32792,7 +32792,7 @@ input[type="file"]:focus { outline: 0 !important; }
 .story h2 {font-size: 80px; position: relative; top: -4px;}
 
 .purchase-car {
-	background: linear-gradient(to right, transparent 60%, black 80%),url('../images/alef-car-blur.jpg');
+	background: linear-gradient(to right, transparent 60%, black 80%),url('../images/alef-car-cgi.jpg');
 	background-attachment: fixed;
 	background-size: cover;
 	background-position: 0 0, -20vw 0;
@@ -32801,7 +32801,7 @@ input[type="file"]:focus { outline: 0 !important; }
 
 @media (max-width:992px) { 
 	.purchase-car {
-		background: linear-gradient(to bottom, transparent 300px, black 400px),url('../images/alef-car-blur.jpg'), black;
+		background: linear-gradient(to bottom, transparent 300px, black 400px),url('../images/alef-car-cgi.jpg'), black;
 		background-attachment: auto;
 		background-size: 100% auto;
 		background-position: 0 0, 0 0;
@@ -32811,7 +32811,7 @@ input[type="file"]:focus { outline: 0 !important; }
 
  @media (max-width:680px) { 
 	.purchase-car {
-		background: linear-gradient(to bottom, transparent 300px, black 400px),url('../images/alef-car-blur.jpg'), black;
+		background: linear-gradient(to bottom, transparent 300px, black 400px),url('../images/alef-car-cgi.jpg'), black;
 		background-size: 150% auto;
 		background-position: center top;
 		background-repeat: no-repeat, no-repeat;
