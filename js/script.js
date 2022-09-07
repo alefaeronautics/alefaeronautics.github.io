@@ -1148,8 +1148,10 @@ function sendMail()
 	if (formtype=="order")
 	{
 		alert('Here JS must send you to PayPal');
-		updateSheets(url+"&paid=no",formdata);
-		return false;
+		//must detect if paid or not
+		formdata['paid'] = "no";
+		url += "&paid=no";
+		updateSheets(url,formdata);
 	}
 	
 }
@@ -1203,39 +1205,31 @@ function fullDate(now) {
 }
 
 function updateSheets(dataurl,formdata) {
-	delete formdata['url'];
-	delete formdata['page'];
+	//delete formdata['url'];
+	//delete formdata['page'];
 	//var sheetID = "1tWeyn-zaFROaVBYoPcPJLq6qBoxtMxAZdeNGxkrNaTc";
 	var g_url = "https://script.google.com/macros/s/AKfycbzpQ27ALVEQP9kZ-a3aI74nDe-Ai70sSKr-3fIcqt5hnOHROY8pAx7mcnge70P_CnoTww/exec";
 
+	/* just in case request won't be working anymore 
 	var iframe = document.createElement('iframe');
 	iframe.onload = function() { formClear(true,true,"Order sent!"); }; //there's no access to what the message is so we assume it's successful
 	iframe.style = "visibility: hidden; position: absolute; top: 0; left: 0; width: 1px; height: 1px;";
 	iframe.src = g_url + dataurl; 
 	document.body.appendChild(iframe);
 
-	// other types of request do not work because of CORS, iframe displays 403 but spreadsheet is nevertheless updated
+	// iframe displays 403 but spreadsheet is nevertheless updated
+	*/
 
-	/*
-	let xhr = new XMLHttpRequest(); 
-	xhr.open('GET', g_url);
-	//xhr.setRequestHeader('accept', 'application/json');
-	//xhr.setRequestHeader('content-type', 'application/json');
-	xhr.send(JSON.stringify(formdata));
- 
-	xhr.onload = function () { 
-		formClear(xhr.status,201,"Order sent!");
-	}*/
-	
 	var xhr = $.ajax({
 		url: g_url,
 		method: "GET",
-		dataType: "json",
+		type: "GET",
+		dataType: "jsonp",
 		data: formdata
 	  }).success(
-		  function (data,status) { alert(data + " " + status); formClear(true,true,"Order Sent!"); }
+		  function () { formClear(true,true,"Order Sent!"); }
 	  ).error (
-		function () { formClear(true,false,JSON.stringify($(this))); }
+		function (data) { console.log('data'); formClear(true,false,JSON.stringify($(data))); }
 	  );
 
 }
