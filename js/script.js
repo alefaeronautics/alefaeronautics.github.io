@@ -1151,7 +1151,7 @@ function sendMail()
 		//must detect if paid or not
 		formdata['paid'] = "no";
 		//url += "&paid=no";
-		updateSheets(url,formdata);
+		updateSheets(/*url,*/formdata);
 	}
 	
 }
@@ -1204,7 +1204,7 @@ function fullDate(now) {
 	return now.getFullYear() + "/" + String(now.getMonth()+1).padStart(2,"0") + "/" + String(now.getDate()).padStart(2,"0") + " " + now.getHours() + ":" + now.getMinutes();
 }
 
-function updateSheets(dataurl,formdata) {
+function updateSheets(/*dataurl,*/formdata) {
 	//delete formdata['url'];
 	//delete formdata['page'];
 	//var sheetID = "1tWeyn-zaFROaVBYoPcPJLq6qBoxtMxAZdeNGxkrNaTc";
