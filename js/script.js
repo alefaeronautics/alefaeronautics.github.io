@@ -1149,8 +1149,8 @@ function sendMail()
 	{
 		alert('Here JS must send you to PayPal and detect if payment was completed.');
 		//must detect if paid or not
-		formdata['paid'] = "no";
-		//url += "&paid=no";
+		formdata['completed'] = "no";
+		//url += "&completed=no";
 		updateSheets(/*url,*/formdata);
 	}
 	
@@ -1201,14 +1201,15 @@ function cUrl_request(maildata) {
 }
 
 function fullDate(now) {
-	return now.getFullYear() + "/" + String(now.getMonth()+1).padStart(2,"0") + "/" + String(now.getDate()).padStart(2,"0") + " " + now.getHours() + ":" + now.getMinutes();
+	var result = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
+	return result;
+	//return now.getFullYear() + "/" + String(now.getMonth()+1).padStart(2,"0") + "/" + String(now.getDate()).padStart(2,"0") + " " + now.getHours().padStart(2,"0") + ":" + now.getMinutes().padStart(2,"0");
 }
 
 function updateSheets(/*dataurl,*/formdata) {
 	//delete formdata['url'];
 	//delete formdata['page'];
-	//var sheetID = "1tWeyn-zaFROaVBYoPcPJLq6qBoxtMxAZdeNGxkrNaTc";
-	var g_url = "https://script.google.com/macros/s/AKfycbzpQ27ALVEQP9kZ-a3aI74nDe-Ai70sSKr-3fIcqt5hnOHROY8pAx7mcnge70P_CnoTww/exec";
+	var g_url = "https://script.google.com/macros/s/AKfycby8F7eb6BmJTSITGwWR2hDg7bQghiPGZ-ujoPMOA4NGBosLfmNtMSDfSgdL8SIDiOcB9Q/exec";
 
 	/* just in case request won't be working anymore 
 	var iframe = document.createElement('iframe');
@@ -1235,9 +1236,13 @@ function updateSheets(/*dataurl,*/formdata) {
 
 function switchMode(amount) {
 
+	var choice = (amount>150) ? "priority" : "general";
 	$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
 	$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
-	document.getElementById( (amount>150) ? "priority" : "general" ).checked = true;
+	document.getElementById('first-button').innerHTML = choice + "Order"; 
+	document.getElementById('order-label').innerHTML = choice + " Queue"; 
+	document.getElementById('second-button').innerHTML = choice + " Order"; 
+	document.getElementById( choice ).checked = true;
 	document.getElementById("contact-advance").value = amount;
 }
 
@@ -1275,4 +1280,15 @@ function thankYou()
 {
 	document.getElementById("order-block").style = "display: none";
 	document.getElementById("thank-you").style = "display: block";
+}
+
+function showForm() {
+	var startpoint = window.scrollY; //keep the scroll offset for the user
+	document.getElementById('order-button').style.display = 'none'; 
+	document.getElementById('order-form').style.display = 'block'; 
+	var endpoint = document.getElementById("first-block").scrollHeight-window.innerHeight-42; // must calculate after the layer is made visible
+	if (window.scrollY < endpoint ) window.scroll(0,endpoint+startpoint);
+	else window.scroll(0,window.scrollY+1);
+	bgBehavior();
+	document.getElementsByClassName("purchase-car")[0].style = "background-size: cover;";
 }

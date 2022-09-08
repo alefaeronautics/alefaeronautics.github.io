@@ -15116,6 +15116,9 @@ html .page .rd-navbar-fixed .rd-navbar-fixed--hidden {
 	background: rgba(255,255,255,0.1);
 }
 
+
+.rd-navbar-static .rd-navbar-nav li.menu-button.active a { opacity: 1; background: white; color: #293c98; font-weight: bold;}
+
 .rd-navbar-fixed .rd-navbar-nav li:hover > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.focus > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.active > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.opened > .rd-navbar-submenu-toggle {
 	color: #ffffff;
 }
@@ -32845,12 +32848,14 @@ input[type="file"]:focus { outline: 0 !important; }
 .story h2 {font-size: 80px; position: relative; top: -4px;}
 
 .purchase-car {
-	background: linear-gradient(to right, transparent 60%, black 80%),url('../images/alef-car-cgi.jpg'), black;
+	background: url('../images/alef-car-cgi.jpg'), black;
 	background-attachment: fixed;
 	background-size: cover;
-	background-position: 0 0, -20vw 0;
+	background-position: -20vw 0;
 	background-repeat: no-repeat;
 }
+
+.purchase-car  .section {background: linear-gradient(to right, transparent 60%, black 80%)}
 
 @media (max-width:992px) { 
 	.purchase-car {
@@ -32881,6 +32886,9 @@ input[type="file"]:focus { outline: 0 !important; }
 .order-form a h3{color: white !important;}
 .order-form a:hover h3 {font-weight: bold !important;}
 
+.order-caption { margin-top: -5px;}
+a .order-caption { color: white; font-weight: normal; cursor: pointer;}
+
 
 @media (max-width: 992px) { 
 	.order-form { padding-top: 300px; max-width: 60% !important; margin-left: auto; margin-right: auto; min-width: 400px !important;} 
@@ -32907,7 +32915,7 @@ input[type="file"]:focus { outline: 0 !important; }
 .order-form .form-input {background-color: rgba(255,255,255,1); color: black;}
 .order-form .form-label {color: black;}
 
-.order-form .check-input { float: left; clear: left; position: relative; top: -3px; left: -25px; margin-right: -20px;}
+.order-form .check-input { height: 57px; float: left; clear: left; position: relative; top: -5px; left: -25px; margin-right: -20px;}
 .order-form .form-check-input { background: transparent; border: 0; padding: 0;}
 .order-form .form-check-input:checked { background: url("../images/checkmark.png"); background-size: 20px 20px; }
 
