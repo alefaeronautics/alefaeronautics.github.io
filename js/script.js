@@ -335,39 +335,6 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 			}
 		}
 
-		/**
-		 * @desc Check if all elements pass validation
-		 * @param {object} elements - object of items for validation
-		 * @param {object} captcha - captcha object for validation
-		 * @return {boolean}
-		 */
-		function isValidated(elements, captcha) {
-			var results, errors = 0;
-
-			if (elements.length) {
-				for (var j = 0; j < elements.length; j++) {
-
-					var $input = $(elements[j]);
-					if ((results = $input.regula('validate')).length) {
-						for (k = 0; k < results.length; k++) {
-							errors++;
-							$input.siblings(".form-validation").text(results[k].message).parent().addClass("has-error");
-						}
-					} else {
-						$input.siblings(".form-validation").text("").parent().removeClass("has-error")
-					}
-				}
-
-				if (captcha) {
-					if (captcha.length) {
-						return validateReCaptcha(captcha) && errors === 0
-					}
-				}
-
-				return errors === 0;
-			}
-			return true;
-		}
 
 		/**
 		 * @desc Validate google reCaptcha
@@ -1024,6 +991,42 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 }());
 
 
+		/**
+		 * @desc Check if all elements pass validation
+		 * @param {object} elements - object of items for validation
+		 * @param {object} captcha - captcha object for validation
+		 * @return {boolean}
+		 */
+		function isValidated(elements, captcha) {
+			var results, errors = 0;
+
+			if (elements.length) {
+				for (var j = 0; j < elements.length; j++) {
+
+					var $input = $(elements[j]);
+					if ((results = $input.regula('validate')).length) {
+						for (k = 0; k < results.length; k++) {
+							errors++;
+							$input.siblings(".form-validation").text(results[k].message).parent().addClass("has-error");
+						}
+					} else {
+						$input.siblings(".form-validation").text("").parent().removeClass("has-error")
+					}
+				}
+
+				if (captcha) {
+					if (captcha.length) {
+						return validateReCaptcha(captcha) && errors === 0
+					}
+				}
+
+				return errors === 0;
+			}
+			return true;
+		}
+
+
+
 $('.careers-position-title').each(function() {
 	var option = document.createElement("option");
 	option.text = $(this).text();
@@ -1068,8 +1071,6 @@ function smartBack(e) {
 }
 
 function shareLinks() {	$("#sharer-block a").each(function(){$(this).get(0).href += window.location;});}
-
-window.addEventListener('load', shareLinks);
 
 
 function getBase64(file,maildata) {
@@ -1156,6 +1157,17 @@ function sendMail()
 	
 }
 
+function collectData()
+{
+	var formdata = {};
+	formdata['date'] = fullDate(new Date());
+	$(".form-input").each(function(index) {
+		formdata[String($(this).attr('name'))] = $(this).attr('value');
+	});
+	return formdata;
+}
+
+
 const crypt = (salt, text) => {
 	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
 	const byteHex = (n) => ("0" + Number(n).toString(16)).substr(-2);
@@ -1227,9 +1239,9 @@ function updateSheets(/*dataurl,*/formdata) {
 		dataType: "json",
 		data: formdata
 	  }).success(
-		  function () { formClear(true,true,"Order Sent!"); thankYou();}
+		  function () { console.log("Google Sheets updated");}
 	  ).error (
-		function (xhr) { console.log(xhr); formClear(xhr.responseText,false,""); }
+		function (xhr) { console.log(xhr); /*formClear(xhr.responseText,false,"");*/ }
 	  );
 
 }
@@ -1239,9 +1251,9 @@ function switchMode(amount) {
 	var choice = (amount>150) ? "priority" : "general";
 	$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
 	$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
-	document.getElementById('first-button').innerHTML = choice + "Order"; 
+	//document.getElementById('first-button').innerHTML = choice + " Order"; 
 	document.getElementById('order-label').innerHTML = choice + " Queue"; 
-	document.getElementById('second-button').innerHTML = choice + " Order"; 
+	//document.getElementById('second-button').innerHTML = choice + " Order"; 
 	document.getElementById( choice ).checked = true;
 	document.getElementById("contact-advance").value = amount;
 }
@@ -1286,9 +1298,21 @@ function showForm() {
 	var startpoint = window.scrollY; //keep the scroll offset for the user
 	document.getElementById('order-button').style.display = 'none'; 
 	document.getElementById('order-form').style.display = 'block'; 
+	//document.getElementById('contact-name').scrollIntoView();
+	//scrolling exactly to the end of the form layer
 	var endpoint = document.getElementById("first-block").scrollHeight-window.innerHeight-42; // must calculate after the layer is made visible
-	if (window.scrollY < endpoint ) window.scroll(0,endpoint+startpoint);
+	if (window.scrollY < endpoint ) window.scroll(0,endpoint+startpoint); 
 	else window.scroll(0,window.scrollY+1);
-	bgBehavior();
-	document.getElementsByClassName("purchase-car")[0].style = "background-size: cover;";
+	setTimeout( function () { bgBehavior();	}, 100 );
+	setTimeout( function () { bgBehavior();	}, 300 );
+	//bgBehavior();
+	//document.getElementById("page-body").style = "background-size: cover;";
+	//alert(1);
 }
+
+window.addEventListener('load', shareLinks);
+$('.round').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.arrow').toggleClass('bounceAlpha');
+});

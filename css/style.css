@@ -15117,7 +15117,7 @@ html .page .rd-navbar-fixed .rd-navbar-fixed--hidden {
 }
 
 
-.rd-navbar-static .rd-navbar-nav li.menu-button.active a { opacity: 1; background: white; color: #293c98; font-weight: bold;}
+.rd-navbar-static .rd-navbar-nav li.menu-button.active a { opacity: 1;}
 
 .rd-navbar-fixed .rd-navbar-nav li:hover > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.focus > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.active > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.opened > .rd-navbar-submenu-toggle {
 	color: #ffffff;
@@ -32862,9 +32862,10 @@ input[type="file"]:focus { outline: 0 !important; }
 		background: linear-gradient(to bottom, transparent 300px, black 400px),url('../images/alef-car-cgi.jpg'), black;
 		background-attachment: auto;
 		background-size: 100% auto;
-		background-position: 0 0, 0 0;
+		background-position: 0 0;
 		background-repeat: no-repeat;
 	}	
+	.purchase-car  .section {background: transparent;)}
  }
 
  @media (max-width:680px) { 
@@ -32891,7 +32892,7 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 
 
 @media (max-width: 992px) { 
-	.order-form { padding-top: 300px; max-width: 60% !important; margin-left: auto; margin-right: auto; min-width: 400px !important;} 
+	.order-form { padding-top: 300px; padding-bottom: 20px; max-width: 80% !important; margin-left: auto; margin-right: auto; min-width: 400px !important;} 
 	.order-form h3 {justify-content: center;} .order-form h3 span:last-child {padding-left: 10px;}
 }
 
@@ -32908,6 +32909,8 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 	padding-right: 0 !important;
 }
 
+.order-form .form-label span {float: right; font-size: 70px; position: relative; top: 20px; left: 5px; }
+
 .order-form .button-primary:hover, .order-form .button-primary:focus {
 	background: linear-gradient(155deg, transparent 35%, rgba(41,60,151,0.4) 35%, rgba(41,60,151,0.4) 65%, transparent 65%) !important;
 }
@@ -32918,6 +32921,14 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 .order-form .check-input { height: 57px; float: left; clear: left; position: relative; top: -5px; left: -25px; margin-right: -20px;}
 .order-form .form-check-input { background: transparent; border: 0; padding: 0;}
 .order-form .form-check-input:checked { background: url("../images/checkmark.png"); background-size: 20px 20px; }
+.order-form .hidden-break {display: none;}
+
+@media (max-width: 992px) {
+	.order-form .check-input, .order-form .preorder { display: inline-block;}
+	.order-form .hidden-break {display: block; margin: 0; height: 1px; overflow: hidden; margin-top: -24px;}
+	.order-form .check-input {  height: 60px; left: 0; top: -20px; float: none; margin: 0; margin-left: -20px;}
+
+}
 
 
 
@@ -32925,11 +32936,14 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 
 @media (min-width: 992px) { 
 	.order-form h1 small {font-size: 33%;} 
-	.order-form {text-align: left; padding-right: 100px; padding-left: 0;}
+	.order-form {text-align: left; padding-left: 0;}
 }
 
 @media (min-width: 1200px) { 
 	.order-form h1 small {font-size: 48%;} 
+}
+@media (min-width: 1400px) { 
+	.order-form {padding-right: 100px;}
 }
 
 @media (min-width: 1600px) {.order-form {text-align: justify;}}

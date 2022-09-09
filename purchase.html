@@ -24,7 +24,7 @@
         </script> 
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   </head>
-  <body class="purchase-car">
+  <body class="purchase-car" id="page-body">
     <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <!-- Page Loader -->
     <div id="page-loader">
@@ -68,8 +68,17 @@
             <!-- First blue image block -->
             <section class="section h-100-plus" id="first-block">
                 <div class="section-md text-center">
-                    <div class="range range-50 range-lg-bottom">
-                        <div class="cell-xs-12 cell-md-8"></div>
+                    <div class="range range-50 range-lg-bottom range-reverse">
+                        <div class="cell-xs-12 cell-md-8">
+                                <div class="center-con">
+                                        <div class="round">
+                                            <div id="cta">
+                                                <span class="arrow primera next "></span>
+                                                <span class="arrow segunda next "></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
                       <div class="cell-xs-12 cell-md-4 self-center order-form wow fadeInLeftSmall" id="order-block">
 
                           <h1><small>Purchase Flying Car</small></h1>
@@ -78,26 +87,28 @@
                                 <input class="form-check-input" id="general" type="radio" name="advance" onClick="switchMode(150);">
                                 <!-- label class="heading-4 mt-1 mb-2" for="general"></label-->
                           </div>
-                          <a onClick="switchMode(150);"><h3 class="mt-2 mb-0"><span>Preorder</span><span>$150</span></h3>
+                          <a class="preorder" onClick="switchMode(150);"><h3 class="mt-2 mb-0"><span>Pre-order</span><span>$150</span></h3>
                           <p class="order-caption">General Queue</p></a>
+                          <div class="hidden-break"></div>
                           <div class="wow fadeIn check-input">
                                 <input class="form-check-input" id="priority" type="radio" name="advance" onClick="switchMode(1500);" checked>
                                 <!-- label class="heading-4 mt-1 mb-2" for="priority"></label-->
                           </div>
-                          <a onClick="switchMode(1500);"><h3 class="mt-1 mb-0" onClick="switchMode(1500);" style="font-weight: bold;"><span>Preorder</span><span>$1500</span></h3>
+                          <a class="preorder" onClick="switchMode(1500);"><h3 class="mt-1 mb-0" onClick="switchMode(1500);" style="font-weight: bold;"><span>Pre-order</span><span>$1500</span></h3>
                           <p class="order-caption">Priority Queue</p></a>
+                          <div class="hidden-break"></div>
                           <p>Fully refundable.</p>
-                          <div class="form-wrap form-button wow fadeInBottom mt-4" id="order-button">
-                                <button class="button button-block button-primary" type="submit" onClick="showForm();" id="first-button">Priority Order</button>
+                          <div class="form-wrap form-button wow fadeInBottom mt-4" id="order-button" style="display: block;">
+                                <button class="button button-block button-primary" type="submit" onClick="showForm();" id="first-button">Order Now</button>
                           </div>
 
 
-                          <form class="rd-mailform" data-form-output="form-output-global" data-form-type="order" style="display: none;" id="order-form">
-                                <div class="form-wrap wow fadeInLeftSmall mb-1" data-wow-delay="0.15s">
+                          <form class="mt-3 rd-mailform" data-form-output="form-output-global" data-form-type="order" style="display: none;" id="order-form">
+                                <div class="form-wrap wow fadeInLeftSmall mb-0" data-wow-delay="0.15s">
                                   <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
                                   <label class="form-label" for="contact-name">Name*</label>
                                 </div>
-                                <div class="form-wrap wow fadeInLeftSmall mb-1" data-wow-delay="0.3s">
+                                <div class="form-wrap wow fadeInLeftSmall mb-0" data-wow-delay="0.3s">
                                         <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">
                                         <label class="form-label" for="contact-email">E-mail*</label>
                                 </div>      
@@ -360,34 +371,85 @@
         <option value="Zambia">Zambia</option>
         <option value="Zimbabwe">Zimbabwe</option>
     </select>
-                                  <label class="form-label" for="contact-country">Country*</label>
+                                  <label class="form-label" for="contact-country"><span>&#129171;</span> Country*</label>
                                 </div>
                                 <input type="hidden" id="contact-advance" name="advance" class="form-input" value="1500">
+                                <input id="form-checked" type="checkbox" style="visibility: hidden;">
                                 <div class="wow fadeInLeftSmall" data-wow-delay="0.6s">
-                                <p class="mb-3">By entering my account details above, I&nbsp;agree to be contacted about Alef products, including through automated calls or texts. This is not a condition of&nbsp;purchase.</p>
-                                <p class="mb-3">By placing this order for <span id="order-label" style="text-transform: capitalize;">Priority Queue</span>, I agree to the <a href="about:blank" target="_pre-order">Alef Pre-Order Agreement</a> and the <a href="about:blank" target="_privacy">Customer Privacy Agreement.</a></p>
+                                <!--p class="mb-3">By entering my account details above, I&nbsp;agree to be contacted about Alef products, including through automated calls or texts. This is not a condition of&nbsp;purchase.</p-->
+                                <p class="mb-3">By placing this order for <span id="order-label" style="text-transform: capitalize;">Priority Queue</span>, I&nbsp;agree to the <a href="about:blank" target="_pre-order">Alef Pre-Order Agreement</a> and the <a href="about:blank" target="_privacy">Customer Privacy Agreement.</a></p>
                                 </div>
 
-                                <div id="smart-button-container">
-                                        <div style="text-align: center;">
+
+                                <div class="wow fadeInBottom">
+                                    <div id="smart-button-container" style="filter: invert() grayscale() brightness(1.25);">
+                                        <div style="text-align: center;" id="second-button">
                                           <div id="paypal-button-container"></div>
                                         </div>
-                                      </div>
+                                    </div>
+                                </div>
                                     <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
                                     <script>
                                       function initPayPalButton() {
                                         paypal.Buttons({
                                           style: {
                                             shape: 'rect',
-                                            color: 'black',
+                                            color: 'white',
                                             layout: 'vertical',
                                             label: 'pay',
                                             
                                           },
+                                          onInit: function(data, actions) {
+                                            // Disable the buttons by default
+                                            actions.disable();
+                                            // check for validation to enable buttons
+                                            document.querySelector('#form-checked').addEventListener('change', function(event) {
+                                            // Enable or disable the button when it is checked or unchecked
+                                            if (event.target.checked) { actions.enable(); } else { actions.disable(); }
+                                            });
+
+                                            },
+                                            onClick: function() {
+                                            // Form validation
+                                            var form = $($(".rd-mailform")[0]),
+							                inputs = form.find("[data-constraints]"),
+							                output = $("#" + form.attr("data-form-output")),
+							                captcha = form.find('.recaptcha'),
+							                captchaFlag = true;
+
+                                            output.removeClass("active error success");
+
+						                    if (isValidated(inputs, captcha)) {
+                                                document.getElementById("form-checked").checked = true; 
+                                                document.getElementById("form-checked").dispatchEvent(new Event('change'));
+                                            }                            
+                                           else {
+                                                document.getElementById("form-checked").checked = false;
+                                                document.getElementById("form-checked").dispatchEvent(new Event('change'));                
+                    						}
+                                            },
                                   
-                                          createOrder: function(data, actions) {
+                                          createOrder: function(data, actions) {    
+                                              var value = parseInt(document.getElementById("contact-advance").value); 
+                                              var description = "Alef Flying Car pre-order.\nRefundable deposit for your "+ ( (value>150) ? "priority" : "general" ) +" queue place in line.";
+                                              var order_data = {
+                                                  "description": description,
+                                                  "amount":{
+                                                      "currency_code":"USD",
+                                                      "value": value
+                                                    }
+                                                };
+                                                /*
+                                                var form = $($(".rd-mailform")[0]);
+                                                form.addClass('form-in-process');
+                                                output = $("#" + form.attr("data-form-output"));
+                                                if (output.hasClass("snackbars")) {
+                                                    output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
+                                                    output.addClass("active");
+                                                }       */                                         
+                                            
                                             return actions.order.create({
-                                              purchase_units: [{"description":"Alef Flying Car pre-order.\nRefundable deposit for your general queue place in line.","amount":{"currency_code":"USD","value":1}}]
+                                              purchase_units: [order_data]
                                             });
                                           },
                                   
@@ -396,19 +458,34 @@
                                               
                                               // Full available details
                                               console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                                              // Collect info from the form and PayPal and update Google Sheets
+                                              formdata = collectData();
+                                              formdata['completed'] = "yes";
+                                              updateSheets(formdata);
+
                                   
                                               // Show a success message within this page, e.g.
+
+                                              formClear(true,true,"Order Sent!"); thankYou();
+                                              /*
+
                                               const element = document.getElementById('paypal-button-container');
                                               element.innerHTML = '';
                                               element.innerHTML = '<h3>Thank you for your payment!</h3>';
                                   
-                                              // Or go to another URL:  actions.redirect('thank_you.html');
+                                              // Or go to another URL:  actions.redirect('thank_you.html'); */
                                               
                                             });
                                           },
                                   
                                           onError: function(err) {
-                                            console.log(err);
+                                              // Collect data from form and update Google sheets with available info and error
+                                              formdata = collectData();
+                                              formdata['completed'] = "no";
+                                              formdata['error'] = String(err);
+                                              updateSheets(formdata);
+                                              formClear("please try again",false,"");
                                           }
                                         }).render('#paypal-button-container');
                                       }
@@ -416,15 +493,15 @@
                                     </script>
 
 
-                                <div class="form-wrap form-button wow fadeInBottom mt-3">
+                                <div class="form-wrap form-button wow fadeInBottom mt-3" style="display: none;">
                                     <button class="button button-block button-primary" type="submit" id="second-button">Priority Order</button>
                                 </div>
                             </form>
           
                     </div>
                     <div class="cell-xs-12 cell-md-4 self-center order-form" id="thank-you" style="display: none;">
-                            <div class="wow fadeInTop"  data-wow-delay="0.3s"><h1><small>The sky<br>awaits!</small></h1></div>
-                            <div class="wow fadeInBottom"  data-wow-delay="0.45s"></div><p class="mt-3">Thank you for ordering.<br>We will contact you as soon as possible.</p></div>
+                            <div class="wow fadeInTop"  data-wow-delay="0.3s"><h1><small>Your car<br>awaits!</small></h1></div>
+                            <div class="wow fadeInBottom"  data-wow-delay="0.45s"></div><p class="mt-3">Thank you for your pre-order.<br>Once production for your batch in line begins, we plan to contact you with details.</p></div>
                     </div>
                   </div>
                 </div>
@@ -446,16 +523,13 @@
     <script>
         // unfix the background when scrolled beyond the first block
             function bgBehavior() {
-                console.log(test);
                 if (document.getElementById("first-block").scrollHeight>window.innerHeight)
                 {
                     pos =  - window.innerHeight - window.scrollY + document.getElementById("first-block").scrollHeight - 41;
                     if (pos>0) pos = 0;
                 }
-                    
                 else
                     pos = -window.scrollY;
-
                 document.getElementsByClassName("purchase-car")[0].style = "background-position-y:"+ String( pos ) + "px;";
             }
             window.addEventListener( 'scroll', bgBehavior );
