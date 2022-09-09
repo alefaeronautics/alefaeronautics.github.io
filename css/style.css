@@ -32953,6 +32953,10 @@ footer {background: #293c98 !important;}
 .preorder-image {	background-size: cover !important; background-position-x: center !important;}
 .preorder-image .preorder-block {	background: linear-gradient(to top, rgba(0,0,0,1) 100px, rgba(0,0,0,0.5) 30%, transparent 60%);}
 
+@media(max-width:992px) {
+	.preorder-image .preorder-block { padding-top: 100px;}
+}
+
 .preorder-block .section-md {
 	padding-top: 50px !important;
 }
@@ -32979,11 +32983,24 @@ footer {background: #293c98 !important;}
 	margin-right: 70%;
 	transform: rotate(90deg); 
 	position: relative;
-	top: -150px;
+	top: -250px;
 	background: linear-gradient(to right, rgba(0,0,0,0.3) 0, transparent 80%);
 	border-radius: 20px;
 	padding-bottom: 20px; padding-top: 20px;
 }
+
+@media(max-width:992px) {
+	.round.centered {
+		margin-left: auto;
+		margin-right: auto;
+		top: -50px;
+		margin-bottom: 50px;
+		background: none;
+		margin-top: 80px;
+	}
+
+}
+
 .round.left {
 	margin-right: auto;
 	position: relative;
@@ -32994,6 +33011,7 @@ footer {background: #293c98 !important;}
 	transform: rotate(270deg);
 	position: relative;
 	top: 30px;
+	margin-bottom: 75px;
 }
 
 #cta{
