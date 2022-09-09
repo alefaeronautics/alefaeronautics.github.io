@@ -1314,5 +1314,9 @@ window.addEventListener('load', shareLinks);
 $('.round').click(function(e) {
     e.preventDefault();
     e.stopPropagation();
-    $('.arrow').toggleClass('bounceAlpha');
+	//$('.arrow').toggleClass('bounceAlpha');
+	const list =   $('.round');   //all containers
+   const index =  list.index($(this));  //current container
+   const target = (index + 1) % list.length;    //increment with wrap
+   $('.arrow-toggler')[target].scrollIntoView();
 });
