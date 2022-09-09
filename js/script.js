@@ -1303,8 +1303,8 @@ function showForm() {
 	var endpoint = document.getElementById("first-block").scrollHeight-window.innerHeight-42; // must calculate after the layer is made visible
 	if (window.scrollY < endpoint ) window.scroll(0,endpoint+startpoint); 
 	else window.scroll(0,window.scrollY+1);
-	setTimeout( function () { bgBehavior();	}, 100 );
-	setTimeout( function () { bgBehavior();	}, 300 );
+	setTimeout( bgBehavior, 100 );
+	setTimeout( bgBehavior, 300 );
 	//bgBehavior();
 	//document.getElementById("page-body").style = "background-size: cover;";
 	//alert(1);

@@ -414,19 +414,19 @@
                                             var form = $($(".rd-mailform")[0]),
 							                inputs = form.find("[data-constraints]"),
 							                output = $("#" + form.attr("data-form-output")),
-							                captcha = form.find('.recaptcha'),
-							                captchaFlag = true;
+							                captcha = form.find('.recaptcha');
 
                                             output.removeClass("active error success");
 
 						                    if (isValidated(inputs, captcha)) {
                                                 document.getElementById("form-checked").checked = true; 
                                                 document.getElementById("form-checked").dispatchEvent(new Event('change'));
+                                                for (var i=1; i<=8; i++) setTimeout( function() { bgBehavior();},i*500); // make sure background is refreshed
                                             }                            
                                            else {
                                                 document.getElementById("form-checked").checked = false;
                                                 document.getElementById("form-checked").dispatchEvent(new Event('change'));                
-                    						}
+                                            }
                                             },
                                   
                                           createOrder: function(data, actions) {    
@@ -438,15 +438,7 @@
                                                       "currency_code":"USD",
                                                       "value": value
                                                     }
-                                                };
-                                                /*
-                                                var form = $($(".rd-mailform")[0]);
-                                                form.addClass('form-in-process');
-                                                output = $("#" + form.attr("data-form-output"));
-                                                if (output.hasClass("snackbars")) {
-                                                    output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
-                                                    output.addClass("active");
-                                                }       */                                         
+                                                };                                       
                                             
                                             return actions.order.create({
                                               purchase_units: [order_data]
@@ -457,17 +449,19 @@
                                             return actions.order.capture().then(function(orderData) {
                                               
                                               // Full available details
-                                              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                              //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
 
                                               // Collect info from the form and PayPal and update Google Sheets
                                               formdata = collectData();
                                               formdata['completed'] = "yes";
+                                              formdata['transaction_id'] = orderData.id;
+                                              formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
+                                              formdata['email_paypal'] = orderData.payer.email_address;
+
                                               updateSheets(formdata);
 
-                                  
                                               // Show a success message within this page, e.g.
-
-                                              formClear(true,true,"Order Sent!"); thankYou();
+                                              thankYou();
                                               /*
 
                                               const element = document.getElementById('paypal-button-container');
@@ -485,6 +479,13 @@
                                               formdata['completed'] = "no";
                                               formdata['error'] = String(err);
                                               updateSheets(formdata);
+                                                                                              
+                                              var form = $($(".rd-mailform")[0]);
+                                              output = $("#" + form.attr("data-form-output"));
+                                              if (output.hasClass("snackbars")) {
+                                                output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span></span></p>');
+                                                output.addClass("active");
+                                              }       
                                               formClear("please try again",false,"");
                                           }
                                         }).render('#paypal-button-container');
