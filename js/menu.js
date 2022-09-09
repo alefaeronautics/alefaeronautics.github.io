@@ -13,6 +13,7 @@ function createMenu(where)
 
     var item = window.location.href;
     item = item.substring(item.lastIndexOf('/')+1,item.length);
+    if (item.lastIndexOf('#')!=-1) item = item.substring(0,item.lastIndexOf('#'));
 
     target = document.getElementsByClassName(where);
     for (var n=0; n<target.length; n++)

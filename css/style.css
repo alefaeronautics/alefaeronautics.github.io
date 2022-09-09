@@ -15117,7 +15117,10 @@ html .page .rd-navbar-fixed .rd-navbar-fixed--hidden {
 }
 
 
-.rd-navbar-static .rd-navbar-nav li.menu-button.active a { opacity: 1;}
+.rd-navbar-static .rd-navbar-nav li.menu-button.active a { 
+	opacity: 1;
+	background: rgba(255,255,255,0.08);
+}
 
 .rd-navbar-fixed .rd-navbar-nav li:hover > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.focus > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.active > .rd-navbar-submenu-toggle, .rd-navbar-fixed .rd-navbar-nav li.opened > .rd-navbar-submenu-toggle {
 	color: #ffffff;
@@ -32977,15 +32980,15 @@ footer {background: #293c98 !important;}
 }
 
 .round.centered {
-	width: 80px;
-	height: 160px;
+	width: 100px;
+	height: 135px;
 	margin-left: 30%;
 	margin-right: 70%;
 	transform: rotate(90deg); 
 	position: relative;
-	top: -250px;
-	background: linear-gradient(to right, rgba(0,0,0,0.3) 0, transparent 80%);
-	border-radius: 20px;
+	top: -180px;
+	background: linear-gradient(to right, rgba(0,0,0,0.75) 0, transparent 70%);
+	border-radius: 40px;
 	padding-bottom: 20px; padding-top: 20px;
 }
 
@@ -32993,7 +32996,7 @@ footer {background: #293c98 !important;}
 	.round.centered {
 		margin-left: auto;
 		margin-right: auto;
-		top: -50px;
+		top: -20px;
 		margin-bottom: 50px;
 		background: none;
 		margin-top: 80px;
@@ -33020,8 +33023,8 @@ footer {background: #293c98 !important;}
 
 #cta .arrow{left: 30%;}
 .arrow {position: absolute; bottom: 0;  margin-left:0px; width: 50px; height: 50px; background-size: contain; top:15px;}
-.round.centered .arrow { width: 90px; height: 90px;}
-.round.centered .segunda{margin-left: 35px;}
+.round.centered .arrow { width: 65px; height: 65px;}
+.round.centered .segunda{margin-left: 22px;}
 .segunda{margin-left: 18px;}
 .next {
 	background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHN0eWxlPi5zdDB7ZmlsbDojZmZmfTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTMxOS4xIDIxN2MyMC4yIDIwLjIgMTkuOSA1My4yLS42IDczLjdzLTUzLjUgMjAuOC03My43LjZsLTE5MC0xOTBjLTIwLjEtMjAuMi0xOS44LTUzLjIuNy03My43UzEwOSA2LjggMTI5LjEgMjdsMTkwIDE5MHoiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzE5LjEgMjkwLjVjMjAuMi0yMC4yIDE5LjktNTMuMi0uNi03My43cy01My41LTIwLjgtNzMuNy0uNmwtMTkwIDE5MGMtMjAuMiAyMC4yLTE5LjkgNTMuMi42IDczLjdzNTMuNSAyMC44IDczLjcuNmwxOTAtMTkweiIvPjwvc3ZnPg==);
