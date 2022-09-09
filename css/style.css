@@ -32975,11 +32975,11 @@ footer {background: #293c98 !important;}
 .round.centered {
 	width: 80px;
 	height: 160px;
-	margin-left: 25%;
-	margin-right: 75%;
+	margin-left: 30%;
+	margin-right: 70%;
 	transform: rotate(90deg); 
 	position: relative;
-	top: -90px;
+	top: -150px;
 	background: linear-gradient(to right, rgba(0,0,0,0.3) 0, transparent 80%);
 	border-radius: 20px;
 	padding-bottom: 20px; padding-top: 20px;
