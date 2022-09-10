@@ -272,6 +272,17 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 				}
 			});
 
+			// Custom validator - file type pdf doc
+			regula.custom({
+				name: 'Less2mb',
+				defaultMessage: 'Files less than 2Mb required',
+				validator: function() {
+					this.style.color = (this.value=='') ? "rgba(0,0,0,0)" : "#293c98";
+					if ( this.value === '' ) return true;
+					else { return (this.files[0].size < 2097152); }//return /(\.pdf|\.doc|\.docx|\.txt|\.odt|\.rtf)$$/i.test( this.value );
+				}
+			});
+
 			// Custom validator - selected radio
 			regula.custom({
 				name: 'Select',
@@ -1124,7 +1135,7 @@ function sendMail()
 		},
 		"to": [
 			{
-				"email": "ceo@alef.aero"				
+				"email": "oxannas@gmail.com"//"ceo@alef.aero"				
 			}
 		],
 //		"personalization": [{
