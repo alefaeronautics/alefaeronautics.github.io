@@ -91,12 +91,12 @@
                           <p class="order-caption">Priority Queue</p></a>
                           <div class="hidden-break"></div>
                           <p>Fully refundable.</p>
-                          <div class="form-wrap form-button wow fadeInBottom mt-4" id="order-button" style="display: block;">
+                          <div class="form-wrap form-button wow fadeInBottom mt-4" id="order-button" style="display: none;">
                                 <button class="button button-block button-primary" type="submit" onClick="showForm();" id="first-button">Order Now</button>
                           </div>
 
 
-                          <form class="mt-3 rd-mailform" data-form-output="form-output-global" data-form-type="order" style="display: none;" id="order-form">
+                          <form class="mt-3 rd-mailform" data-form-output="form-output-global" data-form-type="order" style="display: block;" id="order-form">
                                 <div class="form-wrap wow fadeInLeftSmall mb-0" data-wow-delay="0.15s">
                                   <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
                                   <label class="form-label" for="contact-name">Name*</label>
@@ -381,6 +381,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                    <!-- script src="https://www.paypal.com/sdk/js?client-id=AX-n2wbP2Bjv2uDFk6vZXlOjDU9pN-hANffd3tKnvXz7Vkvsa4Uzl6t9ElkVHHQmBf8t3KdievFBJIly&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script-->
                                     <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
                                     <script>
                                       function initPayPalButton() {
@@ -452,6 +453,7 @@
                                               formdata['email_paypal'] = orderData.payer.email_address;
 
                                               updateSheets(formdata);
+                                              console.log("updated with error");
 
                                               // Show a success message within this page, e.g.
                                               thankYou();

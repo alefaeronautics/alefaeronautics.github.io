@@ -1156,16 +1156,7 @@ function sendMail()
 	if (formtype=="position")
 	{
 		getBase64(document.getElementById("contact-resume").files[0],maildata);
-	}
-	if (formtype=="order")
-	{
-		alert('Here JS must send you to PayPal and detect if payment was completed.');
-		//must detect if paid or not
-		formdata['completed'] = "no";
-		//url += "&completed=no";
-		updateSheets(/*url,*/formdata);
-	}
-	
+	}	
 }
 
 function collectData()
