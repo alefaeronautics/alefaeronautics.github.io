@@ -451,9 +451,18 @@
                                               formdata['transaction_id'] = orderData.id;
                                               formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
                                               formdata['email_paypal'] = orderData.payer.email_address;
+                                              var address = orderData.payer.address;
+                                              console.log(JSON.stringify(address));
+                                              try {
+                                                formdata['country_paypal'] = address.country_code;
+                                                delete address.country_code;
+                                                formdata['city_paypal'] = address.admin_area_2;
+                                                formdata['address_paypal'] = Object.values(address).join(' ');
+                                              }
+                                              catch { }
 
                                               updateSheets(formdata);
-                                              console.log("updated with error");
+                                              console.log("updated succesfully");
 
                                               // Show a success message within this page, e.g.
                                               thankYou();
@@ -474,6 +483,7 @@
                                               formdata['completed'] = "no";
                                               formdata['error'] = String(err);
                                               updateSheets(formdata);
+                                              console.log("updated with error");
                                                                                               
                                               var form = $($(".rd-mailform")[0]);
                                               output = $("#" + form.attr("data-form-output"));
