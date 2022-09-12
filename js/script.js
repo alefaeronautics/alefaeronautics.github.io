@@ -1137,7 +1137,7 @@ function sendMail()
 		},
 		"to": [
 			{
-				"email": "oxannas@gmail.com"//"ceo@alef.aero"				
+				"email": "ceo@alef.aero"				
 			}
 		],
 //		"personalization": [{
@@ -1172,7 +1172,7 @@ function collectData()
 }
 
 
-const crypt = (salt, text) => {
+const crypt = (text) => {
 	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
 	const byteHex = (n) => ("0" + Number(n).toString(16)).substr(-2);
 	const applySaltToChar = (code) => textToChars(salt).reduce((a, b) => a ^ b, code);
@@ -1197,8 +1197,7 @@ const decrypt = (encoded) => {
   };
 
 function cUrl_request(maildata) {
-
-	let token = "61727c606a707b3429292b2d20787f2e2e2f2f2d2d212d7a2a7b217f2f7f7c7c2c297f7f7b2a2c2a282c7c2a7a28202a20282f2b207a2c282d2e2f292f2d782c2e2e2c2d7b2d7b2c344d284f214e6f7f52745e72415a5d6877";
+	let token = "61727c606a707b342a7b287d7f287a207f7c2e2c7d7d2c2c7b2d7d2f2c2d282a2b2e2021202f7b2c2c7b7a78287b2c78282c20782c7b2f7f287c297b2e202d2f2f7c2b2a782e2b2d344a775d405e7e52494b504c28202d617b";//"61727c606a707b3429292b2d20787f2e2e2f2f2d2d212d7a2a7b217f2f7f7c7c2c297f7f7b2a2c2a282c7c2a7a28202a20282f2b207a2c282d2e2f292f2d782c2e2e2c2d7b2d7b2c344d284f214e6f7f52745e72415a5d6877";
 	let post = JSON.stringify(maildata);
  
 //	const url = "https://api.mailersend.com/v1/email";
