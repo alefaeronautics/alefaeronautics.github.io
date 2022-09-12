@@ -2585,11 +2585,12 @@ input:-webkit-autofill ~ label {
 .form-input, .form-file-input  {
 	display: block;
 	width: 100%;
-	min-height: 44px;
+	min-height: 55px;
 	padding: 8px 10px;
+	padding-top: 15px;
 	font-size: 24px;
 	font-weight: 400;
-	line-height: 29px;
+	line-height: 30px;
 	color: #293c98;
 	background-color: #dcdfee;
 	background-image: none;
@@ -2604,8 +2605,8 @@ input:-webkit-autofill ~ label {
 }
 
 textarea.form-input {
-	height: 46px;
-	min-height: 46px;
+	height: 55px;
+	min-height: 55px;
 	max-height: 145px;
 	resize: vertical;
 }
@@ -2634,7 +2635,7 @@ textarea.form-input {
 
 .form-label {
 	position: absolute;
-	top: 20px;
+	top: 25px;
 	left: 0;
 	right: 0;
 	padding-left: 10px;
@@ -2653,8 +2654,13 @@ textarea.form-input {
 }
 
 .form-label.focus {
-	opacity: 0;
+	font-weight: bold;
+	opacity: 0.6;
+	font-size: 10px;
+	top: 10px;
 }
+
+.form-label.focus:before { opacity: 0; }
 
 .form-label.auto-fill {
 	color: #151515;
@@ -3035,7 +3041,7 @@ textarea.form-input {
 
 .rd-mailform_boxed textarea.form-input {
 	height: 135px;
-	min-height: 44px;
+	min-height: 55px;
 	max-height: 230px;
 }
 
