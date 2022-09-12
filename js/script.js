@@ -1049,6 +1049,8 @@ $('.careers-positions-list').on('click',function() {
 	var x = document.getElementById('contact-position');
 	x.selectedIndex = $(this).index()+1;
 	x.scrollIntoView();
+	x.dispatchEvent(new Event('focus'));
+	x.dispatchEvent(new Event('change'));
 	return false;
 });
 
