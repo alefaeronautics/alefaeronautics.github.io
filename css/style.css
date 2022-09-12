@@ -32912,7 +32912,7 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 	padding-right: 0 !important;
 }
 
-.order-form .form-label span {float: right; font-size: 70px; position: relative; top: 20px; left: 5px; }
+.form-label.label-dropdown:before { content: "🢓"; float: right; font-size: 70px; position: relative; top: 20px; left: 5px;}
 
 .order-form .button-primary:hover, .order-form .button-primary:focus {
 	background: linear-gradient(155deg, transparent 35%, rgba(41,60,151,0.4) 35%, rgba(41,60,151,0.4) 65%, transparent 65%) !important;
