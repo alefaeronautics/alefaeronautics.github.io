@@ -13623,7 +13623,7 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	color: #ffffff;
 }
 
-.rd-navbar-nav li.menu-button a small {font-size: 88%; 	line-height: 1 !important;}
+.rd-navbar-nav li.menu-button a small {font-size: 100%; 	line-height: 1 !important;}
 
 .rd-navbar-fullwidth .rd-navbar-nav > li.opened > a,
 .rd-navbar-fullwidth .rd-navbar-nav > li.active > a,
@@ -32766,7 +32766,7 @@ section:first-of-type {margin-top: -68px;}
 .mt-3 {margin-top: 30px;}
 .mt-4 {margin-top: 40px;}
 .mt-5 {margin-top: 50px;}
-.mt-6 {margin-top: 50px;}
+.mt-10 {margin-top: 100px;}
 
 .footer-text {margin-top: 15px; margin-bottom: 20px;}
 @media (max-width: 768px) {
@@ -32961,6 +32961,7 @@ footer {background: #293c98 !important;}
 
 .preorder-image {	background-size: cover !important; background-position-x: center !important; background-repeat: no-repeat !important;}
 .preorder-image .preorder-block {	background: linear-gradient(to top, rgba(0,0,0,1) 100px, rgba(0,0,0,0.5) 30%, transparent 60%);}
+
 .image-smaller {background-size: 100% auto !important;}
 
 @media(min-width: 992px) {
@@ -32981,6 +32982,11 @@ footer {background: #293c98 !important;}
 .preorder-block p {font-size: 15px; color: white; padding-right: 50px;}
 .preorder-block .story {margin-bottom: -90px;}
 .preorder-block h3 {text-shadow: 0 0 3px black;}
+
+@media(max-height:650px) {
+	.preorder-block, .preorder-block h3 {text-shadow: 0 0 3px black,   0 0 6px black, 0 0 10px black,  0 0 15px black;}
+}
+
 .preorder-block .story div {align-self: flex-end;}
 .preorder-block h2 {float: left; width: 100px; margin-left: -100px; position: relative; left:-5px; top: -7px; text-align: right;}
 

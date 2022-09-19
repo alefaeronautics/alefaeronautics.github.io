@@ -8,7 +8,7 @@ function createMenu(where)
         { url: 'investors.html', title: 'Investors',class:''},
         { url: 'contact.html', title: 'Contact',class:''},
         { url: 'presskit.html', title: 'Press&nbsp;Kit',class:''},
-        { url: 'preorder.html', title: 'Preorder<br><small>Flying&nbsp;Car</small>',class:Array('menu-button')}, 
+        { url: 'preorder.html', title: '<nobr>Pre-order</nobr><br><small>Flying&nbsp;Car</small>',class:Array('menu-button')}, 
         );
 
     var item = window.location.href;
