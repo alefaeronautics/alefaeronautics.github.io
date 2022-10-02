@@ -4614,7 +4614,7 @@ html .icon-md {
 	color: white;
 }
 
-.post-boxed:hover a {;
+.post-boxed:hover a {
 	color: white;
 }
 
@@ -32874,7 +32874,7 @@ input[type="file"]:focus { outline: 0 !important; }
 		background-position: 0 0;
 		background-repeat: no-repeat;
 	}	
-	.purchase-car  .section {background: transparent;)}
+	.purchase-car  .section {background: transparent;}
  }
 
  @media (max-width:680px) { 
@@ -32958,6 +32958,13 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 @media (min-width: 1600px) {.order-form {text-align: justify;}}
 
 footer {background: #293c98 !important;}
+
+footer p a {color: white;}
+footer p span {padding: 0 20px; content: "|";}
+footer p span:before {content: "|";}
+@media (max-width: 1200px) {footer p span { display: block;} footer p span:before {content: "";} }
+
+@media (max-width: 768px) { footer p:last-child {margin-bottom: 15px;}}
 
 .preorder-image {	background-size: cover !important; background-position-x: center !important; background-repeat: no-repeat !important;}
 .preorder-image .preorder-block {	background: linear-gradient(to top, rgba(0,0,0,1) 100px, rgba(0,0,0,0.5) 30%, transparent 60%);}
