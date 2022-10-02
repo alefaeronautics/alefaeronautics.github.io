@@ -1137,7 +1137,7 @@ function sendMail()
 		},
 		"to": [
 			{
-				"email": "ceo@alef.aero"				
+				"email": "contact@alef.aero"				
 			}
 		],
 //		"personalization": [{
