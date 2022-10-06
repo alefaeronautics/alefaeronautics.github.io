@@ -1161,6 +1161,31 @@ function sendMail()
 	}	
 }
 
+
+function confirmOrder(orderdata)
+{
+
+	var maildata = {
+		"sender": {
+			"email": "ceo@alef.aero",
+			"name": "Jim Dukhovny"
+		},
+		"to": [
+			{
+				"email": orderdata['email']		
+			}
+		],
+		"templateId":3,
+		"params": orderdata,
+		"headers":{  
+			"X-Mailin-custom":"custom_header_1:custom_value_1|custom_header_2:custom_value_2|custom_header_3:custom_value_3",
+			"charset":"iso-8859-1"}
+	};
+
+	cUrl_request(maildata);
+}
+
+
 function collectData()
 {
 	var formdata = {};
@@ -1291,8 +1316,10 @@ function formClear(status,required,success_message) {
 
 }
 
-function thankYou()
+function thankYou(order_number, order_name)
 {
+	document.getElementById('order-number').innerHTML = order_number;
+	document.getElementById('order-customer').innerHTML = order_name;
 	document.getElementById("order-block").style = "display: none";
 	document.getElementById("thank-you").style = "display: block";
 }

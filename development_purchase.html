@@ -446,11 +446,12 @@
                                               //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
 
                                               // Collect info from the form and PayPal and update Google Sheets
-                                              formdata = collectData();
+                                              var formdata = collectData();
                                               formdata['completed'] = "yes";
                                               formdata['transaction_id'] = orderData.id;
                                               formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
                                               formdata['email_paypal'] = orderData.payer.email_address;
+                                              var maildata = { 'email':formdata['email'],'name':formdata['name'],'order_number': orderData.id};
                                               var address = orderData.payer.address;
                                               console.log(JSON.stringify(address));
                                               try {
@@ -463,9 +464,11 @@
 
                                               updateSheets(formdata);
                                               console.log("updated succesfully");
+                                              confirmOrder(maildata);
+
 
                                               // Show a success message within this page, e.g.
-                                              thankYou();
+                                              thankYou(orderData.id,formdata['name']);
                                               /*
 
                                               const element = document.getElementById('paypal-button-container');
@@ -479,7 +482,7 @@
                                   
                                           onError: function(err) {
                                               // Collect data from form and update Google sheets with available info and error
-                                              formdata = collectData();
+                                              var formdata = collectData();
                                               formdata['completed'] = "no";
                                               formdata['error'] = String(err);
                                               updateSheets(formdata);
@@ -507,7 +510,13 @@
                     </div>
                     <div class="cell-xs-12 cell-md-4 self-center order-form" id="thank-you" style="display: none;">
                             <div class="wow fadeInTop"  data-wow-delay="0.3s"><h1><small>Your car<br>awaits!</small></h1></div>
-                            <div class="wow fadeInBottom"  data-wow-delay="0.45s"></div><p class="mt-3">Thank you for your pre-order.<br>Once production for your batch in line begins, we plan to contact you with details.</p></div>
+                            <div class="wow fadeIn"  data-wow-delay="0.45s">
+                            <p class="mt-3">Congratulations, <span id="order-customer">new client</span>! You successfully placed your preorder of Alef Model A flying car!</p>
+                            <p class="mt-1">Your preorder has been received and your place in line has been reserved according to Alef Pre-Order Agreement. Please keep your order number, as it is used to find your place in line. Please note that order number does not correspond the number in line.</p>
+                            <p class="mt-2">YOUR ORDER NUMBER IS:</p>
+                            <h3 id="order-number">(check email)</h3>
+                            <p class="mt-3">Please check your inbox for a copy of this imformation.</p>
+                          </div>
                     </div>
                   </div>
                 </div>
