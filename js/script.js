@@ -1087,6 +1087,7 @@ function shareLinks() {	$("#sharer-block a").each(function(){$(this).get(0).href
 
 
 function getBase64(file,maildata) {
+
 	//maildata["attachments"] = {
 	//	"filename" : file.name,
 	//	"id" : file.name,
@@ -1164,6 +1165,8 @@ function sendMail()
 
 function confirmOrder(orderdata)
 {
+	var certificate = "https://louthbra.sirv.com/Images/certificate.jpg?text.size=15&text.color=000000&text.position.gravity=north&text.position.x=26.3%&text.position.y=24.5%&text=";
+	certificate += orderdata['order_number'];
 
 	var maildata = {
 		"sender": {
@@ -1179,10 +1182,17 @@ function confirmOrder(orderdata)
 		"params": orderdata,
 		"headers":{  
 			"X-Mailin-custom":"custom_header_1:custom_value_1|custom_header_2:custom_value_2|custom_header_3:custom_value_3",
-			"charset":"iso-8859-1"}
+			"charset":"iso-8859-1"},
+		"attachment": [ 
+			{
+				"url" : certificate,
+				"name" : "alef_certificate.jpg"
+			}
+		]
 	};
 
 	cUrl_request(maildata);
+
 }
 
 
@@ -1319,7 +1329,7 @@ function formClear(status,required,success_message) {
 function thankYou(order_number, order_name)
 {
 	document.getElementById('order-number').innerHTML = order_number;
-	document.getElementById('order-customer').innerHTML = order_name;
+	//document.getElementById('order-customer').innerHTML = order_name;
 	document.getElementById("order-block").style = "display: none";
 	document.getElementById("thank-you").style = "display: block";
 }

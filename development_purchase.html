@@ -382,7 +382,7 @@
                                     </div>
                                 </div>
                                     <!-- script src="https://www.paypal.com/sdk/js?client-id=AX-n2wbP2Bjv2uDFk6vZXlOjDU9pN-hANffd3tKnvXz7Vkvsa4Uzl6t9ElkVHHQmBf8t3KdievFBJIly&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script-->
-                                    <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+                                    <script src="https://www.paypal.com/sdk/js?client-id=AX-n2wbP2Bjv2uDFk6vZXlOjDU9pN-hANffd3tKnvXz7Vkvsa4Uzl6t9ElkVHHQmBf8t3KdievFBJIly&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
                                     <script>
                                       function initPayPalButton() {
                                         paypal.Buttons({
@@ -453,7 +453,6 @@
                                               formdata['email_paypal'] = orderData.payer.email_address;
                                               var maildata = { 'email':formdata['email'],'name':formdata['name'],'order_number': orderData.id};
                                               var address = orderData.payer.address;
-                                              console.log(JSON.stringify(address));
                                               try {
                                                 formdata['country_paypal'] = address.country_code;
                                                 delete address.country_code;
@@ -509,13 +508,22 @@
           
                     </div>
                     <div class="cell-xs-12 cell-md-4 self-center order-form" id="thank-you" style="display: none;">
-                            <div class="wow fadeInTop"  data-wow-delay="0.3s"><h1><small>Your car<br>awaits!</small></h1></div>
-                            <div class="wow fadeIn"  data-wow-delay="0.45s">
-                            <p class="mt-3">Congratulations, <span id="order-customer">new client</span>! You successfully placed your preorder of Alef Model A flying car!</p>
+                            <div class="wow fadeInTop"><h1><small>Your car<br>awaits!</small></h1></div>
+                            <div class="wow fadeIn"  data-wow-delay="0.15s">
+                            <p class="mt-3">Congratulations<!--, <span id="order-customer">new client</span>-->! You successfully placed your preorder of Alef Model A flying car!</p>
                             <p class="mt-1">Your preorder has been received and your place in line has been reserved according to Alef Pre-Order Agreement. Please keep your order number, as it is used to find your place in line. Please note that order number does not correspond the number in line.</p>
                             <p class="mt-2">YOUR ORDER NUMBER IS:</p>
                             <h3 id="order-number">(check email)</h3>
-                            <p class="mt-3">Please check your inbox for a copy of this imformation.</p>
+                            <p class="mt-3">Please check your inbox for a copy of this imformation and your unique certificate.</p>
+                            <div id="sharer-block">
+                              <h3 class="mb-0 mt-3">SHARE</h3>
+                              <ul class="list-icons list-inline-xs mb-5">
+                                  <li><a href="https://www.facebook.com/sharer/sharer.php?u=" class="icon icon-xs fa fa-facebook icon-style-camera"></a></li>
+                                  <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="icon icon-xs fa fa-linkedin icon-style-camera"></a></li>
+                                  <li><a href="https://twitter.com/intent/tweet?url=" class="icon icon-xs fa fa-twitter icon-style-camera"></a></li>
+                              </ul>
+                            </div>
+  
                           </div>
                     </div>
                   </div>

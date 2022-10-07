@@ -3085,6 +3085,9 @@ textarea.form-input {
 	background: #ffffff;
 }
 
+.order-form .icon {color: white !important; background: transparent !important;}
+.order-form a.icon:hover {color: rgba(255,255,255,0.6) !important;}
+
 .icon:before {
 	position: relative;
 	display: inline-block;
