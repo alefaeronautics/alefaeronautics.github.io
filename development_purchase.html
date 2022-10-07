@@ -396,30 +396,43 @@
                                           onInit: function(data, actions) {
                                             // Disable the buttons by default
                                             actions.disable();
+                                            /*
                                             // check for validation to enable buttons
                                             document.querySelector('#form-checked').addEventListener('change', function(event) {
                                             // Enable or disable the button when it is checked or unchecked
                                             if (event.target.checked) { actions.enable(); } else { actions.disable(); }
                                             });
+                                            */
+
+                                            document.querySelectorAll(".form-input").forEach(i=>{
+                                              i.addEventListener("change",()=>{
+                                                if (isValidated($($(".rd-mailform")[0]).find("[data-constraints]"))) {
+                                                   actions.enable();
+                                                } else {
+                                                    actions.disable();
+                                                }
+                                              });
+                                            });
+
 
                                             },
                                             onClick: function() {
                                             // Form validation
                                             var form = $($(".rd-mailform")[0]),
-							                inputs = form.find("[data-constraints]"),
-							                output = $("#" + form.attr("data-form-output")),
-							                captcha = form.find('.recaptcha');
+							                              inputs = form.find("[data-constraints]"),
+							                              output = $("#" + form.attr("data-form-output")),
+							                              captcha = form.find('.recaptcha');
 
                                             output.removeClass("active error success");
 
-						                    if (isValidated(inputs, captcha)) {
-                                                document.getElementById("form-checked").checked = true; 
-                                                document.getElementById("form-checked").dispatchEvent(new Event('change'));
+						                                if (isValidated(inputs, captcha)) {
+                                                //document.getElementById("form-checked").checked = true; 
+                                                //document.getElementById("form-checked").dispatchEvent(new Event('change'));
                                                 for (var i=1; i<=8; i++) setTimeout( function() { bgBehavior();},i*500); // make sure background is refreshed
                                             }                            
                                            else {
-                                                document.getElementById("form-checked").checked = false;
-                                                document.getElementById("form-checked").dispatchEvent(new Event('change'));                
+                                                //document.getElementById("form-checked").checked = false;
+                                                //document.getElementById("form-checked").dispatchEvent(new Event('change'));                
                                             }
                                             },
                                   
