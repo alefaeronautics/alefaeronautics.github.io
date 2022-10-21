@@ -1310,6 +1310,9 @@ function formClear(status,required,success_message) {
 		.addClass(cls)
 		.removeClass('form-in-process');
 
+		form.trigger('reset');
+
+
 		output.text(msg);
 
 		if (output.hasClass("snackbars")) {
@@ -1346,7 +1349,6 @@ function showForm() {
 	setTimeout( bgBehavior, 300 );
 	//bgBehavior();
 	//document.getElementById("page-body").style = "background-size: cover;";
-	//alert(1);
 }
 
 window.addEventListener('load', shareLinks);
