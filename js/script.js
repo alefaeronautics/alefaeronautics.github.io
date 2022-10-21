@@ -1112,7 +1112,8 @@ function getBase64(file,maildata) {
 function sendMail()
 {
 	//var templates = { 'contact' : 'k68zxl275k94j905', 'position' : '0r83ql3p89pgzw1j' };
-	var templates = { 'contact' : 1, 'position' : 2, 'order' : 3 };
+	var templates = { 'contact' : 1, 'position' : 2, 'investor' : 1 };
+	var receiver = { 'contact' : 'contact@alef.aero', 'position' : 'jobs@alef.aero', 'investor' : 'investor@alef.aero' };
 	var formtype = $(".rd-mailform").attr('data-form-type'); 
 	var formdata = {};
 
@@ -1138,7 +1139,7 @@ function sendMail()
 		},
 		"to": [
 			{
-				"email": "contact@alef.aero"				
+				"email": receiver[formtype]				
 			}
 		],
 //		"personalization": [{
@@ -1153,13 +1154,11 @@ function sendMail()
 			"charset":"iso-8859-1"}
 	};
 
-	if (formtype=='contact') {
-		cUrl_request(maildata);
-	}
 	if (formtype=="position")
 	{
 		getBase64(document.getElementById("contact-resume").files[0],maildata);
 	}	
+	else { cUrl_request(maildata); }
 }
 
 
