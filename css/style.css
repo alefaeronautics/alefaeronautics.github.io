@@ -2766,6 +2766,25 @@ textarea.form-input {
 	opacity: 0;
 }
 
+.form-checkbox.has-error .form-validation {display: none;}
+.form-checkbox .form-check-input {
+	background-position: center center !important; 
+	min-height: 30px; 
+	min-width: 30px; 
+	border-radius: 8px; 
+	background-repeat: no-repeat !important; 
+	border: 1px solid #f5543f !important;
+}
+.checkbox-label {
+	margin-bottom: -20px; 
+	position: relative; 
+	top: -57px; 
+	left: 40px; 
+	padding-right: 40px;
+}
+
+.form-checkbox .form-check-input:checked {border-color: white !important;}
+
 .radio .radio-custom, .radio .radio-custom-dummy,
 .radio-inline .radio-custom,
 .radio-inline .radio-custom-dummy,
