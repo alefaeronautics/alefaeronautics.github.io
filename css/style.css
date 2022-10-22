@@ -14764,6 +14764,15 @@ html.lt-ie-10 .range > .cell-lg-12 {
 	width: auto;
 }
 
+@media(max-width: 410px) {
+	.rd-navbar-fixed .rd-navbar-brand img {
+		height: 20px !important;
+		width: auto !important;
+	}
+	
+
+}
+
 .rd-navbar-fixed .rd-navbar-brand .brand__slogan {
 	display: none;
 }
@@ -32876,6 +32885,9 @@ input[type="file"]:focus { outline: 0 !important; }
 @media (min-width: 1092px) { .text-image-2 img {max-height: 365px;} }
 
 .story {position: relative; left: 50px;}
+
+@media(max-width: 992px) {.story { left: 0; }}
+
 .story h2 {font-size: 80px; position: relative; top: -4px;}
 
 .purchase-car {
