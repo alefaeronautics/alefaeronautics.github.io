@@ -33136,3 +33136,13 @@ footer p span:before {content: "|";}
     animation-iteration-count:infinite;
     animation-timing-function:linear;
 }
+
+.smart-button-faded::after { 
+	content: "";
+	width: 100%; 
+	height: 100%; 
+	background: rgba(255,255,255,0.6); 
+	position: absolute;
+	top:0;
+	z-index: 100;
+	}

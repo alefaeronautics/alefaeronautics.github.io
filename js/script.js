@@ -1295,7 +1295,7 @@ function switchMode(amount) {
 	document.getElementById("contact-advance").value = amount;
 }
 
-function formClear(status,required,success_message) {
+function formClear(status,required,success_message,reset=true) {
 	var form = $(".rd-mailform"),
 		output = $("#" + form.attr("data-form-output"));
 
@@ -1310,7 +1310,7 @@ function formClear(status,required,success_message) {
 		.addClass(cls)
 		.removeClass('form-in-process');
 
-		form.trigger('reset');
+		if (reset) form.trigger('reset');
 
 
 		output.text(msg);
