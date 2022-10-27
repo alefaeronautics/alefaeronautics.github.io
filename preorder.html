@@ -369,17 +369,18 @@
                                 <input type="hidden" id="contact-advance" name="advance" class="form-input" value="150">
                                 <input id="form-checked" type="checkbox" style="visibility: hidden;">
                                 <div class="">
-                                <!--p class="mb-3">By entering my account details above, I&nbsp;agree to be contacted about Alef products, including through automated calls or texts. This is not a condition of&nbsp;purchase.</p-->
+                                <!--
                                 <div class="form-wrap form-checkbox">
                                   <input class="form-input form-check-input" id="contact-agreed" type="checkbox" name="agreed" data-constraints="@Required">
                                   <label class="form-label" for="contact-email" style="padding-left: 20px !important; letter-spacing: 0.2em; color: white; text-transform: none; font-size: 14px;"></label>
                           </div> 
-                                <p class="checkbox-label">By checking this box and placing this order for <span id="order-label" style="text-transform: capitalize;">General Queue</span>, I&nbsp;agree to the <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>
+                                <p class="checkbox-label">By placing this order for <span id="order-label" style="text-transform: capitalize;">General Queue</span>, I&nbsp;agree to the <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>-->
+                                <p class="mb-3">By placing this order for <span id="order-label" style="text-transform: capitalize;">General Queue</span>, I&nbsp;agree to the <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>
                                 </div>
 
 
                                 <div class="">
-                                    <div id="smart-button-container" style="filter: invert() hue-rotate(180deg);">
+                                    <div id="smart-button-container" style="filter: invert() hue-rotate(180deg) contrast(1.2);">
                                         <div style="text-align: center;" id="second-button">
                                           <div id="paypal-button-container"></div>
                                         </div>
@@ -399,7 +400,7 @@
                                           },
                                           onInit: function(data, actions) {
                                             // Disable the buttons by default
-                                            actions.disable();
+                                            // actions.disable();
                                             /*
                                             // check for validation to enable buttons
                                             document.querySelector('#form-checked').addEventListener('change', function(event) {
@@ -407,6 +408,7 @@
                                             if (event.target.checked) { actions.enable(); } else { actions.disable(); }
                                             });
                                             */
+                                            /*
 
                                             document.querySelectorAll(".form-input").forEach(i=>{
                                               i.addEventListener("change",()=>{
@@ -416,11 +418,12 @@
                                                     actions.disable();
                                                 }
                                               });
-                                            });
+                                            });*/
 
 
                                             },
                                             onClick: function() {
+                                            /*
                                             // Form validation
                                             var form = $($(".rd-mailform")[0]),
 							                              inputs = form.find("[data-constraints]"),
@@ -438,10 +441,11 @@
                                                 //document.getElementById("form-checked").checked = false;
                                                 //document.getElementById("form-checked").dispatchEvent(new Event('change'));                
                                             }
+                                            */
                                             },
                                   
                                           createOrder: function(data, actions) {    
-                                              var value = parseInt(document.getElementById("contact-advance").value); 
+                                              var value = parseInt($("#contact-advance").val()); 
                                               var description = "Alef Flying Car pre-order.\nRefundable deposit for your "+ ( (value>150) ? "priority" : "general" ) +" queue place in line.";
                                               var order_data = {
                                                   "description": description,
@@ -449,7 +453,9 @@
                                                       "currency_code":"USD",
                                                       "value": value
                                                     }
-                                                };                                       
+                                                };  
+                                                
+                                                console.log(order_data);
                                             
                                             return actions.order.create({
                                               purchase_units: [order_data]
