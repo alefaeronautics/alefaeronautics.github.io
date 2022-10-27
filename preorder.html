@@ -474,7 +474,11 @@
                                               formdata['transaction_id'] = orderData.id;
                                               formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
                                               formdata['email_paypal'] = orderData.payer.email_address;
-                                              var maildata = { 'email':formdata['email'],'name':formdata['name'],'order_number': orderData.id};
+                                              var maildata = { 
+                                                'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
+                                                'name':((formdata['name']!="") ? formdata['name'] : formdata['name_paypal']),
+                                                'order_number': orderData.id
+                                              };
                                               var address = orderData.payer.address;
                                               try {
                                                 formdata['country_paypal'] = address.country_code;
