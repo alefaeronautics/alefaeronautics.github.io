@@ -367,21 +367,20 @@
                                   <label class="form-label label-dropdown" for="contact-country">Country*</label>
                                 </div>
                                 <input type="hidden" id="contact-advance" name="advance" class="form-input" value="150">
-
-                                <p class="message-alert mt-2 hide" id="country-alert">If you want to pay by card, PayPal might display an error. Please be sure to click <b>&laquo;TRY AGAIN&raquo;</b> and proceed in the popup window.</p>
-                                <div class="mt-2">
-                                
+                                <input id="form-checked" type="checkbox" style="visibility: hidden;">
+                                <div class="">
+                                <!--
                                 <div class="form-wrap form-checkbox">
                                   <input class="form-input form-check-input" id="contact-agreed" type="checkbox" name="agreed" data-constraints="@Required">
                                   <label class="form-label" for="contact-email" style="padding-left: 20px !important; letter-spacing: 0.2em; color: white; text-transform: none; font-size: 14px;"></label>
                           </div> 
-                                <p class="checkbox-label">Please check to agree to <span id="order-label" style="text-transform: capitalize;">General Queue</span> <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>
-                                <!-- <p class="mb-3">By placing this order for <span id="order-label" style="text-transform: capitalize;">General Queue</span>, I&nbsp;agree to the <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p> -->
+                                <p class="checkbox-label">By placing this order for <span id="order-label" style="text-transform: capitalize;">General Queue</span>, I&nbsp;agree to the <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>-->
+                                <p class="mb-3">By placing this order for <span id="order-label" style="text-transform: capitalize;">General Queue</span>, I&nbsp;agree to the <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>
                                 </div>
 
 
                                 <div class="">
-                                    <div id="smart-button-container" class="smart-button-faded" style="filter: invert() hue-rotate(180deg) contrast(1.2);">
+                                    <div id="smart-button-container" style="filter: invert() hue-rotate(180deg) contrast(1.2);">
                                         <div style="text-align: center;" id="second-button">
                                           <div id="paypal-button-container"></div>
                                         </div>
@@ -390,28 +389,6 @@
                                     <!-- script src="https://www.paypal.com/sdk/js?client-id=AX-n2wbP2Bjv2uDFk6vZXlOjDU9pN-hANffd3tKnvXz7Vkvsa4Uzl6t9ElkVHHQmBf8t3KdievFBJIly&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script-->
                                     <script src="https://www.paypal.com/sdk/js?client-id=AX-n2wbP2Bjv2uDFk6vZXlOjDU9pN-hANffd3tKnvXz7Vkvsa4Uzl6t9ElkVHHQmBf8t3KdievFBJIly&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
                                     <script>
-                                      const alert_countries = ["China","India"];
-
-                                      document.querySelectorAll(".form-input").forEach(i=>{
-                                              i.addEventListener("change",()=>{
-                                                if (i.id=="contact-country") {
-
-                                                  if (alert_countries.includes(i.value))
-                                                      document.getElementById("country-alert").classList.remove('hide');
-                                                  else
-                                                    document.getElementById("country-alert").classList.add('hide');
-
-                                                  bgBehavior();
-                                                }
-                                                if (isValidated($($(".rd-mailform")[0]).find("[data-constraints]"))) {
-                                                   document.getElementById("smart-button-container").classList.remove("smart-button-faded");
-                                                } else {
-                                                  document.getElementById("smart-button-container").classList.add("smart-button-faded");
-                                                }
-                                              });
-                                            });
-
-
                                       function initPayPalButton() {
                                         paypal.Buttons({
                                           style: {
@@ -422,21 +399,49 @@
                                             
                                           },
                                           onInit: function(data, actions) {
+                                            // Disable the buttons by default
+                                            // actions.disable();
+                                            /*
+                                            // check for validation to enable buttons
+                                            document.querySelector('#form-checked').addEventListener('change', function(event) {
+                                            // Enable or disable the button when it is checked or unchecked
+                                            if (event.target.checked) { actions.enable(); } else { actions.disable(); }
+                                            });
+                                            */
+                                            /*
+
+                                            document.querySelectorAll(".form-input").forEach(i=>{
+                                              i.addEventListener("change",()=>{
+                                                if (isValidated($($(".rd-mailform")[0]).find("[data-constraints]"))) {
+                                                   actions.enable();
+                                                } else {
+                                                    actions.disable();
+                                                }
+                                              });
+                                            });*/
+
 
                                             },
                                             onClick: function() {
-
+                                            /*
                                             // Form validation
                                             var form = $($(".rd-mailform")[0]),
 							                              inputs = form.find("[data-constraints]"),
-							                              output = $("#" + form.attr("data-form-output"));
+							                              output = $("#" + form.attr("data-form-output")),
+							                              captcha = form.find('.recaptcha');
 
                                             output.removeClass("active error success");
 
-						                                if (isValidated(inputs)) {
+						                                if (isValidated(inputs, captcha)) {
+                                                //document.getElementById("form-checked").checked = true; 
+                                                //document.getElementById("form-checked").dispatchEvent(new Event('change'));
                                                 for (var i=1; i<=8; i++) setTimeout( function() { bgBehavior();},i*500); // make sure background is refreshed
                                             }                            
-                                            
+                                           else {
+                                                //document.getElementById("form-checked").checked = false;
+                                                //document.getElementById("form-checked").dispatchEvent(new Event('change'));                
+                                            }
+                                            */
                                             },
                                   
                                           createOrder: function(data, actions) {    
@@ -515,7 +520,7 @@
                                                 output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span></span></p>');
                                                 output.addClass("active");
                                               }       
-                                              formClear("please try again",false,"",false);
+                                              formClear("please try again",false,"");
                                           }
                                         }).render('#paypal-button-container');
                                       }
