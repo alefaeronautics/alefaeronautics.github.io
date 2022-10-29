@@ -32958,7 +32958,6 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 	font-style: normal;
 	font-weight: 400;
 	src: url("../fonts/Symbola.ttf") format('truetype');
-	unicode-range: U+1F893;
   }
 
 .form-label.label-dropdown:before { font-family: Symbola; content: "\1F893"; float: right; font-size: 70px; position: relative; top: 20px; left: 5px;}
@@ -33147,3 +33146,6 @@ footer p span:before {content: "|";}
 	top:0;
 	z-index: 100;
 	}
+
+.message-alert::before {content: "\26A0"; font-size:20px; font-family: Symbola; float: left; margin-left: -30px; margin-top: -5px; color: white;}
+.message-alert {padding: 10px 10px 15px 40px; border-radius: 8px; border: 1px solid white;}
