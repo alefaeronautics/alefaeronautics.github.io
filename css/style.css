@@ -33145,6 +33145,7 @@ footer p span:before {content: "|";}
 	position: absolute;
 	top:0;
 	z-index: 100;
+	display: none;
 	}
 
 .message-alert::before {content: "\26A0"; font-size:20px; font-family: Symbola; float: left; margin-left: -30px; margin-top: -5px; color: white;}
