@@ -32925,6 +32925,8 @@ input[type="file"]:focus { outline: 0 !important; }
 .order-form {padding: 60px; text-align: center; margin-top: 125px;}
 .order-form h3 {display: flex; justify-content: space-between; text-transform: uppercase; cursor: pointer;}
 .order-form h3:hover {font-weight: bold;}
+.order-form #sharer-block h3 {cursor: initial !important;}
+.order-form #sharer-block h3:hover {font-weight: normal !important;}
 
 .order-form a {color: #495cb8; font-weight: bold;}
 .order-form a:hover {color: #597cd8; font-weight: bold;}
