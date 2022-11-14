@@ -40,7 +40,8 @@
         $(function(){
           $("#footer").load("includes/footer.html"); 
         });
-        </script> 
+    </script> 
+    <script src="js/refer.js"></script>
   </head>
   <body class="purchase-car" id="page-body">
     <div class="arrow-toggler"></div>
@@ -98,7 +99,7 @@
                                 <input class="form-check-input" id="general" type="radio" name="advance" onClick="switchMode(150);" checked>
                                 <!-- label class="heading-4 mt-1 mb-2" for="general"></label-->
                           </div>
-                          <a class="preorder" onClick="switchMode(150);"><h3 class="mt-2 mb-0" style="font-weight: bold;"><span>Pre-order</span><span>$150</span></h3>
+                          <a class="preorder" onClick="switchMode(preorder_price);"><h3 class="mt-2 mb-0" style="font-weight: bold;"><span>Pre-order</span><span id="preorder-price">$150</span></h3>
                           <p class="order-caption">General Queue</p></a>
                           <div class="hidden-break"></div>
                           <div class="wow fadeIn check-input">
@@ -406,6 +407,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <script>
+                                  document.getElementById("preorder-price").innerHTML="<s style='font-weight: normal !important;'>$150</s>$"+preorder_price;
+                                  document.getElementById("contact-advance").value= preorder_price;
+                                </script>
                                     <script src="https://www.paypal.com/sdk/js?client-id=AX-n2wbP2Bjv2uDFk6vZXlOjDU9pN-hANffd3tKnvXz7Vkvsa4Uzl6t9ElkVHHQmBf8t3KdievFBJIly&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
                                     <script>
                                       const alert_countries = ["China","India"];
@@ -483,14 +488,16 @@
 
                                               // Collect info from the form and PayPal and update Google Sheets
                                               var formdata = collectData();
-                                              formdata['completed'] = "yes";
+                                              formdata['completed'] = (formdata['advance']>150) ? "priority" : "general";
+                                              formdata['referral'] = referral_code;
                                               formdata['transaction_id'] = orderData.id;
                                               formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
                                               formdata['email_paypal'] = orderData.payer.email_address;
                                               var maildata = { 
                                                 'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
                                                 'name':((formdata['name']!="") ? formdata['name'] : formdata['name_paypal']),
-                                                'order_number': orderData.id
+                                                'order_number': orderData.id,
+                                                'ref_number' : referral_number
                                               };
                                               var address = orderData.payer.address;
                                               try {
@@ -504,6 +511,9 @@
                                               updateSheets(formdata);
                                               console.log("updated succesfully");
                                               confirmOrder(maildata);
+
+                                              referral_code = orderData.id;
+                                              shareLinks();
 
 
                                               // Show a success message within this page, e.g.
@@ -550,21 +560,26 @@
                     <div class="cell-xs-12 cell-md-4 self-center order-form" id="thank-you" style="display: none;">
                             <div class="wow fadeInTop"><h1><small>Your car<br>awaits!</small></h1></div>
                             <div class="wow fadeIn"  data-wow-delay="0.15s">
-                            <p class="mt-3">Congratulations<!--, <span id="order-customer">new client</span>-->! You successfully placed your preorder of Alef Model A flying car!</p>
-
-                            <div id="sharer-block">
-                              <h3 class="mb-0 mt-3">SHARE TO</h3>
-                              <ul class="list-icons list-inline-xs mb-5">
-                                  <li><a href="https://www.facebook.com/sharer/sharer.php?u=" class="icon icon-xs fa fa-facebook icon-style-camera"></a></li>
-                                  <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="icon icon-xs fa fa-linkedin icon-style-camera"></a></li>
-                                  <li><a href="https://twitter.com/intent/tweet?url=" class="icon icon-xs fa fa-twitter icon-style-camera"></a></li>
-                              </ul>
-                            </div>
-
-                            <p class="mt-1">Your preorder has been received and your place in line has been reserved according to <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>. Please keep your order number, as it is used to find your place in line. Please note that order number does not correspond the number in line.</p>
+                            <p class="mt-3">Congratulations<!--, <span id="order-customer">new client</span>-->! You have successfully placed your preorder of Alef Model A flying car!</p>
                             <p class="mt-2">YOUR ORDER NUMBER IS:</p>
                             <h3 id="order-number">(check email)</h3>
-                            <p class="mt-3">Please check your inbox for a copy of this imformation and your unique certificate.</p>
+
+                            <div id="sharer-block">
+                              <h3 class="mb-1 mt-3">SHARE</h3>
+                              <p class="mt-1 mb-0">Share this unique link to give your followers discounted General Queue price of <b>$125</b>. Once you collect <span id="referral-number">enough</span> referrals, you will get a free General Queue reservation!</p>
+                              <ul class="list-icons list-inline-xs mb-0">
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u=" class="icon icon-xs fa fa-facebook icon-style-camera"></a></li>
+                                <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="icon icon-xs fa fa-linkedin icon-style-camera"></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?url=" class="icon icon-xs fa fa-twitter icon-style-camera"></a></li>
+                            </ul>
+                              <div class="form-wrap mb-1 mt-0">
+                                <input class="form-input" id="referral-link" type="text" readonly value="http://alef.aero/preorder.html#">
+                                <label class="form-label" for="referral-link">Your unique referral link</label>
+                              </div>
+                            </div>
+
+                            <p class="mt-3">Your preorder has been received and your place in line has been reserved according to <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>. Please keep your order number, as it is used to find your place in line. Please note that order number does not correspond the number in line.</p>
+                            <p class="mt-2">Please check your inbox for a copy of this imformation and your unique certificate.</p>
   
                           </div>
                     </div>

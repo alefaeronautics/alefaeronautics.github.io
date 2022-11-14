@@ -1083,7 +1083,12 @@ function smartBack(e) {
 
 }
 
-function shareLinks() {	$("#sharer-block a").each(function(){$(this).get(0).href += window.location;});}
+function shareLinks() {	$("#sharer-block a").each(function(){
+	var url = window.location.href;
+	var link_url = $(this).get(0).href;
+	url = url.substring(0,url.lastIndexOf('#'));
+	$(this).get(0).href = link_url.substring(0,link_url.lastIndexOf("?")+1) + url + ( (referral_code) ? "#"+referral_code: "" );
+});}
 
 
 function getBase64(file,maildata) {
@@ -1331,9 +1336,12 @@ function formClear(status,required,success_message,reset=true) {
 function thankYou(order_number, order_name)
 {
 	document.getElementById('order-number').innerHTML = order_number;
+	document.getElementById('referral-number').innerHTML = referral_number;
+	document.getElementById('referral-link').value += order_number;
 	//document.getElementById('order-customer').innerHTML = order_name;
 	document.getElementById("order-block").style = "display: none";
 	document.getElementById("thank-you").style = "display: block";
+	window.scroll(0,window.scrollY+1);
 }
 
 function showForm() {
