@@ -3,7 +3,7 @@ const discount = {
     getPrice: function() {
         var codes = {
             "forgetthetraffic100": 100,
-            "flyabovetraffic75": 75,
+            "flyabovetraffic125": 125,
             "other": 125
         }
     if (this.code == "") return 150;
