@@ -2,7 +2,7 @@
 <!-- saved from url=(0031)https://alef.aero/preorder.html -->
 <html class="wide wow-animation desktop   landscape rd-navbar-static-linked" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Google tag (gtag.js) -->
-    <script async="" src="./original_files/js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5EG3D38XM3"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -33,16 +33,15 @@
     <link rel="icon" href="https://alef.aero/images/favicon.ico" type="image/x-icon">
     <!-- Stylesheets-->
     <!-- link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic%7CJosefin+Sans:400,700,300italic" -->
-    <link rel="stylesheet" href="./original_files/bootstrap.css">
-    <link rel="stylesheet" href="./original_files/style.css">
-    <script src="./original_files/core.min.js.download"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/core.min.js"></script>
     <script> 
         $(function(){
           $("#footer").load("includes/footer.html"); 
         });
         </script> 
-  <script src="./original_files/pptm.js.download" id="xo-pptm" async=""></script></head>
-  <body class="purchase-car" id="page-body" style="background-position-y: 0px;">
+    <body class="purchase-car" id="page-body" style="background-position-y: 0px;">
     <div class="arrow-toggler"></div>
     <!-- Page Loader -->
     <div id="page-loader" class="loaded">
@@ -66,14 +65,15 @@
                   <button class="rd-navbar-toggle toggle-original" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!-- RD Navbar Brand-->
                   <div class="rd-navbar-brand"><a class="brand" href="https://alef.aero/">
-                      <div class="brand__name"><img class="brand__logo-dark" src="./original_files/logo-alef-default.png" alt="Alef logo">
+                      <div class="brand__name"><img class="brand__logo-dark" src="images/logo-alef-default.png" alt="Alef logo">
                       </div></a></div>
                 </div>
                 <!-- RD Navbar Nav-->
                 <div class="rd-navbar-nav-wrap toggle-original-elements">
                   <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
-                  <li><a href="https://alef.aero/story.html">Our&nbsp;Story</a></li><li class="divider"></li><li><a href="https://alef.aero/careers.html">Careers</a></li><li class="divider"></li><li><a href="https://alef.aero/investors.html">Investors</a></li><li class="divider"></li><li><a href="https://alef.aero/contact.html">Contact</a></li><li class="divider"></li><li><a href="https://alef.aero/presskit.html">Press</a></li><li class="menu-button active"><a href="https://alef.aero/preorder.html"><nobr>Pre-order</nobr><br><small>Flying&nbsp;Car</small></a></li></ul>
+                  
+                  </ul>
                 </div>
               </div>
             </div>
@@ -397,189 +397,153 @@
 
 
                                 <div class="">
-                                    <div id="smart-button-container" class="smart-button-faded" style="filter: invert() hue-rotate(180deg) contrast(1.2);">
-                                        <div style="text-align: center;" id="second-button">
-                                          <div id="paypal-button-container"><div id="zoid-paypal-buttons-uid_be53e1b133_mje6mte6ndi" class="paypal-buttons paypal-buttons-context-iframe paypal-buttons-label-pay paypal-buttons-layout-vertical" data-paypal-smart-button-version="5.0.343" style="height: 260px; transition: all 0.2s ease-in-out 0s;"><style nonce="">
-                    #zoid-paypal-buttons-uid_be53e1b133_mje6mte6ndi {
-                        position: relative;
-                        display: inline-block;
-                        width: 100%;
-                        min-height: 35px;
-                        min-width: 200px;
-                        max-width: 750px;
-                        font-size: 0;
-                    }
+                                  <div id="smart-button-container" class="smart-button-faded" style="filter: invert() hue-rotate(180deg) contrast(1.2);">
+                                      <div style="text-align: center;" id="second-button">
+                                        <div id="paypal-button-container"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <script>
+                                if (preorder_price!=150) document.getElementById("preorder-price").innerHTML="<s style='font-weight: normal !important;'>$150</s>$"+preorder_price;
+                                document.getElementById("contact-advance").value= preorder_price;
+                              </script>
+                                  <script src="https://www.paypal.com/sdk/js?client-id=AX-n2wbP2Bjv2uDFk6vZXlOjDU9pN-hANffd3tKnvXz7Vkvsa4Uzl6t9ElkVHHQmBf8t3KdievFBJIly&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+                                  <script>
+                                    const alert_countries = ["China","India"];
 
-                    #zoid-paypal-buttons-uid_be53e1b133_mje6mte6ndi > iframe {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                    }
+                                    document.querySelectorAll(".form-input").forEach(i=>{
+                                            i.addEventListener("change",()=>{
+                                              if (i.id=="contact-country") {
 
-                    #zoid-paypal-buttons-uid_be53e1b133_mje6mte6ndi > iframe.component-frame {
-                        z-index: 100;
-                    }
+                                                if (alert_countries.includes(i.value))
+                                                    document.getElementById("country-alert").classList.remove('hide');
+                                                else
+                                                  document.getElementById("country-alert").classList.add('hide');
 
-                    #zoid-paypal-buttons-uid_be53e1b133_mje6mte6ndi > iframe.prerender-frame {
-                        transition: opacity .2s linear;
-                        z-index: 200;
-                    }
-
-                    #zoid-paypal-buttons-uid_be53e1b133_mje6mte6ndi > iframe.visible {
-                        opacity: 1;
-                    }
-
-                    #zoid-paypal-buttons-uid_be53e1b133_mje6mte6ndi > iframe.invisible {
-                        opacity: 0;
-                        pointer-events: none;
-                    }
-
-                    #zoid-paypal-buttons-uid_be53e1b133_mje6mte6ndi > .smart-menu {
-                        position: absolute;
-                        z-index: 300;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                    }
-                </style><iframe allowtransparency="true" name="__zoid__paypal_buttons__eyJzZW5kZXIiOnsiZG9tYWluIjoiaHR0cHM6Ly9hbGVmLmFlcm8ifSwibWV0YURhdGEiOnsid2luZG93UmVmIjp7InR5cGUiOiJwYXJlbnQiLCJkaXN0YW5jZSI6MH19LCJyZWZlcmVuY2UiOnsidHlwZSI6InJhdyIsInZhbCI6IntcInVpZFwiOlwiem9pZC1wYXlwYWwtYnV0dG9ucy11aWRfYmU1M2UxYjEzM19tamU2bXRlNm5kaVwiLFwiY29udGV4dFwiOlwiaWZyYW1lXCIsXCJ0YWdcIjpcInBheXBhbC1idXR0b25zXCIsXCJjaGlsZERvbWFpbk1hdGNoXCI6e1wiX190eXBlX19cIjpcInJlZ2V4XCIsXCJfX3ZhbF9fXCI6XCJcXFxcLnBheXBhbFxcXFwuKGNvbXxjbikoOlxcXFxkKyk/JFwifSxcInZlcnNpb25cIjpcIjEwXzFfMFwiLFwicHJvcHNcIjp7XCJzdHlsZVwiOntcImN1c3RvbVwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJsYWJlbFwiOlwicGF5XCIsXCJsYXlvdXRcIjpcInZlcnRpY2FsXCIsXCJjb2xvclwiOlwid2hpdGVcIixcInNoYXBlXCI6XCJyZWN0XCIsXCJ0YWdsaW5lXCI6ZmFsc2UsXCJoZWlnaHRcIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwicGVyaW9kXCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcIm1lbnVQbGFjZW1lbnRcIjpcImJlbG93XCJ9LFwib25Jbml0XCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfNjFhZWZkZjA5MF9tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwib25Jbml0XCJ9fSxcIm9uQ2xpY2tcIjp7XCJfX3R5cGVfX1wiOlwiY3Jvc3NfZG9tYWluX2Z1bmN0aW9uXCIsXCJfX3ZhbF9fXCI6e1wiaWRcIjpcInVpZF8wZjQ1MDNkNjBiX21qZTZtdGU2bmRpXCIsXCJuYW1lXCI6XCJvbkNsaWNrXCJ9fSxcImNyZWF0ZU9yZGVyXCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfNzllNDUyY2Q0YV9tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwiY3JlYXRlT3JkZXJcIn19LFwib25BcHByb3ZlXCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfYWU2OWMxYjIwN19tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwib25BcHByb3ZlXCJ9fSxcImNzcE5vbmNlXCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcImZ1bmRpbmdTb3VyY2VcIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwic3RvcmFnZVN0YXRlXCI6e1wiZ2V0XCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfZjIzMmQzMWU1Nl9tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwiZ2V0XCJ9fSxcInNldFwiOntcIl9fdHlwZV9fXCI6XCJjcm9zc19kb21haW5fZnVuY3Rpb25cIixcIl9fdmFsX19cIjp7XCJpZFwiOlwidWlkX2RlMzk3OGYxNDhfbWplNm10ZTZuZGlcIixcIm5hbWVcIjpcInNldFwifX19LFwic2Vzc2lvblN0YXRlXCI6e1wiZ2V0XCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfMTNlNWYwNmVjM19tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwiZ2V0XCJ9fSxcInNldFwiOntcIl9fdHlwZV9fXCI6XCJjcm9zc19kb21haW5fZnVuY3Rpb25cIixcIl9fdmFsX19cIjp7XCJpZFwiOlwidWlkX2JlZGUyNDExOGVfbWplNm10ZTZuZGlcIixcIm5hbWVcIjpcInNldFwifX19LFwiY29tcG9uZW50c1wiOltcImJ1dHRvbnNcIl0sXCJsb2NhbGVcIjp7XCJjb3VudHJ5XCI6XCJDTlwiLFwibGFuZ1wiOlwiemhcIn0sXCJjcmVhdGVCaWxsaW5nQWdyZWVtZW50XCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcImNyZWF0ZVN1YnNjcmlwdGlvblwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJvbkNvbXBsZXRlXCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcIm9uU2hpcHBpbmdDaGFuZ2VcIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwib25TaGlwcGluZ0FkZHJlc3NDaGFuZ2VcIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwib25TaGlwcGluZ09wdGlvbnNDaGFuZ2VcIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwib25DYW5jZWxcIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwiZ2V0UHJlcmVuZGVyRGV0YWlsc1wiOntcIl9fdHlwZV9fXCI6XCJjcm9zc19kb21haW5fZnVuY3Rpb25cIixcIl9fdmFsX19cIjp7XCJpZFwiOlwidWlkX2UxM2Y0NDM5MzlfbWplNm10ZTZuZGlcIixcIm5hbWVcIjpcImdldFByZXJlbmRlckRldGFpbHNcIn19LFwiZ2V0UG9wdXBCcmlkZ2VcIjp7XCJfX3R5cGVfX1wiOlwiY3Jvc3NfZG9tYWluX2Z1bmN0aW9uXCIsXCJfX3ZhbF9fXCI6e1wiaWRcIjpcInVpZF9lZDBiNGYyMzVkX21qZTZtdGU2bmRpXCIsXCJuYW1lXCI6XCJnZXRQb3B1cEJyaWRnZVwifX0sXCJnZXRRdWVyaWVkRWxpZ2libGVGdW5kaW5nXCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfYTQ4YWE0NmQzOV9tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwiZ2V0UXVlcmllZEVsaWdpYmxlRnVuZGluZ1wifX0sXCJjbGllbnRJRFwiOlwiQVgtbjJ3YlAyQmp2MnVERms2dlpYbE9qRFU5cE4taEFOZmZkM3RLbnZYejdWa3ZzYTRVemw2dDlFbGtWSEhRbUJmOHQzS2RpZXZGQkpJbHlcIixcImNsaWVudEFjY2Vzc1Rva2VuXCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcInBhcnRuZXJBdHRyaWJ1dGlvbklEXCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcIm1lcmNoYW50UmVxdWVzdGVkUG9wdXBzRGlzYWJsZWRcIjpmYWxzZSxcImVuYWJsZVRocmVlRG9tYWluU2VjdXJlXCI6ZmFsc2UsXCJzZGtDb3JyZWxhdGlvbklEXCI6XCIwNDg2YTk3YjBiMTgwXCIsXCJzdG9yYWdlSURcIjpcInVpZF85MTZjNDc5MWJhX21kZTZtdGU2bmRjXCIsXCJzZXNzaW9uSURcIjpcInVpZF9jYTFiMDgxZTNlX21qZTZtdGU2bmRpXCIsXCJidXR0b25Mb2NhdGlvblwiOlwiYWxlZi5hZXJvXCIsXCJidXR0b25TZXNzaW9uSURcIjpcInVpZF83NTY1OTdhNDE4X21qZTZtdGU2bmRpXCIsXCJlbmFibGVWYXVsdFwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJlbnZcIjpcInByb2R1Y3Rpb25cIixcImFtb3VudFwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJzdGFnZUhvc3RcIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwiYnV0dG9uU2l6ZVwiOlwibGFyZ2VcIixcImFwaVN0YWdlSG9zdFwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJmdW5kaW5nRWxpZ2liaWxpdHlcIjp7XCJwYXlwYWxcIjp7XCJlbGlnaWJsZVwiOnRydWUsXCJ2YXVsdGFibGVcIjpmYWxzZX0sXCJwYXlsYXRlclwiOntcImVsaWdpYmxlXCI6dHJ1ZSxcInByb2R1Y3RzXCI6e1wicGF5SW4zXCI6e1wiZWxpZ2libGVcIjpmYWxzZSxcInZhcmlhbnRcIjpudWxsfSxcInBheUluNFwiOntcImVsaWdpYmxlXCI6ZmFsc2UsXCJ2YXJpYW50XCI6bnVsbH0sXCJwYXlsYXRlclwiOntcImVsaWdpYmxlXCI6dHJ1ZSxcInZhcmlhbnRcIjpudWxsfX19LFwiY2FyZFwiOntcImVsaWdpYmxlXCI6dHJ1ZSxcImJyYW5kZWRcIjp0cnVlLFwiaW5zdGFsbG1lbnRzXCI6ZmFsc2UsXCJ2ZW5kb3JzXCI6e1widmlzYVwiOntcImVsaWdpYmxlXCI6dHJ1ZSxcInZhdWx0YWJsZVwiOnRydWV9LFwibWFzdGVyY2FyZFwiOntcImVsaWdpYmxlXCI6dHJ1ZSxcInZhdWx0YWJsZVwiOnRydWV9LFwiYW1leFwiOntcImVsaWdpYmxlXCI6dHJ1ZSxcInZhdWx0YWJsZVwiOnRydWV9LFwiZGlzY292ZXJcIjp7XCJlbGlnaWJsZVwiOnRydWUsXCJ2YXVsdGFibGVcIjp0cnVlfSxcImhpcGVyXCI6e1wiZWxpZ2libGVcIjpmYWxzZSxcInZhdWx0YWJsZVwiOmZhbHNlfSxcImVsb1wiOntcImVsaWdpYmxlXCI6ZmFsc2UsXCJ2YXVsdGFibGVcIjp0cnVlfSxcImpjYlwiOntcImVsaWdpYmxlXCI6ZmFsc2UsXCJ2YXVsdGFibGVcIjp0cnVlfX0sXCJndWVzdEVuYWJsZWRcIjpmYWxzZX0sXCJ2ZW5tb1wiOntcImVsaWdpYmxlXCI6dHJ1ZX0sXCJpdGF1XCI6e1wiZWxpZ2libGVcIjpmYWxzZX0sXCJjcmVkaXRcIjp7XCJlbGlnaWJsZVwiOmZhbHNlfSxcImFwcGxlcGF5XCI6e1wiZWxpZ2libGVcIjpmYWxzZX0sXCJzZXBhXCI6e1wiZWxpZ2libGVcIjpmYWxzZX0sXCJpZGVhbFwiOntcImVsaWdpYmxlXCI6ZmFsc2V9LFwiYmFuY29udGFjdFwiOntcImVsaWdpYmxlXCI6ZmFsc2V9LFwiZ2lyb3BheVwiOntcImVsaWdpYmxlXCI6ZmFsc2V9LFwiZXBzXCI6e1wiZWxpZ2libGVcIjpmYWxzZX0sXCJzb2ZvcnRcIjp7XCJlbGlnaWJsZVwiOmZhbHNlfSxcIm15YmFua1wiOntcImVsaWdpYmxlXCI6ZmFsc2V9LFwicDI0XCI6e1wiZWxpZ2libGVcIjpmYWxzZX0sXCJ6aW1wbGVyXCI6e1wiZWxpZ2libGVcIjpmYWxzZX0sXCJ3ZWNoYXRwYXlcIjp7XCJlbGlnaWJsZVwiOmZhbHNlfSxcInBheXVcIjp7XCJlbGlnaWJsZVwiOmZhbHNlfSxcImJsaWtcIjp7XCJlbGlnaWJsZVwiOmZhbHNlfSxcInRydXN0bHlcIjp7XCJlbGlnaWJsZVwiOmZhbHNlfSxcIm94eG9cIjp7XCJlbGlnaWJsZVwiOmZhbHNlfSxcIm1heGltYVwiOntcImVsaWdpYmxlXCI6ZmFsc2V9LFwiYm9sZXRvXCI6e1wiZWxpZ2libGVcIjpmYWxzZX0sXCJib2xldG9iYW5jYXJpb1wiOntcImVsaWdpYmxlXCI6ZmFsc2V9LFwibWVyY2Fkb3BhZ29cIjp7XCJlbGlnaWJsZVwiOmZhbHNlfSxcIm11bHRpYmFuY29cIjp7XCJlbGlnaWJsZVwiOmZhbHNlfX0sXCJwbGF0Zm9ybVwiOlwiZGVza3RvcFwiLFwicmVtZW1iZXJlZFwiOltcInZlbm1vXCJdLFwiZXhwZXJpbWVudFwiOntcImVuYWJsZVZlbm1vXCI6dHJ1ZSxcImVuYWJsZVZlbm1vQXBwTGFiZWxcIjpmYWxzZX0sXCJwYXltZW50UmVxdWVzdFwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJmbG93XCI6XCJwdXJjaGFzZVwiLFwicmVtZW1iZXJcIjp7XCJfX3R5cGVfX1wiOlwiY3Jvc3NfZG9tYWluX2Z1bmN0aW9uXCIsXCJfX3ZhbF9fXCI6e1wiaWRcIjpcInVpZF9lMmNhMzEzNjU0X21qZTZtdGU2bmRpXCIsXCJuYW1lXCI6XCJyZW1lbWJlclwifX0sXCJjdXJyZW5jeVwiOlwiVVNEXCIsXCJpbnRlbnRcIjpcImNhcHR1cmVcIixcImJ1eWVyQ291bnRyeVwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJjb21taXRcIjp0cnVlLFwidmF1bHRcIjpmYWxzZSxcImVuYWJsZUZ1bmRpbmdcIjpbXCJ2ZW5tb1wiXSxcImRpc2FibGVGdW5kaW5nXCI6W10sXCJkaXNhYmxlQ2FyZFwiOltdLFwibWVyY2hhbnRJRFwiOltdLFwicmVuZGVyZWRCdXR0b25zXCI6W1wicGF5cGFsXCIsXCJ2ZW5tb1wiLFwicGF5bGF0ZXJcIixcImNhcmRcIl0sXCJjc3BcIjp7XCJub25jZVwiOlwiXCJ9LFwibm9uY2VcIjpcIlwiLFwiZ2V0UGFnZVVybFwiOntcIl9fdHlwZV9fXCI6XCJjcm9zc19kb21haW5fZnVuY3Rpb25cIixcIl9fdmFsX19cIjp7XCJpZFwiOlwidWlkXzY3YzlhZGIxY2NfbWplNm10ZTZuZGlcIixcIm5hbWVcIjpcImdldFBhZ2VVcmxcIn19LFwidXNlcklEVG9rZW5cIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwiY2xpZW50TWV0YWRhdGFJRFwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJkZWJ1Z1wiOmZhbHNlLFwidGVzdFwiOntcImFjdGlvblwiOlwiY2hlY2tvdXRcIn0sXCJ3YWxsZXRcIjp7XCJfX3R5cGVfX1wiOlwidW5kZWZpbmVkXCJ9LFwicGF5bWVudE1ldGhvZE5vbmNlXCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcInBheW1lbnRNZXRob2RUb2tlblwiOntcIl9fdHlwZV9fXCI6XCJ1bmRlZmluZWRcIn0sXCJicmFuZGVkXCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcImFwcGxlUGF5U3VwcG9ydFwiOmZhbHNlLFwic3VwcG9ydHNQb3B1cHNcIjp0cnVlLFwic3VwcG9ydGVkTmF0aXZlQnJvd3NlclwiOmZhbHNlLFwidXNlckV4cGVyaWVuY2VGbG93XCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcImFwcGxlUGF5XCI6e1wiX190eXBlX19cIjpcInVuZGVmaW5lZFwifSxcImV4cGVyaWVuY2VcIjpcIlwiLFwiYWxsb3dCaWxsaW5nUGF5bWVudHNcIjp0cnVlfSxcImV4cG9ydHNcIjp7XCJpbml0XCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfMWMzNDQ1MTE0OF9tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwiaW5pdFwifX0sXCJjbG9zZVwiOntcIl9fdHlwZV9fXCI6XCJjcm9zc19kb21haW5fZnVuY3Rpb25cIixcIl9fdmFsX19cIjp7XCJpZFwiOlwidWlkXzI3ZDg5MDgwZTZfbWplNm10ZTZuZGlcIixcIm5hbWVcIjpcImNsb3NlOjptZW1vaXplZFwifX0sXCJjaGVja0Nsb3NlXCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfODUzNTNiZDVlY19tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwiY2hlY2tDbG9zZVwifX0sXCJyZXNpemVcIjp7XCJfX3R5cGVfX1wiOlwiY3Jvc3NfZG9tYWluX2Z1bmN0aW9uXCIsXCJfX3ZhbF9fXCI6e1wiaWRcIjpcInVpZF8zZWUyOTZmYTBkX21qZTZtdGU2bmRpXCIsXCJuYW1lXCI6XCJOZVwifX0sXCJvbkVycm9yXCI6e1wiX190eXBlX19cIjpcImNyb3NzX2RvbWFpbl9mdW5jdGlvblwiLFwiX192YWxfX1wiOntcImlkXCI6XCJ1aWRfYWEzNzlkOWIzMl9tamU2bXRlNm5kaVwiLFwibmFtZVwiOlwiQmVcIn19LFwic2hvd1wiOntcIl9fdHlwZV9fXCI6XCJjcm9zc19kb21haW5fZnVuY3Rpb25cIixcIl9fdmFsX19cIjp7XCJpZFwiOlwidWlkXzBhNzg5NjM1NWVfbWplNm10ZTZuZGlcIixcIm5hbWVcIjpcImhlXCJ9fSxcImhpZGVcIjp7XCJfX3R5cGVfX1wiOlwiY3Jvc3NfZG9tYWluX2Z1bmN0aW9uXCIsXCJfX3ZhbF9fXCI6e1wiaWRcIjpcInVpZF80MjQ2ZWI5MmJiX21qZTZtdGU2bmRpXCIsXCJuYW1lXCI6XCJnZVwifX0sXCJleHBvcnRcIjp7XCJfX3R5cGVfX1wiOlwiY3Jvc3NfZG9tYWluX2Z1bmN0aW9uXCIsXCJfX3ZhbF9fXCI6e1wiaWRcIjpcInVpZF9hYzQyYzE3ZTY4X21qZTZtdGU2bmRpXCIsXCJuYW1lXCI6XCJEZVwifX19fSJ9fQ__" title="PayPal" allowpaymentrequest="allowpaymentrequest" scrolling="no" id="jsx-iframe-e207a4a024" class="component-frame visible" style="background-color: transparent; border: none;" src="./original_files/saved_resource.html"></iframe><div id="smart-menu" class="smart-menu"></div><div id="installments-modal" class="installments-modal"></div><iframe name="__detect_close_uid_7112a69177_mje6mte6ndi__" style="display: none;" src="./original_files/saved_resource(1).html"></iframe></div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <script src="./original_files/js(1)" data-sdk-integration-source="button-factory" data-uid-auto="uid_zhuullmilfiumcwcjhldzromymouxr"></script>
-                                    <script>
-                                      const alert_countries = ["China","India"];
-
-                                      document.querySelectorAll(".form-input").forEach(i=>{
-                                              i.addEventListener("change",()=>{
-                                                if (i.id=="contact-country") {
-
-                                                  if (alert_countries.includes(i.value))
-                                                      document.getElementById("country-alert").classList.remove('hide');
-                                                  else
-                                                    document.getElementById("country-alert").classList.add('hide');
-
-                                                  bgBehavior();
-                                                }
-                                                if (isValidated($($(".rd-mailform")[0]).find("[data-constraints]"))) {
-                                                   document.getElementById("smart-button-container").classList.remove("smart-button-faded");
-                                                } else {
-                                                  document.getElementById("smart-button-container").classList.add("smart-button-faded");
-                                                }
-                                              });
-                                            });
-
-
-                                      function initPayPalButton() {
-                                        paypal.Buttons({
-                                          style: {
-                                            shape: 'rect',
-                                            color: 'white',
-                                            layout: 'vertical',
-                                            label: 'pay',
-                                            
-                                          },
-                                          onInit: function(data, actions) {
-
-                                            },
-                                            onClick: function() {
-
-                                            // Form validation
-                                            var form = $($(".rd-mailform")[0]),
-							                              inputs = form.find("[data-constraints]"),
-							                              output = $("#" + form.attr("data-form-output"));
-
-                                            output.removeClass("active error success");
-
-						                                if (isValidated(inputs)) {
-                                                for (var i=1; i<=8; i++) setTimeout( function() { bgBehavior();},i*500); // make sure background is refreshed
-                                            }                            
-                                            
-                                            },
-                                  
-                                          createOrder: function(data, actions) {    
-                                              var value = parseInt($("#contact-advance").val()); 
-                                              var description = "Alef Flying Car pre-order.\nRefundable deposit for your "+ ( (value>150) ? "priority" : "general" ) +" queue place in line.";
-                                              var order_data = {
-                                                  "description": description,
-                                                  "amount":{
-                                                      "currency_code":"USD",
-                                                      "value": value
-                                                    }
-                                                };  
-                                                
-                                                console.log(order_data);
-                                            
-                                            return actions.order.create({
-                                              purchase_units: [order_data]
-                                            });
-                                          },
-                                  
-                                          onApprove: function(data, actions) {
-                                            return actions.order.capture().then(function(orderData) {
-                                              
-                                              // Full available details
-                                              //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-                                              // Collect info from the form and PayPal and update Google Sheets
-                                              var formdata = collectData();
-                                              formdata['completed'] = "yes";
-                                              formdata['transaction_id'] = orderData.id;
-                                              formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
-                                              formdata['email_paypal'] = orderData.payer.email_address;
-                                              var maildata = { 
-                                                'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
-                                                'name':((formdata['name']!="") ? formdata['name'] : formdata['name_paypal']),
-                                                'order_number': orderData.id
-                                              };
-                                              var address = orderData.payer.address;
-                                              try {
-                                                formdata['country_paypal'] = address.country_code;
-                                                delete address.country_code;
-                                                formdata['city_paypal'] = address.admin_area_2;
-                                                formdata['address_paypal'] = Object.values(address).join(' ');
+                                                bgBehavior();
                                               }
-                                              catch { }
-
-                                              updateSheets(formdata);
-                                              console.log("updated succesfully");
-                                              confirmOrder(maildata);
-
-
-                                              // Show a success message within this page, e.g.
-                                              thankYou(orderData.id,formdata['name']);
-                                              /*
-
-                                              const element = document.getElementById('paypal-button-container');
-                                              element.innerHTML = '';
-                                              element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                                  
-                                              // Or go to another URL:  actions.redirect('thank_you.html'); */
-                                              
+                                              if (isValidated($($(".rd-mailform")[0]).find("[data-constraints]"))) {
+                                                 document.getElementById("smart-button-container").classList.remove("smart-button-faded");
+                                              } else {
+                                                document.getElementById("smart-button-container").classList.add("smart-button-faded");
+                                              }
                                             });
+                                          });
+
+
+                                    function initPayPalButton() {
+                                      paypal.Buttons({
+                                        style: {
+                                          shape: 'rect',
+                                          color: 'white',
+                                          layout: 'vertical',
+                                          label: 'pay',
+                                          
+                                        },
+                                        onInit: function(data, actions) {
+
                                           },
-                                  
-                                          onError: function(err) {
-                                              // Collect data from form and update Google sheets with available info and error
-                                              var formdata = collectData();
-                                              formdata['completed'] = "no";
-                                              formdata['error'] = String(err);
-                                              updateSheets(formdata);
-                                              console.log("updated with error");
-                                                                                              
-                                              var form = $($(".rd-mailform")[0]);
-                                              output = $("#" + form.attr("data-form-output"));
-                                              if (output.hasClass("snackbars")) {
-                                                output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span></span></p>');
-                                                output.addClass("active");
-                                              }       
-                                              formClear("please try again",false,"",false);
-                                          }
-                                        }).render('#paypal-button-container');
-                                      }
-                                      initPayPalButton();
-                                    </script>
+                                          onClick: function() {
+
+                                          // Form validation
+                                          var form = $($(".rd-mailform")[0]),
+                                          inputs = form.find("[data-constraints]"),
+                                          output = $("#" + form.attr("data-form-output"));
+
+                                          output.removeClass("active error success");
+
+                                          if (isValidated(inputs)) {
+                                              for (var i=1; i<=8; i++) setTimeout( function() { bgBehavior();},i*500); // make sure background is refreshed
+                                          }                            
+                                          
+                                          },
+                                
+                                        createOrder: function(data, actions) {    
+                                            var value = parseInt($("#contact-advance").val()); 
+                                            var description = "Alef Flying Car pre-order.\nRefundable deposit for your "+ ( (value>150) ? "priority" : "general" ) +" queue place in line.";
+                                            var order_data = {
+                                                "description": description,
+                                                "amount":{
+                                                    "currency_code":"USD",
+                                                    "value": value
+                                                  }
+                                              };  
+                                              
+                                              console.log(order_data);
+                                          
+                                          return actions.order.create({
+                                            purchase_units: [order_data]
+                                          });
+                                        },
+                                
+                                        onApprove: function(data, actions) {
+                                          return actions.order.capture().then(function(orderData) {
+                                            
+                                            // Full available details
+                                            //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                                            // Collect info from the form and PayPal and update Google Sheets
+                                            var formdata = collectData();
+                                            formdata['completed'] = (formdata['advance']>150) ? "priority" : "general";
+                                            formdata['referral'] = referral_code;
+                                            formdata['transaction_id'] = orderData.id;
+                                            formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
+                                            formdata['email_paypal'] = orderData.payer.email_address;
+                                            var maildata = { 
+                                              'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
+                                              'order_number': orderData.id,
+                                              'ref_number' : referral_number
+                                            };
+                                            var address = orderData.payer.address;
+                                            try {
+                                              formdata['country_paypal'] = address.country_code;
+                                              delete address.country_code;
+                                              formdata['city_paypal'] = address.admin_area_2;
+                                              formdata['address_paypal'] = Object.values(address).join(' ');
+                                            }
+                                            catch { }
+
+                                            updateSheets(formdata);
+                                            console.log("updated succesfully");
+                                            confirmOrder(maildata);
+
+                                            referral_code = orderData.id;
+                                            shareLinks();
+
+
+                                            // Show a success message within this page, e.g.
+                                            thankYou(orderData.id,formdata['name']);
+                                            /*
+
+                                            const element = document.getElementById('paypal-button-container');
+                                            element.innerHTML = '';
+                                            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                
+                                            // Or go to another URL:  actions.redirect('thank_you.html'); */
+                                            
+                                          });
+                                        },
+                                
+                                        onError: function(err) {
+                                            // Collect data from form and update Google sheets with available info and error
+                                            var formdata = collectData();
+                                            formdata['completed'] = "no";
+                                            formdata['error'] = String(err);
+                                            updateSheets(formdata);
+                                            console.log("updated with error");
+                                                                                            
+                                            var form = $($(".rd-mailform")[0]);
+                                            output = $("#" + form.attr("data-form-output"));
+                                            if (output.hasClass("snackbars")) {
+                                              output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span></span></p>');
+                                              output.addClass("active");
+                                            }       
+                                            formClear("please try again",false,"",false);
+                                        }
+                                      }).render('#paypal-button-container');
+                                    }
+                                    initPayPalButton();
+                                  </script>
 
 
                                 <div class="form-wrap form-button wow fadeInBottom mt-3 animated" style="display: none; visibility: visible; animation-name: fadeInBottom;">
@@ -727,7 +691,7 @@
             </div>
             <!-- Logo -->
             <div class="col-lg-2 col-md-3 col-sm-4">
-              <img src="./original_files/logo-alef-vertical.png" style="height: 65px;">
+              <img src="images/logo-alef-vertical.png" style="height: 65px;">
             </div>
 
 
@@ -737,8 +701,8 @@
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
-    <script src="./original_files/script.js.download"></script>
-    <script src="./original_files/menu.js.download"></script>
+    <script src="js/script.js"></script>
+    <script src="js/menu.js"></script>
     <script>
         // unfix the background when scrolled beyond the first block
             function bgBehavior() {
@@ -757,4 +721,4 @@
     <!-- coded by Himic-->
   
 
-<a href="https://alef.aero/preorder.html#" id="ui-to-top" class="ui-to-top fa fa-angle-up"></a><iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;" src="./original_files/saved_resource(2).html"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}"></div></body></html>
+<a href="https://alef.aero/preorder.html#" id="ui-to-top" class="ui-to-top fa fa-angle-up"></a>
