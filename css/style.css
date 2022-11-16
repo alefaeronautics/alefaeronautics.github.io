@@ -32887,7 +32887,7 @@ input[type="file"]:focus { outline: 0 !important; }
 
 .story {position: relative; left: 50px;}
 
-@media(max-width: 992px) {.story { left: 0; }}
+@media(max-width: 992px) {.bg-white .story { left: 0; }}
 
 .story h2 {font-size: 80px; position: relative; top: -4px;}
 
