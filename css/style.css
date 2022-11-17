@@ -4721,18 +4721,34 @@ html .icon-md {
 	font-family: Xspace;
 	align-self: bottom;
 	width: 100%;
+	position: relative;
+	top: 20px;
 	
 }
 
 @media (min-width: 480px) {
-	.post-boxed {
-		padding: 55px 40px;
-	}
+
 	.post-boxed__aside {
 		padding-top: 32px;
 	}
 	* + .post-boxed__aside {
 		margin-top: 40px;
+	}
+}
+
+@media (max-width: 480px) {
+
+	.post-boxed, .post-boxed__main {
+		min-height: auto; height: auto;
+	}
+}
+
+@media (min-width: 1208px) {
+	.post-boxed {
+		padding: 55px 40px;
+	}
+	.post-boxed:after {
+		top: 0px;
 	}
 }
 
