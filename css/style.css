@@ -33174,5 +33174,10 @@ footer p span:before {content: "|";}
 	display: none;
 	}
 
+	.smart-button-faded.chinese::after { 
+		content: "请填写此空格";
+		padding-top: 20px;
+		}
+
 .message-alert::before {content: "\26A0"; font-size:20px; font-family: Symbola; float: left; margin-left: -30px; margin-top: -5px; color: white;}
 .message-alert {padding: 10px 10px 15px 40px; border-radius: 8px; border: 1px solid white;}

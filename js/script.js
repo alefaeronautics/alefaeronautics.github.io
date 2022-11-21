@@ -319,11 +319,11 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 			var regularConstraintsMessages = [
 				{
 					type: regula.Constraint.Required,
-					newMessage: "This field is required."
+					newMessage: (CN) ? "这个是必填项目" : "This field is required."
 				},
 				{
 					type: regula.Constraint.Email,
-					newMessage: "The email is not a valid email."
+					newMessage: (CN) ? "这个电子邮件地址是无效的" : "The email is not a valid email."
 				},
 				{
 					type: regula.Constraint.Numeric,
@@ -331,7 +331,7 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 				},
 				{
 					type: regula.Constraint.Selected,
-					newMessage: "Please choose an option."
+					newMessage: (CN) ? "这个是必填项目" : "Please choose an option."
 				}
 			];
 
@@ -1290,13 +1290,13 @@ function updateSheets(/*dataurl,*/formdata) {
 
 function switchMode(amount) {
 
-	var choice = (amount>150) ? "priority" : "general";
+	var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
 	$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
 	$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
 	//document.getElementById('first-button').innerHTML = choice + " Order"; 
-	document.getElementById('order-label').innerHTML = choice + " Queue"; 
+	document.getElementById('order-label').innerHTML = choice; 
 	//document.getElementById('second-button').innerHTML = choice + " Order"; 
-	document.getElementById( choice ).checked = true;
+	document.getElementById( (amount>150) ? "priority" : "general" ).checked = true;
 	document.getElementById("contact-advance").value = amount;
 }
 

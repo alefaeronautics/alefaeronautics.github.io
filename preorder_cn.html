@@ -87,19 +87,19 @@
                     <div class="range range-50 range-lg-bottom range-reverse">
                         <div class="cell-xs-12 cell-md-8">
                         </div>
-                      <div class="cell-xs-12 cell-md-4 self-center order-form wow fadeIn" id="order-block" style="visibility: visible; animation-name: fadeIn;">
+                      <div class="cell-xs-12 cell-md-4 self-center order-form wow fadeIn" id="order-block">
 
                           <h1><small><nobr>预购</nobr>飞行汽车</small></h1>
                           <p class="mb-0">配置将于生产前确认</p>
                           <p class="mt-1"><span class="h4"><b>$299,999</b></span> (预计价格)</p>
-                          <div class="wow fadeIn check-input" style="visibility: visible; animation-name: fadeIn;">
-                                <input class="form-check-input radio-custom" id="general" type="radio" name="advance" onclick="switchMode(150);" checked=""><span class="radio-custom-dummy"></span>
+                          <div class="wow fadeIn check-input">
+                                <input class="form-check-input radio-custom" id="general" type="radio" name="advance" onclick="switchMode(preorder_price);" checked=""><span class="radio-custom-dummy"></span>
                                 <!-- label class="heading-4 mt-1 mb-2" for="general"></label-->
                           </div>
-                          <a class="预购" onclick="switchMode(preorder_price);"><h3 class="mt-2 mb-0" style="font-weight: bold;"><span>预购</span><span id="preorder-price">$150</span></h3>
+                          <a class="preorder" onclick="switchMode(preorder_price);"><h3 class="mt-2 mb-0" style="font-weight: bold;"><span>预购</span><span id="preorder-price">$150</span></h3>
                           <p class="order-caption">普通价格</p></a>
                           <div class="hidden-break"></div>
-                          <div class="wow fadeIn check-input" style="visibility: visible; animation-name: fadeIn;">
+                          <div class="wow fadeIn check-input">
                                 <input class="form-check-input radio-custom" id="priority" type="radio" name="advance" onclick="switchMode(1500);"><span class="radio-custom-dummy"></span>
                                 <!-- label class="heading-4 mt-1 mb-2" for="priority"></label-->
                           </div>
@@ -107,10 +107,6 @@
                           <p class="order-caption">优先价格</p></a>
                           <div class="hidden-break"></div>
                           <p>支持全额退款</p>
-                          <div class="form-wrap form-button wow fadeInBottom mt-4 animated" id="order-button" style="display: none; visibility: visible; animation-name: fadeInBottom;">
-                                <button class="button button-block button-primary" type="submit" onclick="showForm();" id="first-button">Order Now</button>
-                          </div>
-
 
                           <form class="mt-3 rd-mailform" data-form-output="form-output-global" data-form-type="order" style="display: block;" id="order-form" novalidate="novalidate">
                                 <div class="form-wrap mb-0">
@@ -384,7 +380,7 @@
                                 </div>
                                 <input type="hidden" id="contact-advance" name="advance" class="form-input" value="150">
 
-                                <p class="message-alert mt-2 hide" id="country-alert">If you want to pay by card, PayPal might display an error. Please be sure to click <b>«TRY AGAIN»</b> and proceed in the popup window.</p>
+                                <p class="message-alert mt-2 hide" id="country-alert">如果要使用卡付款请，PayPal可能会显示错误. 请按&laquo;再试一次&raquo; 然后进入弹窗口</p>
                                 <div class="mt-2">
                                 
                                 <!--
@@ -393,12 +389,12 @@
                                   <label class="form-label" for="contact-email" style="padding-left: 20px !important; letter-spacing: 0.2em; color: white; text-transform: none; font-size: 14px;"></label>
                                 </div> 
                                 <p class="checkbox-label">Please check to agree to <span id="order-label" style="text-transform: capitalize;">General Queue</span> <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>-->
-                                    <p class="mb-3">同意 <a href="https://alef.aero/documents/Alef%20Aeronautics%20-%20Preorder%20Agreement.pdf" target="_pre-order">Alef 预购协议</a>, 并完成<span id="order-label" style="text-transform: capitalize;">普通预购</span></p>
+                                    <p class="mb-3">同意 <a href="https://alef.aero/documents/Alef%20Aeronautics%20-%20Preorder%20Agreement.pdf" target="_pre-order">Alef 预购协议</a>, 并完成<span id="order-label" style="text-transform: capitalize;">普通</span>预购</p>
                                 </div>
 
 
                                 <div class="">
-                                  <div id="smart-button-container" class="smart-button-faded" style="filter: invert() hue-rotate(180deg) contrast(1.2);">
+                                  <div id="smart-button-container" class="chinese smart-button-faded" style="filter: invert() hue-rotate(180deg) contrast(1.2);">
                                       <div style="text-align: center;" id="second-button">
                                         <div id="paypal-button-container"></div>
                                       </div>
@@ -547,35 +543,37 @@
                                   </script>
 
 
-                                <div class="form-wrap form-button wow fadeInBottom mt-3 animated" style="display: none; visibility: visible; animation-name: fadeInBottom;">
+                                <div class="form-wrap form-button wow fadeInBottom mt-3 animated" style="display: none;">
                                     <button class="button button-block button-primary" type="submit" id="second-button">Priority Order</button>
                                 </div>
                             </form>
           
                     </div>
                     <div class="cell-xs-12 cell-md-4 self-center order-form" id="thank-you" style="display: none;">
-                      <div class="wow fadeInTop"><h1><small>Your car<br>awaits!</small></h1></div>
+                      <div class="wow fadeInTop"><h1><small>您的车在等待着您！</small></h1></div>
                       <div class="wow fadeIn"  data-wow-delay="0.15s">
-                      <p class="mt-3">Congratulations<!--, <span id="order-customer">new client</span>-->! You have successfully placed your preorder of Alef Model A flying car!</p>
-                      <p class="mt-2">YOUR ORDER NUMBER IS:</p>
+                      <p class="mt-3">恭喜！您已成功预订 Alef A 型飞行汽车.</p>
+                      <p class="mt-2">您的订单号是：</p>
                       <h3 id="order-number">(check email)</h3>
 
+                      <div class="form-wrap mb-1 mt-3">
+                        <input class="form-input" id="referral-link" type="text" readonly value="http://alef.aero/preorder.html#">
+                        <label class="form-label" for="referral-link">您的专属推荐链接</label>
+                      </div>
+
                       <div id="sharer-block">
-                        <h3 class="mb-1 mt-3">SHARE</h3>
-                        <p class="mt-1 mb-0">Share this unique link to give your followers discounted General Queue price of <b>$125</b>. Once you collect <span id="referral-number">enough</span> referrals, you will get a free General Queue reservation!</p>
                         <ul class="list-icons list-inline-xs mb-0">
                           <li><a href="https://www.facebook.com/sharer/sharer.php?u=" class="icon icon-xs fa fa-facebook icon-style-camera"></a></li>
                           <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="icon icon-xs fa fa-linkedin icon-style-camera"></a></li>
                           <li><a href="https://twitter.com/intent/tweet?url=" class="icon icon-xs fa fa-twitter icon-style-camera"></a></li>
                       </ul>
-                        <div class="form-wrap mb-1 mt-0">
-                          <input class="form-input" id="referral-link" type="text" readonly value="http://alef.aero/preorder.html#">
-                          <label class="form-label" for="referral-link">Your unique referral link</label>
-                        </div>
                       </div>
+                      <p class="mt-1 mb-1">你可以和朋友共享此链接<p> 
+                      <p><b>1.</b>他们将获得 125 美元的普通队列预订折扣价。</p>
+                      <p><b>2.</b>收集 <span id="referral-number">充足的</span> 推荐后，您将获得免费的普通队列预订！</p>
 
-                      <p class="mt-3">Your preorder has been received and your place in line has been reserved according to <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>. Please keep your order number, as it is used to find your place in line. Please note that order number does not correspond the number in line.</p>
-                      <p class="mt-2">Please check your inbox for a copy of this imformation and your unique certificate.</p>
+                      <p class="mt-3">已收到您的预订，并且已根据 <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef 预订协议保</a>留您的排队位置。请保留您的订单号，它可以用于查找您的位置</p>
+                      <p class="mt-2">请检查您的收件箱以获取此信息的副本和您的专属凭证</p>
   
                           </div>
                     </div>
@@ -586,7 +584,7 @@
     </div>
 
     <div style="width: 100%; background: linear-gradient(to bottom, transparent 0, black 100%); height: 100px; position: relative; top: -100px; z-index: 500; margin-bottom: -100px;">
-                    <div class="wow fadeInTop" style="visibility: visible; animation-name: fadeInTop;"><div class="round centered">
+                    <div class="wow fadeInTop"><div class="round centered">
                             <div id="cta">
                             <span class="arrow primera next "></span>
                             <span class="arrow segunda next "></span>
@@ -595,17 +593,17 @@
     </div>
     <div class="page bg-black">
         <div class="arrow-toggler" style="position: relative; top: -56px;"></div>
-        <section class="bg-black preorder-image h-80-plus wow fadeIn" style="background: url(&quot;images/preorder/rural-road.jpg&quot;); margin-top: 0px; margin-bottom: 0px; visibility: visible; animation-name: fadeIn;">
+        <section class="bg-black preorder-image h-80-plus wow fadeIn" style="background: url(&quot;images/preorder/rural-road.jpg&quot;); margin-top: 0px; margin-bottom: 0px;">
             <div class="preorder-block">
             <div class="shell section-md">
                     <div class="range story">
                         <div class="cell-xs-12 cell-md-3"></div>
-                        <div class="cell-xs-12 cell-md-8 wow fadeInBottom" style="visibility: visible; animation-name: fadeInBottom;">
+                        <div class="cell-xs-12 cell-md-8 wow fadeInBottom">
                             <h2>1.</h2>
                             <h3 class="mt-4 mb-0 text-left text-uppercase">路面驾驶</h3>
                             <p>Alef 飞行汽车适用于常规行驶车道及各种路面环境, 可停放于一般大小的车库及停车位。</p>
                             <p>Alef “A型” 的路面驾驶模式适用于一般路面行驶，并可切换至飞行模式以实现高速行驶。</p>
-                            <div class="wow fadeInTop" style="visibility: hidden; animation-name: none;"><div class="round left">
+                            <div class="wow fadeInTop"><div class="round left">
                                     <div id="cta">
                                     <span class="arrow primera next "></span>
                                     <span class="arrow segunda next "></span>
@@ -617,16 +615,16 @@
             </div>
         </section>
         <div class="arrow-toggler"></div>
-        <section class="bg-black preorder-image h-80-plus wow fadeIn" style="background: url(&quot;images/preorder/front-closed-doors.png&quot;) -70px; visibility: hidden; animation-name: none;">
+        <section class="bg-black preorder-image h-80-plus wow fadeIn" style="background: url(&quot;images/preorder/front-closed-doors.png&quot;) -70px;">
             <div class="preorder-block">
                     <div class="shell section-md">
                     <div class="range story">
                         <div class="cell-xs-12 cell-md-3"></div>
-                        <div class="cell-xs-12 cell-md-8 wow fadeInBottom" style="visibility: hidden; animation-name: none;">
+                        <div class="cell-xs-12 cell-md-8 wow fadeInBottom">
                             <h2>2.</h2>
                             <h3 class="mt-4 mb-0 text-left text-uppercase">飞行模式</h3>
                             <p>Alef飞行汽车拥有垂直起降、飞越障碍物等多种功能，并拥有独特的万向旋转功能来确保驾驶室在飞行过程中保持稳定。</p>
-                            <div class="wow fadeInTop mb-5" style="visibility: hidden; animation-name: none;"><div class="round left">
+                            <div class="wow fadeInTop mb-5"><div class="round left">
                                     <div id="cta">
                                     <span class="arrow primera next "></span>
                                     <span class="arrow segunda next "></span>
@@ -638,16 +636,16 @@
                 </div>
         </section>
         <div class="arrow-toggler mt-5" style="position: relative; top: -90px;"></div>
-        <section class="section bg-black preorder-image image-smaller h-80-plus wow fadeIn" style="background: url(&quot;images/preorder/alef-inside.png&quot;); visibility: hidden; animation-name: none;">
+        <section class="section bg-black preorder-image image-smaller h-80-plus wow fadeIn" style="background: url(&quot;images/preorder/alef-inside.png&quot;);">
             <div class="preorder-block">
                 <div class="shell section-md">
                 <div class="range story">
                     <div class="cell-xs-12 cell-md-3"></div>
-                    <div class="cell-xs-12 cell-md-8 wow fadeInBottom" style="visibility: hidden; animation-name: none;">
+                    <div class="cell-xs-12 cell-md-8 wow fadeInBottom">
                         <h2>3.</h2>
                         <h3 class="mt-4 mb-0 text-left text-uppercase">独特的飞行体验</h3>
                         <p>独特的飞行体验 Alef 飞行汽车提供180 度全景视野及360度完美飞行体验。</p>
-                        <div class="wow fadeInTop mb-5" style="visibility: hidden; animation-name: none;"><div class="round left">
+                        <div class="wow fadeInTop mb-5"><div class="round left">
                                 <div id="cta">
                                 <span class="arrow primera next "></span>
                                 <span class="arrow segunda next "></span>
@@ -659,16 +657,16 @@
             </div>
         </section>
         <div class="arrow-toggler mt-5" style="position: relative; top: -50px;"></div>
-        <section class="section bg-black preorder-image image-smaller h-80-plus wow fadeIn" style="background: url(&quot;images/preorder/alef-outside-grad.jpg&quot;); visibility: hidden; animation-name: none;">
+        <section class="section bg-black preorder-image image-smaller h-80-plus wow fadeIn" style="background: url(&quot;images/preorder/alef-outside-grad.jpg&quot;);">
             <div class="preorder-block">
                 <div class="shell section-md">
                 <div class="range story">
                     <div class="cell-xs-12 cell-md-3"></div>
-                    <div class="cell-xs-12 cell-md-8 wow fadeInBottom" style="visibility: hidden; animation-name: none;">
+                    <div class="cell-xs-12 cell-md-8 wow fadeInBottom">
                         <h2 class="text-right">4.</h2>
                         <h3 class="mt-4 mb-0 text-left text-uppercase">100% 电能驱动</h3>
                         <p>Alef 飞行汽车使用新能源，包括氢气驱动，以实现更持久的飞行范围。</p>
-                        <div class="wow fadeInTop" style="margin-bottom: -40px !important; visibility: hidden; animation-name: none;"><div class="round left totop">
+                        <div class="wow fadeInTop" style="margin-bottom: -40px !important;"><div class="round left totop">
                                 <div id="cta">
                                 <span class="arrow primera next "></span>
                                 <span class="arrow segunda next "></span>
@@ -707,8 +705,8 @@
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
-    <script src="js/script.js"></script>
     <script src="js/menu.js"></script>
+    <script src="js/script.js"></script>
     <script>
         // unfix the background when scrolled beyond the first block
             function bgBehavior() {
