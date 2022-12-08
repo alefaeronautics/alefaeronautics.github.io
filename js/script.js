@@ -1341,6 +1341,7 @@ function thankYou(order_number, order_name)
 	//document.getElementById('order-customer').innerHTML = order_name;
 	document.getElementById("order-block").style = "display: none";
 	document.getElementById("thank-you").style = "display: block";
+	document.getElementById('thank-you').scrollIntoView();
 	window.scroll(0,window.scrollY+1);
 }
 
