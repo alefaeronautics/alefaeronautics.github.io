@@ -1264,6 +1264,7 @@ function updateSheets(/*dataurl,*/formdata) {
 	//delete formdata['url'];
 	//delete formdata['page'];
 	var g_url = "https://script.google.com/macros/s/AKfycby8F7eb6BmJTSITGwWR2hDg7bQghiPGZ-ujoPMOA4NGBosLfmNtMSDfSgdL8SIDiOcB9Q/exec";
+	formdata['user_ip'] = user_ip;
 
 	/* just in case request won't be working anymore 
 	var iframe = document.createElement('iframe');
@@ -1394,13 +1395,17 @@ function aeLog(data) {
 	  }).setRequestHeader( 'referer', 'https://alef.aero' )
 	  .success(
 		  function(response) { 
-			//console.log("ae logged"); 
-			//console.log(response.responseText);
+			console.log("ae logged"); 
+			console.log(response.responseText);
 		}
 	  ).error (
 		function(response) { 
-			//console.log('ae logged');
-			//console.log(response.responseText); 
+			console.log('ae logged');
+			console.log(response.responseText); 
 		}
 	  );
 }
+
+var log_data = { 'date' : new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"}) };
+var user_ip = "";
+$.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.ip;});
