@@ -74,7 +74,8 @@ function initPayPalButton() {
 
         // Collect info from the form and PayPal and update Google Sheets
         var formdata = collectData();
-        formdata['completed'] = (formdata['advance']>150) ? "priority" : "general";
+        var value = parseInt(orderData.purchase_units[0].amount.value);
+        formdata['completed'] = (value>150) ? "priority" : "general";
         formdata['referral'] = referral_code;
         formdata['transaction_id'] = orderData.id;
         formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
