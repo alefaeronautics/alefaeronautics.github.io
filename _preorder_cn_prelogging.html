@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html class="wide wow-animation desktop   landscape rd-navbar-static-linked" lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="js/core.min.js"></script>
+<!-- saved from url=(0031)https://alef.aero/preorder.html -->
+<html class="wide wow-animation desktop   landscape rd-navbar-static-linked" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5EG3D38XM3"></script>
     <script>
@@ -37,6 +35,7 @@
     <!-- link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic%7CJosefin+Sans:400,700,300italic" -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/core.min.js"></script>
     <script> 
         $(function(){
           $("#footer").load("includes/footer.html"); 
@@ -406,7 +405,142 @@
                                 document.getElementById("contact-advance").value= preorder_price;
                               </script>
                                   <script src="https://www.paypal.com/sdk/js?client-id=AYrIaDHJAsUdRz4VrRODZb97n9l2r1bGteInD8p3a-jqu6vWWuqAjaYPPXXEs_jK8ZgRVj9cZMPUJelP&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
-                                  <script src="js/paypal.js"></script>
+                                  <script>
+                                    const alert_countries = ["China","India"];
+
+                                    document.querySelectorAll(".form-input").forEach(i=>{
+                                            i.addEventListener("change",()=>{
+                                              if (i.id=="contact-country") {
+
+                                                if (alert_countries.includes(i.value))
+                                                    document.getElementById("country-alert").classList.remove('hide');
+                                                else
+                                                  document.getElementById("country-alert").classList.add('hide');
+
+                                                bgBehavior();
+                                              }
+                                              if (isValidated($($(".rd-mailform")[0]).find("[data-constraints]"))) {
+                                                 document.getElementById("smart-button-container").classList.remove("smart-button-faded");
+                                              } else {
+                                                document.getElementById("smart-button-container").classList.add("smart-button-faded");
+                                              }
+                                            });
+                                          });
+
+
+                                    function initPayPalButton() {
+                                      paypal.Buttons({
+                                        style: {
+                                          shape: 'rect',
+                                          color: 'white',
+                                          layout: 'vertical',
+                                          label: 'pay',
+                                          
+                                        },
+                                        onInit: function(data, actions) {
+
+                                          },
+                                          onClick: function() {
+
+                                          // Form validation
+                                          var form = $($(".rd-mailform")[0]),
+                                          inputs = form.find("[data-constraints]"),
+                                          output = $("#" + form.attr("data-form-output"));
+
+                                          output.removeClass("active error success");
+
+                                          if (isValidated(inputs)) {
+                                              for (var i=1; i<=8; i++) setTimeout( function() { bgBehavior();},i*500); // make sure background is refreshed
+                                          }                            
+                                          
+                                          },
+                                
+                                        createOrder: function(data, actions) {    
+                                            var value = parseInt($("#contact-advance").val()); 
+                                            var description = "Alef Flying Car pre-order.\nRefundable deposit for your "+ ( (value>150) ? "priority" : "general" ) +" queue place in line.";
+                                            var order_data = {
+                                                "description": description,
+                                                "amount":{
+                                                    "currency_code":"USD",
+                                                    "value": value
+                                                  }
+                                              };  
+                                              
+                                              console.log(order_data);
+                                          
+                                          return actions.order.create({
+                                            purchase_units: [order_data]
+                                          });
+                                        },
+                                
+                                        onApprove: function(data, actions) {
+                                          return actions.order.capture().then(function(orderData) {
+                                            
+                                            // Full available details
+                                            //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                                            // Collect info from the form and PayPal and update Google Sheets
+                                            var formdata = collectData();
+                                            formdata['completed'] = (formdata['advance']>150) ? "priority" : "general";
+                                            formdata['referral'] = referral_code;
+                                            formdata['transaction_id'] = orderData.id;
+                                            formdata['name_paypal'] = Object.values(orderData.payer.name).join(' ');
+                                            formdata['email_paypal'] = orderData.payer.email_address;
+                                            var maildata = { 
+                                              'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
+                                              'order_number': orderData.id,
+                                              'ref_number' : referral_number
+                                            };
+                                            var address = orderData.payer.address;
+                                            try {
+                                              formdata['country_paypal'] = address.country_code;
+                                              delete address.country_code;
+                                              formdata['city_paypal'] = address.admin_area_2;
+                                              formdata['address_paypal'] = Object.values(address).join(' ');
+                                            }
+                                            catch { }
+
+                                            updateSheets(formdata);
+                                            console.log("updated succesfully");
+                                            confirmOrder(maildata);
+
+                                            referral_code = orderData.id;
+                                            shareLinks();
+
+
+                                            // Show a success message within this page, e.g.
+                                            thankYou(orderData.id,formdata['name']);
+                                            /*
+
+                                            const element = document.getElementById('paypal-button-container');
+                                            element.innerHTML = '';
+                                            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                
+                                            // Or go to another URL:  actions.redirect('thank_you.html'); */
+                                            
+                                          });
+                                        },
+                                
+                                        onError: function(err) {
+                                            // Collect data from form and update Google sheets with available info and error
+                                            var formdata = collectData();
+                                            formdata['completed'] = "no";
+                                            formdata['error'] = String(err);
+                                            updateSheets(formdata);
+                                            console.log("updated with error");
+                                                                                            
+                                            var form = $($(".rd-mailform")[0]);
+                                            output = $("#" + form.attr("data-form-output"));
+                                            if (output.hasClass("snackbars")) {
+                                              output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span></span></p>');
+                                              output.addClass("active");
+                                            }       
+                                            formClear("please try again",false,"",false);
+                                        }
+                                      }).render('#paypal-button-container');
+                                    }
+                                    initPayPalButton();
+                                  </script>
 
 
                                 <div class="form-wrap form-button wow fadeInBottom mt-3 animated" style="display: none;">
