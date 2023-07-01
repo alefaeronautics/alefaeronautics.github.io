@@ -92,7 +92,7 @@ function initPayPalButton() {
           formdata['city_paypal'] = address.admin_area_2;
           formdata['address_paypal'] = Object.values(address).join(' ');
           updateSheets(formdata);
-          //confirmOrder(maildata);
+          confirmOrder(maildata);
 
         }
         catch(error) {
