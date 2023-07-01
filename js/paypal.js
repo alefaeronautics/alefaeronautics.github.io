@@ -93,7 +93,6 @@ function initPayPalButton() {
           formdata['address_paypal'] = Object.values(address).join(' ');
           updateSheets(formdata);
           confirmOrder(maildata);
-
         }
         catch(error) {
           log_data['data'] = String(error); 
@@ -127,10 +126,8 @@ function initPayPalButton() {
           log_data['data'] = String(error);
           aeLog(log_data);
         }
-        finally {
-          log_data['data'] = formdata['error'];
-          aeLog(log_data);
-        }
+        log_data['data'] = String(err);
+        aeLog(log_data);
                                                         
         var form = $($(".rd-mailform")[0]);
         output = $("#" + form.attr("data-form-output"));
