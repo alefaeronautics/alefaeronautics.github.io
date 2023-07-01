@@ -1283,7 +1283,10 @@ function updateSheets(/*dataurl,*/formdata) {
 	  }).success(
 		  function () { console.log("Google Sheets updated");}
 	  ).error (
-		function (xhr) { console.log(xhr); /*formClear(xhr.responseText,false,"");*/ }
+		function (xhrresponse) { 
+			log_data['data'] = "Google sheets error: " + JSON.stringify(xhrresponse); 
+			aeLog(log_data);
+		}
 	  );
 
 }
@@ -1298,6 +1301,15 @@ function switchMode(amount) {
 	//document.getElementById('second-button').innerHTML = choice + " Order"; 
 	document.getElementById( (amount>150) ? "priority" : "general" ).checked = true;
 	document.getElementById("contact-advance").value = amount;
+}
+
+function checkAmount(amount) {
+	var return_amount = document.getElementById("priority").checked ? 1500 : preorder_price;
+	if (amount!=return_amount) {
+		log_data['data'] = "Price mismatch detected and fixed";
+		aeLog(log_data);
+	}
+	return return_amount;
 }
 
 function formClear(status,required,success_message,reset=true) {
@@ -1370,3 +1382,25 @@ $('.round').click(function(e) {
    const target = (index + 1) % list.length;    //increment with wrap
    $('.arrow-toggler')[target].scrollIntoView();
 });
+
+
+function aeLog(data) {
+	var xhr = $.ajax({
+		url: 'https://alef.ae-collective.com/log.php',
+		method: "GET",
+		type: "GET",
+		dataType: "json",
+		data: data
+	  }).setRequestHeader( 'referer', 'https://alef.aero' )
+	  .success(
+		  function(response) { 
+			//console.log("ae logged"); 
+			//console.log(response.responseText);
+		}
+	  ).error (
+		function(response) { 
+			//console.log('ae logged');
+			//console.log(response.responseText); 
+		}
+	  );
+}
