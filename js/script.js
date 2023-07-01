@@ -1307,6 +1307,7 @@ function switchMode(amount) {
 function checkAmount(amount) {
 	var return_amount = document.getElementById("priority").checked ? 1500 : preorder_price;
 	if (amount!=return_amount) {
+		document.getElementById("contact-advance").value = return_amount;
 		log_data['data'] = "Price mismatch detected and fixed";
 		aeLog(log_data);
 	}
