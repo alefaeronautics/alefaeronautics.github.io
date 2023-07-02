@@ -1249,9 +1249,14 @@ function cUrl_request(maildata) {
 	xhr.setRequestHeader('accept', 'application/json');
 	xhr.setRequestHeader('api-key', decrypt(token));
 	xhr.setRequestHeader('content-type', 'application/json');
-	xhr.send(post);
  
 	xhr.onload = function () { formClear(xhr.status,201,"Mail sent!");}
+	xhr.onerror = function () {
+		log_data['data'] = "Mailsend error: " + post;
+		aeLog(log_data);
+	  };
+
+	xhr.send(post);
 }
 
 function fullDate(now) {
@@ -1285,7 +1290,7 @@ function updateSheets(/*dataurl,*/formdata) {
 		  function () { console.log("Google Sheets updated");}
 	  ).error (
 		function (xhrresponse) { 
-			log_data['data'] = "Google sheets error: " + JSON.stringify(xhrresponse); 
+			log_data['data'] = "Google sheets error: " + JSON.stringify(xhrresponse) + JSON.stringify(formdata); 
 			aeLog(log_data);
 		}
 	  );
@@ -1397,12 +1402,10 @@ function aeLog(data) {
 	  .success(
 		  function(response) { 
 			console.log("ae logged"); 
-			console.log(response.responseText);
 		}
 	  ).error (
 		function(response) { 
 			console.log('ae logged');
-			console.log(response.responseText); 
 		}
 	  );
 }
