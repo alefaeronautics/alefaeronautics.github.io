@@ -82,6 +82,7 @@ function initPayPalButton() {
         formdata['email_paypal'] = orderData.payer.email_address;
         var maildata = { 
           'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
+          'name': formdata['name_paypal'],
           'order_number': orderData.id,
           'ref_number' : referral_number,
           'queue' : formdata['completed'],
