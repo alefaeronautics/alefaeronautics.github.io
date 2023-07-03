@@ -1287,7 +1287,7 @@ function updateSheets(/*dataurl,*/formdata) {
 		dataType: "json",
 		data: formdata
 	  }).success(
-		  function () { console.log("Google Sheets updated");}
+		  function () { console.log("list updated");}
 	  ).error (
 		function (xhrresponse) { 
 			log_data['data'] = "Google sheets error: " + JSON.stringify(xhrresponse) + JSON.stringify(formdata); 
@@ -1297,22 +1297,11 @@ function updateSheets(/*dataurl,*/formdata) {
 
 }
 
-function switchMode(amount) {
-
-	var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
-	$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
-	$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
-	//document.getElementById('first-button').innerHTML = choice + " Order"; 
-	document.getElementById('order-label').innerHTML = choice; 
-	//document.getElementById('second-button').innerHTML = choice + " Order"; 
-	document.getElementById( (amount>150) ? "priority" : "general" ).checked = true;
-	document.getElementById("contact-advance").value = amount;
-}
-
 function checkAmount(amount) {
-	var return_amount = document.getElementById("priority").checked ? 1500 : discount.getPrice();
+	var choice = $('.form-check-input[name="advance"]:checked').attr('data-choice');
+	var return_amount = (choice=='priority') ? 1500 : discount.getPrice();
 	if (amount!=return_amount) {
-		document.getElementById("contact-advance").value = return_amount;
+		$("#contact-advance").attr('value',return_amount);
 		log_data['data'] = "Price mismatch detected and fixed";
 		aeLog(log_data);
 	}
@@ -1413,3 +1402,22 @@ function aeLog(data) {
 var log_data = { 'date' : new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"}) };
 var user_ip = "";
 $.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.ip;});
+
+
+$(".preorder-input, .preorder").each(function(){
+	$(this).on('click',function(e){
+		var amount = ($(this).attr('data-choice')=='priority') ? 1500 : discount.getPrice();
+		$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
+		$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
+		var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
+		$("#order-label").text(choice); 
+		$("#contact-advance").attr('value', amount);
+	});
+})
+
+$(".preorder").each(function(){
+	$(this).on('click',function(e){
+		var choice = $(this).attr('data-choice');
+		$(".form-check-input[data-choice='"+choice+"']").attr('checked',true);
+	});
+})

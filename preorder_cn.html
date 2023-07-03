@@ -94,17 +94,15 @@
                           <p class="mb-0">配置将于生产前确认</p>
                           <p class="mt-1"><span class="h4"><b>$299,999</b></span> (预计价格)</p>
                           <div class="wow fadeIn check-input">
-                                <input class="form-check-input radio-custom" id="general" type="radio" name="advance" onclick="switchMode(preorder_price);" checked=""><span class="radio-custom-dummy"></span>
-                                <!-- label class="heading-4 mt-1 mb-2" for="general"></label-->
+                                <input class="form-check-input preorder-input" id="general" type="radio" name="advance" checked="true" data-choice="general" value="general">
                           </div>
-                          <a class="preorder" onclick="switchMode(preorder_price);"><h3 class="mt-2 mb-0" style="font-weight: bold;"><span>预购</span><span id="preorder-price">$150</span></h3>
+                          <a class="preorder" data-choice="general"><h3 class="mt-2 mb-0" style="font-weight: bold;"><span>预购</span><span id="preorder-price">$150</span></h3>
                           <p class="order-caption">普通价格</p></a>
                           <div class="hidden-break"></div>
                           <div class="wow fadeIn check-input">
-                                <input class="form-check-input radio-custom" id="priority" type="radio" name="advance" onclick="switchMode(1500);"><span class="radio-custom-dummy"></span>
-                                <!-- label class="heading-4 mt-1 mb-2" for="priority"></label-->
+                            <input class="form-check-input preorder-input" id="priority" type="radio" name="advance" data-choice="priority" value="priority">
                           </div>
-                          <a class="preorder" onclick="switchMode(1500);"><h3 class="mt-1 mb-0" style="font-weight: bold;"><span>预购</span><span>$1500</span></h3>
+                          <a class="preorder" data-choice="priority"><h3 class="mt-1 mb-0" style="font-weight: bold;"><span>预购</span><span>$1500</span></h3>
                           <p class="order-caption">优先价格</p></a>
                           <div class="hidden-break"></div>
                           <p>支持全额退款</p>
