@@ -112,7 +112,7 @@ function initPayPalButton() {
 
 
         // Show a success message within this page, e.g.
-        thankYou(orderData.id,formdata['name']);
+        thankYou(orderData.id,formdata['completed']);
         
       });
     },

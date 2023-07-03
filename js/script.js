@@ -1288,7 +1288,10 @@ function updateSheets(/*dataurl,*/formdata) {
 		dataType: "json",
 		data: formdata
 	  }).success(
-		  function () { console.log("list updated");}
+		  function () { 
+			console.log("list updated");
+			$("#thank-you").removeClass('final-loading');
+		}
 	  ).error (
 		function (xhrresponse) { 
 			log_data['data'] = "Google sheets error: " + JSON.stringify(xhrresponse) + JSON.stringify(formdata); 
@@ -1342,14 +1345,14 @@ function formClear(status,required,success_message,reset=true) {
 
 }
 
-function thankYou(order_number, order_name)
+function thankYou(order_number, order_type)
 {
 	document.getElementById('order-number').innerHTML = order_number;
 	document.getElementById('referral-number').innerHTML = referral_number;
 	document.getElementById('referral-link').value += order_number;
-	//document.getElementById('order-customer').innerHTML = order_name;
 	document.getElementById("order-block").style = "display: none";
 	document.getElementById("thank-you").style = "display: block";
+	if (!CN) document.getElementById('order-type').innerHTML = order_type;
 	document.getElementById('thank-you').scrollIntoView();
 	window.scroll(0,window.scrollY+1);
 }
@@ -1392,10 +1395,12 @@ function aeLog(data) {
 	  .success(
 		  function(response) { 
 			console.log("ae logged"); 
+			$("#thank-you").removeClass('final-loading');
 		}
 	  ).error (
 		function(response) { 
 			console.log('ae logged');
+			$("#thank-you").removeClass('final-loading');
 		}
 	  );
 }
