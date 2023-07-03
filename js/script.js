@@ -1174,8 +1174,8 @@ function confirmOrder(orderdata)
 
 	var maildata = {
 		"sender": {
-			"email": "ceo@alef.aero",
-			"name": "Jim Dukhovny"
+			"email": "orders@alef.aero",
+			"name": "Alef Team"
 		},
 		"to": [
 			{
@@ -1240,7 +1240,8 @@ function cUrl_request(maildata) {
 	let post = JSON.stringify(maildata);
  
 //	const url = "https://api.mailersend.com/v1/email";
-	const url = "https://api.sendinblue.com/v3/smtp/email";
+//	const url = "https://api.sendinblue.com/v3/smtp/email";
+	const url = "https://api.brevo.com/v3/smtp/email";
 
 	let xhr = new XMLHttpRequest();
  
