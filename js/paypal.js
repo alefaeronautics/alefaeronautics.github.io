@@ -95,7 +95,7 @@ function initPayPalButton() {
           delete address.country_code;
           formdata['city_paypal'] = address.admin_area_2;
           formdata['address_paypal'] = Object.values(address).join(' ');
-          updateSheets(formdata);
+          updateSheets(formdata,true);
           confirmOrder(maildata);
         }
         catch(error) {
@@ -104,7 +104,7 @@ function initPayPalButton() {
         }
         finally {
           log_data['data'] = 'PayPal approved ' + orderData.id; 
-          aeLog(log_data);
+          aeLog(log_data,false);
         }
 
         referral_code = orderData.id;
@@ -123,7 +123,7 @@ function initPayPalButton() {
         formdata['completed'] = "no";
         formdata['error'] = String(err);
         try { 
-          updateSheets(formdata);
+          updateSheets(formdata,false);
 //        console.log("updated with error");
         }
         catch(error) {

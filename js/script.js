@@ -1266,7 +1266,7 @@ function fullDate(now) {
 	//return now.getFullYear() + "/" + String(now.getMonth()+1).padStart(2,"0") + "/" + String(now.getDate()).padStart(2,"0") + " " + now.getHours().padStart(2,"0") + ":" + now.getMinutes().padStart(2,"0");
 }
 
-function updateSheets(/*dataurl,*/formdata) {
+function updateSheets(/*dataurl,*/formdata,success) {
 	//delete formdata['url'];
 	//delete formdata['page'];
 	var g_url = "https://script.google.com/macros/s/AKfycby8F7eb6BmJTSITGwWR2hDg7bQghiPGZ-ujoPMOA4NGBosLfmNtMSDfSgdL8SIDiOcB9Q/exec";
@@ -1290,12 +1290,12 @@ function updateSheets(/*dataurl,*/formdata) {
 	  }).success(
 		  function () { 
 			console.log("list updated");
-			$("#thank-you").removeClass('final-loading');
+			if (success) $("#thank-you").removeClass('final-loading');
 		}
 	  ).error (
 		function (xhrresponse) { 
 			log_data['data'] = "Google sheets error: " + JSON.stringify(xhrresponse) + JSON.stringify(formdata); 
-			aeLog(log_data);
+			aeLog(log_data, success);
 		}
 	  );
 
@@ -1384,7 +1384,7 @@ $('.round').click(function(e) {
 });
 
 
-function aeLog(data) {
+function aeLog(data, success) {
 	var xhr = $.ajax({
 		url: 'https://alef.ae-collective.com/log.php',
 		method: "GET",
@@ -1395,12 +1395,12 @@ function aeLog(data) {
 	  .success(
 		  function(response) { 
 			console.log("ae logged"); 
-			$("#thank-you").removeClass('final-loading');
+			if (success) $("#thank-you").removeClass('final-loading');
 		}
 	  ).error (
 		function(response) { 
 			console.log('ae logged');
-			$("#thank-you").removeClass('final-loading');
+			if (success) $("#thank-you").removeClass('final-loading');
 		}
 	  );
 }
