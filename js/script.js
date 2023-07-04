@@ -1413,12 +1413,12 @@ $.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.i
 $(".preorder-input, .preorder").each(function(){
 	$(this).on('click',function(e){
 		var amount = ($(this).attr('data-choice')=='priority') ? 1500 : discount.getPrice();
+		$("#contact-advance").attr('value', amount);
 		$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
 		$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
 		var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
 		choice += ' ($'+amount+')'+ ( (CN) ? ' ' : '');
 		$("#order-label").text(choice); 
-		$("#contact-advance").attr('value', amount);
 	});
 })
 
