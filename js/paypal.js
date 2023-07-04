@@ -112,7 +112,7 @@ function initPayPalButton() {
           aeLog(log_data);
         }
         finally {
-          log_data['data'] = 'PayPal approved ' + orderData.id; 
+          log_data['data'] = 'PayPal approved ' + orderData.id + ' ID:' + formdata['paypal_id']; 
           aeLog(log_data,false);
         }
 
