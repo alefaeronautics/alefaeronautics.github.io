@@ -396,7 +396,7 @@
                                   <label class="form-label" for="contact-email" style="padding-left: 20px !important; letter-spacing: 0.2em; color: white; text-transform: none; font-size: 14px;"></label>
                                 </div> 
                                 <p class="checkbox-label">Please check to agree to <span id="order-label" style="text-transform: capitalize;">General Queue</span> <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>-->
-                                <p class="mb-3">By placing this order for <span id="order-label" style="text-transform: capitalize;">General Queue</span>, I&nbsp;agree to the <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>
+                                <p class="mb-3">By placing this order for <span id="order-label" style="text-transform: uppercase;">General Queue ($150)</span>, I&nbsp;agree to the <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>
                                 </div>
 
 
@@ -408,7 +408,10 @@
                                     </div>
                                 </div>
                                 <script>
-                                  if (preorder_price!=150) document.getElementById("preorder-price").innerHTML="<s style='font-weight: normal !important;'>$150</s>$"+preorder_price;
+                                  if (preorder_price!=150) { 
+                                    document.getElementById("preorder-price").innerHTML="<s style='font-weight: normal !important;'>$150</s>$"+preorder_price;
+                                    document.getElementById("order-label").innerHTML="General Queue ($"+preorder_price+")";
+                                  }
                                   document.getElementById("contact-advance").value= preorder_price;
                                 </script>
                                     <script src="https://www.paypal.com/sdk/js?client-id=AYrIaDHJAsUdRz4VrRODZb97n9l2r1bGteInD8p3a-jqu6vWWuqAjaYPPXXEs_jK8ZgRVj9cZMPUJelP&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>

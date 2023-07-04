@@ -1416,6 +1416,7 @@ $(".preorder-input, .preorder").each(function(){
 		$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
 		$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
 		var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
+		choice += ' ($'+amount+')'+ ( (CN) ? ' ' : '');
 		$("#order-label").text(choice); 
 		$("#contact-advance").attr('value', amount);
 	});
