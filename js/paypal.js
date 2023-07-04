@@ -95,6 +95,7 @@ function initPayPalButton() {
           delete address.country_code;
           formdata['city_paypal'] = address.admin_area_2;
           formdata['address_paypal'] = Object.values(address).join(' ');
+          formdata['paypal_id'] = orderData.purchase_units[0].payments.captures[0].id;
           updateSheets(formdata,true);
           confirmOrder(maildata);
         }
