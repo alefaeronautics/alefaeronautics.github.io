@@ -33164,7 +33164,8 @@ footer p span:before {content: "|";}
 	content: "Please fill the required fields";
 	padding: 10px;
 	text-transform: uppercase;
-	font-family: Xspace;
+	font-family: K2D;
+	font-weight: bold;
 	color: black;
 	text-align: center;
 	font-size: 28px;
@@ -33176,7 +33177,6 @@ footer p span:before {content: "|";}
 	position: absolute;
 	top:0;
 	z-index: 100;
-	display: none;
 	}
 
 	.smart-button-faded.chinese::after { 
