@@ -1,23 +1,31 @@
 const alert_countries = ["China","India"];
 
-document.querySelectorAll(".form-input").forEach(i=>{
-        i.addEventListener("change",()=>{
-          if (i.id=="contact-country") {
+$(".form-input").each(function(index) { 
+  $(this).on("change", function(){
+    console.log($(this).attr('id'));
 
-            if (alert_countries.includes(i.value))
-                document.getElementById("country-alert").classList.remove('hide');
-            else
-              document.getElementById("country-alert").classList.add('hide');
+    if ($(this).attr('id')=="contact-country") {
 
-            bgBehavior();
-          }
-          if (isValidated($($(".rd-mailform")[0]).find("[data-constraints]"))) {
-             document.getElementById("smart-button-container").classList.remove("smart-button-faded");
-          } else {
-            document.getElementById("smart-button-container").classList.add("smart-button-faded");
-          }
-        });
-      });
+      if (alert_countries.includes($(this).attr('value')))
+          $("#country-alert").removeClass('hide');
+      else
+        $("#country-alert").addClass('hide');
+
+      bgBehavior();
+    }
+    if (isValidated($($(".rd-mailform")[0]).find("[data-constraints]"))) {
+       $("#smart-button-container").removeClass("smart-button-faded");
+    } else {
+      $("#smart-button-container").addClass("smart-button-faded");
+    }
+
+  });
+  $(this).on("input", function(){
+    if ($(this).attr('value').length>4) 
+     if ($("#smart-button-container").hasClass("smart-button-faded"))
+      $(this).trigger("change");
+  });
+});
 
 
 function initPayPalButton() {
