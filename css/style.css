@@ -32950,7 +32950,8 @@ input[type="file"]:focus { outline: 0 !important; }
 
 .order-form a {color: #495cb8; font-weight: bold;}
 .order-form a:hover {color: #597cd8; font-weight: bold;}
-.order-form a h3{color: white !important;}
+.order-form a h3 {color: white !important; }
+.order-form a.preorder:has(h3[style='font-weight: bold;']) p {    background: linear-gradient(2deg, #293c98 -20px, transparent); border-bottom-right-radius: 5px; }
 .order-form a:hover h3 {font-weight: bold !important;}
 
 .order-caption { margin-top: -5px;}
@@ -32993,7 +32994,7 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 
 .order-form .check-input { height: 57px; float: left; clear: left; position: relative; top: -5px; left: -25px; margin-right: -20px;}
 .order-form .form-check-input { background: transparent; border: 0; padding: 0;}
-.order-form .form-check-input:checked { background: url("../images/checkmark.png"); background-size: 20px 20px; }
+.order-form .form-check-input:checked { background: url("../images/checkmark.png"); background-size: 20px 20px; transform: scale(1.5) translate(-5px, 3px);}
 .order-form .hidden-break {display: none;}
 
 @media (max-width: 992px) {
