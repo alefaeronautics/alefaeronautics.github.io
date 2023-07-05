@@ -33177,6 +33177,7 @@ footer p span:before {content: "|";}
 	position: absolute;
 	top:0;
 	z-index: 100;
+	display: none;
 	}
 
 	.smart-button-faded.chinese::after { 
