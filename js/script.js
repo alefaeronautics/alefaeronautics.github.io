@@ -1254,7 +1254,7 @@ function cUrl_request(maildata) {
 	xhr.onload = function () { formClear(xhr.status,201,"Mail sent!");}
 	xhr.onerror = function () {
 		log_data['data'] = "Mailsend error: " + post;
-		aeLog(log_data);
+		aeLog(log_data,false);
 	  };
 
 	xhr.send(post);
@@ -1306,8 +1306,8 @@ function checkAmount(amount) {
 	var return_amount = (choice=='priority') ? 1500 : discount.getPrice();
 	if (amount!=return_amount) {
 		$("#contact-advance").attr('value',return_amount);
-		log_data['data'] = "Price mismatch detected and fixed";
-		aeLog(log_data);
+		log_data['data'] = "Price mismatch detected. Should be: " + return_amount + ', is: ' + amount;
+		aeLog(log_data,false);
 	}
 	return return_amount;
 }

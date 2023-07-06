@@ -58,6 +58,7 @@ function initPayPalButton() {
     createOrder: function(data, actions) {    
         var value = $("#contact-advance").attr('value'); 
         //value = checkAmount(value);
+        checkAmount(value);
         var description = "Alef Flying Car pre-order.\nRefundable deposit for your "+ ( (value=='1500') ? "priority" : "general" ) +" queue place in line.";
         var order_data = {
             "description": description,
