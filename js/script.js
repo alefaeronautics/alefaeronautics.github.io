@@ -1137,10 +1137,10 @@ function sendMail()
 
 	var maildata = {
 		//"from": {
-//		"sender": {
-//			"email": "robot@alef.aero",
-//			"name": "Alef Robot"
-//		},
+		"sender": {
+			"email": "robot@alef.aero",
+			"name": "Alef Robot"
+		},
 		"to": [
 			{
 				"email": receiver[formtype]				
