@@ -2,7 +2,6 @@ const alert_countries = ["China","India"];
 
 $(".form-input").each(function(index) { 
   $(this).on("change", function(){
-    console.log($(this).attr('id'));
 
     if ($(this).attr('id')=="contact-country") {
 
@@ -133,15 +132,15 @@ function initPayPalButton() {
         formdata['completed'] = "no";
         formdata['error'] = String(err);
         try { 
-          updateSheets(formdata,false);
+          if ((formdata['error']!="Error: Detected popup close")&&(formdata['error']!="Error: Native popup closed")) updateSheets(formdata,false);
 //        console.log("updated with error");
         }
         catch(error) {
           log_data['data'] = String(error);
-          aeLog(log_data);
+          aeLog(log_data,false);
         }
         log_data['data'] = String(err);
-        aeLog(log_data);
+        aeLog(log_data,false);
                                                         
         var form = $($(".rd-mailform")[0]);
         output = $("#" + form.attr("data-form-output"));
