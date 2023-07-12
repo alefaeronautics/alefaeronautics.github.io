@@ -39,8 +39,10 @@ function initPayPalButton() {
     onInit: function(data, actions) {
 
       },
+      onCancel: function() {
+        $('.queue-option').removeClass('faded');
+      },
       onClick: function() {
-
       // Form validation
       var form = $($(".rd-mailform")[0]),
                     inputs = form.find("[data-constraints]"),
@@ -54,11 +56,13 @@ function initPayPalButton() {
       
       },
 
-    createOrder: function(data, actions) {    
+    createOrder: function(data, actions) {
         var value = $("#contact-advance").attr('value'); 
+        var choice = (value=='1500') ? "priority" : "general" ;
+        $('.form-check-input[data-choice!="'+choice+'"]').closest('.queue-option').addClass('faded');
         //value = checkAmount(value);
         checkAmount(value);
-        var description = "Alef Flying Car pre-order.\nRefundable deposit for your "+ ( (value=='1500') ? "priority" : "general" ) +" queue place in line.";
+        var description = "Alef Flying Car pre-order.\nRefundable deposit for your "+ choice +" queue place in line.";
         var order_data = {
             "description": description,
             "amount":{
@@ -127,6 +131,7 @@ function initPayPalButton() {
     },
 
     onError: function(err) {
+      console.log('error event');
         // Collect data from form and update Google sheets with available info and error
         var formdata = collectData();
         formdata['completed'] = "no";

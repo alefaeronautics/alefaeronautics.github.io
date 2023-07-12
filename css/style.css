@@ -33209,3 +33209,19 @@ footer p span:before {content: "|";}
 .final-loading {
 	position: relative;
 }
+
+.queue-option.faded, .queue-option.faded .check-input {
+	position: relative;
+}
+.queue-option.faded:before, .queue-option.faded .check-input:before  {
+	content: "";
+	width: 120%;
+	height: 120%;
+	left: -10%;
+	top: -10%;
+	background: black;
+	opacity: 0.65;
+	z-index: 10;
+	position: absolute;
+	filter: blur(15px);
+}
