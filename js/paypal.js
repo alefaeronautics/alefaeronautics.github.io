@@ -72,6 +72,9 @@ function initPayPalButton() {
           };  
           
           //console.log(order_data);
+
+          log_data['data'] = "Info to PayPal: " + JSON.stringify(order_data); 
+          aeLog(log_data,false);
       
       return actions.order.create({
         purchase_units: [order_data]
@@ -113,7 +116,7 @@ function initPayPalButton() {
         }
         catch(error) {
           log_data['data'] = String(error); 
-          aeLog(log_data);
+          aeLog(log_data,false);
         }
         finally {
           log_data['data'] = 'PayPal approved ' + orderData.id + ' ID:' + formdata['paypal_id']; 
@@ -131,7 +134,7 @@ function initPayPalButton() {
     },
 
     onError: function(err) {
-      console.log('error event');
+      //console.log('error event');
         // Collect data from form and update Google sheets with available info and error
         var formdata = collectData();
         formdata['completed'] = "no";

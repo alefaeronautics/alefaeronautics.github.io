@@ -1386,6 +1386,7 @@ $('.round').click(function(e) {
 
 
 function aeLog(data, success) {
+	console.log(data);
 	var xhr = $.ajax({
 		url: 'https://alef.ae-collective.com/log.php',
 		method: "GET",
@@ -1408,7 +1409,7 @@ function aeLog(data, success) {
 
 var log_data = { 'date' : new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"}) };
 var user_ip = "";
-$.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.ip;});
+$.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.ip; });
 
 
 $(".preorder-input").each(function(){
@@ -1421,6 +1422,8 @@ $(".preorder-input").each(function(){
 		var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
 		choice += ' ($'+amount+')'+ ( (CN) ? ' ' : '');
 		$("#order-label").text(choice); 
+		log_data['data'] = "Change/Click event: " + "Amount " + amount + ", choice " + choice; 
+		aeLog(log_data,false);
 	});
 })
 
