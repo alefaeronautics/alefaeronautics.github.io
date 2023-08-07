@@ -1386,7 +1386,7 @@ $('.round').click(function(e) {
 
 
 function aeLog(data, success) {
-	console.log(data);
+	//console.log(data);
 	var xhr = $.ajax({
 		url: 'https://alef.ae-collective.com/log.php',
 		method: "GET",

@@ -139,14 +139,8 @@ function initPayPalButton() {
         var formdata = collectData();
         formdata['completed'] = "no";
         formdata['error'] = String(err);
-        try { 
-          if ((formdata['error']!="Error: Detected popup close")&&(formdata['error']!="Error: Native popup closed")) updateSheets(formdata,false);
-//        console.log("updated with error");
-        }
-        catch(error) {
-          log_data['data'] = String(error);
-          aeLog(log_data,false);
-        }
+//      updateSheets(formdata,false);
+//      console.log("updated with error");
         log_data['data'] = String(err);
         aeLog(log_data,false);
                                                         
