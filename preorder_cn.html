@@ -37,6 +37,11 @@
     <!-- link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic%7CJosefin+Sans:400,700,300italic" -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+      .snackbars {
+        background-color: #293c98;
+      }
+    </style>
     <script> 
         $(function(){
           $("#footer").load("includes/footer.html"); 
@@ -381,30 +386,18 @@
     </select><span class="form-validation"></span>
              <label class="form-label label-dropdown rd-input-label" for="contact-country">所在地*</label>
                                 </div>
-                                <div class="form-wrap mb-0 mt-0">
+                                <div class="form-wrap form-button wow fadeInBottom mt-3">
+                                  <button class="button button-block button-primary" type="submit">註冊願望清單</button>
+                              </div>
+                                <div class="form-wrap mb-0 mt-1">
                                 <input type="hidden" id="contact-advance" name="advance" class="form-input" value="150">
                                 </div>
 
-                                <p class="message-alert mt-2 hide" id="country-alert">如果要使用卡付款请，PayPal可能会显示错误. 请按&laquo;再试一次&raquo; 然后进入弹窗口</p>
                                 <div class="mt-2">
                                 
-                                <!--
-                                <div class="form-wrap form-checkbox">
-                                  <input class="form-input form-check-input" id="contact-agreed" type="checkbox" name="agreed" data-constraints="@Required">
-                                  <label class="form-label" for="contact-email" style="padding-left: 20px !important; letter-spacing: 0.2em; color: white; text-transform: none; font-size: 14px;"></label>
-                                </div> 
-                                <p class="checkbox-label">Please check to agree to <span id="order-label" style="text-transform: capitalize;">General Queue</span> <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef Pre-Order Agreement</a>.</p>-->
-                                    <p class="mb-3">同意 <a href="https://alef.aero/documents/Alef%20Aeronautics%20-%20Preorder%20Agreement.pdf" target="_pre-order">Alef 预购协议</a>, 并完成<span id="order-label">普通 ($150) </span>预购</p>
+                                    <p class="mb-3">目前無法預訂 <span id="order-label">普通 ($150) </span>。 您可以登記等候名單。 我們將保留您的排隊號碼，並在重新開放預訂後立即通知您。</p>
                                 </div>
 
-
-                                <div class="">
-                                  <div id="smart-button-container" class="chinese smart-button-faded" style="filter: invert() hue-rotate(180deg) contrast(1.2);">
-                                      <div style="text-align: center;" id="second-button">
-                                        <div id="paypal-button-container"></div>
-                                      </div>
-                                  </div>
-                              </div>
                               <script>
                                   if (preorder_price!=150) { 
                                     document.getElementById("preorder-price").innerHTML="<s style='font-weight: normal !important;'>$150</s>$"+preorder_price;
@@ -412,43 +405,9 @@
                                   }
                                 document.getElementById("contact-advance").value= preorder_price;
                               </script>
-                                  <script src="https://www.paypal.com/sdk/js?client-id=AYrIaDHJAsUdRz4VrRODZb97n9l2r1bGteInD8p3a-jqu6vWWuqAjaYPPXXEs_jK8ZgRVj9cZMPUJelP&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
-                                  <script src="js/paypal.js"></script>
 
-
-                                <div class="form-wrap form-button wow fadeInBottom mt-3 animated" style="display: none;">
-                                    <button class="button button-block button-primary" type="submit" id="second-button">Priority Order</button>
-                                </div>
                             </form>
           
-                    </div>
-                    <div class="cell-xs-12 cell-md-4 self-center order-form final-loading" id="thank-you" style="display: none;">
-                      <div class="wow fadeInTop"><h1><small>您的车在等待着您！</small></h1></div>
-                      <div class="wow fadeIn"  data-wow-delay="0.15s">
-                      <p class="mt-3">恭喜！您已成功预订 Alef A 型飞行汽车.</p>
-                      <p class="mt-2">您的订单号是：</p>
-                      <h3 id="order-number">(check email)</h3>
-
-                      <div class="form-wrap mb-1 mt-3">
-                        <input class="form-input" id="referral-link" type="text" readonly value="http://alef.aero/preorder.html#">
-                        <label class="form-label" for="referral-link">您的专属推荐链接</label>
-                      </div>
-
-                      <div id="sharer-block">
-                        <ul class="list-icons list-inline-xs mb-0">
-                          <li><a href="https://www.facebook.com/sharer/sharer.php?u=" class="icon icon-xs fa fa-facebook icon-style-camera"></a></li>
-                          <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="icon icon-xs fa fa-linkedin icon-style-camera"></a></li>
-                          <li><a href="https://twitter.com/intent/tweet?url=" class="icon icon-xs fa fa-twitter icon-style-camera"></a></li>
-                      </ul>
-                      </div>
-                      <p class="mt-1 mb-1">你可以和朋友共享此链接<p> 
-                      <p><b>1.</b>他们将获得 125 美元的普通队列预订折扣价。</p>
-                      <p><b>2.</b>收集 <span id="referral-number">充足的</span> 推荐后，您将获得免费的普通队列预订！</p>
-
-                      <p class="mt-3">已收到您的预订，并且已根据 <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef 预订协议保</a>留您的排队位置。请保留您的订单号，它可以用于查找您的位置</p>
-                      <p class="mt-2">请检查您的收件箱以获取此信息的副本和您的专属凭证</p>
-  
-                          </div>
                     </div>
                   </div>
                 </div>

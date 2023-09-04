@@ -1158,12 +1158,16 @@ function sendMail()
 			"charset":"iso-8859-1"}
 	};
 
-	if (formtype=="position")
-	{
-		getBase64(document.getElementById("contact-resume").files[0],maildata);
-	}	
-	else {
-		cUrl_request(maildata); 
+	switch(formtype) {
+		case "position":
+			getBase64(document.getElementById("contact-resume").files[0],maildata);
+		break;
+		case "order":
+			updateSheets(formdata,true);
+		break;
+		default:
+			cUrl_request(maildata); 
+		break;
 	}
 }
 
@@ -1270,7 +1274,8 @@ function fullDate(now) {
 function updateSheets(/*dataurl,*/formdata,success) {
 	//delete formdata['url'];
 	//delete formdata['page'];
-	var g_url = "https://script.google.com/macros/s/AKfycby8F7eb6BmJTSITGwWR2hDg7bQghiPGZ-ujoPMOA4NGBosLfmNtMSDfSgdL8SIDiOcB9Q/exec";
+	//var g_url = "https://script.google.com/macros/s/AKfycby8F7eb6BmJTSITGwWR2hDg7bQghiPGZ-ujoPMOA4NGBosLfmNtMSDfSgdL8SIDiOcB9Q/exec";
+	var g_url = "https://script.google.com/macros/s/AKfycbyZiT7luUJQWIUN8v8ii6EFlagliIaIW9Iv-wJ72OQsNCpftk2NOPE2IA6J1ujOHOfTZA/exec";
 	formdata['user_ip'] = user_ip;
 
 	/* just in case request won't be working anymore 
@@ -1291,7 +1296,14 @@ function updateSheets(/*dataurl,*/formdata,success) {
 	  }).success(
 		  function () { 
 			console.log("list updated");
-			if (success) $("#thank-you").removeClass('final-loading');
+			if (success) {
+				if ($("#thank-you").length) $("#thank-you").removeClass('final-loading');
+				else { 
+					formClear(true,true,'Your request has been sent!');
+					log_data['data'] = 'Request added to the wishlist;';
+					aeLog(log_data,false);
+				}
+			}
 		}
 	  ).error (
 		function (xhrresponse) { 
