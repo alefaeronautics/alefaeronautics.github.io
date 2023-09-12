@@ -12,7 +12,8 @@ const createClient = () => {
   }else {
     amount = 1500;
   }
-  if(name.value, email.value, country.value, amount){
+  console.log(name.value, email.value, country.value, amount);
+  if(name.value && email.value && country.value && amount){
     initialize(name.value, email.value, country.value, amount)
   }
 }
@@ -42,7 +43,7 @@ async function initialize(name, email, country, amount) {
   document
   .querySelector("#payment-form").style = "display: block";
 
-  const response = await fetch("https://whale-app-mwxk3.ondigitalocean.app/create-payment-intent", {
+  const response = await fetch("https://jellyfish-app-6nax7.ondigitalocean.app/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, country, amount }),
