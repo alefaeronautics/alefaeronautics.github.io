@@ -78,7 +78,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "https://alef.aero/",
+      return_url: "https://alef.aero/preorder_success.html",
       receipt_email: emailAddress,
     },
   });
