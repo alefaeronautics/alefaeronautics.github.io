@@ -105,7 +105,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "https://alef.aero/preorder.html?name="+formdata['name']+"&email="+"&country="+formdata['country'],
+      return_url: "https://alef.aero/preorder.html?user_name="+formdata['name']+"&user_email="+formdata['email']+"&user_country="+formdata['country']+"&user_advance="+formdata['advance'],
       receipt_email: emailAddress,
     },
   });
@@ -148,6 +148,9 @@ async function checkStatus() {
       try {
         var formdata = collectData();
         var value = parseInt(paymentIntent.amount)/100;
+        var user_advance = new URLSearchParams(window.location.search).get("user_advance");
+        formdata['advance'] = (user_advance) ? user_advance : formdata['advance'];
+        formdata['amount_paypal'] = value;
         formdata['completed'] = (value>150) ? "priority" : "general";
         formdata['referral'] = referral_code;
         formdata['paypal_id'] = paymentIntent.id;
@@ -156,9 +159,10 @@ async function checkStatus() {
 
         if (formdata['name']=='') formdata['name'] = new URLSearchParams(window.location.search).get("user_name");
         if (formdata['country']=='') formdata['country'] = new URLSearchParams(window.location.search).get("user_country");
+        if (formdata['email']=='') formdata['email'] = new URLSearchParams(window.location.search).get("user_email");
 
-        formdata['name_paypal'] = (billingDetails) ? billingDetails.name : formdata['name'];
-        formdata['email_paypal'] = emailAddress;
+        formdata['name_paypal'] = (billingDetails) ? billingDetails.name : '';
+        formdata['email_paypal'] = paymentIntent.receipt_email;
         // Concatenate address values into a single string
         formdata['address_paypal'] = (billingDetails) ? [
           billingDetails.address.line1,
