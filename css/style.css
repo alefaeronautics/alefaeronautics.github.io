@@ -33236,3 +33236,8 @@ footer p span:before {content: "|";}
 	line-height: 1.1;
 	top: 5px;
 }
+
+#order-number {
+    font-size: 19px;
+    font-weight: bold;
+}

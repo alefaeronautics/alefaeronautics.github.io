@@ -1262,7 +1262,10 @@ function cUrl_request(maildata) {
 	xhr.setRequestHeader('api-key', decrypt(token));
 	xhr.setRequestHeader('content-type', 'application/json');
  
-	xhr.onload = function () { formClear(xhr.status,201,"Mail sent!");}
+	xhr.onload = function () { 
+		formClear(xhr.status,201,"Mail sent!"); 
+		console.log('mail sent'); 
+	}
 	xhr.onerror = function () {
 		log_data['data'] = "Mailsend error: " + post;
 		aeLog(log_data,false);

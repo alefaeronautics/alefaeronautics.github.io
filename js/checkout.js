@@ -24,7 +24,7 @@ const createClientAE = () => {
   var formdata = collectData();
   log_data['data'] = "Payment request created: " + JSON.stringify(formdata); 
   aeLog(log_data,false);
-  initialize(formdata.name, formdata.email, formdata.country, formdata.advance);
+  initialize(formdata.name, formdata.email, formdata.country, checkAmount(formdata.advance));
 }
 
 // This is a public sample test API key.
@@ -78,7 +78,6 @@ async function initialize(name, email, country, amount) {
       }
   };
   elements = stripe.elements({ appearance, clientSecret });
-  if (tester) console.log(response);
 
   const linkAuthenticationElement = elements.create("linkAuthentication",{defaultValues: {email: emailAddress}});
   linkAuthenticationElement.mount("#link-authentication-element");
@@ -101,11 +100,17 @@ async function handleSubmit(e) {
   setLoading(true);
   formdata = collectData();
 
+  var params = "";
+  var params_array = ['name','email','country','advance'];
+  for (var i=0; i<params_array.length; i++)
+    params += ((i==0) ? '' : '&') + "user_" + params_array[i] + '=' + formdata[params_array[i]];
+  if (referral_code!='') params += "&user_referral="+referral_code;
+
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "https://alef.aero/preorder.html?user_name="+formdata['name']+"&user_email="+formdata['email']+"&user_country="+formdata['country']+"&user_advance="+formdata['advance'],
+      return_url: "https://alef.aero/preorder.html"+params,
       receipt_email: emailAddress,
     },
   });
@@ -138,9 +143,6 @@ async function checkStatus() {
 
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
-  if (tester) console.log(paymentIntent);
-  if (tester) console.log(paymentIntent.status);
-
   switch (paymentIntent.status) {
     case "succeeded":
       showMessage("Payment succeeded!");
@@ -149,10 +151,11 @@ async function checkStatus() {
         var formdata = collectData();
         var value = parseInt(paymentIntent.amount)/100;
         var user_advance = new URLSearchParams(window.location.search).get("user_advance");
+        var user_referral = new URLSearchParams(window.location.search).get("user_referral");
         formdata['advance'] = (user_advance) ? user_advance : formdata['advance'];
         formdata['amount_paypal'] = value;
         formdata['completed'] = (value>150) ? "priority" : "general";
-        formdata['referral'] = referral_code;
+        formdata['referral'] = (user_referral) ? user_referral : referral_code;
         formdata['paypal_id'] = paymentIntent.id;
         formdata['transaction_id'] = paymentIntent.id.split("_")[1];
         var billingDetails = paymentIntent.billing_details;
