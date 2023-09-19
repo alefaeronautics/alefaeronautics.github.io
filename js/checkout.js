@@ -60,12 +60,13 @@ async function initialize(name, email, country, amount) {
   document
   .querySelector("#payment-form").style = "display: block";
 
+  /*
   const response = await fetch("https://jellyfish-app-6nax7.ondigitalocean.app/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, country, amount }),
   });
-  const { clientSecret } = await response.json();
+  const { clientSecret } = await response.json();*/
   const appearance = {
     theme: 'stripe',
     rules: {
@@ -77,7 +78,8 @@ async function initialize(name, email, country, amount) {
       },
       }
   };
-  elements = stripe.elements({ appearance, clientSecret });
+  //elements = stripe.elements({ appearance, clientSecret });
+  elements = stripe.elements({ appearance });
 
   const linkAuthenticationElement = elements.create("linkAuthentication",{defaultValues: {email: emailAddress}});
   linkAuthenticationElement.mount("#link-authentication-element");
