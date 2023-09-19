@@ -60,40 +60,53 @@ async function initialize(name, email, country, amount) {
   document
   .querySelector("#payment-form").style = "display: block";
 
-  
+  /*
   const response = await fetch("https://jellyfish-app-6nax7.ondigitalocean.app/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({  }),
   });
   const { clientSecret } = await response.json();
-  console.log(clientSecret);
-  const appearance = {
-    theme: 'stripe',
-    rules: {
-      '.Label': {
-        color: 'white',
-      },
-      '.Label--invalid': {
-        color: '#ff4525',
-      },
-      }
-  };
-  elements = stripe.elements({ appearance, clientSecret });
+  console.log(clientSecret);*/
 
-  const linkAuthenticationElement = elements.create("linkAuthentication",{defaultValues: {email: emailAddress}});
-  linkAuthenticationElement.mount("#link-authentication-element");
+  stripe.paymentIntents.create({
+    amount: amount*100, // Replace with the amount in cents
+    currency: 'usd', // Replace with your desired currency
+    // Add any additional parameters or metadata as needed
+  }).then(function(intent) {
+    // Retrieve the clientSecret from the Payment Intent
+    var clientSecret = intent.client_secret;
+    console.log('Client Secret:', clientSecret);
 
-  linkAuthenticationElement.on('change', (event) => {
-    emailAddress = event.value.email;
+    const appearance = {
+      theme: 'stripe',
+      rules: {
+        '.Label': {
+          color: 'white',
+        },
+        '.Label--invalid': {
+          color: '#ff4525',
+        },
+        }
+    };
+    elements = stripe.elements({ appearance, clientSecret });
+  
+    const linkAuthenticationElement = elements.create("linkAuthentication",{defaultValues: {email: emailAddress}});
+    linkAuthenticationElement.mount("#link-authentication-element");
+  
+    linkAuthenticationElement.on('change', (event) => {
+      emailAddress = event.value.email;
+    });
+  
+    const paymentElementOptions = {
+      layout: "tabs",
+    };
+  
+    const paymentElement = elements.create("payment", paymentElementOptions);
+    paymentElement.mount("#payment-element");
+  
   });
 
-  const paymentElementOptions = {
-    layout: "tabs",
-  };
-
-  const paymentElement = elements.create("payment", paymentElementOptions);
-  paymentElement.mount("#payment-element");
 }
 
 async function handleSubmit(e) {
