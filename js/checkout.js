@@ -72,7 +72,7 @@ async function initialize(name, email, country, amount) {
   elements = stripe.elements({ appearance, clientSecret });
   if (tester) console.log(response);
 
-  const linkAuthenticationElement = elements.create("linkAuthentication");
+  const linkAuthenticationElement = elements.create("linkAuthentication",{defaultValues: {email: emailAddress}});
   linkAuthenticationElement.mount("#link-authentication-element");
 
   linkAuthenticationElement.on('change', (event) => {
@@ -111,6 +111,8 @@ async function handleSubmit(e) {
   } else {
     showMessage("An unexpected error occurred.");
   }
+  log_data['data'] =  error.type + ": " + JSON.stringify(collectData()); 
+  aeLog(log_data,false);
 
   setLoading(false);
 }
@@ -132,7 +134,58 @@ async function checkStatus() {
   switch (paymentIntent.status) {
     case "succeeded":
       showMessage("Payment succeeded!");
-      console.log("success sequence");
+
+      if (tester) {
+
+      try {
+        var formdata = collectData();
+        var value = parseInt(paymentIntent.amount)/100;
+        formdata['completed'] = (value>150) ? "priority" : "general";
+        formdata['referral'] = referral_code;
+        formdata['transaction_id'] = paymentIntent.id;
+        var billingDetails = paymentIntent.billing_details;
+        formdata['name_paypal'] = billingDetails.name;
+        formdata['email_paypal'] = emailAddress;
+        // Concatenate address values into a single string
+        formdata['address_paypal'] = [
+          billingDetails.address.line1,
+          billingDetails.address.line2,
+          billingDetails.address.city,
+          billingDetails.address.state,
+          billingDetails.address.postal_code,
+          billingDetails.address.country
+        ].filter(Boolean).join(", ");
+
+        var maildata = { 
+          'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
+          'name': ((formdata['name']!="") ? formdata['name'] : formdata['name_paypal']),
+          'order_number': formdata['transaction_id'],
+          'ref_number' : referral_number,
+          'queue' : formdata['completed'],
+          'amount' : value
+        };
+
+        updateSheets(formdata,true);
+        confirmOrder(maildata);
+
+      }
+      catch {
+        log_data['data'] = String(error); 
+        aeLog(log_data,false);
+      }
+      finally {
+        log_data['data'] = 'Stripe approved ' + formdata['transaction_id']; 
+        aeLog(log_data,false);
+
+        referral_code = formdata['transaction_id'];
+        shareLinks();
+
+        // Show a success message within this page, e.g.
+        thankYou(formdata['transaction_id'],formdata['completed']);
+
+      }
+      }
+
       break;
     case "processing":
       showMessage("Your payment is processing.");
