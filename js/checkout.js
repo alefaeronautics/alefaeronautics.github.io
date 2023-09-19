@@ -64,11 +64,10 @@ async function initialize(name, email, country, amount) {
   const response = await fetch("https://jellyfish-app-6nax7.ondigitalocean.app/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({  }),
+    body: JSON.stringify({ name, email, country, amount }),
   });
   const { clientSecret } = await response.json();
   
-
     const appearance = {
       theme: 'stripe',
       rules: {
