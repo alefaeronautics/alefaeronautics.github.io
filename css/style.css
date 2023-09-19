@@ -33220,14 +33220,14 @@ footer p span:before {content: "|";}
 	left: -10%;
 	top: -10%;
 	background: black;
-	opacity: 1;
+	opacity: 0.5;
 	z-index: 10;
 	position: absolute;
 	filter: blur(15px);
 }
 
 .queue-option.faded:after {
-	content: "Please close PayPal checkout if you'd like to change your choice";
+	content: "";
 	z-index: 11;
 	position: absolute;
 	color: white;

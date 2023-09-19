@@ -1,5 +1,6 @@
 let amount = 0;
 const createClient = () => {
+
   // const priority = document.getElementById('priority');
   const general = document.getElementById('general');
   const name = document.getElementById('contact-name');
@@ -12,19 +13,35 @@ const createClient = () => {
   }else {
     amount = 1500;
   }
-  console.log(name.value, email.value, country.value, amount);
+  //console.log(name.value, email.value, country.value, amount); 
   if(name.value && email.value && country.value && amount){
     initialize(name.value, email.value, country.value, amount)
   }
 }
 
+const createClientAE = () => {
+
+  var formdata = collectData();
+  log_data['data'] = "Payment request created: " + JSON.stringify(formdata); 
+  aeLog(log_data,false);
+  initialize(formdata.name, formdata.email, formdata.country, formdata.advance);
+}
+
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
+
+var key = (tester) ? 
+  "pk_test_51LxO07CBiDZSNJ7Q6E45zERQSIGW1uM8EKJ0QHEMwYcReabeAEK3CbHz6yZU8bzC0IkJjP0ZRamvPDnufc4OKyHT00HhQKrlgk" 
+  :
+  "pk_live_51LxO07CBiDZSNJ7QmAN9Mik8KRPS5cJ2dfSxdFvRkl64euTlQotX1FVk5DHLhfpzfUxPNMKDPndPGIz7HjoylVjN000s84GRGz"; 
+
 const stripe = Stripe("pk_live_51LxO07CBiDZSNJ7QmAN9Mik8KRPS5cJ2dfSxdFvRkl64euTlQotX1FVk5DHLhfpzfUxPNMKDPndPGIz7HjoylVjN000s84GRGz");
 
+
+
 // The items the customer wants to buy
-const items = [{ id: "xl-tshirt" }];
+//const items = [{ id: "xl-tshirt" }];
 
 let elements;
 
@@ -53,6 +70,7 @@ async function initialize(name, email, country, amount) {
     theme: 'stripe',
   };
   elements = stripe.elements({ appearance, clientSecret });
+  if (tester) console.log(response);
 
   const linkAuthenticationElement = elements.create("linkAuthentication");
   linkAuthenticationElement.mount("#link-authentication-element");
@@ -78,7 +96,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "https://alef.aero/preorder_success.html",
+      return_url: "https://alef.aero/preorder.html",
       receipt_email: emailAddress,
     },
   });
@@ -109,18 +127,25 @@ async function checkStatus() {
 
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
+  if (tester) console.log(paymentIntent);
+
   switch (paymentIntent.status) {
     case "succeeded":
       showMessage("Payment succeeded!");
+      console.log("success sequence");
       break;
     case "processing":
       showMessage("Your payment is processing.");
       break;
     case "requires_payment_method":
       showMessage("Your payment was not successful, please try again.");
+      log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
+      aeLog(log_data,false);
       break;
     default:
       showMessage("Something went wrong.");
+      log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
+      aeLog(log_data,false);
       break;
   }
 }
@@ -136,7 +161,7 @@ function showMessage(messageText) {
   setTimeout(function () {
     messageContainer.classList.add("hidden");
     messageContainer.textContent = "";
-  }, 4000);
+  }, 40000);
 }
 
 // Show a spinner on payment submission

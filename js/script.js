@@ -850,6 +850,11 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 								return false;
 							}
 
+							if (form.attr('data-form-type')=='order') {
+								processOrder(form);
+							}
+							else {
+
 							form.addClass('form-in-process');
 
 							if (output.hasClass("snackbars")) {
@@ -858,6 +863,7 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 							}
 
 							sendMail();
+						}
 
 						} else {
 							return false;
@@ -1371,6 +1377,7 @@ function thankYou(order_number, order_type)
 }
 
 function showForm() {
+	
 	var startpoint = window.scrollY; //keep the scroll offset for the user
 	document.getElementById('order-button').style.display = 'none'; 
 	document.getElementById('order-form').style.display = 'block'; 
@@ -1383,6 +1390,21 @@ function showForm() {
 	setTimeout( bgBehavior, 300 );
 	//bgBehavior();
 	//document.getElementById("page-body").style = "background-size: cover;";
+}
+
+function processOrder(form) {
+	var choice;
+	$(".queue-option").each(function(){
+		var el = $(this);
+		if (el.find("input").attr('checked'))
+			{
+				$(this).removeClass('faded');
+				choice = el.find("input").attr('data-choice');
+			}
+		else $(this).addClass('faded');	
+	});
+
+	createClientAE();
 }
 
 window.addEventListener('load', shareLinks);
@@ -1434,8 +1456,8 @@ $(".preorder-input").each(function(){
 		var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
 		choice += ' ($'+amount+')'+ ( (CN) ? ' ' : '');
 		$("#order-label").text(choice); 
-		log_data['data'] = "Change/Click event: " + "Amount " + amount + ", choice " + choice; 
-		aeLog(log_data,false);
+		//log_data['data'] = "Change/Click event: " + "Amount " + amount + ", choice " + choice; 
+		//aeLog(log_data,false);
 	});
 })
 
@@ -1446,4 +1468,4 @@ $(".preorder").each(function(){
 		el.attr('checked',true);
 		el.trigger('change');
 	});
-})
+});
