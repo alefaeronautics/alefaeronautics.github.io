@@ -1280,8 +1280,10 @@ function fullDate(now) {
 function updateSheets(/*dataurl,*/formdata,success) {
 	//delete formdata['url'];
 	//delete formdata['page'];
-	//var g_url = "https://script.google.com/macros/s/AKfycby8F7eb6BmJTSITGwWR2hDg7bQghiPGZ-ujoPMOA4NGBosLfmNtMSDfSgdL8SIDiOcB9Q/exec";
-	var g_url = "https://script.google.com/macros/s/AKfycbyZiT7luUJQWIUN8v8ii6EFlagliIaIW9Iv-wJ72OQsNCpftk2NOPE2IA6J1ujOHOfTZA/exec";
+	//orders
+	var g_url = "https://script.google.com/macros/s/AKfycby8F7eb6BmJTSITGwWR2hDg7bQghiPGZ-ujoPMOA4NGBosLfmNtMSDfSgdL8SIDiOcB9Q/exec";
+	//wishlist
+	//var g_url = "https://script.google.com/macros/s/AKfycbyZiT7luUJQWIUN8v8ii6EFlagliIaIW9Iv-wJ72OQsNCpftk2NOPE2IA6J1ujOHOfTZA/exec";
 	formdata['user_ip'] = user_ip;
 
 	/* just in case request won't be working anymore 
