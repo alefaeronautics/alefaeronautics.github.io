@@ -31,12 +31,13 @@
     background: #293c98;
     font-family: K2D, Helvetica, Arial, sans-serif;
     letter-spacing: 0.2em;
+    text-transform: uppercase;
     color: #ffffff;
     border-radius: 4px;
     border: 0;
     padding: 12px 16px;
     font-size: 16px;
-    font-weight: 600;
+    /* font-weight: 600; */
     cursor: pointer;
     display: block;
     transition: all 0.2s ease;

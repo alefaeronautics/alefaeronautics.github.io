@@ -99,12 +99,13 @@ async function handleSubmit(e) {
   // e.preventDefault();
   console.log("Submit")
   setLoading(true);
+  formdata = collectData();
 
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "https://alef.aero/preorder.html",
+      return_url: "https://alef.aero/preorder.html?name="+formdata['name']+"&email="+"&country="+formdata['country'],
       receipt_email: emailAddress,
     },
   });
@@ -130,9 +131,6 @@ async function checkStatus() {
   const clientSecret = new URLSearchParams(window.location.search).get(
     "payment_intent_client_secret"
   );
-  const redirectStatus = new URLSearchParams(window.location.search).get(
-    "redirect_status"
-  );
 
   if (!clientSecret) {
     return;
@@ -155,7 +153,11 @@ async function checkStatus() {
         formdata['paypal_id'] = paymentIntent.id;
         formdata['transaction_id'] = paymentIntent.id.split("_")[1];
         var billingDetails = paymentIntent.billing_details;
-        formdata['name_paypal'] = billingDetails.name;
+
+        if (formdata['name']=='') formdata['name'] = new URLSearchParams(window.location.search).get("user_name");
+        if (formdata['country']=='') formdata['country'] = new URLSearchParams(window.location.search).get("user_country");
+
+        formdata['name_paypal'] = (billingDetails) ? billingDetails.name : formdata['name'];
         formdata['email_paypal'] = emailAddress;
         // Concatenate address values into a single string
         formdata['address_paypal'] = (billingDetails) ? [
@@ -168,7 +170,7 @@ async function checkStatus() {
         ].filter(Boolean).join(", ") : '';
 
         var maildata = { 
-          'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
+          'email':((formdata['email']!="") ? formdata['email'] : paymentIntent.receipt_email ),
           'name': ((formdata['name']!="") ? formdata['name'] : formdata['name_paypal']),
           'order_number': formdata['transaction_id'],
           'ref_number' : referral_number,
@@ -176,15 +178,14 @@ async function checkStatus() {
           'amount' : value
         };
 
-        updateSheets(formdata,true);
-        confirmOrder(maildata);
-
       }
-      catch {
+      catch(error) {
         log_data['data'] = String(error); 
         aeLog(log_data,false);
       }
       finally {
+        updateSheets(formdata,true);
+        confirmOrder(maildata);
         log_data['data'] = 'Stripe approved ' + formdata['transaction_id']; 
         aeLog(log_data,false);
 
