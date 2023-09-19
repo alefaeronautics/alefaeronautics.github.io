@@ -122,6 +122,9 @@ async function checkStatus() {
   const clientSecret = new URLSearchParams(window.location.search).get(
     "payment_intent_client_secret"
   );
+  const redirectStatus = new URLSearchParams(window.location.search).get(
+    "redirect_status"
+  );
 
   if (!clientSecret) {
     return;
@@ -130,31 +133,31 @@ async function checkStatus() {
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
   if (tester) console.log(paymentIntent);
+  if (tester) console.log(paymentIntent.status);
 
   switch (paymentIntent.status) {
     case "succeeded":
       showMessage("Payment succeeded!");
-
-      if (tester) {
-
+      console.log("success sequence");
       try {
         var formdata = collectData();
         var value = parseInt(paymentIntent.amount)/100;
         formdata['completed'] = (value>150) ? "priority" : "general";
         formdata['referral'] = referral_code;
-        formdata['transaction_id'] = paymentIntent.id;
+        formdata['paypal_id'] = paymentIntent.id;
+        formdata['transaction_id'] = paymentIntent.id.split("_")[1];
         var billingDetails = paymentIntent.billing_details;
         formdata['name_paypal'] = billingDetails.name;
         formdata['email_paypal'] = emailAddress;
         // Concatenate address values into a single string
-        formdata['address_paypal'] = [
+        formdata['address_paypal'] = (billingDetails) ? [
           billingDetails.address.line1,
           billingDetails.address.line2,
           billingDetails.address.city,
           billingDetails.address.state,
           billingDetails.address.postal_code,
           billingDetails.address.country
-        ].filter(Boolean).join(", ");
+        ].filter(Boolean).join(", ") : '';
 
         var maildata = { 
           'email':((formdata['email']!="") ? formdata['email'] : formdata['email_paypal']),
@@ -184,23 +187,21 @@ async function checkStatus() {
         thankYou(formdata['transaction_id'],formdata['completed']);
 
       }
-      }
-
       break;
-    case "processing":
-      showMessage("Your payment is processing.");
-      break;
-    case "requires_payment_method":
-      showMessage("Your payment was not successful, please try again.");
-      log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
-      aeLog(log_data,false);
-      break;
-    default:
-      showMessage("Something went wrong.");
-      log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
-      aeLog(log_data,false);
-      break;
-  }
+      case "processing":
+        showMessage("Your payment is processing.");
+        break;
+      case "requires_payment_method":
+        showMessage("Your payment was not successful, please try again.");
+        log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
+        aeLog(log_data,false);
+        break;
+      default:
+        showMessage("Something went wrong.");
+        log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
+        aeLog(log_data,false);
+        break;
+    }
 }
 
 // ------- UI helpers -------

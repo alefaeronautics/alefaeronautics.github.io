@@ -127,3 +127,11 @@
       min-width: initial;
     }
   }
+
+  label.p-FieldLabel {
+    color: white;
+  }
+
+  .p-FieldError {
+    color: #ff4525;
+  }
