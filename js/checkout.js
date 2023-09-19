@@ -68,6 +68,14 @@ async function initialize(name, email, country, amount) {
   const { clientSecret } = await response.json();
   const appearance = {
     theme: 'stripe',
+    rules: {
+      '.Label': {
+        color: 'white',
+      },
+      '.Label--invalid': {
+        color: '#ff4525',
+      },
+      }
   };
   elements = stripe.elements({ appearance, clientSecret });
   if (tester) console.log(response);
