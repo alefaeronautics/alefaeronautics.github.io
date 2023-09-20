@@ -33264,6 +33264,6 @@ footer p span:before {content: "|";}
 	transition: 0.5s all ease;
 }
 
-#link-authentication-element:not(:has(input))::before, #payment-element:not(:has(input))::before {
+#link-authentication-element:not(:has(iframe))::before, #payment-element:not(:has(iframe))::before {
 	opacity: 1;
 }
