@@ -1216,7 +1216,7 @@ function collectData()
 	var formdata = {};
 	formdata['date'] = fullDate(new Date());
 	$(".form-input").each(function(index) {
-		formdata[String($(this).attr('name'))] = $(this).attr('value');
+		if ($(this).attr('name')) formdata[String($(this).attr('name'))] = $(this).attr('value');
 	});
 	return formdata;
 }
