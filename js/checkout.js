@@ -55,6 +55,8 @@ let elements;
 let emailAddress = '';
 // Fetches a payment intent and captures the client secret
 
+var currentIntent = false;
+
 async function initialize(name, email, country, amount) {
   emailAddress = email
   infoForm.style = "display: none";
@@ -101,6 +103,11 @@ async function initialize(name, email, country, amount) {
       }
     });
     paymentElement.mount("#payment-element");
+
+    if (tester) {
+      currentIntent = await stripe.retrievePaymentIntent(clientSecret);
+      console.log(currentIntent);
+    }
 
 }
 
@@ -153,10 +160,11 @@ async function checkStatus() {
 
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
-  console.log(paymentIntent.status);
+  if (tester) console.log(paymentIntent.status);
 
   switch (paymentIntent.status) {
     case "succeeded":
+      //success sequence
       showMessage("Payment succeeded!");
       console.log("success sequence");
       try {
@@ -217,11 +225,13 @@ async function checkStatus() {
       }
       break;
       case "processing":
+        //keep refreshing
         //showMessage("Your payment is processing.");  
         $("#thank-you").addClass('processing');
         setTimeout(checkStatus,1000);      
         break;
       case "requires_payment_method":
+        //display error and then fill the form with data and show
         
         log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
         aeLog(log_data,false);
@@ -234,6 +244,7 @@ async function checkStatus() {
 
         break;
       default:
+        //display error and then fill the form with data and show
        
         log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
         aeLog(log_data,false);
@@ -276,6 +287,7 @@ function setLoading(isLoading) {
   }
 }
 
+//fill form with data from URI
 function fillForm() {
   var params_array = ['name','email','country','advance'];
   for (var i=0; i<params_array.length; i++) {
@@ -292,6 +304,7 @@ function fillForm() {
 
 }
 
+//display the form when ready
 function showFilledForm() {
   document.getElementById("order-block").style = "display: block";
   document.getElementById("thank-you").style = "display: none";
