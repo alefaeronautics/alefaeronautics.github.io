@@ -41,6 +41,14 @@
     .snackbars {
       background-color: #293c98;
     }
+    .queue-option.faded:before, .queue-option.faded .check-input:before  {
+	opacity: 1;
+}
+
+.queue-option.faded:after {
+	content: "Please close the payment form to change";
+    text-transform: uppercase;
+}
   </style>
   <script>
     $(function () {
@@ -436,6 +444,7 @@
             
               <!-- Display a payment form -->
             <form id="payment-form" style="display: none;">
+                <div id="payment-close">✕</div>
               <div id="link-authentication-element">
                 <!--Stripe.js injects the Link Authentication Element-->
               </div>

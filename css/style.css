@@ -33217,11 +33217,11 @@ footer p span:before {content: "|";}
 .queue-option.faded:before, .queue-option.faded .check-input:before  {
 	content: "";
 	width: 120%;
-	height: 120%;
+	height: 130%;
 	left: -10%;
-	top: -10%;
+	top: -15%;
 	background: black;
-	opacity: 0.5;
+	opacity: 0.6;
 	z-index: 10;
 	position: absolute;
 	filter: blur(15px);

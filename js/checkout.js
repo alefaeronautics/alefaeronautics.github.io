@@ -55,8 +55,6 @@ let elements;
 let emailAddress = '';
 // Fetches a payment intent and captures the client secret
 
-var currentIntent = false;
-
 async function initialize(name, email, country, amount) {
   emailAddress = email
   infoForm.style = "display: none";
@@ -103,11 +101,6 @@ async function initialize(name, email, country, amount) {
       }
     });
     paymentElement.mount("#payment-element");
-
-    if (tester) {
-      currentIntent = await stripe.retrievePaymentIntent(clientSecret);
-      console.log(currentIntent);
-    }
 
 }
 

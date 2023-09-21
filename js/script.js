@@ -1460,3 +1460,10 @@ $("#load-more").on('click',function(){
 	});
 	display += step;
 });
+
+
+$("#payment-close").on("click",function(){
+	document.getElementById("payment-form").style = "display:none";
+	document.getElementById("infoForm").style = "display:block";
+	$(".queue-option").removeClass("faded");
+});
