@@ -24,7 +24,20 @@ const createClientAE = () => {
   var formdata = collectData();
   log_data['data'] = "Payment request created: " + JSON.stringify(formdata); 
   aeLog(log_data,false);
-  initialize(formdata.name, formdata.email, formdata.country, checkAmount(formdata.advance));
+
+  var amount = checkAmount(formdata.advance);
+
+  if ((amount!=currentAmount)||(formdata.email!=emailAddress)) {
+    
+    if (elements!=null) $(".StripeElement").html("");
+ 
+    initialize(formdata.name, formdata.email, formdata.country, amount);  
+
+  }
+
+  document.getElementById("order-form").style = "display: none";
+  document.querySelector("#payment-form").style = "display: block";
+
 }
 
 // This is a public sample test API key.
@@ -55,12 +68,12 @@ let elements;
 let emailAddress = '';
 // Fetches a payment intent and captures the client secret
 
-async function initialize(name, email, country, amount) {
-  emailAddress = email
-  document.getElementById("order-form").style = "display: none";
-  document
-  .querySelector("#payment-form").style = "display: block";
+let currentAmount = 0;
 
+async function initialize(name, email, country, amount) {
+  emailAddress = email;
+
+  currentAmount = amount;
   
   const response = await fetch("https://jellyfish-app-6nax7.ondigitalocean.app/create-payment-intent", {
     method: "POST",
