@@ -57,7 +57,7 @@ let emailAddress = '';
 
 async function initialize(name, email, country, amount) {
   emailAddress = email
-  infoForm.style = "display: none";
+  document.getElementById("order-form").style = "display: none";
   document
   .querySelector("#payment-form").style = "display: block";
 

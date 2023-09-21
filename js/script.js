@@ -1464,6 +1464,6 @@ $("#load-more").on('click',function(){
 
 $("#payment-close").on("click",function(){
 	document.getElementById("payment-form").style = "display:none";
-	document.getElementById("infoForm").style = "display:block";
+	document.getElementById("order-form").style = "display:block";
 	$(".queue-option").removeClass("faded");
 });
