@@ -46,7 +46,7 @@ const stripe = Stripe("pk_live_51LxO07CBiDZSNJ7QmAN9Mik8KRPS5cJ2dfSxdFvRkl64euTl
 let elements;
 
 // initialize();
-checkStatus();
+//checkStatus(); moved to after the form
 
 // document
 //   .querySelector("#payment-form")
@@ -54,6 +54,7 @@ checkStatus();
 
 let emailAddress = '';
 // Fetches a payment intent and captures the client secret
+
 async function initialize(name, email, country, amount) {
   emailAddress = email
   infoForm.style = "display: none";

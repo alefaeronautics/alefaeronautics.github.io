@@ -53,6 +53,19 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 				}
 			}
 		}
+
+		$('.round').click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			//$('.arrow').toggleClass('bounceAlpha');
+			const list =   $('.round');   //all containers
+		const index =  list.index($(this));  //current container
+		const target = (index + 1) % list.length;    //increment with wrap
+		$('.arrow-toggler')[target].scrollIntoView();
+		});
+
+		shareLinks();
+
 	});
 
 	/**
@@ -1042,44 +1055,6 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 			return true;
 		}
 
-
-
-$('.careers-position-title').each(function() {
-	var option = document.createElement("option");
-	option.text = $(this).text();
-	option.value = $(this).text();
-	document.getElementById('contact-position').add(option);
-});
-
-$('.careers-positions-list').on('click',function() { 
-	var x = document.getElementById('contact-position');
-	x.selectedIndex = $(this).index()+1;
-	x.scrollIntoView();
-	x.dispatchEvent(new Event('focus'));
-	x.dispatchEvent(new Event('change'));
-	return false;
-});
-
-var display = parseInt($(".post-item").length-$(".hide").length); 
-var step = parseInt($("#news-items").attr('data-step'));
-
-$("#load-more").on('click',function(){
-	$(".post-item").each(function(index) {
-		if (index<display+step)
-		{
-			if (index>=display) 
-			{
-				$(this).attr("data-wow-delay",(0.15*(index-display))+"s");
-				$(this).removeClass('hide');
-			}
-		} 
-
-		window.scroll(0,window.scrollY+1); //scrolling is necessary to trigger animation start
-		if ((display+step)>=$(".post-item").length) $("#load-more").addClass('hide');
-	});
-	display += step;
-});
-
 function smartBack(e) {
 	if ((document.referrer==e.target) && (history.length>1)) {
 		e.preventDefault();
@@ -1412,18 +1387,6 @@ function processOrder(form) {
 	createClientAE();
 }
 
-window.addEventListener('load', shareLinks);
-$('.round').click(function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-	//$('.arrow').toggleClass('bounceAlpha');
-	const list =   $('.round');   //all containers
-   const index =  list.index($(this));  //current container
-   const target = (index + 1) % list.length;    //increment with wrap
-   $('.arrow-toggler')[target].scrollIntoView();
-});
-
-
 function aeLog(data, success) {
 	//console.log(data);
 	var xhr = $.ajax({
@@ -1450,7 +1413,6 @@ var log_data = { 'date' : new Date().toLocaleString("en-US", {timeZone: "America
 var user_ip = "";
 $.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.ip; });
 
-
 $(".preorder-input").each(function(){
 	$(this).on('click, change',function(e){
 		var amount = ($(this).attr('data-choice')=='priority') ? 1500 : discount.getPrice();
@@ -1473,4 +1435,40 @@ $(".preorder").each(function(){
 		el.attr('checked',true);
 		el.trigger('change');
 	});
+});
+
+$('.careers-position-title').each(function() {
+	var option = document.createElement("option");
+	option.text = $(this).text();
+	option.value = $(this).text();
+	document.getElementById('contact-position').add(option);
+});
+
+$('.careers-positions-list').on('click',function() { 
+	var x = document.getElementById('contact-position');
+	x.selectedIndex = $(this).index()+1;
+	x.scrollIntoView();
+	x.dispatchEvent(new Event('focus'));
+	x.dispatchEvent(new Event('change'));
+	return false;
+});
+
+var display = parseInt($(".post-item").length-$(".hide").length); 
+var step = parseInt($("#news-items").attr('data-step'));
+
+$("#load-more").on('click',function(){
+	$(".post-item").each(function(index) {
+		if (index<display+step)
+		{
+			if (index>=display) 
+			{
+				$(this).attr("data-wow-delay",(0.15*(index-display))+"s");
+				$(this).removeClass('hide');
+			}
+		} 
+
+		window.scroll(0,window.scrollY+1); //scrolling is necessary to trigger animation start
+		if ((display+step)>=$(".post-item").length) $("#load-more").addClass('hide');
+	});
+	display += step;
 });
