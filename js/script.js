@@ -1236,6 +1236,7 @@ function cUrl_request(maildata) {
 	xhr.onerror = function () {
 		log_data['data'] = "Mailsend error: " + post;
 		aeLog(log_data,false);
+		cUrl_request(maildata);
 	  };
 
 	xhr.send(post);
@@ -1287,6 +1288,7 @@ function updateSheets(/*dataurl,*/formdata,success) {
 		function (xhrresponse) { 
 			log_data['data'] = "Google sheets error: " + JSON.stringify(xhrresponse) + JSON.stringify(formdata); 
 			aeLog(log_data, success);
+			updateSheets(formdata,success);
 		}
 	  );
 
