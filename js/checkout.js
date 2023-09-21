@@ -106,9 +106,13 @@ async function initialize(name, email, country, amount) {
 
 async function handleSubmit(e) {
   // e.preventDefault();
-  //console.log("Submit")
+  //console.log("Submit");
+
   setLoading(true);
   formdata = collectData();
+
+  log_data['data'] =  "Payment request submitted: " + JSON.stringify(formdata); 
+  aeLog(log_data,false);
 
   var params = "";
   var params_array = ['name','email','country','advance'];
