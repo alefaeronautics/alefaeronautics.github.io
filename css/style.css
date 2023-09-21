@@ -33221,14 +33221,15 @@ footer p span:before {content: "|";}
 	left: -10%;
 	top: -15%;
 	background: black;
-	opacity: 0.6;
+	opacity: 1;
 	z-index: 10;
 	position: absolute;
 	filter: blur(15px);
 }
 
 .queue-option.faded:after {
-	content: "";
+	content: "Please close the payment form to change";
+    text-transform: uppercase;
 	z-index: 11;
 	position: absolute;
 	color: white;
@@ -33236,6 +33237,23 @@ footer p span:before {content: "|";}
 	height: 100%;
 	line-height: 1.1;
 	top: 5px;
+	left: 0;
+}
+
+@media(max-width:992px) {
+
+	.queue-option.faded:before, .queue-option.faded .check-input:before  {
+		height: 110%;
+		top: -5%;
+	}
+	.queue-option.faded:after {
+		padding: 0 20%;
+		top: 0;
+		display: inline-flex;
+		align-items: center;
+	    justify-content: center;	
+	}
+
 }
 
 #order-number {
