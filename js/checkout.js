@@ -153,6 +153,8 @@ async function checkStatus() {
 
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
+  console.log(paymentIntent.status);
+
   switch (paymentIntent.status) {
     case "succeeded":
       showMessage("Payment succeeded!");
@@ -215,7 +217,7 @@ async function checkStatus() {
       }
       break;
       case "processing":
-        showMessage("Your payment is processing.");
+        showMessage("Your payment is processing.");        
         break;
       case "requires_payment_method":
         showMessage("Your payment was not successful, please try again.");
@@ -241,7 +243,7 @@ function showMessage(messageText) {
   setTimeout(function () {
     messageContainer.classList.add("hidden");
     messageContainer.textContent = "";
-  }, 40000);
+  }, 10000);
 }
 
 // Show a spinner on payment submission
