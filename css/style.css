@@ -8158,7 +8158,7 @@ html .page .group-sm-justify .button {
 }
 
 #alef-blog {
-	padding: 20px 0;
+	padding: 40px 0 20px;
 }
 
 .section-collapse + .section-collapse {
@@ -32813,6 +32813,7 @@ section:first-of-type {margin-top: -68px;}
 
 .form-wrap.mb-1 {border-bottom: 10px solid rgba(0,0,0,0);}
 
+.mt-0 {margin-top: 0px;}
 .mt-1 {margin-top: 10px;}
 .mt-2 {margin-top: 20px;}
 .mt-3 {margin-top: 30px;}
@@ -33266,4 +33267,17 @@ footer p span:before {content: "|";}
 
 #link-authentication-element:not(:has(iframe))::before, #payment-element:not(:has(iframe))::before {
 	opacity: 1;
+}
+
+.stripe-link {
+	font-size: 10px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stripe-link img {
+    width: 50px !important;
+    min-width: auto;
+    margin: 0 0 0 4px;
 }
