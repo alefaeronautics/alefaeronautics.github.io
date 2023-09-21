@@ -1399,10 +1399,6 @@ function aeLog(data, success) {
 	  );
 }
 
-var log_data = { 'date' : new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"}) };
-var user_ip = "";
-$.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.ip; });
-
 $(".preorder-input").each(function(){
 	$(this).on('click, change',function(e){
 		var amount = ($(this).attr('data-choice')=='priority') ? 1500 : discount.getPrice();
@@ -1462,3 +1458,31 @@ $("#load-more").on('click',function(){
 	});
 	display += step;
 });
+
+var current_stripe = "";
+
+const blur = window.addEventListener('blur', () => {
+	if (current_stripe!="")
+		console.log(current_stripe);
+});
+const focus = window.addEventListener('focus', () => {
+    current_stripe = "";
+});
+
+$(".StripeElement").each(function(index) {
+	var el = $(this);
+	var iframe = el.find('iframe');
+	el.on("mouseover",function(){
+		current_stripe = el.attr('id');
+	});
+	el.find('iframe').on('mousemove',function () {
+		var move_stripe = $(this).closest(".StripeElement").attr('id');
+		if (current_stripe!=move_stripe) 
+			{
+				window.focus();
+			}
+	} );
+
+});
+
+for (var i=0; i<iframe.length; i++) console.log($(iframe[i]).closest(".StripeElement").attr('id'));

@@ -96,7 +96,8 @@ async function initialize(name, email, country, amount) {
     const paymentElement = elements.create("payment", paymentElementOptions);
     paymentElement.on('change', function(event) {
       if (!event.empty) {
-        console.log("type in");
+        log_data['data'] =  "Type in payment info"; 
+        aeLog(log_data,false);
       }
     });
     paymentElement.mount("#payment-element");
