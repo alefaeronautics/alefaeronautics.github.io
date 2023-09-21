@@ -141,3 +141,15 @@
       min-width: initial;
     }
   }
+
+  .final-loading.stripe-processing:before {
+    content: "Your payment is processing."
+  }
+  
+  .final-loading.error:before {
+    content: "Some thing went wrong."
+  }
+
+  .final-loading.again:before {
+    content: "Not successful, please try again."
+  }

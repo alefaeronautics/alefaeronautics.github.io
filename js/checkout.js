@@ -106,7 +106,7 @@ async function initialize(name, email, country, amount) {
 
 async function handleSubmit(e) {
   // e.preventDefault();
-  console.log("Submit")
+  //console.log("Submit")
   setLoading(true);
   formdata = collectData();
 
@@ -217,17 +217,33 @@ async function checkStatus() {
       }
       break;
       case "processing":
-        showMessage("Your payment is processing.");        
+        //showMessage("Your payment is processing.");  
+        $("#thank-you").addClass('processing');
+        setTimeout(checkStatus,1000);      
         break;
       case "requires_payment_method":
-        showMessage("Your payment was not successful, please try again.");
+        
         log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
         aeLog(log_data,false);
+
+        showMessage("Your payment was not successful, please try again.");
+
+        $("#thank-you").addClass('error');
+        fillForm();
+        setTimeout(showFilledForm,1000);
+
         break;
       default:
-        showMessage("Something went wrong.");
+       
         log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
         aeLog(log_data,false);
+
+        showMessage("Something went wrong.");
+
+        $("#thank-you").addClass('again');
+        fillForm();
+        setTimeout(showFilledForm,1000);
+
         break;
     }
 }
@@ -260,3 +276,24 @@ function setLoading(isLoading) {
   }
 }
 
+function fillForm() {
+  var params_array = ['name','email','country','advance'];
+  for (var i=0; i<params_array.length; i++) {
+    var curr = new URLSearchParams(window.location.search).get("user_"+params_array[i]);
+    var field = $("#contact-"+params_array[i]);
+    field.attr("value",curr);
+    if (params_array[i]=='advance')
+      $(".preorder")[(curr>150) ? 1 : 0].dispatchEvent(new Event("click"));
+    else {
+      field[0].dispatchEvent(new Event('focus'));
+      field[0].dispatchEvent(new Event('change'));
+    }
+  }
+
+}
+
+function showFilledForm() {
+  document.getElementById("order-block").style = "display: block";
+  document.getElementById("thank-you").style = "display: none";
+  window.dispatchEvent(new Event("scroll"));
+}
