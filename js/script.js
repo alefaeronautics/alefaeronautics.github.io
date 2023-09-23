@@ -1057,10 +1057,9 @@ function smartBack(e) {
 }
 
 function shareLinks() {	$("#sharer-block a").each(function(){
-	var url = window.location.href;
-	var link_url = $(this).get(0).href;
-	url = url.substring(0,url.lastIndexOf('#'));
-	$(this).get(0).href = link_url.substring(0,link_url.lastIndexOf("?")+1) + url + ( (referral_code) ? "#"+referral_code: "" );
+	var url = window.location.href.split("?")[0].split("#")[0];
+	var link_url = $(this).get(0).href.split("?")[0];
+	$(this).get(0).href = link_url + "?" + url + ( (referral_code) ? "#"+referral_code: "" );
 });}
 
 
@@ -1276,7 +1275,13 @@ function updateSheets(/*dataurl,*/formdata,success) {
 		  function () { 
 			console.log("list updated");
 			if (success) {
-				if ($("#thank-you").length) $("#thank-you").removeClass('final-loading');
+				if ($("#thank-you").length) {
+					$("#thank-you").removeClass('final-loading');
+					if (tester) {
+						log_data['data'] = success;
+						aeLog(log_data,false);
+						}
+				}
 				else { 
 					formClear(true,true,'Your request has been sent!');
 					log_data['data'] = 'Request added to the wishlist;';

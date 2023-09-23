@@ -221,10 +221,34 @@ async function checkStatus() {
         aeLog(log_data,false);
       }
       finally {
-        updateSheets(formdata,true);
+        
+        if (!tester) { 
+          updateSheets(formdata,true);
+          log_data['data'] = 'Stripe approved ' + formdata['transaction_id']; 
+          aeLog(log_data,false);
+        }
+        else {
+          console.log("check if logged");
+          var xhr = $.ajax({
+            url: "https://alef.ae-collective.com/checker.php",
+            method: "GET",
+            type: "GET",
+            dataType: "json",
+            data: {id:formdata['transaction_id']}
+            }).success(
+              function (result) { 
+                if (!result) {
+                  updateSheets(formdata,'Stripe approved ' + formdata['transaction_id']);
+                }
+                else {
+                  log_data['data'] = "Repeat view " + formdata['transaction_id'];
+                  aeLog(log_data,false);
+                }
+            }
+            );
+        }
+        
         confirmOrder(maildata);
-        log_data['data'] = 'Stripe approved ' + formdata['transaction_id']; 
-        aeLog(log_data,false);
 
         referral_code = formdata['transaction_id'];
         shareLinks();
