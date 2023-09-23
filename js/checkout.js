@@ -242,7 +242,13 @@ async function checkStatus() {
                   aeLog(log_data,false);
                 }
             }
-          );
+          ).error(function() {
+            //if cannot connect update anyways
+            updateSheets(formdata,'Stripe approved ' + formdata['transaction_id']);
+            confirmOrder(maildata);
+            log_data['data'] = "Possible duplicate " + formdata['transaction_id'];
+            aeLog(log_data,false);
+          });
 
         referral_code = formdata['transaction_id'];
         shareLinks();
