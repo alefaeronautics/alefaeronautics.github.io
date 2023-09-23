@@ -241,6 +241,7 @@ async function checkStatus() {
                   updateSheets(formdata,'Stripe approved ' + formdata['transaction_id']);
                 }
                 else {
+                  $("#thank-you").removeClass('final-loading');
                   log_data['data'] = "Repeat view " + formdata['transaction_id'];
                   aeLog(log_data,false);
                 }
