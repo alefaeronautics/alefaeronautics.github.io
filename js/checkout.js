@@ -170,7 +170,7 @@ async function checkStatus() {
 
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
-  if (tester) console.log(paymentIntent.status);
+  if (tester) console.log(paymentIntent);
 
   switch (paymentIntent.status) {
     case "succeeded":
