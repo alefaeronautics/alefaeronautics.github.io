@@ -113,6 +113,14 @@ async function initialize(name, email, country, amount) {
         aeLog(log_data,false);
       }
     });
+
+    document.querySelector("#submit").disabled = true;
+
+    paymentElement.on('ready',function() {
+      document.querySelector("#submit").disabled = false;
+    });
+
+
     paymentElement.mount("#payment-element");
 
 }
