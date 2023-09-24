@@ -191,7 +191,7 @@
   z-index: -1;
 	opacity: 0;
   animation: fa-spin 2s infinite linear;
-  transition: 7s opacity ease;  
+  transition: 10s opacity ease;  
 }
 
 #link-authentication-element:not(:has(iframe))::before, #payment-element:not(:has(iframe))::before {
