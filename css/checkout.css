@@ -190,12 +190,12 @@
   /*height: 20px;*/
   z-index: -1;
 	opacity: 0;
-  transition: 5s opacity ease;  
+  animation: fa-spin 2s infinite linear;
+  transition: 7s opacity ease;  
 }
 
 #link-authentication-element:not(:has(iframe))::before, #payment-element:not(:has(iframe))::before {
 	opacity: 1;
-  animation: fa-spin 2s infinite linear;
 }
 
 .stripe-link {
