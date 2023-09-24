@@ -171,7 +171,7 @@
 
 #link-authentication-element, #payment-element {
 	position: relative;
-	min-height: 25px;
+	min-height: 30px;
 }
 
 #link-authentication-element::before, #payment-element::before {
@@ -185,8 +185,8 @@
   position: absolute;
   /*width: 100%;
   left: 0;*/
-	top: 5px;
-  left: calc(50% - 10px);
+	top: 25px;
+  left: 43%;
   /*height: 20px;*/
   z-index: -1;
 	opacity: 0;
@@ -219,8 +219,8 @@
   top: -10%;
   display: none;
   text-align: center;
-  margin-top: 25px;
   overflow: hidden;
+  padding: 45px 15px 0 0;
 }
 
 #payment-form::before {
