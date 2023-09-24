@@ -1277,10 +1277,8 @@ function updateSheets(/*dataurl,*/formdata,success) {
 			if (success) {
 				if ($("#thank-you").length) {
 					$("#thank-you").removeClass('final-loading');
-					if (tester) {
-						log_data['data'] = success;
-						aeLog(log_data,false);
-						}
+					log_data['data'] = success;
+					aeLog(log_data,false);
 				}
 				else { 
 					formClear(true,true,'Your request has been sent!');
