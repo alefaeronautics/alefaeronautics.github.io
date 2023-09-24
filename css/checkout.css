@@ -168,3 +168,71 @@
     font-size: 16px;
     font-weight: bold;
 }
+
+#link-authentication-element, #payment-element {
+	position: relative;
+	min-height: 25px;
+}
+
+#link-authentication-element::before, #payment-element::before {
+  font-family: 'FontAwesome';
+  display: block;
+    /*background-image: url(../images/loading.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+	background-size: auto 20px;*/
+  position: absolute;
+  /*width: 100%;
+  left: 0;*/
+	top: 5px;
+  left: calc(50% - 10px);
+  /*height: 20px;*/
+  z-index: -1;
+	opacity: 0;
+  
+}
+
+#link-authentication-element:not(:has(iframe))::before, #payment-element:not(:has(iframe))::before {
+	opacity: 1;
+  animation: fa-spin 2s infinite linear;
+  content: "\f110";
+}
+
+.stripe-link {
+	font-size: 10px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stripe-link img {
+    width: 50px !important;
+    min-width: auto;
+    margin: 0 0 0 4px;
+}
+
+#payment-form::before, #payment-form::after {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  left: -10%;
+  top: -10%;
+  display: none;
+  text-align: center;
+  margin-top: 25px;
+  overflow: hidden;
+}
+
+#payment-form::before {
+  content: "";
+  filter: blur(15px);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#payment-form::after {
+  content: "Please wait, initializing...";
+}
+
+#payment-form:not(:has(iframe))::before, #payment-form:not(:has(iframe))::after {
+  display: block;
+}
