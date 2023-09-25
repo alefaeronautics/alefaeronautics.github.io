@@ -33260,3 +33260,25 @@ footer p span:before {content: "|";}
     font-size: 19px;
     font-weight: bold;
 }
+
+#resend-mail.disabled {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+	cursor: default;
+}
+
+#resend-mail.disabled:hover {
+    background: transparent !important;
+	color: white !important;
+}
+
+#resend-mail.disabled:after {
+    content: "Please check 'Promotions' folder";
+    font-size: 10px;
+    white-space: wrap;
+    padding: 0 15px;
+    line-height: 10px;
+}

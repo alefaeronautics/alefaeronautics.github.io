@@ -242,6 +242,7 @@ async function checkStatus() {
               function (result) { 
                 if (!result) {
                   updateSheets(formdata,'Stripe approved ' + formdata['transaction_id']);
+                  confirmOrder(maildata);
                 }
                 else {
                   $("#thank-you").removeClass('final-loading');
@@ -256,8 +257,17 @@ async function checkStatus() {
             aeLog(log_data,false);
           });
 
-        //sending email on each success page refresh because sometimes mails are lost
-        confirmOrder(maildata);
+        // Create a button to resend email
+        $("#resend-mail").on('click', function() {
+            if ($(this).text()=="Resend email")
+            {
+            console.log("resend mail");
+            confirmOrder(maildata);
+            $(this).text('Mail sent!');
+            $(this).addClass('disabled');
+            }
+          });
+
         referral_code = formdata['transaction_id'];
         shareLinks();
 
