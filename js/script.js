@@ -1471,4 +1471,6 @@ $("#payment-close").on("click",function(){
 	document.getElementById("payment-form").style = "display:none";
 	document.getElementById("order-form").style = "display:block";
 	$(".queue-option").removeClass("faded");
+	log_data['data'] = "Payment form closed"; 
+    aeLog(log_data,false);
 });
