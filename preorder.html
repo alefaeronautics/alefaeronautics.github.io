@@ -647,6 +647,8 @@
 		const index =  list.index($(this));  //current container
 		const target = (index + 1) % list.length;    //increment with wrap
 		$('.arrow-toggler')[target].scrollIntoView();
+    log_data['data'] = "Page browse block #" + (index+1); 
+		aeLog(log_data,false);
 		});
     // unfix the background when scrolled beyond the first block
     function bgBehavior() {

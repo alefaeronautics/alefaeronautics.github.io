@@ -1416,8 +1416,8 @@ $(".preorder-input").each(function(){
 		var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
 		choice += ' ($'+amount+')'+ ( (CN) ? ' ' : '');
 		$("#order-label").text(choice); 
-		//log_data['data'] = "Change/Click event: " + "Amount " + amount + ", choice " + choice; 
-		//aeLog(log_data,false);
+		log_data['data'] = "Change/Click event: " + "Amount " + amount + ", choice " + choice; 
+		aeLog(log_data,false);
 	});
 })
 
