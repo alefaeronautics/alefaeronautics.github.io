@@ -33259,6 +33259,7 @@ footer p span:before {content: "|";}
 #order-number, #refund-number {
     font-size: 19px;
     font-weight: bold;
+	letter-spacing: 0.1em;
 }
 
 #resend-mail.disabled {

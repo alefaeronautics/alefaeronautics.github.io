@@ -183,8 +183,7 @@ async function checkStatus() {
   switch (paymentIntent.status) {
     case "succeeded":
       //success sequence
-      if (tester) {
-        const has_refunds = await $.ajax({
+      const has_refunds = await $.ajax({
           url: "https://api.stripe.com/v1/refunds",
           type: "GET",
           headers: {
@@ -201,9 +200,8 @@ async function checkStatus() {
           console.log("has been refunded");
           return;
         }
-      }
 
-      showMessage("Payment succeeded!");
+      //showMessage("Payment succeeded!");
       console.log("success sequence");
       try {
         var formdata = collectData();
