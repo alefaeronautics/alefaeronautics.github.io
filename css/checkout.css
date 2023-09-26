@@ -147,7 +147,7 @@
   }
   
   .final-loading.error:before {
-    content: "Some thing went wrong."
+    content: "Something went wrong."
   }
 
   .final-loading.again:before {
