@@ -184,7 +184,7 @@ async function checkStatus() {
     case "succeeded":
       //success sequence
       if (tester) {
-        var has_refunds = await $.ajax({
+        const has_refunds = await $.ajax({
           url: "https://api.stripe.com/v1/refunds",
           type: "GET",
           headers: {
@@ -194,12 +194,15 @@ async function checkStatus() {
             payment_intent: paymentIntent.id
           }
         });
-        if (has_refunds.responseJSON.count) {
+        const refund_data = await has_refunds.count;
+       if (refund_data) {
+          $("#refund-number").text(paymentIntent.id.split("_")[1]);
+          $("#thank-you").addClass('refunded').removeClass('final-loading');
           console.log("has been refunded");
           return;
         }
       }
-      
+
       showMessage("Payment succeeded!");
       console.log("success sequence");
       try {

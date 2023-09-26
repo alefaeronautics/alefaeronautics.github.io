@@ -33256,7 +33256,7 @@ footer p span:before {content: "|";}
 
 }
 
-#order-number {
+#order-number, #refund-number {
     font-size: 19px;
     font-weight: bold;
 }
@@ -33281,4 +33281,12 @@ footer p span:before {content: "|";}
     white-space: wrap;
     padding: 0 15px;
     line-height: 10px;
+}
+
+.refunded div, .refunded-block {
+	display: none !important;
+}
+
+.refunded .refunded-block {
+	display: block !important;
 }
