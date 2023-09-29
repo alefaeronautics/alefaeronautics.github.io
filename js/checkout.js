@@ -92,7 +92,7 @@ async function initialize(name, email, country, amount) {
   data: {
       amount: amount*100,
       currency: 'usd',
-      description: 'Alef ' + ( (amount>150) ? ' Priority' : 'General' ) + ' Queue pre-order'
+      //description: 'Alef ' + ( (amount>150) ? ' Priority' : 'General' ) + ' Queue pre-order'
     }
   });
     const clientSecret = await alternate.client_secret;
