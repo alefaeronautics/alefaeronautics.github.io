@@ -75,15 +75,14 @@ async function initialize(name, email, country, amount) {
 
   currentAmount = amount;
   
-  if (!tester) {
+  /*
   const response = await fetch("https://jellyfish-app-6nax7.ondigitalocean.app/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, country, amount }),
   });
-  const { clientSecret } = await response.json();}
+  const { clientSecret } = await response.json();} */
 
-  if (tester)  {
     const alternate = await $.ajax({
     url: "https://api.stripe.com/v1/payment_intents",
     type: "POST",
@@ -97,8 +96,12 @@ async function initialize(name, email, country, amount) {
     }
   });
     const clientSecret = await alternate.client_secret;
-  }
-  
+
+    if (tester) {
+      console.log(alternate);
+      console.log(clientSecret);
+    }
+
     const appearance = {
       theme: 'stripe',
       rules: {
