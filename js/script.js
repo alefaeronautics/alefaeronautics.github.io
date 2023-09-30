@@ -869,7 +869,7 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 						}
 
 						} else {
-							log_data['data'] = "Validation error: " + JSON.stringify(collectData()); 
+							log_data['data'] = "Form validation error: " + JSON.stringify(collectData()); 
 							aeLog(log_data,false);
 							return false;
 						}

@@ -138,8 +138,9 @@ async function initialize(name, email, country, amount) {
 
     paymentElement.on('ready',function() {
       document.querySelector("#submit").disabled = false;
+      log_data['data'] =  "Payment form loaded"; 
+      aeLog(log_data,false);
     });
-
 
     paymentElement.mount("#payment-element");
 
