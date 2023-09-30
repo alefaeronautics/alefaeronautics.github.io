@@ -205,18 +205,29 @@
   height: 120%;
   left: -10%;
   top: -10%;
-  display: block;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  padding: 45px 15px 0 0;
+  padding: 0 15px 0 0;
 }
 
 #payment-form.loading::before {
   content: "";
   filter: blur(15px);
   background: rgba(0, 0, 0, 0.7);
+  z-index: 8;
 }
 
 #payment-form.loading::after {
   content: "Please wait, initializing...";
+  z-index: 9;
+  /*
+  color: black;
+  font-weight: bold;
+  background-image: url(/images/preloader.gif);
+  background-repeat: no-repeat;
+  background-position: 50% 40%;
+  mix-blend-mode: screen;
+  filter: invert(1);*/
 }
