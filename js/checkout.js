@@ -71,6 +71,9 @@ let emailAddress = '';
 let currentAmount = 0;
 
 async function initialize(name, email, country, amount) {
+
+  document.querySelector("#payment-form").classList.add('loading');
+
   emailAddress = email;
 
   currentAmount = amount;
@@ -137,6 +140,7 @@ async function initialize(name, email, country, amount) {
     document.querySelector("#submit").disabled = true;
 
     paymentElement.on('ready',function() {
+      document.querySelector("#payment-form").classList.remove('loading');
       document.querySelector("#submit").disabled = false;
       log_data['data'] =  "Payment form loaded"; 
       aeLog(log_data,false);
