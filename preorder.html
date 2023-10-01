@@ -675,8 +675,20 @@
       return (entries, observer) => {
         entries.forEach(entry => {
         if (entry.isIntersecting) {
-            log_data['data'] = (index==-1) ? "Back to order form" : "Page browse block #" + (index+1); 
-		        if ((index!=-1)||scrolled_out) aeLog(log_data,false);
+            switch (index) {
+              case -1:
+                log_data['data'] = "Back to order form";
+                break;
+              case 0:
+                log_data['data'] = "First block browse";
+                break;
+              case 3:
+                log_data['data'] = "Last block browse";
+                break;
+            }
+            //log_data['data'] = (index==-1) ? "Back to order form" : "Page browse block #" + (index+1); 
+		        if (((index==-1)&&scrolled_out)||(index==0)||(index==3)) 
+              aeLog(log_data,false); // console.log(log_data['data']);}
             if (index!=-1) scrolled_out = true;
         }
         });
@@ -684,8 +696,7 @@
       }
   
       // Create an IntersectionObserver instance for each element with the specified CSS class
-      //const elementsToObserve = document.querySelectorAll('.preorder-image'); for all elements
-      const elementsToObserve = [document.querySelectorAll('.preorder-image')[0]]; //just the 1st
+      const elementsToObserve = document.querySelectorAll('.preorder-image'); //for all elements
       elementsToObserve.forEach((element, index) => {
       const observer = new IntersectionObserver(
         createIntersectionCallback(index),
@@ -706,7 +717,7 @@
         threshold: 0.5, // Adjust this threshold as needed
         }
       );
-      observer.observe(document.getElementById("order-form"));
+      observer.observe(document.getElementById("first-block"));
 
   </script>
 
