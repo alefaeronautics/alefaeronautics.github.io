@@ -684,7 +684,8 @@
       }
   
       // Create an IntersectionObserver instance for each element with the specified CSS class
-      const elementsToObserve = document.querySelectorAll('.preorder-image');
+      //const elementsToObserve = document.querySelectorAll('.preorder-image'); for all elements
+      const elementsToObserve = [document.querySelectorAll('.preorder-image')[0]]; //just the 1st
       elementsToObserve.forEach((element, index) => {
       const observer = new IntersectionObserver(
         createIntersectionCallback(index),
