@@ -668,13 +668,16 @@
     }
     window.addEventListener('scroll', bgBehavior);
 
+    var scrolled_out = false;
+
     // Create an IntersectionObserver callback function
     function createIntersectionCallback(index) {
       return (entries, observer) => {
         entries.forEach(entry => {
         if (entry.isIntersecting) {
-            log_data['data'] = "Page browse block #" + (index+1); 
-		        aeLog(log_data,false);
+            log_data['data'] = (index==-1) ? "Back to order form" : "Page browse block #" + (index+1); 
+		        if ((index!=-1)||scrolled_out) aeLog(log_data,false);
+            if (index!=-1) scrolled_out = true;
         }
         });
       };
@@ -693,6 +696,16 @@
       );
       observer.observe(element);
       });
+
+      const observer = new IntersectionObserver(
+        createIntersectionCallback(-1),
+        {
+        root: null, // Use the viewport as the root
+        rootMargin: '0px',
+        threshold: 0.5, // Adjust this threshold as needed
+        }
+      );
+      observer.observe(document.getElementById("order-form"));
 
   </script>
 
