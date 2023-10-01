@@ -668,28 +668,20 @@
     }
     window.addEventListener('scroll', bgBehavior);
 
+    
     var scrolled_out = false;
-
     // Create an IntersectionObserver callback function
     function createIntersectionCallback(index) {
       return (entries, observer) => {
         entries.forEach(entry => {
         if (entry.isIntersecting) {
-            switch (index) {
-              case -1:
-                log_data['data'] = "Back to order form";
-                break;
-              case 0:
-                log_data['data'] = "First block browse";
-                break;
-              case 3:
-                log_data['data'] = "Last block browse";
-                break;
-            }
-            //log_data['data'] = (index==-1) ? "Back to order form" : "Page browse block #" + (index+1); 
-		        if (((index==-1)&&scrolled_out)||(index==0)||(index==3)) 
-              aeLog(log_data,false); // console.log(log_data['data']);}
-            if (index!=-1) scrolled_out = true;
+		        if ( ((index==-1)&&scrolled_out) || ( !scrolled_out&&(index>=0) )) 
+              { 
+                log_data['data'] = (index==-1) ? "Back to order form" : "Page browse";// block #" + (index+1); 
+                aeLog(log_data,false); 
+                //console.log(log_data['data']);
+              }
+            scrolled_out = (index!=-1);
         }
         });
       };
@@ -703,7 +695,7 @@
         {
         root: null, // Use the viewport as the root
         rootMargin: '0px',
-        threshold: 0.1, // Adjust this threshold as needed
+        threshold: 0.25, // Adjust this threshold as needed
         }
       );
       observer.observe(element);
