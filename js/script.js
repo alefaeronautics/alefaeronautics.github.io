@@ -1385,6 +1385,7 @@ function processOrder(form) {
 }
 
 function aeLog(data, success) {
+	log_data["date"] = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
 	//console.log(data);
 	var xhr = $.ajax({
 		url: 'https://alef.ae-collective.com/log.php',

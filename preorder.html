@@ -46,7 +46,7 @@
     $(function () {
       $("#footer").load("includes/footer.html");
     });
-    var log_data = { 'date' : new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"}) };
+    var log_data = {  };
     var user_ip = "";
     $.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.ip; });
   </script>
