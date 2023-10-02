@@ -386,7 +386,7 @@ function setLoading(isLoading) {
 function fillForm() {
   var params_array = ['name','email','country','advance'];
   for (var i=0; i<params_array.length; i++) {
-    var curr = new URLSearchParams(window.location.search).get("user_"+params_array[i]);
+    var curr = decodeURIComponent( new URLSearchParams(window.location.search).get("user_"+params_array[i]) );
     var field = $("#contact-"+params_array[i]);
     field.attr("value",curr);
     if (params_array[i]=='advance')
