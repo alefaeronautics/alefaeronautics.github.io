@@ -1477,19 +1477,20 @@ $("#payment-close").on("click",function(){
     aeLog(log_data,false);
 });
 
-$("#contact-country").on("change propertychange", function(){
-	var alert_countries = {
-	China : '请<a href="preorder_cn.html' + ( referral_code ? '#'+referral_code : '' ) + '">点击这里</a>查看中文版本'
+var alert_countries = {
+	cn : '请<a href="preorder_cn.html' + ( referral_code ? '#'+referral_code : '' ) + '">点击这里</a>查看中文版本'
 	};
-	var el = $("#country-alert");
-	if (alert_countries[$(this).attr('value')]) {
-		el.html(alert_countries[$(this).attr('value')]);
-		el.removeClass('hide');
 
+$("#contact-country").on("change propertychange", function(){
+	var el = $("#country-alert");
+	var datalink = $(this).find("option:selected").attr("data-link");
+	if (datalink&&alert_countries[datalink]) 
+	{
+		el.html(alert_countries[datalink]);
+		el.removeClass('hide');
 	}
 	else {
 		el.html('');
 		el.addClass('hide');
 	}
-
 });
