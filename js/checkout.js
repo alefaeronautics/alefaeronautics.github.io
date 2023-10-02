@@ -396,8 +396,12 @@ function fillForm() {
     var field = $("#contact-"+params_array[i]);
     field.attr("value",curr);
     if (params_array[i]=='advance')
+    {
       $(".preorder")[(curr>150) ? 1 : 0].dispatchEvent(new Event("click"));
+      currentAmount = curr;
+    }
     else {
+      if (params_array[i]=='email') emailAddress = curr;
       field[0].dispatchEvent(new Event('focus'));
       field[0].dispatchEvent(new Event('change'));
     }
