@@ -22,16 +22,28 @@ const createClient = () => {
 const createClientAE = () => {
 
   var formdata = collectData();
-  log_data['data'] = "Payment request created: " + JSON.stringify(formdata); 
-  aeLog(log_data,false);
 
   var amount = checkAmount(formdata.advance);
 
   if ((amount!=currentAmount)||(formdata.email!=emailAddress)) {
     
     if (elements!=null) $(".StripeElement").html("");
- 
-    initialize(formdata.name, formdata.email, formdata.country, amount);  
+    document.querySelector("#payment-form").classList.add('loading');
+
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
+  
+    if (clientSecret) {
+      log_data['data'] = "Payment request retrieved: " + JSON.stringify(formdata); 
+      aeLog(log_data,false);
+      displayStripe(clientSecret,formdata['email']);
+    }
+    else {
+      log_data['data'] = "Payment request created: " + JSON.stringify(formdata); 
+      aeLog(log_data,false);
+      initialize(formdata.name, formdata.email, formdata.country, amount);  
+    }
 
   }
 
@@ -44,6 +56,13 @@ const createClientAE = () => {
 // Don’t submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
 
+let elements;
+let emailAddress = '';
+let currentAmount = 0;
+
+// initialize();
+//checkStatus(); moved to after the form
+
 var key = (tester) ? 
   "pk_test_51LxO07CBiDZSNJ7Q6E45zERQSIGW1uM8EKJ0QHEMwYcReabeAEK3CbHz6yZU8bzC0IkJjP0ZRamvPDnufc4OKyHT00HhQKrlgk" 
   :
@@ -53,26 +72,7 @@ const stripe = Stripe("pk_live_51LxO07CBiDZSNJ7QmAN9Mik8KRPS5cJ2dfSxdFvRkl64euTl
 
 
 
-// The items the customer wants to buy
-//const items = [{ id: "xl-tshirt" }];
-
-let elements;
-
-// initialize();
-//checkStatus(); moved to after the form
-
-// document
-//   .querySelector("#payment-form")
-//   .addEventListener("submit", handleSubmit);
-
-let emailAddress = '';
-// Fetches a payment intent and captures the client secret
-
-let currentAmount = 0;
-
 async function initialize(name, email, country, amount) {
-
-  document.querySelector("#payment-form").classList.add('loading');
 
   emailAddress = email;
 
@@ -105,48 +105,54 @@ async function initialize(name, email, country, amount) {
       console.log(clientSecret);
     }
 
-    const appearance = {
-      theme: 'stripe',
-      rules: {
-        '.Label': {
-          color: 'white',
-        },
-        '.Label--invalid': {
-          color: '#ff4525',
-        },
-        }
-    };
-    elements = stripe.elements({ appearance, clientSecret });
-  
-    const linkAuthenticationElement = elements.create("linkAuthentication",{defaultValues: {email: emailAddress}});
-    linkAuthenticationElement.mount("#link-authentication-element");
-  
-    linkAuthenticationElement.on('change', (event) => {
-      emailAddress = event.value.email;
-    });
-  
-    const paymentElementOptions = {
-      layout: "tabs",
-    };
-  
-    const paymentElement = elements.create("payment", paymentElementOptions);
-    paymentElement.on('change', function(event) {
-      if (!event.empty) {
-        log_data['data'] =  "Type in payment info"; 
-        aeLog(log_data,false);
+    displayStripe(clientSecret,emailAddress);
+
+}
+
+function displayStripe(clientSecret,emailAddress) {
+
+  const appearance = {
+    theme: 'stripe',
+    rules: {
+      '.Label': {
+        color: 'white',
+      },
+      '.Label--invalid': {
+        color: '#ff4525',
+      },
       }
-    });
+  };
+  elements = stripe.elements({ appearance, clientSecret });
 
-    document.querySelector("#submit").disabled = true;
+  const linkAuthenticationElement = elements.create("linkAuthentication",{defaultValues: {email: emailAddress}});
+  linkAuthenticationElement.mount("#link-authentication-element");
 
-    paymentElement.on('ready',function() {
-      document.querySelector("#payment-form").classList.remove('loading');
-      document.querySelector("#submit").disabled = false;
-      log_data['data'] =  "Payment form loaded"; 
+  linkAuthenticationElement.on('change', (event) => {
+    emailAddress = event.value.email;
+  });
+
+  const paymentElementOptions = {
+    layout: "tabs",
+  };
+
+  const paymentElement = elements.create("payment", paymentElementOptions);
+  paymentElement.on('change', function(event) {
+    if (!event.empty) {
+      log_data['data'] =  "Type in payment info"; 
       aeLog(log_data,false);
-    });
+    }
+  });
 
-    paymentElement.mount("#payment-element");
+  document.querySelector("#submit").disabled = true;
+
+  paymentElement.on('ready',function() {
+    document.querySelector("#payment-form").classList.remove('loading');
+    document.querySelector("#submit").disabled = false;
+    log_data['data'] =  "Payment form loaded"; 
+    aeLog(log_data,false);
+  });
+
+  paymentElement.mount("#payment-element");
 
 }
 
