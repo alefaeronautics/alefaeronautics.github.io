@@ -14,7 +14,7 @@ const discount = {
     },
     getCode: function() {
         var url = window.location.href;
-        if (url.lastIndexOf('#')!=-1) this.code = url.substring(url.lastIndexOf('#')+1,url.length);
+        if (url.lastIndexOf('#')!=-1) this.code = url.substring(url.lastIndexOf('#')+1,url.length).split('?')[0];
         else this.code = "";
         return this.code;
     }
