@@ -500,6 +500,18 @@
                   </div>
                 </div>
             </section>
+            <script src="js/script.js"></script>
+            <script>
+              if (new URLSearchParams(window.location.search).get("payment_intent_client_secret"))
+              {
+                document.getElementById("order-block").style = "display: none";
+                document.getElementById("thank-you").style = "display: block";
+              }
+              //stripe check status
+              checkStatus();
+              log_data['data'] = "Site visitor"; 
+              aeLog(log_data,false);
+            </script>
 
     </div>
 
@@ -626,7 +638,6 @@
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
     <script src="js/menu.js"></script>
-    <script src="js/script.js"></script>
     <script>
         // unfix the background when scrolled beyond the first block
             function bgBehavior() {
