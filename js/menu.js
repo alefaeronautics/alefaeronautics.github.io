@@ -1,5 +1,5 @@
 var curPage = "";
-var CN = false;
+if (typeof CN === 'undefined') var CN = false;
 
 function createMenu(where)
 {
