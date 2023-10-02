@@ -393,7 +393,7 @@ function fillForm() {
   );
 
   if (clientSecret) {
-    log_data['data'] = "Payment request retrieved " + clientSecret; 
+    log_data['data'] = "Payment request retrieved " + clientSecret.split('_')[1]; 
     aeLog(log_data,false);
     displayStripe(clientSecret,emailAddress);
   }
