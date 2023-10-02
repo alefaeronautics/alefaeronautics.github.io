@@ -160,7 +160,7 @@ async function handleSubmit(e) {
   var params_array = ['name','email','country','advance'];
   for (var i=0; i<params_array.length; i++)
     params += ((i==0) ? '?' : '&') + "user_" + params_array[i] + '=' + encodeURIComponent(formdata[params_array[i]]);
-  if (referral_code!='') params = "#"+referral_code + params;
+  if (referral_code!='') params += "&user_referral="+referral_code;
 
   const { error } = await stripe.confirmPayment({
     elements,

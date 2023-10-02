@@ -15,7 +15,10 @@ const discount = {
     getCode: function() {
         var url = window.location.href;
         if (url.lastIndexOf('#')!=-1) this.code = url.substring(url.lastIndexOf('#')+1,url.length).split('?')[0];
-        else this.code = "";
+        else {
+            var user_ref = new URLSearchParams(window.location.search).get("user_referral");
+            this.code = (user_ref) ? user_ref : "";
+        }
         return this.code;
     }
 }
