@@ -185,7 +185,7 @@ async function handleSubmit(e) {
   } else {
     showMessage( (CN) ? "一个意料之外的问题发生了" : "An unexpected error occurred.");
   }
-  log_data['data'] =  error.message + ": " + JSON.stringify(collectData()); 
+  log_data['data'] =  error.type + ' ' + error.message + ": " + JSON.stringify(collectData()); 
   aeLog(log_data,false);
 
   setLoading(false);
