@@ -1479,7 +1479,7 @@ $("#payment-close").on("click",function(){
 
 $("#contact-country").on("change propertychange", function(){
 	var alert_countries = {
-	China : '请<a href="preorder_cn.html">点击这里</a>查看中文版本'
+	China : '请<a href="preorder_cn.html' + ( referral_code ? '#'+referral_code : '' ) + '">点击这里</a>查看中文版本'
 	};
 	var el = $("#country-alert");
 	if (alert_countries[$(this).attr('value')]) {
