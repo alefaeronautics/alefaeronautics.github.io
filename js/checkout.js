@@ -331,28 +331,20 @@ async function checkStatus() {
         $("#thank-you").addClass('processing');
         setTimeout(checkStatus,1000);      
         break;
-      case "requires_payment_method":
+      //case "requires_payment_method":
+      default:
         //display error and then fill the form with data and show
         
         showMessage((CN) ? "您的付款未成功，请重试" : "Your payment was not successful, please try again.");
+        //showMessage((CN) ? "出了些问题" : "Something went wrong.");
 
-        $("#thank-you").addClass('error');
-        fillForm();
-        setTimeout(showFilledForm,1000);
-
-        log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
-        aeLog(log_data,false);
-
-        break;
-      default:
-        //display error and then fill the form with data and show       
-        showMessage((CN) ? "出了些问题" : "Something went wrong.");
-
+        //$("#thank-you").addClass('error');
         $("#thank-you").addClass('again');
+
         fillForm();
         setTimeout(showFilledForm,1000);
 
-        log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
+        log_data['data'] = paymentIntent.status + JSON.stringify(collectData()); 
         aeLog(log_data,false);
 
         break;
