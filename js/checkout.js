@@ -38,6 +38,8 @@ const createClientAE = () => {
       log_data['data'] = "Payment request retrieved: " + JSON.stringify(formdata); 
       aeLog(log_data,false);
       displayStripe(clientSecret,formdata['email']);
+      emailAddress = formdata['email'];
+      currentAmount = formdata['advance'];
     }
     else {
       log_data['data'] = "Payment request created: " + JSON.stringify(formdata); 
@@ -389,10 +391,8 @@ function fillForm() {
     if (params_array[i]=='advance')
     {
       $(".preorder")[(curr>150) ? 1 : 0].dispatchEvent(new Event("click"));
-      currentAmount = curr;
     }
     else {
-      if (params_array[i]=='email') emailAddress = curr;
       field[0].dispatchEvent(new Event('focus'));
       field[0].dispatchEvent(new Event('change'));
     }
