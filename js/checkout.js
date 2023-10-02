@@ -170,7 +170,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "https://alef.aero/preorder.html"+params,
+      return_url: "https://alef.aero/preorder"+ ( (CN) ? "_cn" : "" ) +".html"+params,
       receipt_email: emailAddress,
     },
   });
