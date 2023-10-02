@@ -334,7 +334,7 @@ async function checkStatus() {
         fillForm();
         setTimeout(showFilledForm,1000);
 
-        log_data['data'] = paymentIntent.status + JSON.stringify(collectData()); 
+        log_data['data'] = 'Error ' + paymentIntent.status + ' ' + JSON.stringify(collectData()); 
         aeLog(log_data,false);
 
         break;
