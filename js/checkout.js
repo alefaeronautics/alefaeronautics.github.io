@@ -334,14 +334,14 @@ async function checkStatus() {
       case "requires_payment_method":
         //display error and then fill the form with data and show
         
-        log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
-        aeLog(log_data,false);
-
         showMessage((CN) ? "您的付款未成功，请重试" : "Your payment was not successful, please try again.");
 
         $("#thank-you").addClass('error');
         fillForm();
         setTimeout(showFilledForm,1000);
+
+        log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
+        aeLog(log_data,false);
 
         break;
       default:
