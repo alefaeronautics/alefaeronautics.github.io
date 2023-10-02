@@ -26,6 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #ff4525;
   }
 
   #payment-message::before {
