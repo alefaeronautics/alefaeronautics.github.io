@@ -345,16 +345,15 @@ async function checkStatus() {
 
         break;
       default:
-        //display error and then fill the form with data and show
-       
-        log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
-        aeLog(log_data,false);
-
+        //display error and then fill the form with data and show       
         showMessage((CN) ? "出了些问题" : "Something went wrong.");
 
         $("#thank-you").addClass('again');
         fillForm();
         setTimeout(showFilledForm,1000);
+
+        log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
+        aeLog(log_data,false);
 
         break;
     }
@@ -371,7 +370,7 @@ function showMessage(messageText) {
   setTimeout(function () {
     messageContainer.classList.add("hidden");
     messageContainer.textContent = "";
-  }, 10000);
+  }, 40000);
 }
 
 // Show a spinner on payment submission
