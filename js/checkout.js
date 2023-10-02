@@ -183,7 +183,7 @@ async function handleSubmit(e) {
   if (error.type === "card_error" || error.type === "validation_error") {
     showMessage(error.message);
   } else {
-    showMessage("An unexpected error occurred.");
+    showMessage( (CN) ? "一个意料之外的问题发生了" : "An unexpected error occurred.");
   }
   log_data['data'] =  error.type + ": " + JSON.stringify(collectData()); 
   aeLog(log_data,false);
@@ -302,11 +302,11 @@ async function checkStatus() {
 
         // Create a button to resend email
         $("#resend-mail").on('click', function() {
-            if ($(this).text()=="Resend email")
+            if (!$(this).hasClass("disabled"))
             {
             console.log("resend mail");
             confirmOrder(maildata);
-            $(this).text('Mail sent!');
+            $(this).text( (CN) ? ' 邮件已发送！' : 'Mail sent!');
             $(this).addClass('disabled');
             }
           });
@@ -331,7 +331,7 @@ async function checkStatus() {
         log_data['data'] = "Payment processing error: " + JSON.stringify(collectData()); 
         aeLog(log_data,false);
 
-        showMessage("Your payment was not successful, please try again.");
+        showMessage((CN) ? "您的付款未成功，请重试" : "Your payment was not successful, please try again.");
 
         $("#thank-you").addClass('error');
         fillForm();
@@ -344,7 +344,7 @@ async function checkStatus() {
         log_data['data'] = "Unknown error: " + JSON.stringify(collectData()); 
         aeLog(log_data,false);
 
-        showMessage("Something went wrong.");
+        showMessage((CN) ? "出了些问题" : "Something went wrong.");
 
         $("#thank-you").addClass('again');
         fillForm();

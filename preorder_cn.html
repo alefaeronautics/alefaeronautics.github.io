@@ -14,7 +14,7 @@
     </script>
 	  
     <!-- Site Title-->
-    <title>Alef | Pre-order Flying Car</title>
+    <title>Alef | 预购 飞行汽车</title>
     
     
      
@@ -41,14 +41,48 @@
       .snackbars {
         background-color: #293c98;
       }
+
+      .queue-option.faded:after
+      {
+      content: "请关闭付款表格以进行更改" !important;
+      }
+      #payment-form.loading::after {
+      content: "请稍候，正在初始化..." !important;
+      }
+      .final-loading:before {
+        content: "请稍候，正在加载..." !important;
+      }
+      .final-loading.stripe-processing:before {
+        content: "您的付款正在处理中" !important
+      }
+      .final-loading.error:before {
+        content: "出了些问题" !important
+      }
+      .final-loading.again:before {
+        content: "未成功，请重试" !important
+      }
+      #resend-mail.disabled:after {
+        content: "请检查“促销”文件夹" !important;
+      }
     </style>
     <script> 
         $(function(){
           $("#footer").load("includes/footer.html"); 
         });
+        var log_data = {  };
+        var user_ip = "";
+        $.getJSON("https://api.ipify.org?format=json", function(data) {	user_ip = data.ip; });
         </script> 
     <script src="js/refer.js"></script>
-    <body class="purchase-car" id="page-body" style="background-position-y: 0px;">
+    <link rel="stylesheet" href="css/checkout.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const tester = false;
+    </script>
+  <script src="js/checkout.js"></script>
+  </head>
+  
+  <body class="purchase-car" id="page-body" style="background-position-y: 0px;">
     <div class="arrow-toggler"></div>
     <!-- Page Loader -->
     <div id="page-loader" class="loaded">
@@ -130,7 +164,7 @@
                                 <!-- All countries -->
 <select class="form-input form-control-has-validation" data-constraints="@Required" id="contact-country" name="country">
         <option value="">
-        </option><option value="China">中国</option>
+        </option><option value="China" selected>中国</option>
         </option><option value="United States">美国</option>
         <option value="Afghanistan">Afghanistan</option>
         <option value="Aland Islands">Aland Islands</option>
@@ -386,28 +420,82 @@
     </select><span class="form-validation"></span>
              <label class="form-label label-dropdown rd-input-label" for="contact-country">所在地*</label>
                                 </div>
-                                <div class="form-wrap form-button wow fadeInBottom mt-3">
-                                  <button class="button button-block button-primary" type="submit">註冊等候名單</button>
+                                <p class="mb-3">同意 <a href="https://alef.aero/documents/Alef%20Aeronautics%20-%20Preorder%20Agreement.pdf" target="_pre-order">Alef 预购协议</a>, 并完成<span id="order-label">普通($150) </span>预购</p>
+                                <div class="form-wrap form-button wow fadeInBottom mt-2">
+                                  <button class="button button-block button-primary" type="submit">现在下单</button>
                               </div>
                                 <div class="form-wrap mb-0 mt-1">
                                 <input type="hidden" id="contact-advance" name="advance" class="form-input" value="150">
                                 </div>
 
-                                <div class="mt-2">
-                                
-                                    <p class="mb-3">抱歉，我們收到的訂單數量超出了我們的生產能力。 您可以報名參加 <span id="order-label">普通 ($150)</span> 的等候名單</p>
-                                </div>
-
-                              <script>
-                                  if (preorder_price!=150) { 
-                                    document.getElementById("preorder-price").innerHTML="<s style='font-weight: normal !important;'>$150</s>$"+preorder_price;
-                                    document.getElementById("order-label").innerHTML="普通 ($"+preorder_price+") ";
-                                  }
-                                document.getElementById("contact-advance").value= preorder_price;
-                              </script>
 
                             </form>
+
+                            <!-- Display a payment form -->
+                            <form id="payment-form" style="display: none;" class="mt-2">
+                              <div id="payment-close">✕</div>
+                            <div id="link-authentication-element">
+                              <!--Stripe.js injects the Link Authentication Element-->
+                            </div>
+                            <div id="payment-element">
+                              <!--Stripe.js injects the Payment Element-->
+                            </div>
+                            <button id="submit" onclick="handleSubmit()">
+                              <div class="spinner hidden" id="spinner"></div>
+                              <span id="button-text">Proceed to pay</span>
+                            </button>
+                          </form>
+                          <div id="payment-message" class="hidden"></div>
+                          <div class="mt-0 mb-0 stripe-link wow fadeInBottom" data-wow-delay="0.1s">
+                            <span>Powered by</span><a href="https://stripe.com" target="_stripe"><img src="/images/stripe_logo.png"></a>
+                          </div>
+              
+                            <div class="mt-2">
+                              <p class="mb-3">如需退款，请发送电子邮件至 <a href="mailto:orders@alef.aero">orders@alef.aero</a>并附上您的确认/交易号码</p>
+                            </div>
+                          <script>
+                            if (preorder_price!=150) { 
+                              document.getElementById("preorder-price").innerHTML="<s style='font-weight: normal !important;'>$150</s>$"+preorder_price;
+                              document.getElementById("order-label").innerHTML="普通 ($"+preorder_price+") ";
+                            }
+                          document.getElementById("contact-advance").value= preorder_price;
+                        </script>
           
+                    </div>
+                    <div class="cell-xs-12 cell-md-4 self-center order-form final-loading" id="thank-you" style="display: none;">
+                          <div class="wow fadeInTop"><h1><small>您的车在等待着您！</small></h1></div>
+                          <div class="wow fadeIn"  data-wow-delay="0.15s">
+                          <p class="mt-3">恭喜！您已成功预订 Alef A 型飞行汽车.</p>
+                          <p class="mt-2">您的订单号是：</p>
+                          <h3 id="order-number">(check email)</h3>
+
+                          <div class="form-wrap mb-1 mt-3">
+                            <input class="form-input" id="referral-link" type="text" readonly value="http://alef.aero/preorder.html#">
+                            <label class="form-label" for="referral-link">您的专属推荐链接</label>
+                          </div>
+
+                          <div id="sharer-block">
+                            <ul class="list-icons list-inline-xs mb-0">
+                              <li><a href="https://www.facebook.com/sharer/sharer.php?u=" class="icon icon-xs fa fa-facebook icon-style-camera"></a></li>
+                              <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="icon icon-xs fa fa-linkedin icon-style-camera"></a></li>
+                              <li><a href="https://twitter.com/intent/tweet?url=" class="icon icon-xs fa fa-twitter icon-style-camera"></a></li>
+                          </ul>
+                          </div>
+                          <p class="mt-1 mb-1">你可以和朋友共享此链接<p> 
+                          <p><b>1.</b>他们将获得 125 美元的普通队列预订折扣价。</p>
+                          <p><b>2.</b>收集 <span id="referral-number">充足的</span> 推荐后，您将获得免费的普通队列预订！</p>
+
+                          <p class="mt-3">已收到您的预订，并且已根据 <a href="documents/Alef Aeronautics - Preorder Agreement.pdf" target="_pre-order">Alef 预订协议保</a>留您的排队位置。请保留您的订单号，它可以用于查找您的位置</p>
+                          <p class="mt-2">请检查您的收件箱以获取此信息的副本和您的专属凭证</p>
+
+                          <a id="resend-mail" class="button button-block button-primary mt-3 mb-0">重发电子邮件</a>
+                          </div>
+                          <div class="refunded-block wow fadeIn">
+                            <p class="mb-1">以下订单已退款。 请检查您的电子邮件中是否有收据。</p>
+                            <p class="mt-2 text-uppercase">您的订单号是：</p>
+                            <h3 class="mb-3" id="refund-number">(check email)</h3>
+                          </div>
+                          <a class="button button-block button-primary mt-1 mb-5 wow fadeInUp" href="/preorder.html" id="order-again">再次订购</a>
                     </div>
                   </div>
                 </div>

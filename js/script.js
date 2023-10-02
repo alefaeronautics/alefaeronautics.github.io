@@ -1415,7 +1415,7 @@ $(".preorder-input").each(function(){
 		$(".order-form").find("h3")[ (amount>150) ? 1 : 0].style = "font-weight: bold;";
 		$(".order-form").find("h3")[ (amount>150) ? 0 : 1].style = "font-weight: normal;";
 		var choice = (amount>150) ? ( (CN) ? "优先" : "Priority Queue" ) : ( (CN) ? "普通" : "General Queue");
-		choice += ' ($'+amount+')'+ ( (CN) ? ' ' : '');
+		choice += ( (CN) ? '' : ' ') + '($'+amount+')'+ ( (CN) ? ' ' : '');
 		$("#order-label").text(choice); 
 		log_data['data'] = "Change/Click event: " + "Amount " + amount + ", choice " + choice; 
 		aeLog(log_data,false);
@@ -1474,4 +1474,21 @@ $("#payment-close").on("click",function(){
 	$(".queue-option").removeClass("faded");
 	log_data['data'] = "Payment form closed"; 
     aeLog(log_data,false);
+});
+
+$("#contact-country").on("change propertychange", function(){
+	var alert_countries = {
+	China : '请<a href="preorder_cn.html">点击这里</a>查看中文版本'
+	};
+	var el = $("#country-alert");
+	if (alert_countries[$(this).attr('value')]) {
+		el.html(alert_countries[$(this).attr('value')]);
+		el.removeClass('hide');
+
+	}
+	else {
+		el.html('');
+		el.addClass('hide');
+	}
+
 });

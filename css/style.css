@@ -33186,8 +33186,19 @@ footer p span:before {content: "|";}
 		padding-top: 20px;
 		}
 
-.message-alert::before {content: "\26A0"; font-size:20px; font-family: Symbola; float: left; margin-left: -30px; margin-top: -5px; color: white;}
-.message-alert {padding: 10px 10px 15px 40px; border-radius: 8px; border: 1px solid white;}
+		
+.message-alert::before { 
+	content: "\26A0";
+	font-family: Symbola;
+	margin-left: -30px;
+}
+.message-info::before { 
+	content: "\f129";
+	font-family: 'FontAwesome';
+    margin-left: -20px;
+}
+.message-alert::before, .message-info::before {font-size:20px; float: left; margin-top: -5px; color: white;}
+.message-alert, .message-info {padding: 10px 10px 15px 40px; border-radius: 8px; background-color: rgba(255,255,255,0.1);}
 
 .final-loading * {display: none;}
 .final-loading::before {
