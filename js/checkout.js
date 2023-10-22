@@ -85,7 +85,9 @@ async function initialize(name, email, country, amount) {
   data: {
       amount: amount*100,
       currency: 'usd',
+      automatic_payment_methods: { enabled: true },
       //description: 'Alef ' + ( (amount>150) ? ' Priority' : 'General' ) + ' Queue pre-order'
+      //"automatic_payment_methods[enabled]"=true
     }
   });
     const clientSecret = await alternate.client_secret;
