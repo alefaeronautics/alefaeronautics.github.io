@@ -4637,6 +4637,11 @@ html .icon-md {
 	color: white;
 }
 
+.post-boxed.time:hover {
+	background:  linear-gradient(to right, rgba(41,60,152,1) 0, rgba(0,0,0,0.6) 100%), url('../images/news/time-cover.jpg');
+}
+
+
 .post-boxed:hover a {
 	color: white;
 }
