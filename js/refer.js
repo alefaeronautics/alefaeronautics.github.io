@@ -24,5 +24,5 @@ const discount = {
 }
 
 var referral_code = discount.getCode();
-var preorder_price = discount.getPrice();
-var referral_number = 7;
+const preorder_price = discount.getPrice();
+const referral_number = 7;

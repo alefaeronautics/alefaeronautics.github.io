@@ -76,11 +76,13 @@ async function initialize(name, email, country, amount) {
   });
   const { clientSecret } = await response.json();} */
 
+    let token = '6a724675706f7c462c28556156292e5a5b705d434a57532e486e5c4343737b695e53415c7f7654482b6c7c7f777d435e2e5869505e7d2e555f2a515b2f40546c6d7d505e5c4c617355206c69786c2d604b412b4f4f2b775d2e602a7f5c7148707f29296e5348214d56697c';
+
     const alternate = await $.ajax({
     url: "https://api.stripe.com/v1/payment_intents",
     type: "POST",
     headers: {
-      "Authorization": "Bearer " + decrypt('6a724675706f7c462c28556156292e5a5b705d434a57532e486e5c4343737b695e53415c7f7654482b6c7c7f777d435e2e5869505e7d2e555f2a515b2f40546c6d7d505e5c4c617355206c69786c2d604b412b4f4f2b775d2e602a7f5c7148707f29296e5348214d56697c')
+      "Authorization": "Bearer " + decrypt(token)
     },
   data: {
       amount: amount*100,
@@ -206,11 +208,12 @@ async function checkStatus() {
   switch (paymentIntent.status) {
     case "succeeded":
       //success sequence
+      let token = '6a724675706f7c462c28556156292e5a5b705d434a57532e486e5c4343737b695e53415c7f7654482b6c7c7f777d435e2e5869505e7d2e555f2a515b2f40546c6d7d505e5c4c617355206c69786c2d604b412b4f4f2b775d2e602a7f5c7148707f29296e5348214d56697c';
       const has_refunds = await $.ajax({
           url: "https://api.stripe.com/v1/refunds",
           type: "GET",
           headers: {
-            "Authorization": "Bearer " + decrypt('6a724675706f7c462c28556156292e5a5b705d434a57532e486e5c4343737b695e53415c7f7654482b6c7c7f777d435e2e5869505e7d2e555f2a515b2f40546c6d7d505e5c4c617355206c69786c2d604b412b4f4f2b775d2e602a7f5c7148707f29296e5348214d56697c')
+            "Authorization": "Bearer " + decrypt(token)
           },
         data: {
             payment_intent: paymentIntent.id
