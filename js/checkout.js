@@ -68,38 +68,22 @@ async function initialize(name, email, country, amount) {
 
   currentAmount = amount;
   
-  /*
-  const response = await fetch("https://jellyfish-app-6nax7.ondigitalocean.app/create-payment-intent", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, country, amount }),
-  });
-  const { clientSecret } = await response.json();} */
-
-    let token = '6a724675706f7c462c28556156292e5a5b705d434a57532e486e5c4343737b695e53415c7f7654482b6c7c7f777d435e2e5869505e7d2e555f2a515b2f40546c6d7d505e5c4c617355206c69786c2d604b412b4f4f2b775d2e602a7f5c7148707f29296e5348214d56697c';
-
-    const alternate = await $.ajax({
-    url: "https://api.stripe.com/v1/payment_intents",
+  const oceanApp = await $.ajax({
+    url: "https://oyster-app-lxo6h.ondigitalocean.app/stripe/",
     type: "POST",
-    headers: {
-      "Authorization": "Bearer " + decrypt(token)
-    },
-  data: {
-      amount: amount*100,
-      currency: 'usd',
-      automatic_payment_methods: { enabled: true },
-      //description: 'Alef ' + ( (amount>150) ? ' Priority' : 'General' ) + ' Queue pre-order'
-      //"automatic_payment_methods[enabled]"=true
+    data: {
+      amount: amount,
+      type: 'create'
     }
   });
-    const clientSecret = await alternate.client_secret;
 
-    if (tester) {
-      console.log(alternate);
-      console.log(clientSecret);
+  const clientSecret = await oceanApp.result;
+
+  if (!oceanApp.error) displayStripe(clientSecret,emailAddress);
+  else {
+    log_data['data'] =  oceanApp.result; 
+    aeLog(log_data,false);
     }
-
-    displayStripe(clientSecret,emailAddress);
 
 }
 
@@ -208,24 +192,33 @@ async function checkStatus() {
   switch (paymentIntent.status) {
     case "succeeded":
       //success sequence
-      let token = '6a724675706f7c462c28556156292e5a5b705d434a57532e486e5c4343737b695e53415c7f7654482b6c7c7f777d435e2e5869505e7d2e555f2a515b2f40546c6d7d505e5c4c617355206c69786c2d604b412b4f4f2b775d2e602a7f5c7148707f29296e5348214d56697c';
+
       const has_refunds = await $.ajax({
-          url: "https://api.stripe.com/v1/refunds",
-          type: "GET",
-          headers: {
-            "Authorization": "Bearer " + decrypt(token)
-          },
+        url: "https://oyster-app-lxo6h.ondigitalocean.app/stripe/",
+        type: "POST",
         data: {
-            payment_intent: paymentIntent.id
-          }
-        });
-        const refund_data = await has_refunds.count;
-       if (refund_data) {
-          $("#refund-number").text(paymentIntent.id.split("_")[1]);
+          id: paymentIntent.id,
+          type: 'refunds'
+        }
+      });
+    
+      const refund_data = await has_refunds.result;
+      
+      if (!has_refunds.error) {
+        if (refund_data) {
+          var refund_number = paymentIntent.id.split("_")[1];
+          $("#refund-number").text(refund_number);
           $("#thank-you").addClass('refunded').removeClass('final-loading');
           console.log("has been refunded");
+          log_data['data'] =  "Repeat view on refunded "+ refund_number; 
+          aeLog(log_data,false);
           return;
         }
+      }
+      else {
+        log_data['data'] =  has_refunds.result; 
+        aeLog(log_data,false);
+      }
 
       //showMessage("Payment succeeded!");
       console.log("success sequence");
