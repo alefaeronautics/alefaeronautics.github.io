@@ -1083,20 +1083,23 @@ $("#contact-file").on("change propertychange", function(){
 	var el = $(this);
 	el.attr('style','color:'+((el.val()=='') ? "rgba(0,0,0,0)" : "#293c98"));
 	
-	var file = el[0].files[0];
-	base64content = "";
-	var reader = new FileReader();
-	reader.readAsDataURL(file);
-	reader.onload = function () {
-		base64content = reader.result.split(',').pop();
-		$("[name=attachment]").attr('value',base64content);
-		$("[name=resume]").attr('value',file.name);
-	};
-	reader.onerror = function (error) {
-		//return null;
-	};
+	if (el.val()!='') {
+		var file = el[0].files[0];
+		base64content = "";
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function () {
+			base64content = reader.result.split(',').pop();
+			$("[name=attachment]").attr('value',base64content);
+			$("[name=resume]").attr('value',file.name);
+		};
+		reader.onerror = function (error) {
+			//return null;
+		};	
 
-	if ((el.val()=='')) el.trigger("blur");
+	}
+	else
+	 el.trigger("blur");
   });
 
 /* news load */
