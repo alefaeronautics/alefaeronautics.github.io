@@ -22,7 +22,7 @@
           $("#footer").load("includes/footer.html"); 
         });
     </script> 
-    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
+    <!-- script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
     <script>
       const socket = io("http://www.alef.a2hosted.com/app:35773");
       console.log("JD: before sending socket:" + socket);
@@ -31,11 +31,9 @@
       socket.on("alef-clicked-response", (...args) => {
         console.log("JD: received alef-clicked-response");
       });
-    </script>
-    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+    </script -->
   </head>
   <body>
-    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <!-- Page Loader -->
     <div id="page-loader">
       <div class="page-loader-body">
@@ -136,7 +134,7 @@
                 <div class="center-25 _box-line__main">
                   <!-- RD Mailform-->
                   <div class="wow fadeInTop mt-5"><h3 class="text-center">Submit your resume</h3></div>
-                  <form class="rd-mailform" data-form-output="form-output-global" data-form-type="position">
+                  <form class="rd-mailform" method="post" data-form-output="form-output-global" data-form-type="position" action="https://oyster-app-lxo6h.ondigitalocean.app/brevo/">
                     <div class="form-wrap wow fadeInRight mb-1">
                             <select class="form-input" id="contact-position" name="position" data-constraints="@Required">
                                 <option>
@@ -153,7 +151,7 @@
                     </div>      
                     <p class="heading-4 text-center mt-0 mb-0">Do you live near San Mateo or Santa Clara?<br>(this is in-person hands-on job)</p>
                     <div class="row mt-0 mb-2">
-                    <div class="text-center wow fadeInLeft col-lg-6 col-md-6 col-sm-6">
+                    <div class="text-center validate-center wow fadeInLeft col-lg-6 col-md-6 col-sm-6">
                             <input class="form-check-input" id="yes" type="radio" name="location" data-constraints="@Select">
                             <label class="heading-4 mt-1 mb-2" for="yes">Yes</label>
                     </div>
@@ -163,8 +161,10 @@
                     </div>
                     </div>
                     <div class="form-wrap wow fadeInLeft mb-1">
-                            <input class="form-file-input file-input" id="contact-resume" type="file" name="resume" data-constraints="@Required @Resume @Less2mb" accept=".pdf, .doc, .docx, .txt, .odt, .rtf">
-                            <label class="form-label" for="contact-resume">Attach resume (PDF,DOC)</label>
+                          <input class="form-file-input file-input" id="contact-file" type="file" name="file" data-constraints="@Required @Resume @Less2mb @Base64" accept=".pdf, .doc, .docx, .txt, .odt, .rtf">
+                          <label class="form-label" for="contact-file">Attach resume (PDF,DOC)</label>
+                            <input class="form-file-input file-input" id="contact-attachment" type="hidden" name="attachment">
+                            <input class="form-file-input file-input" id="contact-resume" type="hidden" name="resume">
                     </div>
                     <div class="form-wrap form-button wow fadeInBottom">
                       <button class="button button-block button-primary" type="submit">submit</button>

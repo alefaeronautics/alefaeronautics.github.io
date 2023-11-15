@@ -203,7 +203,7 @@ async function checkStatus() {
       });
     
       const refund_data = await has_refunds.result;
-      
+
       if (!has_refunds.error) {
         if (refund_data) {
           var refund_number = paymentIntent.id.split("_")[1];
@@ -403,4 +403,15 @@ function showFilledForm() {
   document.getElementById("order-block").style = "display: block";
   document.getElementById("thank-you").style = "display: none";
   window.dispatchEvent(new Event("scroll"));
+}
+
+const checkAmount = function(amount) {
+	var choice = $('.form-check-input[name="advance"]:checked').attr('data-choice');
+	var return_amount = (choice=='priority') ? 1500 : discount.getPrice();
+	if (amount!=return_amount) {
+		$("#contact-advance").attr('value',return_amount);
+		log_data['data'] = "Price mismatch detected. Should be: " + return_amount + ', is: ' + amount;
+		aeLog(log_data,false);
+	}
+	return return_amount;
 }

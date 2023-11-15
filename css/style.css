@@ -33307,3 +33307,7 @@ footer p span:before {content: "|";}
 .refunded .refunded-block {
 	display: block !important;
 }
+
+.validate-center .form-validation {
+	text-align: center;
+}

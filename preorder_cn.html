@@ -41,6 +41,9 @@
       .snackbars {
         background-color: #293c98;
       }
+      .ui-to-top {
+        display: none;
+      }
 
       .queue-option.faded:after
       {
@@ -447,7 +450,7 @@
                           </form>
                           <div id="payment-message" class="hidden"></div>
                           <div class="mt-0 mb-0 stripe-link wow fadeInBottom" data-wow-delay="0.1s">
-                            <span>Powered by</span><a href="https://stripe.com" target="_stripe"><img src="/images/stripe_logo.png"></a>
+                            <span>Powered by</span><a href="https://stripe.com" target="_stripe"><img src="images/stripe_logo.png"></a>
                           </div>
               
                             <div class="mt-2">
@@ -638,22 +641,4 @@
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
     <script src="js/menu.js"></script>
-    <script>
-        // unfix the background when scrolled beyond the first block
-            function bgBehavior() {
-                if (document.getElementById("first-block").scrollHeight>window.innerHeight)
-                {
-                    pos =  - window.innerHeight - window.scrollY + document.getElementById("first-block").scrollHeight - 41;
-                    if (pos>0) pos = 0;
-                }
-                else
-                    pos = -window.scrollY;
-                document.getElementsByClassName("purchase-car")[0].style = "background-position-y:"+ String( pos ) + "px;";
-            }
-            window.addEventListener( 'scroll', bgBehavior );
-    </script>
-    
-    <!-- coded by Himic-->
-  
-
-<a href="https://alef.aero/preorder_cn.html#" id="ui-to-top" class="ui-to-top fa fa-angle-up"></a>
+    <script src="js/preorder.js"></script>

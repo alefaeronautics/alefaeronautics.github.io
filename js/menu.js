@@ -29,7 +29,7 @@ function createMenu(where)
             elem.innerHTML = "<a href='"+menu[i]['url']+"'>"+menu[i]['title']+"</a>";
             if (menu[i]['url']==item) {
                 elem.classList.add('active');
-                curPage = menu[i]['title'];
+                curPage = (menu[i]['url']=='preorder.html') ? 'Preorder' : menu[i]['title'];
                 }
             target[n].appendChild(elem);
             if (i<menu.length-2) 

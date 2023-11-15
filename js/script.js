@@ -1,7 +1,6 @@
 /**
  * Global variables
  */
-var salt = String.fromCharCode(97, 101, 114, 111);
 "use strict";
 (function () {
 	var isNoviBuilder = window.xMode;
@@ -269,7 +268,6 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 				name: 'Resume',
 				defaultMessage: 'Unacceptable file type (PDF,DOC,DOCX,ODT,RTF,TXT required)',
 				validator: function() {
-					this.style.color = (this.value=='') ? "rgba(0,0,0,0)" : "#293c98";
 					if ( this.value === '' ) return true;
 					else return /(\.pdf|\.doc|\.docx|\.txt|\.odt|\.rtf)$$/i.test( this.value );
 				}
@@ -280,16 +278,30 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 				name: 'Less2mb',
 				defaultMessage: 'Files less than 2Mb required',
 				validator: function() {
-					this.style.color = (this.value=='') ? "rgba(0,0,0,0)" : "#293c98";
+					//this.style.color = (this.value=='') ? "rgba(0,0,0,0)" : "#293c98";
 					if ( this.value === '' ) return true;
 					else { return (this.files[0].size < 2097152); }//return /(\.pdf|\.doc|\.docx|\.txt|\.odt|\.rtf)$$/i.test( this.value );
+				}
+			});
+
+			// Custom validator - file type pdf doc
+			regula.custom({
+				name: 'Base64',
+				defaultMessage: 'Please wait, the file is processed',
+				validator: function() {
+					var result = (this.value=='')||(base64content!="");
+					var el = this;
+					if ((this.value!='')&&(base64content=="")) setTimeout(function(){
+						el.dispatchEvent(new Event("blur"));
+					},1000);
+					return result;
 				}
 			});
 
 			// Custom validator - selected radio
 			regula.custom({
 				name: 'Select',
-				defaultMessage: 'You need to live in that area',
+				defaultMessage: 'You need to live in this area',
 				validator: function() {
 				return this.checked;
 				}
@@ -779,25 +791,20 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 
 		// RD Mailform
 		if (plugins.rdMailForm.length) {
-			var i, j, k,
-				msg = {
-					'MF000': 'Successfully sent!',
-					'MF001': 'Recipients are not set!',
-					'MF002': 'Form will not work locally!',
-					'MF003': 'Please, define email field in your form!',
-					'MF004': 'Please, define type of your form!',
-					'MF254': 'Something went wrong with PHPMailer!',
-					'MF255': 'Aw, snap! Something went wrong.'
-				};
+			var i, j, k;
 
 			for (i = 0; i < plugins.rdMailForm.length; i++) {
 				var $form = $(plugins.rdMailForm[i]),
 					formHasCaptcha = false;
 
+
+
 				$form.attr('novalidate', 'novalidate').ajaxForm({
 					data: {
 						"form-type": $form.attr("data-form-type") || "contact",
-						"counter": i
+						"counter": i,
+						'page':curPage,
+						'url':window.location.href,
 					},
 					beforeSubmit: function (arr, $form, options) {
 
@@ -858,84 +865,30 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 							}
 							else {
 
-							form.addClass('form-in-process');
+								form.addClass('form-in-process');
 
-							if (output.hasClass("snackbars")) {
-								output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
-								output.addClass("active");
+								if (output.hasClass("snackbars")) {
+									output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
+									output.addClass("active");
+								}
+
+								if (form.attr('data-form-type')=='position') {
+									$("#contact-file").attr('disabled',true);
+								}
 							}
 
-							sendMail();
-						}
-
 						} else {
-							log_data['data'] = "Form validation error: " + JSON.stringify(collectData()); 
-							aeLog(log_data,false);
+							aeLog({ 'data': "Form validation error on "+curPage+": " + JSON.stringify(collectData())},false);
 							return false;
 						}
 					},
 					error: function (result) {
-						return; // is now handled by sendMail function
-						if (isNoviBuilder)
-							return;
-
-						var output = $("#" + $(plugins.rdMailForm[this.extraData.counter]).attr("data-form-output")),
-							form = $(plugins.rdMailForm[this.extraData.counter]);
-
-						output.text(msg[result]);
-						form.removeClass('form-in-process');
-
-						if (formHasCaptcha) {
-							grecaptcha.reset();
-						}
+						aeLog({'data':curPage + ' mail:' + JSON.stringify(result)});
+						formClear(result.statusText,false,'',false);
 					},
 					success: function (result) {
-						return; // is now handled by sendMail function
-
-						if (isNoviBuilder)
-							return;
-
-						var form = $(plugins.rdMailForm[this.extraData.counter]),
-							output = $("#" + form.attr("data-form-output")),
-							select = form.find('select');
-
-						form
-							.addClass('success')
-							.removeClass('form-in-process');
-
-						if (formHasCaptcha) {
-							grecaptcha.reset();
-						}
-
-						result = result.length === 5 ? result : 'MF255';
-						output.text(msg[result]);
-
-						if (result === "MF000") {
-							if (output.hasClass("snackbars")) {
-								output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + msg[result] + '</span></p>');
-							} else {
-								output.addClass("active success");
-							}
-						} else {
-							if (output.hasClass("snackbars")) {
-								output.html(' <p class="snackbars-left"><span class="icon icon-xxs mdi mdi-alert-outline text-middle"></span><span>' + msg[result] + '</span></p>');
-							} else {
-								output.addClass("active error");
-							}
-						}
-
-						form.clearForm();
-
-						if (select.length) {
-							select.select2("val", "");
-						}
-
-						form.find('input, textarea').trigger('blur');
-
-						setTimeout(function () {
-							output.removeClass("active error success");
-							form.removeClass('success');
-						}, 3500);
+						aeLog({'data':curPage + ' mail:' + JSON.stringify(result)});
+						formClear(result.error,false,"Mail sent!",true);
 					}
 				});
 			}
@@ -1010,42 +963,86 @@ var salt = String.fromCharCode(97, 101, 114, 111);
 		}
 
 	} );
-}());
 
 
-		/**
+			/**
 		 * @desc Check if all elements pass validation
 		 * @param {object} elements - object of items for validation
 		 * @param {object} captcha - captcha object for validation
 		 * @return {boolean}
 		 */
-		function isValidated(elements, captcha) {
-			var results, errors = 0;
-
-			if (elements.length) {
-				for (var j = 0; j < elements.length; j++) {
-
-					var $input = $(elements[j]);
-					if ((results = $input.regula('validate')).length) {
-						for (k = 0; k < results.length; k++) {
-							errors++;
-							$input.siblings(".form-validation").text(results[k].message).parent().addClass("has-error");
+			function isValidated(elements, captcha) {
+				var results, errors = 0;
+	
+				if (elements.length) {
+					for (var j = 0; j < elements.length; j++) {
+	
+						var $input = $(elements[j]);
+						if ((results = $input.regula('validate')).length) {
+							for (var k = 0; k < results.length; k++) {
+								errors++;
+								$input.siblings(".form-validation").text(results[k].message).parent().addClass("has-error");
+							}
+						} else {
+							$input.siblings(".form-validation").text("").parent().removeClass("has-error")
 						}
-					} else {
-						$input.siblings(".form-validation").text("").parent().removeClass("has-error")
 					}
-				}
-
-				if (captcha) {
-					if (captcha.length) {
-						return validateReCaptcha(captcha) && errors === 0
+	
+					if (captcha) {
+						if (captcha.length) {
+							return validateReCaptcha(captcha) && errors === 0
+						}
 					}
+	
+					return errors === 0;
 				}
-
-				return errors === 0;
+				return true;
 			}
-			return true;
-		}
+	
+			/* display and remove form message based on request result */
+	
+	function formClear(status,required,success_message,reset=true) {
+		var form = $(".rd-mailform"),
+			output = $("#" + form.attr("data-form-output"));
+	
+			if(status==required) {
+				var cls = "success", msg = success_message, icon = "mdi-check";
+			}
+			else {
+				var cls = "error", msg = "Something went wrong: " + String(status), icon = "mdi-alert-outline";
+			}
+	
+			form
+			.addClass(cls)
+			.removeClass('form-in-process');
+	
+			if (reset) form.trigger('reset');
+			form.find('[type=file]').each(function(){
+				$(this).trigger('change');
+				$(this).attr('disabled',false);
+			});
+	
+	
+			output.text(msg);
+	
+			if (output.hasClass("snackbars")) {
+				output.html('<p><span class="icon text-middle mdi '+icon+' icon-xxs"></span><span>' + msg + '</span></p>');
+				} 
+			else {
+					output.addClass("active "+cls);
+				}
+	
+			setTimeout(function () {
+				output.removeClass("active");
+			}, 3500);
+	
+	}
+
+
+
+}());
+
+/* navigation helper */
 
 function smartBack(e) {
 	if ((document.referrer==e.target) && (history.length>1)) {
@@ -1062,117 +1059,88 @@ function shareLinks() {	$("#sharer-block a").each(function(){
 	$(this).get(0).href = link_url + "?" + url + ( (referral_code) ? "#"+referral_code: "" );
 });}
 
+/* careers page specific */
 
-function getBase64(file,maildata) {
+$('.careers-position-title').each(function() {
+	var option = document.createElement("option");
+	option.text = $(this).text();
+	option.value = $(this).text();
+	document.getElementById('contact-position').add(option);
+});
 
-	//maildata["attachments"] = {
-	//	"filename" : file.name,
-	//	"id" : file.name,
-	//	"content" : ""
-	//}
-	maildata["attachment"] = [{
-		"content" : "",
-		"name" : file.name
-	}];
+$('.careers-positions-list').on('click',function() { 
+	var x = document.getElementById('contact-position');
+	x.selectedIndex = $(this).index()+1;
+	x.scrollIntoView();
+	x.dispatchEvent(new Event('focus'));
+	x.dispatchEvent(new Event('change'));
+	return false;
+});
+
+var base64content = "";
+
+$("#contact-file").on("change propertychange", function(){
+	var el = $(this);
+	el.attr('style','color:'+((el.val()=='') ? "rgba(0,0,0,0)" : "#293c98"));
+	
+	var file = el[0].files[0];
+	base64content = "";
 	var reader = new FileReader();
 	reader.readAsDataURL(file);
 	reader.onload = function () {
-		//maildata["attachments"]["content"] = reader.result,
-		maildata["attachment"][0]["content"] = reader.result.split(',').pop();
-		cUrl_request(maildata);
+		base64content = reader.result.split(',').pop();
+		$("[name=attachment]").attr('value',base64content);
+		$("[name=resume]").attr('value',file.name);
 	};
 	reader.onerror = function (error) {
-		return null;
+		//return null;
 	};
- }
 
-function sendMail()
-{
-	//var templates = { 'contact' : 'k68zxl275k94j905', 'position' : '0r83ql3p89pgzw1j' };
-	var templates = { 'contact' : 1, 'position' : 2, 'investor' : 4 };
-	var receiver = { 'contact' : 'contact@alef.aero', 'position' : 'jobs@alef.aero', 'investor' : 'investor@alef.aero' };
-	var formtype = $(".rd-mailform").attr('data-form-type'); 
+	if ((el.val()=='')) el.trigger("blur");
+  });
 
-	var formdata = {};
+/* news load */
 
-	if (formtype == "order") { 
-		formdata['date'] = fullDate(new Date());
-	}
+var display = parseInt($(".post-item").length-$(".hide").length); 
+var step = parseInt($("#news-items").attr('data-step'));
 
-	$(".form-input").each(function(index) {
-		formdata[String($(this).attr('name'))] = $(this).attr('value');
-		//if (formtype == "order") url += "&" + String($(this).attr('name')) + "=" + encodeURIComponent($(this).attr('value'));
+$("#load-more").on('click',function(){
+	$(".post-item").each(function(index) {
+		if (index<display+step)
+		{
+			if (index>=display) 
+			{
+				$(this).attr("data-wow-delay",(0.15*(index-display))+"s");
+				$(this).removeClass('hide');
+			}
+		} 
+
+		window.scroll(0,window.scrollY+1); //scrolling is necessary to trigger animation start
+		if ((display+step)>=$(".post-item").length) $("#load-more").addClass('hide');
 	});
+	display += step;
+});
 
-	formdata['page'] = curPage;
-	formdata['url'] =  window.location.href;
+/* preorder page specific */
 
-	var maildata = {
-		//"from": {
-		"sender": {
-			"email": "robot@alef.aero",
-			"name": "Alef Robot"
-		},
-		"to": [
-			{
-				"email": receiver[formtype]				
-			}
-		],
-//		"personalization": [{
-//			"email": "khandro.an@gmail.com",
-//			"data": { formdata }
-//		}],
-//		"template_id": templates[formtype]
-		"templateId":templates[formtype],
-		"params": formdata,
-		"headers":{  
-			"X-Mailin-custom":"custom_header_1:custom_value_1|custom_header_2:custom_value_2|custom_header_3:custom_value_3",
-			"charset":"iso-8859-1"}
-	};
-
-	switch(formtype) {
-		case "position":
-			getBase64(document.getElementById("contact-resume").files[0],maildata);
-		break;
-		case "order":
-			updateSheets(formdata,true);
-		break;
-		default:
-			cUrl_request(maildata); 
-		break;
-	}
-}
-
-
-function confirmOrder(orderdata)
+async function confirmOrder(orderdata)
 {
-	var certificate = "https://louthbra.sirv.com/Images/certificate.jpg?text.size=15&text.color=000000&text.position.gravity=north&text.position.x=26.3%&text.position.y=24.5%&text=";
-	certificate += orderdata['order_number'];
+	orderdata['form-type'] = "order";
+	orderdata['page'] = curPage;
+	orderdata['url'] = window.location.href;
 
-	var maildata = {
-		"sender": {
-			"email": "orders@alef.aero",
-			"name": "Alef Team"
-		},
-		"to": [
-			{
-				"email": orderdata['email']		
-			}
-		],
-		"templateId":3,
-		"params": orderdata,
-		"headers":{  
-			"X-Mailin-custom":"custom_header_1:custom_value_1|custom_header_2:custom_value_2|custom_header_3:custom_value_3",
-			"charset":"iso-8859-1"},
-		"attachment": [ 
-			{
-				"url" : certificate,
-				"name" : "alef_certificate.jpg"
-			}
-		]
-	};
+	const brevoApp = await $.ajax({
+		url: "https://oyster-app-lxo6h.ondigitalocean.app/brevo/",
+		type: "POST",
+		data: orderdata
+	  });
 
-	cUrl_request(maildata);
+	const has_error = await brevoApp.error;
+
+	if (has_error) {
+		log_data['data'] = "Mailsend error: " + JSON.stringify(orderdata);
+		aeLog(log_data,false);
+	}
 
 }
 
@@ -1188,59 +1156,6 @@ function collectData()
 }
 
 
-const crypt = (text) => {
-	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
-	const byteHex = (n) => ("0" + Number(n).toString(16)).substr(-2);
-	const applySaltToChar = (code) => textToChars(salt).reduce((a, b) => a ^ b, code);
-  
-	return text
-	  .split("")
-	  .map(textToChars)
-	  .map(applySaltToChar)
-	  .map(byteHex)
-	  .join("");
-  };
-
-const decrypt = (encoded) => {
-	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
-	const applySaltToChar = (code) => textToChars(salt).reduce((a, b) => a ^ b, code);
-	return encoded
-	  .match(/.{1,2}/g)
-	  .map((hex) => parseInt(hex, 16))
-	  .map(applySaltToChar)
-	  .map((charCode) => String.fromCharCode(charCode))
-	  .join("");
-  };
-
-function cUrl_request(maildata) {
-	let token = "61727c606a707b342a7b287d7f287a207f7c2e2c7d7d2c2c7b2d7d2f2c2d282a2b2e2021202f7b2c2c7b7a78287b2c78282c20782c7b2f7f287c297b2e202d2f2f7c2b2a782e2b2d344a775d405e7e52494b504c28202d617b";//"61727c606a707b3429292b2d20787f2e2e2f2f2d2d212d7a2a7b217f2f7f7c7c2c297f7f7b2a2c2a282c7c2a7a28202a20282f2b207a2c282d2e2f292f2d782c2e2e2c2d7b2d7b2c344d284f214e6f7f52745e72415a5d6877";
-	let post = JSON.stringify(maildata);
- 
-//	const url = "https://api.mailersend.com/v1/email";
-//	const url = "https://api.sendinblue.com/v3/smtp/email";
-	const url = "https://api.brevo.com/v3/smtp/email";
-
-	let xhr = new XMLHttpRequest();
- 
-	xhr.open('POST', url, true);
-	//xhr.setRequestHeader('Authorization', 'Bearer '+token);
-	xhr.setRequestHeader('accept', 'application/json');
-	xhr.setRequestHeader('api-key', decrypt(token));
-	xhr.setRequestHeader('content-type', 'application/json');
- 
-	xhr.onload = function () { 
-		formClear(xhr.status,201,"Mail sent!"); 
-		console.log('mail sent'); 
-	}
-	xhr.onerror = function () {
-		log_data['data'] = "Mailsend error: " + post;
-		aeLog(log_data,false);
-		cUrl_request(maildata);
-	  };
-
-	xhr.send(post);
-}
-
 function fullDate(now) {
 	var result = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
 	return result;
@@ -1255,15 +1170,6 @@ function updateSheets(/*dataurl,*/formdata,success) {
 	//wishlist
 	//var g_url = "https://script.google.com/macros/s/AKfycbyZiT7luUJQWIUN8v8ii6EFlagliIaIW9Iv-wJ72OQsNCpftk2NOPE2IA6J1ujOHOfTZA/exec";
 	formdata['user_ip'] = user_ip;
-
-	/* just in case request won't be working anymore 
-	var iframe = document.createElement('iframe');
-	iframe.onload = function() { formClear(true,true,"Order sent!"); }; //there's no access to what the message is so we assume it's successful
-	iframe.style = "visibility: hidden; position: absolute; top: 0; left: 0; width: 1px; height: 1px;";
-	iframe.src = g_url + dataurl; 
-	document.body.appendChild(iframe);
-	// iframe displays 403 but spreadsheet is nevertheless updated
-	*/
 
 	var xhr = $.ajax({
 		url: g_url,
@@ -1297,50 +1203,6 @@ function updateSheets(/*dataurl,*/formdata,success) {
 
 }
 
-const checkAmount = function(amount) {
-	var choice = $('.form-check-input[name="advance"]:checked').attr('data-choice');
-	var return_amount = (choice=='priority') ? 1500 : discount.getPrice();
-	if (amount!=return_amount) {
-		$("#contact-advance").attr('value',return_amount);
-		log_data['data'] = "Price mismatch detected. Should be: " + return_amount + ', is: ' + amount;
-		aeLog(log_data,false);
-	}
-	return return_amount;
-}
-
-function formClear(status,required,success_message,reset=true) {
-	var form = $(".rd-mailform"),
-		output = $("#" + form.attr("data-form-output"));
-
-    	if(status==required) {
-			var cls = "success", msg = success_message, icon = "mdi-check";
-		}
-		else {
-			var cls = "error", msg = "Something went wrong: "+String(status), icon = "mdi-alert-outline";
-		}
-
-		form
-		.addClass(cls)
-		.removeClass('form-in-process');
-
-		if (reset) form.trigger('reset');
-
-
-		output.text(msg);
-
-		if (output.hasClass("snackbars")) {
-			output.html('<p><span class="icon text-middle mdi '+icon+' icon-xxs"></span><span>' + msg + '</span></p>');
-			} 
-		else {
-				output.addClass("active "+cls);
-			}
-
-		setTimeout(function () {
-			output.removeClass("active");
-		}, 3500);
-
-}
-
 function thankYou(order_number, order_type)
 {
 	document.getElementById('order-number').innerHTML = order_number;
@@ -1351,22 +1213,6 @@ function thankYou(order_number, order_type)
 	if (!CN) document.getElementById('order-type').innerHTML = order_type;
 	document.getElementById('thank-you').scrollIntoView();
 	window.scroll(0,window.scrollY+1);
-}
-
-function showForm() {
-	
-	var startpoint = window.scrollY; //keep the scroll offset for the user
-	document.getElementById('order-button').style.display = 'none'; 
-	document.getElementById('order-form').style.display = 'block'; 
-	//document.getElementById('contact-name').scrollIntoView();
-	//scrolling exactly to the end of the form layer
-	var endpoint = document.getElementById("first-block").scrollHeight-window.innerHeight-42; // must calculate after the layer is made visible
-	if (window.scrollY < endpoint ) window.scroll(0,endpoint+startpoint); 
-	else window.scroll(0,window.scrollY+1);
-	setTimeout( bgBehavior, 100 );
-	setTimeout( bgBehavior, 300 );
-	//bgBehavior();
-	//document.getElementById("page-body").style = "background-size: cover;";
 }
 
 function processOrder(form) {
@@ -1382,30 +1228,6 @@ function processOrder(form) {
 	});
 
 	createClientAE();
-}
-
-function aeLog(data, success) {
-	data["date"] = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
-	if (CN) data["data"] = "CN " + data["data"];
-	//console.log(data);
-	var xhr = $.ajax({
-		url: 'https://alef.ae-collective.com/log.php',
-		method: "GET",
-		type: "GET",
-		dataType: "json",
-		data: data
-	  }).setRequestHeader( 'referer', 'https://alef.aero' )
-	  .success(
-		  function(response) { 
-			console.log("ae logged"); 
-			if (success) $("#thank-you").removeClass('final-loading');
-		}
-	  ).error (
-		function(response) { 
-			console.log('ae logged');
-			if (success) $("#thank-you").removeClass('final-loading');
-		}
-	  );
 }
 
 $(".preorder-input").each(function(){
@@ -1432,65 +1254,56 @@ $(".preorder").each(function(){
 	});
 });
 
-$('.careers-position-title').each(function() {
-	var option = document.createElement("option");
-	option.text = $(this).text();
-	option.value = $(this).text();
-	document.getElementById('contact-position').add(option);
-});
-
-$('.careers-positions-list').on('click',function() { 
-	var x = document.getElementById('contact-position');
-	x.selectedIndex = $(this).index()+1;
-	x.scrollIntoView();
-	x.dispatchEvent(new Event('focus'));
-	x.dispatchEvent(new Event('change'));
-	return false;
-});
-
-var display = parseInt($(".post-item").length-$(".hide").length); 
-var step = parseInt($("#news-items").attr('data-step'));
-
-$("#load-more").on('click',function(){
-	$(".post-item").each(function(index) {
-		if (index<display+step)
-		{
-			if (index>=display) 
-			{
-				$(this).attr("data-wow-delay",(0.15*(index-display))+"s");
-				$(this).removeClass('hide');
-			}
-		} 
-
-		window.scroll(0,window.scrollY+1); //scrolling is necessary to trigger animation start
-		if ((display+step)>=$(".post-item").length) $("#load-more").addClass('hide');
-	});
-	display += step;
-});
-
-
 $("#payment-close").on("click",function(){
-	document.getElementById("payment-form").style = "display:none";
-	document.getElementById("order-form").style = "display:block";
-	$(".queue-option").removeClass("faded");
-	log_data['data'] = "Payment form closed"; 
-    aeLog(log_data,false);
-});
+    document.getElementById("payment-form").style = "display:none";
+    document.getElementById("order-form").style = "display:block";
+    $(".queue-option").removeClass("faded");
+    log_data['data'] = "Payment form closed"; 
+      aeLog(log_data,false);
+  });
 
-var alert_countries = {
-	cn : '请<a href="preorder_cn.html' + ( referral_code ? '#'+referral_code : '' ) + '">点击这里</a>查看中文版本'
-	};
+  var referral_code;
 
-$("#contact-country").on("change propertychange", function(){
-	var el = $("#country-alert");
-	var datalink = $(this).find("option:selected").attr("data-link");
-	if (datalink&&alert_countries[datalink]) 
-	{
-		el.html(alert_countries[datalink]);
-		el.removeClass('hide');
-	}
-	else {
-		el.html('');
-		el.addClass('hide');
-	}
-});
+  var alert_countries = {
+    cn : '请<a href="preorder_cn.html' + ( (referral_code) ? '#'+referral_code : '' ) + '">点击这里</a>查看中文版本'
+    };
+
+  $("#contact-country").on("change propertychange", function(){
+    var el = $("#country-alert");
+    var datalink = $(this).find("option:selected").attr("data-link");
+    if (datalink&&alert_countries[datalink]) 
+    {
+      el.html(alert_countries[datalink]);
+      el.removeClass('hide');
+    }
+    else {
+      el.html('');
+      el.addClass('hide');
+    }
+  });
+
+
+/* special log on AE-collective */
+
+function aeLog(data, success) {
+	data["date"] = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
+	if (CN) data["data"] = "CN " + data["data"];
+	var xhr = $.ajax({
+		url: 'https://alef.ae-collective.com/log.php',
+		method: "GET",
+		type: "GET",
+		dataType: "json",
+		data: data
+	  }).setRequestHeader( 'referer', 'https://alef.aero' )
+	  .success(
+		  function(response) { 
+			console.log("ae logged"); 
+			if (success) $("#thank-you").removeClass('final-loading');
+		}
+	  ).error (
+		function(response) { 
+			console.log('ae logged');
+			if (success) $("#thank-you").removeClass('final-loading');
+		}
+	  );
+}
