@@ -862,6 +862,7 @@
 
 							if (form.attr('data-form-type')=='order') {
 								processOrder(form);
+								return false;
 							}
 							else {
 
