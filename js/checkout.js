@@ -436,7 +436,7 @@ function fillForm(data=false) {
   for (var i=0; i<params_array.length; i++) {
     var curr = (data) ? data[params_array[i]] : decodeURIComponent( new URLSearchParams(window.location.search).get("user_"+params_array[i]) );
     var field = $("#contact-"+params_array[i]);
-    field.attr("value",curr);
+    if (curr) if (curr!='') field.attr("value",curr);
     if (params_array[i]=='advance')
     {
       $(".preorder")[(curr>150) ? 1 : 0].dispatchEvent(new Event("click"));
