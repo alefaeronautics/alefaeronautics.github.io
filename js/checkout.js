@@ -339,6 +339,65 @@ async function checkStatus() {
     }
 }
 
+// Fetches the payment intent status after payment submission
+async function checkStatusOcean() {
+
+  var URIdata = extractData();
+
+  if (tester) console.log(URIdata);
+
+  if (!URIdata['payment_intent']) {
+    return;
+  }
+
+  var send_data = {
+    'pid':URIdata['payment_intent']
+  }
+
+  var params_array = ['name','email','country','advance','referral'];
+  for (const param of params_array)
+    send_data[param] = URIdata['user_'+param];
+
+  const result = await $.ajax({
+    url: "https://oyster-app-lxo6h.ondigitalocean.app/preorder/",
+    type: "POST",
+    data: send_data
+  });
+
+  if (tester) console.log(result);
+
+  const messages = {
+    'default': (CN) ? "您的付款未成功，请重试" : "Your payment was not successful, please try again."
+  }
+
+  if (result.css!='') $("#thank-you").addClass(result.css);
+  if (result.content) { 
+    thankYouNew(result.content.id,result.content.queue);
+    referral_code = result.content.id;
+    shareLinks();
+  }
+  if (result.message) showMessage(messages[result.message]);
+  if (result.form) fillForm(result.form);
+  if (result.repeat) setTimeout(checkStatusOcean,1000);
+  for (const logentry of result.ae)
+    {
+      log_data['data'] = logentry;
+      aeLog(log_data);
+    }
+  if (result.maildata) 
+       // Create a button to resend email
+        $("#resend-mail").on('click', function() {
+            if (!$(this).hasClass("disabled"))
+            {
+            console.log("resend mail");
+            confirmOrder(maildata);
+            $(this).text( (CN) ? ' 邮件已发送！' : 'Mail sent!');
+            $(this).addClass('disabled');
+            }
+          });
+
+}
+
 // ------- UI helpers -------
 
 function showMessage(messageText) {
@@ -368,10 +427,10 @@ function setLoading(isLoading) {
 }
 
 //fill form with data from URI
-function fillForm() {
+function fillForm(data=false) {
   var params_array = ['name','email','country','advance'];
   for (var i=0; i<params_array.length; i++) {
-    var curr = decodeURIComponent( new URLSearchParams(window.location.search).get("user_"+params_array[i]) );
+    var curr = (data) ? data[params_array[i]] : decodeURIComponent( new URLSearchParams(window.location.search).get("user_"+params_array[i]) );
     var field = $("#contact-"+params_array[i]);
     field.attr("value",curr);
     if (params_array[i]=='advance')
@@ -414,4 +473,18 @@ const checkAmount = function(amount) {
 		aeLog(log_data,false);
 	}
 	return return_amount;
+}
+
+function extractData() {
+  const queryString = window.location.search.substring(1);
+  const queryParams = {};
+  const queryParametersArray = queryString.split('&');
+
+  for (const param of queryParametersArray) {
+    const [key, value] = param.split('=');
+    // DecodeURIComponent to handle special characters in values
+    queryParams[key] = decodeURIComponent(value || '');
+  }
+
+  return queryParams;
 }

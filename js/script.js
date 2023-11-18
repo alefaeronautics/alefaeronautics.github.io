@@ -1219,6 +1219,21 @@ function thankYou(order_number, order_type)
 	window.scroll(0,window.scrollY+1);
 }
 
+function thankYouNew(order_number, order_type)
+{
+	$('#order-number').text(order_number);
+	if (!CN) $('#order-type').text(order_type);
+	$('#referral-number').text(referral_number);
+	$('#referral-link').text($('#referral-link').text() + order_number );
+	$("#refund-number").text(order_number);
+	$("#order-block").attr('style',"display: none");
+	$("#thank-you").attr('style',"display: block");
+	$("#thank-you").removeClass('final-loading');
+	$(window).trigger("scroll");
+	//document.getElementById('thank-you').scrollIntoView();
+	//window.scroll(0,window.scrollY+1);
+}
+
 function processOrder(form) {
 	var choice;
 	$(".queue-option").each(function(){
