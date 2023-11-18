@@ -380,7 +380,7 @@ async function checkStatusOcean() {
   if (result.message) showMessage(messages[result.message]);
   if (result.form) { 
     fillForm(result.form);
-    setTimeout(showFilledForm,1000);
+    if (!result.content) setTimeout(showFilledForm,1000);
   }
   if (result.repeat) setTimeout(checkStatusOcean,1000);
   for (const logentry of result.ae)
