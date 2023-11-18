@@ -367,7 +367,8 @@ async function checkStatusOcean() {
   if (tester) console.log(result);
 
   const messages = {
-    'default': (CN) ? "您的付款未成功，请重试" : "Your payment was not successful, please try again."
+    'default': (CN) ? "您的付款未成功，请重试" : "Your payment was not successful, please try again.",
+    'notfound': (CN) ? "未找到，请重试" : "Not found, please try again."
   }
 
   if (result.css!='') $("#thank-you").addClass(result.css);
@@ -377,7 +378,10 @@ async function checkStatusOcean() {
     shareLinks();
   }
   if (result.message) showMessage(messages[result.message]);
-  if (result.form) fillForm(result.form);
+  if (result.form) { 
+    fillForm(result.form);
+    setTimeout(showFilledForm,1000);
+  }
   if (result.repeat) setTimeout(checkStatusOcean,1000);
   for (const logentry of result.ae)
     {
