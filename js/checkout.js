@@ -301,6 +301,7 @@ function fillForm(data=false) {
     }
   }
 
+  /* potentially unnecessary
   const clientSecret = new URLSearchParams(window.location.search).get(
     "payment_intent_client_secret"
   );
@@ -309,7 +310,7 @@ function fillForm(data=false) {
     log_data['data'] = "Payment request retrieved " + clientSecret.split('_')[1]; 
     aeLog(log_data,false);
     displayStripe(clientSecret,emailAddress);
-  }
+  }*/
 
 }
 
