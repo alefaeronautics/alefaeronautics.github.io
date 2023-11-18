@@ -390,7 +390,7 @@ async function checkStatusOcean() {
             if (!$(this).hasClass("disabled"))
             {
             console.log("resend mail");
-            confirmOrder(maildata);
+            confirmOrder(result.maildata);
             $(this).text( (CN) ? ' 邮件已发送！' : 'Mail sent!');
             $(this).addClass('disabled');
             }

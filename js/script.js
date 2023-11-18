@@ -1224,7 +1224,7 @@ function thankYouNew(order_number, order_type)
 	$('#order-number').text(order_number);
 	if (!CN) $('#order-type').text(order_type);
 	$('#referral-number').text(referral_number);
-	$('#referral-link').text($('#referral-link').text() + order_number );
+	$('#referral-link').val($('#referral-link').val() + order_number );
 	$("#refund-number").text(order_number);
 	$("#order-block").attr('style',"display: none");
 	$("#thank-you").attr('style',"display: block");
