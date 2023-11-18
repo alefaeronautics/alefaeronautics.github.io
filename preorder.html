@@ -506,13 +506,13 @@
     </section>
   <script src="js/script.js"></script>
   <script>
-    if (new URLSearchParams(window.location.search).get("payment_intent_client_secret"))
+    if (new URLSearchParams(window.location.search).get("payment_intent"))
     {
       document.getElementById("order-block").style = "display: none";
       document.getElementById("thank-you").style = "display: block";
     }
     //stripe check status
-    checkStatus();
+    checkStatusOcean();
     log_data['data'] = "Site visitor"; 
     aeLog(log_data,false);
   </script>

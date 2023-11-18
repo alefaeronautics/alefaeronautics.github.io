@@ -176,170 +176,6 @@ async function handleSubmit(e) {
 }
 
 // Fetches the payment intent status after payment submission
-async function checkStatus() {
-  const clientSecret = new URLSearchParams(window.location.search).get(
-    "payment_intent_client_secret"
-  );
-
-  if (!clientSecret) {
-    return;
-  }
-
-  const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
-
-  if (tester) console.log(paymentIntent);
-
-  switch (paymentIntent.status) {
-    case "succeeded":
-      //success sequence
-
-      const has_refunds = await $.ajax({
-        url: "https://oyster-app-lxo6h.ondigitalocean.app/stripe/",
-        type: "POST",
-        data: {
-          id: paymentIntent.id,
-          type: 'refunds'
-        }
-      });
-    
-      const refund_data = await has_refunds.result;
-
-      if (!has_refunds.error) {
-        if (refund_data) {
-          var refund_number = paymentIntent.id.split("_")[1];
-          $("#refund-number").text(refund_number);
-          $("#thank-you").addClass('refunded').removeClass('final-loading');
-          console.log("has been refunded");
-          log_data['data'] =  "Repeat view on refunded "+ refund_number; 
-          aeLog(log_data,false);
-          return;
-        }
-      }
-      else {
-        log_data['data'] =  has_refunds.result; 
-        aeLog(log_data,false);
-      }
-
-      //showMessage("Payment succeeded!");
-      console.log("success sequence");
-      try {
-        var formdata = collectData();
-        var value = parseInt(paymentIntent.amount)/100;
-        var user_advance = new URLSearchParams(window.location.search).get("user_advance");
-        var user_referral = new URLSearchParams(window.location.search).get("user_referral");
-        formdata['advance'] = (user_advance) ? user_advance : formdata['advance'];
-        formdata['amount_paypal'] = value;
-        formdata['completed'] = (value>150) ? "priority" : "general";
-        formdata['referral'] = (user_referral) ? user_referral : referral_code;
-        formdata['paypal_id'] = paymentIntent.id;
-        formdata['transaction_id'] = paymentIntent.id.split("_")[1];
-        var billingDetails = paymentIntent.billing_details;
-
-        if (formdata['name']=='') formdata['name'] = new URLSearchParams(window.location.search).get("user_name");
-        if (formdata['country']=='') formdata['country'] = new URLSearchParams(window.location.search).get("user_country");
-        if (formdata['email']=='') formdata['email'] = new URLSearchParams(window.location.search).get("user_email");
-
-        formdata['name_paypal'] = (billingDetails) ? billingDetails.name : '';
-        formdata['email_paypal'] = paymentIntent.receipt_email;
-        // Concatenate address values into a single string
-        formdata['address_paypal'] = (billingDetails) ? [
-          billingDetails.address.line1,
-          billingDetails.address.line2,
-          billingDetails.address.city,
-          billingDetails.address.state,
-          billingDetails.address.postal_code,
-          billingDetails.address.country
-        ].filter(Boolean).join(", ") : '';
-
-        var maildata = { 
-          'email':((formdata['email']!="") ? formdata['email'] : paymentIntent.receipt_email ),
-          'name': ((formdata['name']!="") ? formdata['name'] : formdata['name_paypal']),
-          'order_number': formdata['transaction_id'],
-          'ref_number' : referral_number,
-          'queue' : formdata['completed'],
-          'amount' : value
-        };
-
-      }
-      catch(error) {
-        log_data['data'] = String(error); 
-        aeLog(log_data,false);
-      }
-      finally {
-        
-
-        if (tester) console.log("check if logged");
-        var xhr = $.ajax({
-            url: "https://alef.ae-collective.com/checker.php",
-            method: "GET",
-            type: "GET",
-            dataType: "json",
-            data: {id:formdata['transaction_id']}
-            }).success(
-              function (result) { 
-                if (!result) {
-                  updateSheets(formdata,'Stripe approved ' + formdata['transaction_id']);
-                  confirmOrder(maildata);
-                }
-                else {
-                  $("#thank-you").removeClass('final-loading');
-                  log_data['data'] = "Repeat view " + formdata['transaction_id'];
-                  aeLog(log_data,false);
-                }
-            }
-          ).error(function() {
-            //if cannot connect update anyways
-            updateSheets(formdata,'Stripe approved ' + formdata['transaction_id']);
-            log_data['data'] = "Possible duplicate " + formdata['transaction_id'];
-            aeLog(log_data,false);
-          });
-
-        // Create a button to resend email
-        $("#resend-mail").on('click', function() {
-            if (!$(this).hasClass("disabled"))
-            {
-            console.log("resend mail");
-            confirmOrder(maildata);
-            $(this).text( (CN) ? ' 邮件已发送！' : 'Mail sent!');
-            $(this).addClass('disabled');
-            }
-          });
-
-        referral_code = formdata['transaction_id'];
-        shareLinks();
-
-        // Show a success message within this page, e.g.
-        thankYou(formdata['transaction_id'],formdata['completed']);
-
-      }
-      break;
-      case "processing":
-        //keep refreshing
-        //showMessage("Your payment is processing.");  
-        $("#thank-you").addClass('processing');
-        setTimeout(checkStatus,1000);      
-        break;
-      //case "requires_payment_method":
-      default:
-        //display error and then fill the form with data and show
-        
-        showMessage((CN) ? "您的付款未成功，请重试" : "Your payment was not successful, please try again.");
-        //showMessage((CN) ? "出了些问题" : "Something went wrong.");
-
-        //$("#thank-you").addClass('error');
-        $("#thank-you").addClass('again');
-
-        fillForm();
-        setTimeout(showFilledForm,1000);
-
-        log_data['data'] = 'Error ' + paymentIntent.status + ' ' + JSON.stringify(collectData()); 
-        aeLog(log_data,false);
-
-        break;
-    }
-}
-
-// Fetches the payment intent status after payment submission
 async function checkStatusOcean() {
 
   var URIdata = extractData();
@@ -393,10 +229,23 @@ async function checkStatusOcean() {
         $("#resend-mail").on('click', function() {
             if (!$(this).hasClass("disabled"))
             {
-            console.log("resend mail");
-            confirmOrder(result.maildata);
-            $(this).text( (CN) ? ' 邮件已发送！' : 'Mail sent!');
-            $(this).addClass('disabled');
+              var el = $(this);
+            //console.log("resend mail");
+              $.ajax({
+                url: "https://oyster-app-lxo6h.ondigitalocean.app/brevo/",
+                type: "POST",
+                data: result.maildata
+                }).success(
+                function () {
+                  el.text( (CN) ? ' 邮件已发送！' : 'Mail sent!');
+                  el.addClass('disabled');
+                  log_data['data'] = 'Mail resend success';
+                  aeLog(log_data);
+                })
+                .error(function(){
+                  log_data['data'] = 'Mail resend error '+result.maildata.email;
+                  aeLog(log_data);
+                });
             }
           });
 

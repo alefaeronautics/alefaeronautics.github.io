@@ -1127,28 +1127,6 @@ $("#load-more").on('click',function(){
 
 /* preorder page specific */
 
-async function confirmOrder(orderdata)
-{
-	orderdata['form-type'] = "order";
-	orderdata['page'] = curPage;
-	orderdata['url'] = window.location.href;
-
-	const brevoApp = await $.ajax({
-		url: "https://oyster-app-lxo6h.ondigitalocean.app/brevo/",
-		type: "POST",
-		data: orderdata
-	  });
-
-	const has_error = await brevoApp.error;
-
-	if (has_error) {
-		log_data['data'] = "Mailsend error: " + JSON.stringify(orderdata);
-		aeLog(log_data,false);
-	}
-
-}
-
-
 function collectData()
 {
 	var formdata = {};
@@ -1164,47 +1142,6 @@ function fullDate(now) {
 	var result = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
 	return result;
 	//return now.getFullYear() + "/" + String(now.getMonth()+1).padStart(2,"0") + "/" + String(now.getDate()).padStart(2,"0") + " " + now.getHours().padStart(2,"0") + ":" + now.getMinutes().padStart(2,"0");
-}
-
-function updateSheets(/*dataurl,*/formdata,success) {
-	//delete formdata['url'];
-	//delete formdata['page'];
-	//orders
-	var g_url = "https://script.google.com/macros/s/AKfycby8F7eb6BmJTSITGwWR2hDg7bQghiPGZ-ujoPMOA4NGBosLfmNtMSDfSgdL8SIDiOcB9Q/exec";
-	//wishlist
-	//var g_url = "https://script.google.com/macros/s/AKfycbyZiT7luUJQWIUN8v8ii6EFlagliIaIW9Iv-wJ72OQsNCpftk2NOPE2IA6J1ujOHOfTZA/exec";
-	formdata['user_ip'] = user_ip;
-
-	var xhr = $.ajax({
-		url: g_url,
-		method: "GET",
-		type: "GET",
-		dataType: "json",
-		data: formdata
-	  }).success(
-		  function () { 
-			console.log("list updated");
-			if (success) {
-				if ($("#thank-you").length) {
-					$("#thank-you").removeClass('final-loading');
-					log_data['data'] = success;
-					aeLog(log_data,false);
-				}
-				else { 
-					formClear(true,true,'Your request has been sent!');
-					log_data['data'] = 'Request added to the wishlist;';
-					aeLog(log_data,false);
-				}
-			}
-		}
-	  ).error (
-		function (xhrresponse) { 
-			log_data['data'] = "Google sheets error: " + JSON.stringify(xhrresponse) + JSON.stringify(formdata); 
-			aeLog(log_data, success);
-			updateSheets(formdata,success);
-		}
-	  );
-
 }
 
 function thankYou(order_number, order_type)
