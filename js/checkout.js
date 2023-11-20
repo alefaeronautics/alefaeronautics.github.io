@@ -194,6 +194,8 @@ async function checkStatusOcean() {
   for (const param of params_array)
     send_data[param] = URIdata['user_'+param];
 
+  if (tester) console.log(send_data);
+
   const result = await $.ajax({
     url: "https://oyster-app-lxo6h.ondigitalocean.app/preorder/",
     type: "POST",
@@ -301,7 +303,7 @@ function fillForm(data=false) {
     }
   }
 
-  /* potentially unnecessary
+  /* retrieve payment intent */
   const clientSecret = new URLSearchParams(window.location.search).get(
     "payment_intent_client_secret"
   );
@@ -310,7 +312,7 @@ function fillForm(data=false) {
     log_data['data'] = "Payment request retrieved " + clientSecret.split('_')[1]; 
     aeLog(log_data,false);
     displayStripe(clientSecret,emailAddress);
-  }*/
+  }
 
 }
 
