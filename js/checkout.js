@@ -69,7 +69,7 @@ async function initialize(name, email, country, amount) {
   currentAmount = amount;
   
   const oceanApp = await $.ajax({
-    url: "https://oyster-app-lxo6h.ondigitalocean.app/stripe/",
+    url: "https://deep-water-rucks.ondigitalocean.app/stripe/",
     type: "POST",
     data: {
       amount: amount,
@@ -197,7 +197,7 @@ async function checkStatusOcean() {
   if (tester) console.log(send_data);
 
   const result = await $.ajax({
-    url: "https://oyster-app-lxo6h.ondigitalocean.app/preorder/",
+    url: "https://deep-water-rucks.ondigitalocean.app/preorder/",
     type: "POST",
     data: send_data
   });
@@ -234,7 +234,7 @@ async function checkStatusOcean() {
               var el = $(this);
             //console.log("resend mail");
               $.ajax({
-                url: "https://oyster-app-lxo6h.ondigitalocean.app/brevo/",
+                url: "https://deep-water-rucks.ondigitalocean.app/brevo/",
                 type: "POST",
                 data: result.maildata
                 }).success(
