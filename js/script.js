@@ -887,11 +887,11 @@
 					},
 					error: function (result) {
 						formClear(result.statusText,false,'',false);
-						aeLog({'data':curPage + ' mail:' + ((result.error) ? ' Error ' : '') + result.result});						
+						aeLog({'data':curPage + ' mail:' + ((result.error) ? ' Error ' : '') + JSON.stringify(result.result)});						
 					},
 					success: function (result) {
 						formClear(result.error,false,"Mail sent!",true);
-						aeLog({'data':curPage + ' mail:' + ((result.error) ? ' Error ' : '') + result.result});						
+						aeLog({'data':curPage + ' mail:' + ((result.error) ? ' Error ' : '') + JSON.stringify(result.result)});						
 					}
 				});
 			}
