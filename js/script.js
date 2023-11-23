@@ -879,17 +879,19 @@
 							}
 
 						} else {
-							aeLog({ 'data': "Form validation error on "+curPage+": " + JSON.stringify(collectData())},false);
+							aeLog({ 
+								'data': "Form validation error on "+curPage+ ( (curPage=='Preorder') ? ": " + JSON.stringify(collectData()) : '')
+							},false);
 							return false;
 						}
 					},
 					error: function (result) {
-						aeLog({'data':curPage + ' mail:' + JSON.stringify(result)});
 						formClear(result.statusText,false,'',false);
+						aeLog({'data':curPage + ' mail:' + ((result.error) ? ' Error ' : '') + result.result});						
 					},
 					success: function (result) {
-						aeLog({'data':curPage + ' mail:' + JSON.stringify(result)});
 						formClear(result.error,false,"Mail sent!",true);
+						aeLog({'data':curPage + ' mail:' + ((result.error) ? ' Error ' : '') + result.result});						
 					}
 				});
 			}
