@@ -194,6 +194,8 @@ async function checkStatusOcean() {
   for (const param of params_array)
     send_data[param] = URIdata['user_'+param];
 
+  send_data['user_ip'] = user_ip;
+
   if (tester) console.log(send_data);
 
   const result = await $.ajax({
