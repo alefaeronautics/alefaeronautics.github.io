@@ -194,8 +194,8 @@ async function checkStatusOcean() {
   for (const param of params_array)
     send_data[param] = URIdata['user_'+param];
 
-  send_data['user_ip'] = "";
-  await $.getJSON("https://api.ipify.org?format=json", function(data) {	send_data['user_ip'] = data.ip; });
+  //send_data['user_ip'] = "";
+  //await $.getJSON("https://api.ipify.org?format=json", function(data) {	send_data['user_ip'] = data.ip; });
 
   if (tester) console.log(send_data);
 
