@@ -164,12 +164,13 @@ async function handleSubmit(e) {
   // your `return_url`. For some payment methods like iDEAL, your customer will
   // be redirected to an intermediate site first to authorize the payment, then
   // redirected to the `return_url`.
+  var msg = (error.message) ? error.message : "An unexpected error occurred.";
   if (error.type === "card_error" || error.type === "validation_error") {
-    showMessage(error.message);
+    showMessage(msg);
   } else {
-    showMessage( (CN) ? "一个意料之外的问题发生了" : "An unexpected error occurred.");
+    showMessage( (CN) ? "一个意料之外的问题发生了" : msg);
   }
-  log_data['data'] =  error.type + ' ' + error.message + ": " + JSON.stringify(collectData()); 
+  log_data['data'] =  error.type + ' ' + msg + ": " + JSON.stringify(collectData()); 
   aeLog(log_data,false);
 
   setLoading(false);
