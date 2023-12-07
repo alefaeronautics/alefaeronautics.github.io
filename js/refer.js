@@ -5,6 +5,7 @@ const discount = {
             "forgetthetraffic100": 100,
             "flyabovetraffic125": 125,
             "nordic": 100,
+            "aetest": 1,
             "other": 125
         }
     if (this.code == "") return 150;
