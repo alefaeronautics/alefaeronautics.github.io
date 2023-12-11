@@ -1189,7 +1189,7 @@ function processOrder(form) {
 }
 
 $(".preorder-input").each(function(){
-	$(this).on('click, change',function(e){
+	$(this).on('click, change', function(e){
 		var amount = ($(this).attr('data-choice')=='priority') ? 1500 : discount.getPrice();
 		//console.log(amount);
 		$("#contact-advance").attr('value', amount);
