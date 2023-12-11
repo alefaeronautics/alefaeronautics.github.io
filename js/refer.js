@@ -51,7 +51,7 @@ const discount1 = {
 }
 
 var referral1_code = discount1.getCode();
-var preorder1_price = await discount1.getPrice();
+var preorder1_price = discount1.getPrice();
 
 
 var referral_code = discount.getCode();
