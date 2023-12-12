@@ -34,7 +34,7 @@ const preorder_price = discount.getPrice();
 const referral_number = 7;
 
 function updatePrice() {
-    if (ocean_value != 150) {
+    if (ocean_value) if (ocean_value != 150) {
         $("#preorder-price").html("<s style='font-weight: normal !important;'>$150</s>$" + ocean_value);
         $("#order-label").innerHTML = ((CN) ? "普通" : "General Queue") + " ($" + ocean_value + ")";
         $("#contact-advance").val(ocean_value);
