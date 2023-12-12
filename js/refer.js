@@ -14,7 +14,7 @@ const discount = {
     },
     init: function() {
         this.getCode();
-        if (code!='') {
+        if (this.code!='') {
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = "https://deep-water-rucks.ondigitalocean.app/referral/?code="+this.code;
