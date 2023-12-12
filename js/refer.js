@@ -30,12 +30,12 @@ const discount = {
 discount.init();
 
 var referral_code = discount.getCode();
-if (referral_code!='') $("#preorder-price").addClass('loading');
 //const preorder_price = discount.getPrice();
 const referral_number = 7;
 
 function updatePrice() {
-    if (ocean_value) { 
+    if (referral_code!='') $("#preorder-price").addClass('loading');
+    if (typeof ocean_value !== 'undefined') { 
         if (ocean_value != 150) {
             $("#preorder-price").html("<s style='font-weight: normal !important;'>$150</s>$" + ocean_value);
             $("#order-label").innerHTML = ((CN) ? "普通" : "General Queue") + " ($" + ocean_value + ")";
