@@ -1,17 +1,7 @@
 const discount = {
     code: "",
     getPrice: function() {
-        var codes = {
-            "forgetthetraffic100": 100,
-            "flyabovetraffic125": 125,
-            "nordic": 100,
-            "aetest": 1,
-            "other": 125
-        }
-    if (this.code == "") return 150;
-    if (typeof codes[this.code] === "undefined")
-        return codes["other"];
-    else return codes[this.code];
+        return (ocean_value) ? ocean_value : 150;
     },
     getCode: function() {
         var url = window.location.href;
@@ -21,23 +11,32 @@ const discount = {
             this.code = (user_ref) ? user_ref : "";
         }
         return this.code;
+    },
+    init: function() {
+        this.getCode();
+        if (code!='') {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = "https://deep-water-rucks.ondigitalocean.app/referral/?code="+this.code;
+            script.onload = function() {
+                updatePrice();
+            };
+            // Append the script element to the document
+            document.head.appendChild(script);
+        }
     }
 }
 
-async function getPrice(code) {
-    const oceanRefer = await $.ajax({
-        url: "https://deep-water-rucks.ondigitalocean.app/referral/",
-        type: "POST",
-        data: {
-          "code": code
-        }
-      });
-      var result = await oceanRefer.value;
-      return parseInt(result);
-}
+discount.init();
 
 var referral_code = discount.getCode();
-var preorder_price = discount.getPrice();
-
+const preorder_price = discount.getPrice();
 const referral_number = 7;
 
+function updatePrice() {
+    if (ocean_value != 150) {
+        $("#preorder-price").html("<s style='font-weight: normal !important;'>$150</s>$" + ocean_value);
+        $("#order-label").innerHTML = ((CN) ? "普通" : "General Queue") + " ($" + ocean_value + ")";
+        $("#contact-advance").val(ocean_value);
+      }
+}

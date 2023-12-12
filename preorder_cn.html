@@ -68,6 +68,10 @@
         content: "请检查“促销”文件夹" !important;
       }
     </style>
+    <script>
+      const tester = false;
+      const CN = true;
+    </script>
     <script> 
         $(function(){
           $("#footer").load("includes/footer.html"); 
@@ -77,10 +81,6 @@
     <script src="js/refer.js"></script>
     <link rel="stylesheet" href="css/checkout.css" />
     <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        const tester = false;
-        var CN = true;
-    </script>
   <script src="js/checkout.js"></script>
   </head>
   
@@ -455,12 +455,8 @@
                               <p class="mb-3">如果您有任何问题或疑虑，请发送电子邮件至<a href="mailto:orders@alef.aero">orders@alef.aero</a> 请附上您的确认/交易编号</p>
                             </div>
                           <script>
-                            if (preorder_price!=150) { 
-                              document.getElementById("preorder-price").innerHTML="<s style='font-weight: normal !important;'>$150</s>$"+preorder_price;
-                              document.getElementById("order-label").innerHTML="普通 ($"+preorder_price+") ";
-                            }
-                          document.getElementById("contact-advance").value= preorder_price;
-                        </script>
+                            updatePrice();
+                          </script>
           
                     </div>
                     <div class="cell-xs-12 cell-md-4 self-center order-form final-loading" id="thank-you" style="display: none;">

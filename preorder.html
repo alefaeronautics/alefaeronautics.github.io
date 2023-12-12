@@ -45,6 +45,10 @@
     }
   </style>
   <script>
+    const tester = false;
+    const CN = false;
+  </script>
+  <script>
     $(function () {
       $("#footer").load("includes/footer.html");
     });
@@ -54,10 +58,6 @@
 
   <link rel="stylesheet" href="css/checkout.css" />
     <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        const tester = false;
-        var CN = false;
-    </script>
   <script src="js/checkout.js"></script>
 
 </head>
@@ -453,11 +453,7 @@
               </div>
 
               <script>
-                if (preorder_price != 150) {
-                  document.getElementById("preorder-price").innerHTML = "<s style='font-weight: normal !important;'>$150</s>$" + preorder_price;
-                  document.getElementById("order-label").innerHTML = "General Queue ($" + preorder_price + ")";
-                }
-                document.getElementById("contact-advance").value = preorder_price;
+                updatePrice();
               </script>
 
             
