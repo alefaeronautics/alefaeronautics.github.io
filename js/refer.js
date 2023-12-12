@@ -1,7 +1,7 @@
 const discount = {
     code: "",
     getPrice: function() {
-        return (ocean_value) ? ocean_value : 150;
+        return (typeof ocean_value !== 'undefined') ? ocean_value : 150;
     },
     getCode: function() {
         var url = window.location.href;
