@@ -30,7 +30,7 @@ const discount = {
 discount.init();
 
 var referral_code = discount.getCode();
-const preorder_price = discount.getPrice();
+//const preorder_price = discount.getPrice();
 const referral_number = 7;
 
 function updatePrice() {
