@@ -33010,6 +33010,18 @@ a .order-caption { color: white; font-weight: normal; cursor: pointer;}
 
 }
 
+#preorder-price.loading:before {
+    content: "";
+    background-image: url(./../images/ajax-loader.gif);
+    width: 30px;
+    height: 23px;
+    filter: invert(1);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    vertical-align: bottom;
+}
 
 
 .order-form h1 small {font-size: 80%; color: white; position: relative; left: -10px;}
