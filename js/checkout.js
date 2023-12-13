@@ -327,7 +327,7 @@ function showFilledForm() {
   window.dispatchEvent(new Event("scroll"));
 }
 
-function checkAmount(amount) {
+ checkAmount = function(amount) {
 	var choice = $('.form-check-input[name="advance"]:checked').attr('data-choice');
 	var return_amount = (choice=='priority') ? 1500 : discount.getPrice();
 	if (amount!=return_amount) {
