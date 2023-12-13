@@ -327,9 +327,9 @@ function showFilledForm() {
   window.dispatchEvent(new Event("scroll"));
 }
 
-const checkAmount = async function(amount) {
+function checkAmount(amount) {
 	var choice = $('.form-check-input[name="advance"]:checked').attr('data-choice');
-	var return_amount = (choice=='priority') ? 1500 : await getPrice();
+	var return_amount = (choice=='priority') ? 1500 : discount.getPrice();
 	if (amount!=return_amount) {
 		$("#contact-advance").attr('value',return_amount);
 		log_data['data'] = "Price mismatch detected. Should be: " + return_amount + ', is: ' + amount;
