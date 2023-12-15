@@ -1247,8 +1247,7 @@ function aeLog(data, success) {
 	data["date"] = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
 	if (CN) data["data"] = "CN " + data["data"];
 	var xhr = $.ajax({
-//		url: 'https://alef.ae-collective.com/log.php',
-		url: 'https://ae-collective.com/alef/log.php',
+		url: 'https://alef.ae-collective.com/log.php',
 		method: "GET",
 		type: "GET",
 		dataType: "json",
