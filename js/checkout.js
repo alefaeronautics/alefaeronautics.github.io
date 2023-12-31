@@ -287,6 +287,11 @@ function setLoading(isLoading) {
 
 //fill form with data from URI
 function fillForm(data=false) {
+
+  const clientSecret = new URLSearchParams(window.location.search).get(
+    "payment_intent_client_secret"
+  );
+
   var params_array = ['name','email','country','advance'];
   for (var i=0; i<params_array.length; i++) {
     var curr = (data) ? data[params_array[i]] : decodeURIComponent( new URLSearchParams(window.location.search).get("user_"+params_array[i]) );
@@ -296,7 +301,7 @@ function fillForm(data=false) {
     if (params_array[i]=='advance')
     {
       $(".preorder")[(curr>150) ? 1 : 0].dispatchEvent(new Event("click"));
-      currentAmount = curr;
+      if (clientSecret) currentAmount = curr;
     }
     else {
       if (params_array[i]=='email') emailAddress = curr;
@@ -308,10 +313,6 @@ function fillForm(data=false) {
   }
 
   /* retrieve payment intent */
-  const clientSecret = new URLSearchParams(window.location.search).get(
-    "payment_intent_client_secret"
-  );
-
   if (clientSecret) {
     log_data['data'] = "Payment request retrieved " + clientSecret.split('_')[1]; 
     aeLog(log_data,false);
@@ -327,9 +328,9 @@ function showFilledForm() {
   window.dispatchEvent(new Event("scroll"));
 }
 
- checkAmount = function(amount) {
+const checkAmount = function(amount) {
 	var choice = $('.form-check-input[name="advance"]:checked').attr('data-choice');
-	var return_amount = (choice=='priority') ? 1500 : discount.getPrice();
+	var return_amount = (choice=='priority') ? priority_price : discount.getPrice();
 	if (amount!=return_amount) {
 		$("#contact-advance").attr('value',return_amount);
 		log_data['data'] = "Price mismatch detected. Should be: " + return_amount + ', is: ' + amount;

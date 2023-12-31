@@ -3,7 +3,7 @@ if (typeof CN === 'undefined') var CN = false;
 
 function createMenu(where)
 {
-    menu = Array( 
+    let menu = Array( 
         { url: 'story.html', title: 'Our&nbsp;Story',class:''},
         { url: 'careers.html', title: 'Careers',class:''},
         { url: 'investors.html', title: 'Investors',class:''},
