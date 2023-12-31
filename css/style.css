@@ -32656,6 +32656,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 	content: "\e0db";
 }
 
+/* additional styles */
 
 .h-100 { height: 100vh !important; }
 .h-100 .range {height: 100vh;}
