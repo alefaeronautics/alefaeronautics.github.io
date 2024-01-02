@@ -79,7 +79,11 @@ async function initialize(name, email, country, amount) {
 
   const clientSecret = await oceanApp.result;
 
-  if (!oceanApp.error) displayStripe(clientSecret,emailAddress);
+  if (!oceanApp.error) { 
+    displayStripe(clientSecret,emailAddress);
+    log_data['data'] = "Stripe return " + clientSecret.split("_secret")[0]; 
+    aeLog(log_data,false);
+  }
   else {
     log_data['data'] =  oceanApp.result; 
     aeLog(log_data,false);
