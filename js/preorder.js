@@ -21,6 +21,11 @@
   }
   window.addEventListener('scroll', bgBehavior);
 
+window.addEventListener('beforeunload', function (e) {
+    log_data['data'] = "Page closing"; 
+    aeLog(log_data,false);     
+});
+
   
   var scrolled_out = false;
   // Create an IntersectionObserver callback function
