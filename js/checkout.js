@@ -118,12 +118,15 @@ function displayStripe(clientSecret,emailAddress) {
   };
 
   const paymentElement = elements.create("payment", paymentElementOptions);
-  paymentElement.on('change', function(event) {
+
+  var events_array = ['change', 'focus', 'blur', 'escape','click','loaderror'];
+  for (const current_event of events_array)
+    paymentElement.on(current_event, function(event) {
     if (!event.empty) {
-      log_data['data'] =  "Type in payment info"; 
+      log_data['data'] =  "Type in payment info : " + current_event; 
       aeLog(log_data,false);
-    }
-  });
+      }
+    });
 
   document.querySelector("#submit").disabled = true;
 
