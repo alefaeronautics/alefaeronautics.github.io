@@ -33,9 +33,9 @@ window.addEventListener('beforeunload', function (e) {
     return (entries, observer) => {
       entries.forEach(entry => {
       if (entry.isIntersecting) {
-              if ( ((index==-1)&&scrolled_out) || ( !scrolled_out&&(index>=0) )) 
+              if ( ((index==-1)&&scrolled_out) || ( !scrolled_out&&(index>=0) ) || (index==4) ) 
             { 
-              log_data['data'] = (index==-1) ? "Back to order form" : "Page browse";// block #" + (index+1); 
+              log_data['data'] = (index==-1) ? "Back to order form" : ( (index==4) ? "Page browse: last block" : "Page browse");// block #" + (index+1); 
               aeLog(log_data,false); 
               //console.log(log_data['data']);
             }
