@@ -28,18 +28,20 @@ window.addEventListener('beforeunload', function (e) {
 
   
   var scrolled_out = false;
+  var last_block = false;
   // Create an IntersectionObserver callback function
   function createIntersectionCallback(index) {
     return (entries, observer) => {
       entries.forEach(entry => {
       if (entry.isIntersecting) {
-              if ( ((index==-1)&&scrolled_out) || ( !scrolled_out&&(index>=0) ) || (index==3) ) 
+            if ( ((index==-1)&&scrolled_out) || ( !scrolled_out&&(index>=0) ) || ((index==3)&&!last_block) ) 
             { 
-              log_data['data'] = (index==-1) ? "Back to order form" : ( (index==3) ? "Page browse: last block" : "Page browse");// block #" + (index+1); 
+              log_data['data'] = (index==-1) ? "Back to order form" : "Page browse" + ( (index==3) ? " last block" : "");// block #" + (index+1); 
               aeLog(log_data,false); 
               //console.log(log_data['data']);
             }
           scrolled_out = (index!=-1);
+          last_block = (index==3);
       }
       });
     };
