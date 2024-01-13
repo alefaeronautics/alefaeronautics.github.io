@@ -157,14 +157,19 @@ async function handleSubmit(e) {
     params += ((i==0) ? '?' : '&') + "user_" + params_array[i] + '=' + encodeURIComponent(formdata[params_array[i]]);
   if (referral_code!='') params += "&user_referral="+referral_code;
 
+  var full_link = "https://alef.aero/preorder"+ ( (CN) ? "_cn" : "" ) +".html"+params;
+  
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "https://alef.aero/preorder"+ ( (CN) ? "_cn" : "" ) +".html"+params,
+      return_url: full_link,
       receipt_email: emailAddress,
     },
   });
+
+  log_data['data'] =  "Client link: " + full_link; 
+  aeLog(log_data,false);
 
   // This point will only be reached if there is an immediate error when
   // confirming the payment. Otherwise, your customer will be redirected to
