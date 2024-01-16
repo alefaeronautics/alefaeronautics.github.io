@@ -1265,3 +1265,103 @@ function aeLog(data, success) {
 		}
 	  );
 }
+
+// timeline functions
+
+function readSheets(sheet_url, success_function, target_div) {
+	sheet_url = "https://docs.google.com/spreadsheets/d/e/" + sheet_url + "/pub?gid=0&single=true&output=tsv";
+	var xhr = $.ajax({
+		url: sheet_url,
+		dataType: "text"
+	  }).success(
+		  function (data) { 	
+			var sheet_data = data.split(/\r?\n|\r/);
+			var keys = sheet_data[0].split('\t');
+			var new_data = {'keys':keys,'data':[]};
+			for(var i = 1; i<sheet_data.length; i++)
+    		{
+				var tmp = sheet_data[i].split('\t');
+				sheet_data[i] = {};
+				for (var j=0; j<keys.length; j++) {
+					sheet_data[i][keys[j]] = tmp[j];
+				}
+				new_data['data'].push(sheet_data[i]);
+			}
+			success_function(new_data,target_div);
+		   }
+	  ).error (
+		function (xhr) { return false; }
+	  );
+}
+
+function displayTimeline(data,target_div) {
+	var keys = data['keys'];
+	var data = data['data'];
+	var blank = target_div.find(".timeline-div");
+	var default_image = "/images/timeline/default.jpg";
+	for (var i=data.length-1; i>=0; i--)
+	{
+		for (var j=0; j<keys.length; j++)
+		{
+			var element = blank;
+			element.attr("data-wow-delay", (data.length-i)/10+"s")
+			var child_element = element.find(".timeline-"+keys[j]);
+			var element_type = child_element.attr("data-type");
+			switch(element_type) {
+				case "link":
+					child_element.attr("href",data[i][keys[j]]);
+					break;
+				case "image":
+					child_element.attr("style","background-image:url("+( (data[i][keys[j]]!="") ? data[i][keys[j]] : default_image) +")");
+					break;
+				case "text":
+				default:
+					child_element.text(data[i][keys[j]]);
+					break;
+			}
+		}
+		target_div.append(element.prop("outerHTML"));
+	}
+	blank.prop("outerHTML","");
+	target_div.find(".timeline-div").each(function(){
+		var el = $(this);
+		el.on("click",function(){
+			window.location = el.find("a").attr("href");
+		});
+	});
+	target_div.removeClass("loading");
+}
+
+$(".timeline").each(function(index) {
+	var timeline = $(this)[0];
+	readSheets($(this).attr('data-url'),displayTimeline,$(this));
+	const key_listener = window.addEventListener('keydown', (e) => { 
+		if(isElementInViewport(timeline)) {
+			if (e.which==39)
+				timeline.scrollTo(
+				{ 
+					left: timeline.scrollLeft + $(this).find(".timeline-div")[0].getBoundingClientRect()["width"],
+					behavior: "smooth"
+				});
+			if (e.which==37) 
+				timeline.scrollTo(
+				{ 
+					left: $(this)[0].scrollLeft - $(this).find(".timeline-div")[0].getBoundingClientRect()["width"],
+					behavior: "smooth"
+				});
+		}
+
+	   });
+});
+
+function isElementInViewport(element) {
+	var rect = element.getBoundingClientRect();
+	console.log(rect);
+	console.log((window.innerHeight || document.documentElement.clientHeight));
+	return (
+	  rect.top >= 0 &&
+	  rect.left >= 0 &&
+	  rect.bottom - 120 <= (window.innerHeight || document.documentElement.clientHeight) &&
+	  rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+	);
+  }
