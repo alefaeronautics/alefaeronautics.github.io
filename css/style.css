@@ -33099,6 +33099,21 @@ footer p span:before {content: "|";}
 	width: 80px;
 	height: 80px;
 	transform: rotate(90deg); 
+	position: relative;
+}
+
+.round.forw {
+    transform: none;
+	margin-left: auto;
+	left: -50px;
+	top: -20px;
+}
+
+.round.prev {
+    transform: rotate(-180deg);
+	margin-right: auto;
+	left: 20px;
+	top: -20px;
 }
 
 .round.centered {
@@ -33140,7 +33155,7 @@ footer p span:before {content: "|";}
 }
 
 #cta{
-	width:100%; cursor: pointer; position: absolute;
+	width:100%; cursor: pointer; position: absolute; ;
 }
 
 #cta .arrow{left: 30%;}
@@ -33339,13 +33354,12 @@ footer p span:before {content: "|";}
 .timeline {
 	flex-wrap: nowrap;
 	overflow-y: hidden;
-	overflow-x: auto;
+	overflow-x: hidden;
 	scroll-snap-type: x mandatory;
 	pointer-events: auto;
 	padding: 20px 0;
 	margin-left: 25px;
 	margin-right: 25px;
-	border-top: 70px solid transparent;
 	border-bottom: 70px solid transparent;
 }
 
@@ -33354,13 +33368,13 @@ footer p span:before {content: "|";}
 }
 
 .timeline::-webkit-scrollbar-track {
-	border-radius: 0;
+	border-radius: 8;
 	border: 0px solid white;
 	background: rgba(255,255,255,0.15);
 }
 
 .timeline::-webkit-scrollbar-thumb {
-	border-radius: 0;
+	border-radius: 8;
 	background: white;
 }
 
@@ -33383,6 +33397,7 @@ footer p span:before {content: "|";}
 		font-size: 18px;
 		text-align: center;
 		left: 15px;
+		top: 50%;
 		height: 100px;
 	}
 
@@ -33408,12 +33423,7 @@ footer p span:before {content: "|";}
 	position: absolute;
 	top: 0;
 	left: 7px;
-	z-index: 0;
-}
-
-.timeline-div:hover .timeline-element {
-	color: white;
-	transition: 0.3s all ease;
+	z-index: -1;
 }
 
 .timeline-Image {
@@ -33426,13 +33436,13 @@ footer p span:before {content: "|";}
 	position: absolute;
 	top: 0;
 	left: 7px;
-	z-index: -1;
+	z-index: -2;
 	filter: grayscale(0.5) contrast(1.2);
 	transition: opacity 0.5s ease;
 }
 
-.timeline-div:hover .timeline-Image {
-	opacity: 1;
+.timeline-div:last-of-type::before, .timeline-div:last-of-type .timeline-Image {
+	width: calc(100% - 7px);
 }
 
 .timeline-Image::after {
@@ -33454,7 +33464,6 @@ footer p span:before {content: "|";}
 }
 
 .timeline-div::after {
-
 	content: "read more    →";
 	justify-content: space-between;
 	display: flex;
@@ -33469,5 +33478,34 @@ footer p span:before {content: "|";}
 
 .timeline-Date {
 	font-family: DSdigi, K2D, sans-serif;
-	font-size: 50px;
+	font-size: 45px;
+	color: white;
+}
+
+.timeline-div:hover .timeline-element, .timeline-div:focus .timeline-element, .timeline-div a:focus .timeline-element {
+	color: white;
+	transition: 0.3s all ease;
+}
+
+.timeline-div:hover .timeline-Image, .timeline-div:focus .timeline-Image, .timeline-div a:focus .timeline-Image {
+	opacity: 1;
+}
+
+@media(max-width:479px) {
+	.xs-hide {
+		display: none;
+	}
+	.cell-xxs-6 {
+		width: 50% !important;
+		max-width: 50% !important;
+	}
+	.round.forw {
+		left: -20px;
+	}
+}
+
+@media(min-width:480px) {
+	.sm-hide {
+		display: none;
+	}
 }

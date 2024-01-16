@@ -1310,6 +1310,7 @@ function displayTimeline(data,target_div) {
 			switch(element_type) {
 				case "link":
 					child_element.attr("href",data[i][keys[j]]);
+					child_element.attr("target","_blankalef"+i);
 					break;
 				case "image":
 					child_element.attr("style","background-image:url("+( (data[i][keys[j]]!="") ? data[i][keys[j]] : default_image) +")");
@@ -1326,7 +1327,8 @@ function displayTimeline(data,target_div) {
 	target_div.find(".timeline-div").each(function(){
 		var el = $(this);
 		el.on("click",function(){
-			window.location = el.find("a").attr("href");
+			//console.log(el.find("a"));
+			window.open(el.find("a").attr('href'),el.find("a").attr('target'));
 		});
 	});
 	target_div.removeClass("loading");
@@ -1338,26 +1340,33 @@ $(".timeline").each(function(index) {
 	const key_listener = window.addEventListener('keydown', (e) => { 
 		if(isElementInViewport(timeline)) {
 			if (e.which==39)
-				timeline.scrollTo(
+				scrollTimeline($(this),'next');
+				/*timeline.scrollTo(
 				{ 
 					left: timeline.scrollLeft + $(this).find(".timeline-div")[0].getBoundingClientRect()["width"],
 					behavior: "smooth"
-				});
+				});*/
 			if (e.which==37) 
+				scrollTimeline($(this),'prev');
+			/*
 				timeline.scrollTo(
 				{ 
 					left: $(this)[0].scrollLeft - $(this).find(".timeline-div")[0].getBoundingClientRect()["width"],
 					behavior: "smooth"
-				});
+				});*/
 		}
 
 	   });
 });
 
+function scrollTimeline(el,dir) {
+	var sign = (dir=='next') ? 1 : -1;
+	var scroll = el[0].scrollLeft + sign*el.find(".timeline-div")[0].getBoundingClientRect()["width"];
+	el[0].scrollTo({left:scroll, behavior: "smooth"});
+}
+
 function isElementInViewport(element) {
 	var rect = element.getBoundingClientRect();
-	console.log(rect);
-	console.log((window.innerHeight || document.documentElement.clientHeight));
 	return (
 	  rect.top >= 0 &&
 	  rect.left >= 0 &&
@@ -1365,3 +1374,6 @@ function isElementInViewport(element) {
 	  rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
   }
+
+$(".round.prev").on("click", function(){scrollTimeline($(this).closest(".section").find(".timeline"),'prev')});
+$(".round.forw").on("click", function(){scrollTimeline($(this).closest(".section").find(".timeline"),'next')});
