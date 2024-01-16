@@ -33360,7 +33360,6 @@ footer p span:before {content: "|";}
 	padding: 20px 0;
 	margin-left: 25px;
 	margin-right: 25px;
-	border-bottom: 70px solid transparent;
 }
 
 .timeline::-webkit-scrollbar {
