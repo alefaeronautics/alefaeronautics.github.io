@@ -7842,6 +7842,11 @@ html .page .group-sm-justify .button {
 	color: #ffffff;
 }
 
+.bg-black a:hover, .bg-image-dark a:hover {
+	color: inherit;
+	opacity: 0.75;
+}
+
 .link-back {font-family: Xspace; color: #293c98; font-size: 14px;}
 .link-back:before {content: "← ";}
 
