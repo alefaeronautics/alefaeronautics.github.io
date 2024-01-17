@@ -1341,19 +1341,8 @@ $(".timeline").each(function(index) {
 		if(isElementInViewport(timeline)) {
 			if (e.which==39)
 				scrollTimeline($(this),'next');
-				/*timeline.scrollTo(
-				{ 
-					left: timeline.scrollLeft + $(this).find(".timeline-div")[0].getBoundingClientRect()["width"],
-					behavior: "smooth"
-				});*/
 			if (e.which==37) 
 				scrollTimeline($(this),'prev');
-			/*
-				timeline.scrollTo(
-				{ 
-					left: $(this)[0].scrollLeft - $(this).find(".timeline-div")[0].getBoundingClientRect()["width"],
-					behavior: "smooth"
-				});*/
 		}
 
 	   });
