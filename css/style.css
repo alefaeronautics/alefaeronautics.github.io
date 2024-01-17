@@ -7847,6 +7847,10 @@ html .page .group-sm-justify .button {
 	opacity: 0.75;
 }
 
+.bg-image-dark a:has(.button-primary):hover {
+	opacity: 1;
+}
+
 .link-back {font-family: Xspace; color: #293c98; font-size: 14px;}
 .link-back:before {content: "← ";}
 
@@ -8046,14 +8050,19 @@ html .page .group-sm-justify .button {
 
 .bg-image-dark .button-primary, .bg-image-dark .button-primary:focus {
 	color: #ffffff;
-	background-color: transparent;
+	background-color: rgba(26,37,171,0.4);
 	border: 1px solid #ffffff;
 	border-radius: 8px;
 }
 
 .bg-image-dark .button-primary:hover, .bg-image-dark .button-primary:active {
+	opacity: 1 !important;
+	background-color: rgba(255,255,255,1);
+	color: black;
+}
+
+.bg-image-dark a {
 	opacity: 1;
-	background-color: rgba(255,255,255,0.08);
 }
 
 .bg-image-dark .button-primary.button-ujarak:hover {
