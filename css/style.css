@@ -8048,15 +8048,16 @@ html .page .group-sm-justify .button {
 	background: #000000;
 }
 
-.bg-image-dark .button-primary, .bg-image-dark .button-primary:focus {
+.bg-image-dark .button-primary {
 	color: #ffffff;
 	background-color: rgba(26,37,171,0.4);
 	border: 1px solid #ffffff;
 	border-radius: 8px;
+	line-height: 24px;
 }
 
-.bg-image-dark .button-primary:hover, .bg-image-dark .button-primary:active {
-	opacity: 1 !important;
+.bg-image-dark .button-primary:hover, .bg-image-dark .button-primary:active, .bg-image-dark .button-primary:focus {
+	opacity: 1;
 	background-color: rgba(255,255,255,1);
 	color: black;
 }
@@ -33514,6 +33515,9 @@ footer p span:before {content: "|";}
 	}
 	.round.forw {
 		left: -20px;
+	}
+	.timeline {
+		padding-top: 0;
 	}
 }
 

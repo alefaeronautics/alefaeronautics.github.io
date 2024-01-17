@@ -1295,6 +1295,7 @@ function readSheets(sheet_url, success_function, target_div) {
 }
 
 function displayTimeline(data,target_div) {
+	target_div.removeClass("loading");
 	var keys = data['keys'];
 	var data = data['data'];
 	var blank = target_div.find(".timeline-div");
@@ -1327,11 +1328,9 @@ function displayTimeline(data,target_div) {
 	target_div.find(".timeline-div").each(function(){
 		var el = $(this);
 		el.on("click",function(){
-			//console.log(el.find("a"));
 			window.open(el.find("a").attr('href'),el.find("a").attr('target'));
 		});
 	});
-	target_div.removeClass("loading");
 }
 
 $(".timeline").each(function(index) {
