@@ -30,7 +30,7 @@ Pdf files for Alef Preorder Agreement, Website Privacy Policy and Website terms 
 
 ### 3. Font files (`/fonts/`)
 
-A collection of different font files required by the website, mostly different kinds of icons. The main is FontAwesome collection, plus some Material Design Icons, plus Symbola for mobile compartibility. Main text uses K2D font and some headers use XSpace (see `@font-face` defitions in `style.css`).
+A collection of different font files required by the website, mostly different kinds of icons. The main is FontAwesome collection, plus some Material Design Icons, plus Symbola for mobile compartibility. Main text uses K2D font and some headers use XSpace (see `@font-face` defitions in `style.css`). Timeline (latest news) uses DSdigi for dates.
 
 ### 4. Image files (`/images/`)
 
@@ -45,6 +45,9 @@ A collection of different font files required by the website, mostly different k
 
 - **`/images/story/`**
  - Photographs and images used on `Story` page.
+
+- **`/images/timeline/`**
+ - Timeline (latest news) images for items `Press` page.
 
 ### 5. Files to be included throughout different pages (`/includes/`)
 
@@ -126,6 +129,19 @@ The website relies on Javascript heavily for its functionality is not available 
       - Mail API requires file in base64 format. The converting is done on the frontend as the actual file is selected by the user. File name and content are saved into hidden fields. As the form submit is handled by ajaxForm (see inside `script.js` and `rdMailForm` plugin), the actual file field is disabled to avoid submitting the same data twice and enabled back again when the form is reset.
     - **news page specific**
      - "Load more" button (`#load-more`) functionality for news elements (`.post-item`).
+     - Timeline (latest news) functionality (`.timeline`) with custom Javascript scrolling
+          - **`readSheets`**
+          - Reads content from sheets document (specified by `data-url` of `.timeline` div) with headers (`Event`), dates (`Date`), links (`LinkedIn`) and optional images (`Image`), transform tsv to array of dictionaries and passes that data to a specified function (`displayTimeline`) on completion.
+          - **`displayTimeline`**
+          - Creates and displays all the necessary blocks from the data using a blank block as a template. Class names must correspont to data keys. Uses `data-type` property set inside html to process data in a different way. Attaches window openers based on the link to the whole block. Default image is set to `/images/timeline/default.jpg`.
+          - **`isElementInViewport`**
+          - Checks if a particular element is currently in view
+          - **`scrollTimeline`**
+          - Scrolls timeline object back or forth by particular amount equal to the innver block (`timeline-div`) size 
+          - **`.timeline` attached**
+          - Potentially can support multiple timelines on the same page. Calls `readSheets` with callback to `displayTimeline` on each object. Creates a listener to `keypress` event to scroll the specified timeline (`scrollTimeline`) back or forth if it is visible (detected by `isElementInViewport`).
+          - **`.round.prev` & `.round.forv` attached**
+          - Same double arrows from `Preorder` page are used here to scroll back and forth.
     - **preorder page specific**
      - **`collectData`**
       - Collects and returns data from the form also adding the "date" key via `fullDate`.
@@ -242,6 +258,8 @@ To add new menu items see `/js/menu.js`. To modify footer content see `/includes
    3. Find an element (`article`) with class of `post-boxed` inside the news div and add a new class to it.
   - To hide a news link, add `hide` class to the div which has `post-item` class. Please make sure that all the visible items come first and all the hidden ones come after with no mixing. The script may malfunction otherwise.
   - To change the amount of articles that are loaded when `Load more news` button is pressed, look for `data-step` attribute inside `id="news-items"` element and adjust it as necessary. 
+ - **timeline or latest news**
+  - News are imported from a google sheets document specified in `data-url` property of `.timeline` class object. The div is `.range` class and uses `.cell-*-*` layout for different screen sizes. Some custom styles have been defined. Inner elements must have `data-type` specified to be processed properly. Possible values are `link` (for hyperlink), `image` (background on hover) or `text` (default, can be omitted, for plain text content).
  - **presskit link**
    - Is a simple link to Google drive in the format `https://drive.google.com/u/0/uc?id=GOOGLE_DRIVE_ID&export=download&confirm=t`. Replace `GOOGLE_DRIVE_ID` with the necessary ID. `export=download&confirm=t` try to enforce the direct download of the file instead of opening actual Google Drive.
 

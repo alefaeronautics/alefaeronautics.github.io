@@ -1336,19 +1336,19 @@ function displayTimeline(data,target_div) {
 $(".timeline").each(function(index) {
 	var timeline = $(this)[0];
 	readSheets($(this).attr('data-url'),displayTimeline,$(this));
-	const key_listener = window.addEventListener('keydown', (e) => { 
+	window.addEventListener('keydown', (e) => { 
 		if(isElementInViewport(timeline)) {
 			if (e.which==39)
-				scrollTimeline($(this),'next');
+				scrollTimeline($(this),1);
 			if (e.which==37) 
-				scrollTimeline($(this),'prev');
+				scrollTimeline($(this),-1);
 		}
 
 	   });
 });
 
-function scrollTimeline(el,dir) {
-	var sign = (dir=='next') ? 1 : -1;
+function scrollTimeline(el,sign) {
+	sign = (sign > 0) ? 1 : -1;
 	var scroll = el[0].scrollLeft + sign*el.find(".timeline-div")[0].getBoundingClientRect()["width"];
 	el[0].scrollTo({left:scroll, behavior: "smooth"});
 }
@@ -1363,5 +1363,5 @@ function isElementInViewport(element) {
 	);
   }
 
-$(".round.prev").on("click", function(){scrollTimeline($(this).closest(".section").find(".timeline"),'prev')});
-$(".round.forw").on("click", function(){scrollTimeline($(this).closest(".section").find(".timeline"),'next')});
+$(".round.prev").on("click", function(){scrollTimeline($(this).closest(".section").find(".timeline"),-1)});
+$(".round.forw").on("click", function(){scrollTimeline($(this).closest(".section").find(".timeline"),1)});
