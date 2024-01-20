@@ -324,6 +324,7 @@ function fillForm(data=false) {
     log_data['data'] = "Payment request retrieved " + clientSecret.split('_')[1]; 
     aeLog(log_data,false);
     displayStripe(clientSecret,emailAddress);
+    $("#order-form button[type='submit']").text("Try again");
   }
 
 }
