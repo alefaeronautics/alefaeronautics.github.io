@@ -228,7 +228,7 @@ The website relies on Javascript heavily for its functionality is not available 
     - **`setLoading`**
      - Sets the form into either loading or available state by either disabling or enabling the submit button and changing the button text either to a spinner or back to the default.
     - **`fillForm`**
-     - Tries to fill the form fields with data obtained from GET variables (available when the payment was submitted and the page was redirected). To make sure labels are displayed properly `focus` and `change` events are dispatched in case the data is valid. If `clientSecret` is available also tries to retrieve the existing payment intent from it and preload the payment form via `displayStripe` while logging "Payment request retrieved" with `aeLog`.
+     - Tries to fill the form fields with data obtained from GET variables (available when the payment was submitted and the page was redirected). To make sure labels are displayed properly `focus` and `change` events are dispatched in case the data is valid. If `clientSecret` is available it: tries to retrieve the existing payment intent from it, preload the payment form via `displayStripe`, log "Payment request retrieved" with `aeLog`, and changes "Order now" button text to "Try again".
     - **`showFilledForm`**
      - Displays the filled form and activates the animations by dispatching `scroll` event.
     - **`extractData`**
