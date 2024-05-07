@@ -1058,8 +1058,8 @@ function smartBack(e) {
 
 function shareLinks() {	$("#sharer-block a").each(function(){
 	var url = window.location.href.split("?")[0].split("#")[0];
-	var link_url = $(this).get(0).href.split("?")[0];
-	$(this).get(0).href = link_url + "?" + url + ( (referral_code) ? "#"+referral_code: "" );
+	var link_url = $(this).get(0).href; //.split("?")[0];
+	$(this).get(0).href = link_url + url + ( (referral_code) ? "#"+referral_code: "" );
 });}
 
 /* careers page specific */
