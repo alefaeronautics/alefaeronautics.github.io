@@ -8059,8 +8059,8 @@ html .page .group-sm-justify .button {
 
 .bg-image-dark .button-primary:hover, .bg-image-dark .button-primary:active, .bg-image-dark .button-primary:focus {
 	opacity: 1;
-	background-color: rgba(255,255,255,0.17);
-	/*color: black;*/
+	/*background-color: #152abb;*/
+	color: rgba(26,37,171,0.7);
 }
 
 .bg-image-dark a {
