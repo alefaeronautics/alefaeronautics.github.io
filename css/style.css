@@ -8049,9 +8049,10 @@ html .page .group-sm-justify .button {
 }
 
 .bg-image-dark .button-primary {
-	color: #ffffff;
-	background-color: rgba(26,37,171,0.4);
-	border: 1px solid #ffffff;
+	color: rgb(26,37,171);
+	font-weight: bold;
+	background-color: #ffffff;
+	border: 0;
 	border-radius: 8px;
 	line-height: 24px;
 }
