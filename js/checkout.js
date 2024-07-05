@@ -240,6 +240,7 @@ async function checkStatusOcean() {
   if (result.maildata) 
        // Create a button to resend email
         $("#resend-mail").on('click', function() {
+            console.log(result.maildata);
             if (!$(this).hasClass("disabled"))
             {
               var el = $(this);
