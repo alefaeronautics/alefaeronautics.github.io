@@ -5,7 +5,6 @@ function createMenu(where)
 {
     let menu = Array( 
         { url: 'story.html', title: 'Our&nbsp;Story',class:''},
-        { url: 'careers.html', title: 'Careers',class:''},
         { url: 'investors.html', title: 'Investors',class:''},
         { url: 'contact.html', title: 'Contact',class:''},
         { url: 'press.html', title: 'Press',class:''},
