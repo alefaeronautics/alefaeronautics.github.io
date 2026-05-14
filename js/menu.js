@@ -8,6 +8,7 @@ function createMenu(where)
         { url: 'investors.html', title: 'Investors',class:''},
         { url: 'contact.html', title: 'Contact',class:''},
         { url: 'press.html', title: 'Press',class:''},
+		{ url: 'https://wefunder.com/alef.aero', title: '<nobr>Invest</nobr><br><small>Now</small>',class:Array('menu-button')}, 
         { url: 'preorder.html', title: '<nobr>Pre-order</nobr><br><small>Flying&nbsp;Car</small>',class:Array('menu-button')}, 
         );
 
