@@ -1786,6 +1786,18 @@ a.box-triangle__aside:hover .box-triangle__image {
 	background: #000000;
 }
 
+.button-light-outline, .button-light-outline:focus {
+	color: #ffffff;
+	background-color: transparent;
+	border: 1px solid #ffffff;
+}
+
+.button-light-outline:hover, .button-light-outline:active {
+	color: #293c98;
+	background-color: #ffffff;
+	border-color: #ffffff;
+}
+
 .button-facebook, .button-facebook:active, .button-facebook:focus {
 	color: #ffffff;
 	background: #547abb;
