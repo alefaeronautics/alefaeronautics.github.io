@@ -33539,3 +33539,29 @@ footer p span:before {content: "|";}
 		display: none;
 	}
 }
+
+/* ---- Press page: two-column news layout ---- */
+#alef-blog .press-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: start; text-align: left; }
+#alef-blog .press-col h2 { font-size: 30px; font-weight: 300; margin-bottom: 26px; }
+#alef-blog .press-cards { display: grid; grid-template-columns: 1fr; gap: 24px; }
+#alef-blog .press-cards .post-item.hide { display: none; }
+#alef-blog .press-grid .post-boxed { height: auto; min-height: 0; max-width: 100%; padding: 18px 18px 22px; border: 1px solid #dfe3f0; display: flex; flex-direction: column; }
+#alef-blog .press-grid .post-boxed__main { height: auto; min-height: 0; flex: 1; }
+#alef-blog .press-grid .post-boxed:after { top: auto; margin-top: 22px; }
+#alef-blog .press-grid .post-boxed__title { font-size: 17px; line-height: 1.3; max-width: 100%; }
+#alef-blog .press-grid .post-boxed__meta > li { font-size: 11.5px; letter-spacing: .14em; }
+.post-boxed__img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; margin-bottom: 16px; background: #e9ecf7; }
+#alef-blog .hl-also { font-size: 12.5px; line-height: 1.6; margin-top: 10px; opacity: .85; }
+#alef-blog .hl-also span { font-weight: 600; letter-spacing: .04em; }
+#alef-blog .hl-also i { font-style: normal; opacity: .5; padding: 0 2px; }
+#alef-blog .hl-also a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+#alef-blog .live { display: inline-block; margin-left: 8px; font-size: 10px; font-weight: 600; letter-spacing: .12em; border: 1px solid currentColor; border-radius: 999px; padding: 1px 8px; vertical-align: middle; opacity: .8; }
+#alef-blog .press-also { margin-top: 28px; }
+#alef-blog .press-also h4 { font-size: 11.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #293c98; margin-bottom: 10px; }
+#alef-blog .press-also ul { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+#alef-blog .press-also li a { display: inline-block; font-size: 12.5px; color: #1b1e2b; border: 1px solid #dfe3f0; border-radius: 999px; padding: 3px 11px; line-height: 1.5; transition: .2s; }
+#alef-blog .press-also li a:hover { border-color: #293c98; color: #293c98; }
+@media (max-width: 900px) {
+	#alef-blog .press-grid { grid-template-columns: 1fr; }
+	#alef-blog .press-col-right { order: -1; padding-bottom: 40px; border-bottom: 1px solid #dfe3f0; margin-bottom: 8px; }
+}
