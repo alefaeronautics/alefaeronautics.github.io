@@ -33585,7 +33585,7 @@ footer p span:before {content: "|";}
 #alef-blog .press-also li a:hover { border-color: #293c98; color: #293c98; }
 @media (max-width: 900px) {
 	#alef-blog .press-grid { gap: 14px; }
-	#alef-blog .press-col h2 { font-size: 20px; margin-bottom: 14px; }
+	#alef-blog .press-col h2 { font-size: 17px; letter-spacing: .03em; white-space: nowrap; margin-bottom: 14px; }
 	#alef-blog .press-cards { gap: 14px; }
 	#alef-blog .press-grid .post-boxed { padding: 10px 10px 14px; }
 	#alef-blog .press-grid .post-boxed__img { margin-bottom: 10px; border-radius: 4px; }
